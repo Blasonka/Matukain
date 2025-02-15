@@ -1,6 +1,5 @@
 # Matukain
  Szoftver projekt laboratórium - Fungorium
-# Projekt Neve
 
 ## Leírás
 Egy rövid összefoglaló a projektről: milyen problémát old meg, milyen technológiákat használ, és mi a célja.
@@ -38,14 +37,14 @@ g++ -o program_neve main.cpp
 ```
 
 ## Fejlesztők
-- **Név 1** - *Feladatkör*
-- **Név 2** - *Feladatkör*
-- **Név 3** - *Feladatkör*
-- **Név 4** - *Feladatkör*
-- **Név 5** - *Feladatkör*
+- **Tóth Tódor** - *OWEKB9*
+- **Blasek Balázs** - *CW4D3S*
+- **Csordás Bence** - *PU8FXP*
+- **Jónás Gergely Péter** - *UEYXGL*
+- **Monostori Dóra Marianna** - *PNNV8Z*
 
 ## Hozzájárulás
-Ha más is szeretne hozzájárulni a projekthez, itt leírhatjátok, hogyan teheti ezt meg (pl. fork-olás, pull request küldése stb.).
+Konzulens (Laborvezető):  **Salvi Péter** 
 
 ## Licenc
 (Egy rövid megjegyzés arról, hogy milyen licenc alatt áll a projekt, pl. MIT, GPL, stb.)
