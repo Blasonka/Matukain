@@ -2,19 +2,21 @@
  Szoftver projekt laboratórium - Fungorium
 
 ## Leírás
-Egy rövid összefoglaló a projektről: milyen problémát old meg, milyen technológiákat használ, és mi a célja.
+A Fungorium egy stratégiai szimulációs játék, amelyben gombák és rovarok versengenek egy dinamikusan változó környezetben. A bolygó felszínét tektonok alkotják, amelyeken a gombák terjednek, és a rovarok táplálékot keresnek.
 
 ## Főbb funkciók
-- [ ] Funkció 1
-- [ ] Funkció 2
-- [ ] Funkció 3
+- [ ] Dinamikus tektonikus rendszer, amely törések és mozgások révén változik.
+- [ ] Gombák terjedése gombafonalak és spórák segítségével.
+- [ ] Rovarok mozgása, amely a gombafonalakhoz kötött.
+- [ ] Stratégiai döntések: gombászok a gombák terjedését irányítják, míg rovarászok a rovarok mozgását befolyásolják.
+- [ ] Többféle spóra, amelyek különböző hatással vannak a rovarokra.
 
 ## Telepítés és futtatás
 
 ### Szükséges követelmények
 - C++ fordító (pl. GCC vagy MSVC)
 - CMake (ha szükséges)
-- Egyéb szükséges könyvtárak
+- Egyéb szükséges könyvtárak (pl. SDL, SFML, stb.)
 
 ### Fordítás és futtatás
 ```sh
@@ -22,18 +24,18 @@ Egy rövid összefoglaló a projektről: milyen problémát old meg, milyen tech
 mkdir build && cd build
 cmake ..
 make
-./program_neve
+./fungorium
 
 # Ha sima g++ fordítást használunk
-g++ -o program_neve main.cpp
-./program_neve
+g++ -o fungorium main.cpp
+./fungorium
 ```
 
 ## Használati példák
 Írjatok ide néhány példát a program használatára, például:
 ```sh
-./program_neve --help
-./program_neve input.txt output.txt
+./fungorium --help
+./fungorium simulation_config.json
 ```
 
 ## Fejlesztők
@@ -42,6 +44,15 @@ g++ -o program_neve main.cpp
 - **Csordás Bence** - *PU8FXP*
 - **Jónás Gergely Péter** - *UEYXGL*
 - **Monostori Dóra Marianna** - *PNNV8Z*
+
+## Játékmenet
+- A gombászok a gombák terjedését és spóraszórását irányítják.
+- A rovarászok a rovarok mozgását és a fonalak elvágását befolyásolják.
+- A gombák és rovarok interakciója meghatározza a játék kimenetelét.
+
+## Győzelmi feltételek
+- A gombászok közül az nyer, akinek a legtöbb gombatestje fejlődött ki a játék végére.
+- A rovarászok közül az nyer, aki a legtöbb tápanyagot gyűjtötte be a spórák elfogyasztásával.
 
 ## Hozzájárulás
 Konzulens (Laborvezető):  **Salvi Péter** 
