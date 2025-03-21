@@ -11,14 +11,14 @@ public class GyorsitoSpora extends Spora {
      */
     public GyorsitoSpora(int sz) {
         super(sz);
-        System.out.println(">GyorsitoSpora->GyorsitoSpora()");
+        System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }
     /// GyorsitoSpora törlése
     public void torles() {
-        System.out.println(">GyorsitoSpora->torles()");
+        System.out.println("\t\t>GyorsitoSpora->torles()");
     }
     /// GyorsitoSpora osztály rovarra nézett gyorsító hatásának kifejtése
     public void hatasKifejtes() {
-        System.out.println(">GyorsitoSpora->hatasKifejtes()");
+        System.out.println("\t\t>GyorsitoSpora->hatasKifejtes()");
     }
 }
