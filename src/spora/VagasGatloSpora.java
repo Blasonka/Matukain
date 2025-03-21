@@ -11,14 +11,14 @@ public class VagasGatloSpora extends Spora {
      */
     public VagasGatloSpora(int sz) {
         super(sz);
-        System.out.println(">VagasGatloSpora->VagasGatloSpora()");
+        System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
     }
     /// VagasGatloSpora törlése
     public void torles() {
-        System.out.println(">VagasGatloSpora->torles()");
+        System.out.println("\t\t>VagasGatloSpora->torles()");
     }
     /// VagasGatloSpora osztály rovarra nézett vágás gátló hatásának kifejtése
     public void hatasKifejtes() {
-        System.out.println(">VagasGatloSpora->hatasKifejtes()");
+        System.out.println("\t\t>VagasGatloSpora->hatasKifejtes()");
     }
 }

@@ -11,14 +11,14 @@ public class LassitoSpora extends Spora {
      */
     public LassitoSpora(int sz) {
         super(sz);
-        System.out.println(">LassitoSpora->LassitoSpora()");
+        System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
     /// LassítóSpora törlése
     public void torles() {
-        System.out.println(">LassitoSpora->torles()");
+        System.out.println("\t\t>LassitoSpora->torles()");
     }
     /// LassítóSpora osztály rovarra nézett lassító hatásának kifejtése
     public void hatasKifejtes() {
-        System.out.println(">LassitoSpora->hatasKifejtes()");
+        System.out.println("\t\t>LassitoSpora->hatasKifejtes()");
     }
 }

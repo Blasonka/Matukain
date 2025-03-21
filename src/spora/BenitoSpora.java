@@ -11,14 +11,14 @@ public class BenitoSpora extends Spora {
      */
     public BenitoSpora(int sz) {
         super(sz);
-        System.out.println(">BenitoSpora->BenitoSpora()");
+        System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
     /// BenitoSpora törlése
     public void torles() {
-        System.out.println(">BenitoSpora->torles()");
+        System.out.println("\t\t>BenitoSpora->torles()");
     }
     /// BenitoSpora osztály rovarra nézett bénító hatásának kifejtése
     public void hatasKifejtes() {
-        System.out.println(">BenitoSpora->hatasKifejtes()");
+        System.out.println("\t\t>BenitoSpora->hatasKifejtes()");
     }
 }
