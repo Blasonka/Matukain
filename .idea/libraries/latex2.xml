@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="latex2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Követelmények/latex2.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
