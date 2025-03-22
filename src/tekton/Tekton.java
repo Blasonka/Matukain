@@ -5,6 +5,7 @@ import gomba.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Absztrakt osztály Tektonok adatainak tárolására
@@ -84,8 +85,20 @@ public abstract class Tekton {
     /**
      * Meghatározza a szomszédos tektonokat
      */
-    public void szomszedosTekton(){
-        System.out.println("Meg lettek határozva a szomszédos tektonok");
+    public boolean szomszedosTekton(Tekton szomszed){
+        System.out.println("Tekton->szomszedosTekton(szomszed)");
+        System.out.println("A két tekton szomszédos?(Y/N)");
+        Scanner scanner = new Scanner(System.in);
+        String valasz = scanner.nextLine();
+        scanner.close();
+        if (valasz.equals("Y")) {
+            System.out.println("A két tekton szomszédos");
+            return true;
+        } else {
+            System.out.println("A két tekton nem szomszédos");
+            return false;
+        }
+
     }
 
     /**
