@@ -23,7 +23,7 @@ public class Gombafonal {
      * Visszaadja a gombafonal egyik végpontját
      * @return a gombafonal egyik végpontja
      */
-    public Tekton hatar1() {
+    public Tekton getHatar1() {
         return hatar1;
     }
 
@@ -31,7 +31,7 @@ public class Gombafonal {
      * Visszaadja a gombafonal másik végpontját
      * @return a gombafonal másik végpontja
      */
-    public Tekton hatar2() {
+    public Tekton getHatar2() {
         return hatar2;
     }
 

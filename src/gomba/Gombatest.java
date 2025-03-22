@@ -1,6 +1,9 @@
 package gomba;
 
+import spora.Spora;
 import tekton.Tekton;
+
+import java.util.Random;
 
 /**
  * A gombatesteket reprezentáló osztály
@@ -13,14 +16,11 @@ public class Gombatest {
 
     /**
      * Gombatest konstruktora
-     * @param elettartam a gombatest élettartama
-     * @param kilohetoSporakSzama a gombatestből kihelyezhető spórák száma
-     * @param fejlett a gombatest fejlettsége
      */
-    public Gombatest(int elettartam, int kilohetoSporakSzama, boolean fejlett) {
-        this.elettartam = elettartam;
-        this.kilohetoSporakSzama = kilohetoSporakSzama;
-        this.fejlett = fejlett;
+    public Gombatest() {
+        this.elettartam = 0;
+        this.kilohetoSporakSzama = 6;
+        this.fejlett = false;
         System.out.println("Gombatest létrejött");
     }
 
@@ -28,7 +28,7 @@ public class Gombatest {
      * Visszaadja a gombatest élettartamát
      * @return a gombatest élettartama
      */
-    public int Getelettartam() {
+    public int getElettartam() {
         return elettartam;
     }
 
@@ -36,7 +36,7 @@ public class Gombatest {
      * Visszaadja a gombatestből kihelyezhető spórák számát
      * @return a gombatestből kihelyezhető spórák száma
      */
-    public int GetkilohetoSporakSzama() {
+    public int getKilohetoSporakSzama() {
         return kilohetoSporakSzama;
     }
 
@@ -44,7 +44,7 @@ public class Gombatest {
      * Visszaadja a gombatest fejlettségét
      * @return a gombatest fejlettsége
      */
-    public boolean Getfejlett() {
+    public boolean getFejlett() {
         return fejlett;
     }
 
@@ -53,6 +53,26 @@ public class Gombatest {
      * @param tekton a tekton, amin elhelyezzük az új spórát
      */
     public void sporaLoves(Tekton tekton) {
+        Random rand = new Random();
+        Spora spora;
+        int randomSpora = rand.nextInt(4);
+        switch (randomSpora) {
+            case 0:
+                spora = Spora.FEKETE;
+                break;
+            case 1:
+                spora = Spora.FEHER;
+                break;
+            case 2:
+                spora = Spora.PIROS;
+                break;
+            case 3:
+                spora = Spora.ZOLD;
+                break;
+            default:
+                spora = Spora.FEKETE;
+                break;
+        }
         System.out.println("Gombatest->sporaLoves()");
     }
 

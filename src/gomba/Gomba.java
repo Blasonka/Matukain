@@ -2,6 +2,8 @@ package gomba;
 
 import tekton.Tekton;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +17,11 @@ public class Gomba {
 
     /**
      * Gomba konstruktora
-     * @param gombafonalak a gomba fonalai
-     * @param gombatest a gomba testét reprezentáló objektum
      * @param tekton a tekton, amin a gomba található
      */
-    public Gomba(List<Gombafonal> gombafonalak, Gombatest gombatest, Tekton tekton) {
-        this.gombafonalak = gombafonalak;
-        this.gombatest = gombatest;
+    public Gomba(Tekton tekton) {
+        this.gombafonalak = new ArrayList<Gombafonal>();
+        this.gombatest = null;
         this.tekton = tekton;
     }
 
@@ -30,8 +30,14 @@ public class Gomba {
      * @return true, ha van fonal, false egyébként
      */
     public boolean fonalOsszekoti(Tekton tekton1, Tekton tekton2) {
-        System.out.println("Gomba->fonalOsszekoti()");
-        return true;
+        for (Gombafonal gombafonal : gombafonalak) {
+            if (gombafonal.getHatar1() == tekton1 && gombafonal.getHatar2() == tekton2) {
+                System.out.println("Van fonal a két tekton között");
+                return true;
+            }
+        }
+        System.out.println("Nincs fonal a két tekton között");
+        return false;
     }
 
     /**
@@ -40,8 +46,15 @@ public class Gomba {
      */
     public void addFonal(Gombafonal gombafonal) {
         gombafonalak.add(gombafonal);
-        System.out.println("Gomba->addFonal()");
+        System.out.println("Fonal hozzáadva");
     }
 
-
+    /**
+     * Fonal eltávolítása
+     * @param gombafonal az eltávolítandó fonal
+     */
+    public void removeFonal(Gombafonal gombafonal) {
+        gombafonalak.remove(gombafonal);
+        System.out.println("Fonal eltávolítva");
+    }
 }
