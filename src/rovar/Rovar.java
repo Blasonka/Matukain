@@ -6,6 +6,7 @@ import tekton.Tekton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Rovar osztály
@@ -57,13 +58,82 @@ public class Rovar {
         this.tekton = tekton;
         this.telitettseg = 3;
         this.elfogyasztottSporak = new ArrayList<>();
+        System.out.println("Rovar.init()");
     }
 
-    public void rovarMozgas(Tekton tekton){}
+    /**
+     * Gombafonal elvágása
+     * @brief A rovar elvágja az adott gombafonalat.
+     * @param fonal a fonal, amit el kell vágni.
+     */
+    public void fonalElvagas(Gombafonal fonal){
+        System.out.println("Rovar->fonalElvagas(fonal)");
+        System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
+        Scanner scanner = new Scanner(System.in);
+        String valasz = scanner.nextLine();
+        scanner.close();
+        if (valasz.equals("Y")) {
+            //Gomba1.removeFonal(fonal);
+            //Gomba2.removeFonal(fonal);
+        } else {
+            System.out.println("A gombafonalat nem lehet elvágni.");
+        }
+    }
 
-    public void fonalElvagas(Gombafonal fonal){}
+    /**
+     * Spóra elfogyasztása
+     * @brief A rovar elfogyaszt egy adott spórát.
+     * @param spora a spóra, amit elfogyaszt.
+     */
+    public void elfogyaszt(Spora spora){
+        System.out.println("Rovar->elfogyaszt(spora)");
+        telitettseg=3;
+        elfogyasztottSporak.add(spora);
+        System.out.println("A spóra elfogyasztva.");
+    }
 
-    public void elfogyaszt(Spora spora){}
+    /**
+     * Rovar áttelepítése
+     * @brief A rovar áttelepül a következő tektonra.
+     * @param kovetkezo a következő tekton.
+     */
+    public void attesz(Tekton kovetkezo){
+        System.out.println("Rovar->attesz(t1, t2)");
+        System.out.print("\t");
+        boolean szomszedos = tekton.szomszedosTekton(kovetkezo);
+        if (szomszedos) {
+            tekton = kovetkezo;
+            System.out.println("A rovar áttelepült a következő tektonra.");
+        } else {
+            System.out.println("A két tekton nem szomszédos, nem lehet áttenni a rovart.");
+        }
+    }
 
-    public void attesz(Tekton t1, Tekton t2){}
+    /**
+     * Spóra eltávolítása
+     * @brief Az adott spóra eltávolítása a rovarból.
+     * @param spora a spóra, amit eltávolít.
+     */
+    public void removeSpora(Spora spora){
+        System.out.println("Rovar->removeSpora(spora)");
+        elfogyasztottSporak.remove(spora);
+        System.out.println("A spóra törölve lett.");
+    }
+
+    /**
+     * Visszaadja a rovar telítettségét
+     * @return a rovar telítettsége
+     */
+    public int getTelitettseg() {
+        return telitettseg;
+    }
+
+    /**
+     * Beállítja a rovar telítettségét
+     * @param telitettseg a rovar telítettsége
+     */
+    public void setTelitettseg(int telitettseg) {
+        this.telitettseg = telitettseg;
+    }
+
 }
