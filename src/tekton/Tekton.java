@@ -1,3 +1,10 @@
+package tekton;
+
+import spora.Spora;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Absztrakt osztály Tektonok adatainak tárolására
  */

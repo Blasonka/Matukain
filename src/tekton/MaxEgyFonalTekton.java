@@ -1,5 +1,8 @@
-class MaxEgyFonalTekton extends Tekton{
-    public TobbFonalTekton(int id, int koordinataX, int koordinataY){
+package tekton;
+
+
+public class MaxEgyFonalTekton extends Tekton{
+    public MaxEgyFonalTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
         System.out.println("\t>MaxEgyFonalTekton->MaxEgyFonalTekton()");
     }

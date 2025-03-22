@@ -1,3 +1,5 @@
+package tekton;
+
 public class TobbFonalTekton extends Tekton{
     public TobbFonalTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
