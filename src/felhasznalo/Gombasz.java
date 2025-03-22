@@ -2,7 +2,7 @@ package felhasznalo;
 
 import gomba.Gomba;
 import tekton.Tekton;
-import gomba.Gombafonal
+import gomba.Gombafonal;
 
 import java.util.ArrayList;
 import java.util.List;

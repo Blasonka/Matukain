@@ -12,12 +12,14 @@ class GombatestNelkuliTekton extends Tekton {
      */
     public GombatestNelkuliTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("\t>GombatestNelkuliTekton->GombatestNelkuliTekton()");
+        System.out.println("Létrejött egy GombatestNelkuliTekton");
     }
 
-    /// Kifejti a Tekton hatását, azaz nem nőhet rajta gombatest
+    /**
+     * Kifejti a Tekton hatását, azaz nem nőhet rajta gombatest
+     */
     @Override
     public void hatasKifejtes(){
-        System.out.println("\t>GombatestNelkuliTekton->GombatestNelkuliTekton()");
+        System.out.println("GombatestNelkuliTekton hatás kifejtve, azaz nem nőhet rajta gombatest");
     }
 }
