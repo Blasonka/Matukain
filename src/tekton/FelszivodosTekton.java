@@ -20,6 +20,13 @@ public class FelszivodosTekton extends Tekton{
     }
 
     /**
+     * Visszaadja a számláló értékét
+     */
+    public int getSzamlalo(){
+        return szamlalo;
+    }
+
+    /**
      * Kifejti a Tekton hatását, azaz egy gombafonal adott idő után felszívódik
      */
     @Override
