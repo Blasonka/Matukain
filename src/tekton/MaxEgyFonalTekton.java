@@ -12,12 +12,14 @@ public class MaxEgyFonalTekton extends Tekton{
      */
     public MaxEgyFonalTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("\t>MaxEgyFonalTekton->MaxEgyFonalTekton()");
+        System.out.println("Létrejött egy MaxEgyFonalTekton");
     }
 
-    /// Kifejti a Tekton hatását, azaz maximum egy fonal nőhet rajta
+    /**
+     * Kifejti a Tekton hatását, azaz maximum egy gomba fonal nőhet rajta
+     */
     @Override
     public void hatasKifejtes(){
-        System.out.println("\t>MaxEgyFonalTekton->MaxEgyFonalTekton()");
+        System.out.println("MaxEgyFonalTekton hatás kifejtve, azaz maximum egy gomba fonal nőhet rajta");
     }
 }

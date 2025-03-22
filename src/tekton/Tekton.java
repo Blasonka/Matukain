@@ -1,6 +1,7 @@
 package tekton;
 
-import spora.Spora;
+import spora.*;
+import gomba.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,30 @@ import java.util.List;
  */
 
 public abstract class Tekton {
-    /// Tekton azonosítóját tárolja
+    /**
+     * Tekton azonosítóját tárolja
+     */
     private int id;
 
-    /// Tekton X koordinátáját tárolja
+    /**
+     * Tekton X koordinátáját tárolja
+     */
     private int koordinataX;
 
-    /// Tekton X koordinátáját tárolja
+    /**
+     * Tekton Y koordinátáját tárolja
+     */
     private int koordinataY;
 
-    /// Tektonon lévő spórákat tárolja egy listában
+    /**
+     * Tektonon lévő spórákat tárolja egy listában
+     */
     private List<Spora> sporak;
+
+    /**
+     * Tektonon lévő gombát tárolja
+     */
+    private Gomba gomba;
 
     /**
      * Tekton osztály konstruktora
@@ -33,17 +47,28 @@ public abstract class Tekton {
         this.koordinataX = koordinataX;
         this.koordinataY = koordinataY;
         sporak = new ArrayList<>();
+        gomba = null;
         System.out.println("Tekton->Tekton()");
     }
 
-    /// Tekton törése
-    public void tores(){
-        System.out.println("Tekton->tores()");
+    public int getID() {
+        return id;
     }
 
-    /// Spóra hozzáadása
+    /**
+     * Tekton törése
+     */
+    public void tores(){
+        System.out.println("A tekton törölve lett");
+    }
+
+    /**
+     * Spóra hozzáadása
+     * @param spora spórát hozzáadja a tektonhoz
+     */
     public void addSpora(Spora spora){
-        System.out.println("Tekton->addSpora(Spora)");
+        sporak.add(spora);
+        System.out.println("Az adott spóra hozzá lett adva a tektonhoz");
     }
 
     /**
@@ -51,23 +76,38 @@ public abstract class Tekton {
      * @param spora törli az adott spórát
      */
     public void removeSpora(Spora spora){
-        System.out.println("Tekton->removeSpora(Spora)");
+        spora.torles();
+        sporak.remove(spora);
+        System.out.println("Az adott spóra törölve lett a tektonról");
     }
 
-    /// Meghatározza a szomszédos tektonokat
+    /**
+     * Meghatározza a szomszédos tektonokat
+     */
     public void szomszedosTekton(){
-        System.out.println("Tekton->szomszedosTekton()");
+        System.out.println("Meg lettek határozva a szomszédos tektonok");
     }
 
-    /// Meghatározza, hogy a tekton szabad-e
+    /**
+     * Visszaadja, hogy az adott tekton szabad-e
+     */
     public boolean szabadTekton(){
-        System.out.println("Tekton->szabadTekton()");
-        return true;
+        if (gomba != null){
+            System.out.println("A tekton nem szabad");
+            return false;
+        }
+        else {
+            System.out.println("A tekton szabad");
+            return true;
+        }
     }
 
-    /// Gombát növeszt a tektonra
+    /**
+     * Gombát növeszt a tektonra
+     */
     public void gombaNovesztes(){
-        System.out.println("Tekton->gombaNovesztes()");
+        gomba = new Gomba(this);
+        System.out.println("Új gomba nőtt erre a tektonra");
     }
 
     /// Tekton hatásának kifejtése, absztrakt metódus

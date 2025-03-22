@@ -16,12 +16,14 @@ public class FelszivodosTekton extends Tekton{
     public FelszivodosTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
         szamlalo = 0;
-        System.out.println("\t>FelszivodosTekton->FelszivodosTekton()");
+        System.out.println("Létrejött egy FelszivodosTekton");
     }
 
-    /// Kifejti a Tekton hatását, azaz egy gombafonal adott idő után felszívódik
+    /**
+     * Kifejti a Tekton hatását, azaz egy gombafonal adott idő után felszívódik
+     */
     @Override
     public void hatasKifejtes(){
-        System.out.println("\t>FelszivodosTekton->hatasKifejtes()");
+        System.out.println("FelszivodosTekton hatás kifejtve, azaz egy gombafonal adott idő után felszívódik");
     }
 }
