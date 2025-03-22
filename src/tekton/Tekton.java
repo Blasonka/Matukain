@@ -51,8 +51,39 @@ public abstract class Tekton {
         System.out.println("Tekton->Tekton()");
     }
 
+    /**
+     * Visszaadja a tekton ID-ját
+     */
     public int getID() {
         return id;
+    }
+
+    /**
+     * Visszaadja a tekton X koordinátáját
+     */
+    public int getKoordinataX() {
+        return koordinataX;
+    }
+
+    /**
+     * Visszaadja a tekton Y koordinátáját
+     */
+    public int getKoordinataY() {
+        return koordinataY;
+    }
+
+    /**
+     * Visszaadja a tektonon lévő spórákat
+     */
+    public List<Spora> getSporak() {
+        return sporak;
+    }
+
+    /**
+     * Visszaadja a tektonon lévő gombát, vagy null-t, ha nincs rajta gomba
+     */
+    public Gomba getGomba() {
+        return gomba;
     }
 
     /**
