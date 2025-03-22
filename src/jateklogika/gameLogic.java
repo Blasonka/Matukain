@@ -1,6 +1,6 @@
 package jateklogika;
 import java.util.List;
-import falhasznalo.Felhasznalo;
+import felhasznalo.Felhasznalo;
 import tekton.Tekton;
 /**
  * Osztály a játék szabályainak megvalósításához

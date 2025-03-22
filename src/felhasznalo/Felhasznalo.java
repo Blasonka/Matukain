@@ -1,4 +1,4 @@
-package falhasznalo;
+package felhasznalo;
 
 /**
  * Felhasználó osztály, melyből a különböző felhasználók (rovarász, gombész) származnak.

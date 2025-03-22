@@ -1,4 +1,4 @@
-package falhasznalo;
+package felhasznalo;
 
 import spora.Spora;
 import tekton.Tekton;

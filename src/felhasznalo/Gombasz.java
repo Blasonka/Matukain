@@ -1,6 +1,4 @@
-package falhasznalo;
-
-import java.util.List;
+package felhasznalo;
 
 
 /**
