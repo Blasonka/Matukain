@@ -74,7 +74,7 @@ public class Rovar {
         Scanner scanner1 = new Scanner(System.in);
         String valasz1 = scanner1.nextLine();
         scanner1.close();
-        if (valasz1.equals("Y")) {
+        if (valasz1.equals("N")) {
             System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
             Scanner scanner2 = new Scanner(System.in);
             String valasz2 = scanner2.nextLine();

@@ -42,7 +42,7 @@ public class gameLogic {
     /**
      * Default konstruktor
      */
-    gameLogic() 
+    public gameLogic()
     {
         this.map=new ArrayList<>();
     }
@@ -103,7 +103,7 @@ public class gameLogic {
      */
     public void jatekKezdes() 
     {
-        List<Gombasz> gombaszok = new ArrayList<>();
+        List<Gombasz> gombaszok2 = new ArrayList<>();
         List<Rovarasz> rovaraszok = new ArrayList<>();
         Random rand = new Random();
         Tekton[] tektonok = new Tekton[3];
@@ -129,10 +129,12 @@ public class gameLogic {
         Gomba gomba2 = new Gomba(null);
         korSzamlalo=0;
 
-        gombaszok.add(g1);
-        gombaszok.add(g2);
+        gombaszok2.add(g1);
+        gombaszok2.add(g2);
         rovaraszok.add(r1);
         rovaraszok.add(r2);
+
+        gombaszok = gombaszok2;
             
         System.out.println("Játék inicializálva. Játékosok, tektonok, rovarok, gombák létrehozva.");
         

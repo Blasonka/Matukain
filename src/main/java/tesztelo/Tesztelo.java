@@ -1,8 +1,16 @@
 package tesztelo;
 
 import felhasznalo.Gombasz;
+import gomba.Gomba;
+import gomba.Gombafonal;
+import gomba.Gombatest;
+import jateklogika.gameLogic;
+import rovar.Rovar;
 import spora.GyorsitoSpora;
+import tekton.Tekton;
+import tekton.TobbFonalTekton;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -28,9 +36,15 @@ import java.util.Scanner;
  * @date 2025-03-22
  */
 public class Tesztelo {
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in); int valasztas = -1;
-        while (valasztas != 0) {
+        Scanner sc = new Scanner(System.in);
+        int valasztas = -1;
+        while (true) {
             System.out.println("Az alábbi menüpontok közül válassz!\n" +
                     "(0) Kilépés\n" +
                     "(1) Gomba létrehozása és inicializálása\n" +
@@ -40,18 +54,61 @@ public class Tesztelo {
                     "(5) Rovar spóra elfogyasztása\n" +
                     "(6) Rovar gombafonal vágása\n" +
                     "(7) Tekton törés és kapcsolatok frissítése\n");
-            if (sc.hasNextInt()) {
-                valasztas = sc.nextInt();
-                switch (valasztas) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    default:
-                        System.out.println(">Nem létező menüpont!\n");
-                        break;
-                }
+
+            if (!sc.hasNextLine()) {
+                System.out.println(">Bemenet hiányzik! Program vége.");
+                break;
             }
+
+            try {
+                valasztas = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println(">Nem érvényes számformátum!\n");
+                continue;
+            }
+
+
+            switch (valasztas) {
+                case 0:
+                    return;
+                case 1:
+                    clearScreen();
+                    Tekton t1 = new TobbFonalTekton(0, 0, 0);
+                    Gombatest g1 = new Gombatest();
+                    Gomba gomba1 = new Gomba(t1);
+                    gomba1.setGombatest(g1);
+                    break;
+                case 4:
+                    clearScreen();
+                    Tekton t2 = new TobbFonalTekton(1, 0, 0);
+                    Tekton t3 = new TobbFonalTekton(2, 0, 0);
+                    Rovar r1 = new Rovar(t2);
+                    r1.attesz(t3);
+                    break;
+                case 5:
+                    clearScreen();
+                    Rovar r2 = new Rovar(null);
+                    GyorsitoSpora spora = new GyorsitoSpora(3);
+                    r2.elfogyaszt(spora);
+                    break;
+                case 6:
+                    clearScreen();
+                    gameLogic gl = new gameLogic();
+                    gl.jatekKezdes();
+                    Rovar r3 = new Rovar(null);
+                    Tekton t4 = new TobbFonalTekton(3, 0, 0);
+                    Tekton t5 = new TobbFonalTekton(4, 0, 0);
+                    Gombafonal fonal = new Gombafonal(t4, t5);
+                    Gomba g2 = new Gomba(t4);
+                    g2.addFonal(fonal);
+                    gl.getGombaszok().get(0).getGombak().add(g2);
+                    r3.fonalElvagas(fonal, gl.getGombaszok());
+                    break;
+                default:
+                    System.out.println(">Nem létező menüpont!\n");
+                    break;
+            }
+            System.out.flush();
         }
     }
 }
