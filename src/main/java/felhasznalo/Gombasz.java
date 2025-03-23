@@ -83,4 +83,12 @@ public class Gombasz extends Felhasznalo {
     public void sporaLoves(Tekton t1) {
         System.out.println(">Gombasz->sporaLoves()");
     }
+
+    /**
+     * Gombák listájának lekérdezése
+     * @return gombák listája
+     */
+    public List<Gomba> getGombak() {
+        return gombak;
+    }
 }
