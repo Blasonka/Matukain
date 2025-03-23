@@ -1,6 +1,7 @@
 package felhasznalo;
 
 import gomba.Gombafonal;
+import jateklogika.gameLogic;
 import rovar.Rovar;
 import spora.Spora;
 import tekton.Tekton;
@@ -71,5 +72,7 @@ public class Rovarasz extends Felhasznalo {
      */
     public void fonalElvagas(Gombafonal gf1) {
         System.out.println(">Rovarasz->fonalElvagas(gf1)");
+        System.out.println(">A fonalelvágást az (1). számú rovar fogja végezni");
+        rovarak.get(0).fonalElvagas(gf1, gameLogic.getGombaszok());
     }
 }

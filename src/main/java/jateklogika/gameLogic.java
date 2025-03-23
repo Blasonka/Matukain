@@ -1,6 +1,8 @@
 package jateklogika;
 import java.util.List;
 import felhasznalo.Felhasznalo;
+import felhasznalo.Gombasz;
+import felhasznalo.Rovarasz;
 import tekton.Tekton;
 /**
  * Osztály a játék szabályainak megvalósításához
@@ -9,11 +11,22 @@ import tekton.Tekton;
  *  */ 
 public class gameLogic {
     int korSzamlalo;
-    List<Tekton> map; 
+    List<Tekton> map;
+    static List<Gombasz> gombaszok;
     /**
      * Default konstruktor
      */
     gameLogic() {}
+
+    /**
+     * Gombászok lekérdezése
+     * @details statikus metódus, mely így elérhető lesz a Rovarasz osztály számára,
+     * aki ezáltal a Rovar osztályban megtalálhatja a megfelelő gombafonalat
+     * @return gombaszok
+     */
+    public static List<Gombasz> getGombaszok() {
+        return gombaszok;
+    }
     /**
      * Meghívja a tektonnak a tores() függvényét, ha a tektonnak ketté kell törnie
      * @param t adja meg a Tektonok listáját

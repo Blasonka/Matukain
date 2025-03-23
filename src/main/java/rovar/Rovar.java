@@ -68,7 +68,7 @@ public class Rovar {
      * @brief A rovar elvágja az adott gombafonalat.
      * @param fonal a fonal, amit el kell vágni.
      */
-    public void fonalElvagas(Gombafonal fonal, Gombasz g){
+    public void fonalElvagas(Gombafonal fonal, List<Gombasz> gomg){
         System.out.println("Rovar->fonalElvagas(fonal)");
         System.out.println("Van hatással VagasGatloSpora? (Y/N)");
         Scanner scanner1 = new Scanner(System.in);
@@ -80,14 +80,16 @@ public class Rovar {
             String valasz2 = scanner2.nextLine();
             scanner2.close();
             if (valasz2.equals("Y")) {
-                List<Gomba> gombak = g.getGombak();
-                for (Gomba gomba : gombak) {
-                    List<Gombafonal> gombafonalak = gomba.getGombafonalak();
-                    for (Gombafonal gombafonal : gombafonalak) {
-                        if (gombafonal.equals(fonal)) {
-                            g.getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
-                            System.out.println("A gombafonal elvágva.");
-                            return;
+                for (Gombasz g : gomg) {
+                    List<Gomba> gombak = g.getGombak();
+                    for (Gomba gomba : gombak) {
+                        List<Gombafonal> gombafonalak = gomba.getGombafonalak();
+                        for (Gombafonal gombafonal : gombafonalak) {
+                            if (gombafonal.equals(fonal)) {
+                                g.getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
+                                System.out.println("A gombafonal elvágva.");
+                                return;
+                            }
                         }
                     }
                 }
