@@ -16,7 +16,7 @@ package tekton;
  * @version 1.0
  * @date 2025-03-21
  */
-class GombatestNelkuliTekton extends Tekton {
+public class GombatestNelkuliTekton extends Tekton {
     /**
      * GombatestNelkulTekton osztály konstruktora
      * @param id beállítja az id értékét
