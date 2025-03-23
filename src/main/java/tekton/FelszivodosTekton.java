@@ -1,5 +1,7 @@
 package tekton;
 
+import gomba.Gomba;
+
 /**
  * FelszivodosTekton osztály
  *
@@ -50,7 +52,7 @@ public class FelszivodosTekton extends Tekton{
     @Override
     public void hatasKifejtes(Gomba gomba){
         if (szamlalo>=2){
-            gomba.getGombaFonalak().remove(0);
+            gomba.getGombafonalak().remove(0);
             System.out.println("A gombafonal felszívódott");
         }
         else{

@@ -1,5 +1,7 @@
 package tekton;
 
+import gomba.Gomba;
+
 /**
  * GombatestNelkuliTekton osztály
  *

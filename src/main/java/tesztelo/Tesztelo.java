@@ -33,13 +33,13 @@ public class Tesztelo {
         while (valasztas != 0) {
             System.out.println("Az alábbi menüpontok közül válassz!\n" +
                     "(0) Kilépés\n" +
-                    "(1) Gomba létrehozása és inicializálása" +
-                    "(2) Gombafonal növesztése" +
-                    "(3) Spóraszórás egy tektonról másikra" +
-                    "(4) Rovar mozgatása egyik tektonról másikra" +
-                    "(5) Rovar spóra elfogyasztása" +
-                    "(6) Rovar gombafonal vágása" +
-                    "(7) Tekton törés és kapcsolatok frissítése");
+                    "(1) Gomba létrehozása és inicializálása\n" +
+                    "(2) Gombafonal növesztése\n" +
+                    "(3) Spóraszórás egy tektonról másikra\n" +
+                    "(4) Rovar mozgatása egyik tektonról másikra\n" +
+                    "(5) Rovar spóra elfogyasztása\n" +
+                    "(6) Rovar gombafonal vágása\n" +
+                    "(7) Tekton törés és kapcsolatok frissítése\n");
             if (sc.hasNextInt()) {
                 valasztas = sc.nextInt();
                 switch (valasztas) {

@@ -1,5 +1,7 @@
 package tekton;
 
+import gomba.Gomba;
+
 /**
  * MaxEgyFonalTekton osztály
  *
@@ -33,7 +35,7 @@ public class MaxEgyFonalTekton extends Tekton{
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (gomba.getGombaFonalak().size()==0){
+        if (gomba.getGombafonalak().size()==0){
             System.out.println("A gomba növeszthet egy fonalat");
         }
         System.out.println("A gomba nem növeszthet fonalat");
