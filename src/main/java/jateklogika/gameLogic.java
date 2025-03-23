@@ -15,10 +15,26 @@ import tekton.TobbFonalTekton;
 import tekton.GombatestNelkuliTekton;
 
 /**
- * Osztály a játék szabályainak megvalósításához
- * Szüksége van a Tekton,felhasználó osztályokra
+ * gameLogic
+ *
+ * @class gameLogic
+ *
+ * @brief A szkeleton fázis inicializálását megvalósító osztály
+ *
+ * @details
+ * Inicializáló osztály, mely 1 fő feladattal rendelkezik:
+ * Példányosítja mind a tektonokat, játékosokat, rovarakat és a gombákat is
+ *
+ * @see gameLogic
  * 
- *  */ 
+ *
+ * @note Szkeleton fázishoz tartozik, a metódusok még hiányosak lehetnek
+ *
+ * @author Bence338
+ * @version 1.0
+ * @version 1.1 - comment Update
+ * @date 2025-03-22
+ */
 public class gameLogic {
     int korSzamlalo;
     List<Tekton> map;
