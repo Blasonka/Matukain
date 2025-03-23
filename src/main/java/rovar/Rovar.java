@@ -1,5 +1,7 @@
 package rovar;
 
+import felhasznalo.Gombasz;
+import gomba.Gomba;
 import gomba.Gombafonal;
 import spora.Spora;
 import tekton.Tekton;
@@ -66,15 +68,32 @@ public class Rovar {
      * @brief A rovar elvágja az adott gombafonalat.
      * @param fonal a fonal, amit el kell vágni.
      */
-    public void fonalElvagas(Gombafonal fonal){
+    public void fonalElvagas(Gombafonal fonal, Gombasz g){
         System.out.println("Rovar->fonalElvagas(fonal)");
-        System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
-        Scanner scanner = new Scanner(System.in);
-        String valasz = scanner.nextLine();
-        scanner.close();
-        if (valasz.equals("Y")) {
-            //Gomba1.removeFonal(fonal);
-            //Gomba2.removeFonal(fonal);
+        System.out.println("Van hatással VagasGatloSpora? (Y/N)");
+        Scanner scanner1 = new Scanner(System.in);
+        String valasz1 = scanner1.nextLine();
+        scanner1.close();
+        if (valasz1.equals("Y")) {
+            System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
+            Scanner scanner2 = new Scanner(System.in);
+            String valasz2 = scanner2.nextLine();
+            scanner2.close();
+            if (valasz2.equals("Y")) {
+                List<Gomba> gombak = g.getGombak();
+                for (Gomba gomba : gombak) {
+                    List<Gombafonal> gombafonalak = gomba.getGombafonalak();
+                    for (Gombafonal gombafonal : gombafonalak) {
+                        if (gombafonal.equals(fonal)) {
+                            g.getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
+                            System.out.println("A gombafonal elvágva.");
+                            return;
+                        }
+                    }
+                }
+            } else {
+                System.out.println("A gombafonalat nem lehet elvágni.");
+            }
         } else {
             System.out.println("A gombafonalat nem lehet elvágni.");
         }
