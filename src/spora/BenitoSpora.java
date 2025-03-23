@@ -1,8 +1,28 @@
 package spora;
 
+import rovar.Rovar;
+
 /**
- * Osztály béníto hatású spórák tárolására
- * Őse az absztrak Spora osztály
+ * BénítóSpóra osztály
+ *
+ * @class BenitoSpora
+ *
+ * @brief BénítóSpórákat reprezentáló osztály
+ *
+ * @details
+ *  Osztály béníto hatású spórák tárolására
+ *  Őse az absztrak Spora osztály
+ *
+ * @see spora.Spora
+ * @see gomba.Gomba
+ * @see tekton.Tekton
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author todortoth
+ * @version 1.0
+ * @version 1.1 - comment Update
+ * @date 2025-03-22
  */
 public class BenitoSpora extends Spora {
     /**
@@ -13,12 +33,20 @@ public class BenitoSpora extends Spora {
         super(sz);
         System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
-    /// BenitoSpora törlése
+
+    /**
+     * Spóra törlése
+     */
     public void torles() {
         System.out.println("\t\t>BenitoSpora->torles()");
     }
-    /// BenitoSpora osztály rovarra nézett bénító hatásának kifejtése
-    public void hatasKifejtes() {
+    /**
+     * Spóra hatásának kifejtése
+     * @param rovar a rovar akin a hatást kívánja kifejteni
+     */
+    @Override
+    public boolean hatasKifejtes(Rovar rovar) {
         System.out.println("\t\t>BenitoSpora->hatasKifejtes()");
+        return false;
     }
 }

@@ -1,8 +1,28 @@
 package spora;
 
+import rovar.Rovar;
+
 /**
- * Osztály vágás gátló hatású spórák tárolására
- * Őse az absztrak Spora osztály
+ * VágásGátlóSpóra osztály
+ *
+ * @class VagasGatloSpora
+ *
+ * @brief VágásGátlóSpórákat reprezentáló osztály
+ *
+ * @details
+ *  Osztály vágás gátló hatású spórák tárolására
+ *  Őse az absztrak Spora osztály
+ *
+ * @see spora.Spora
+ * @see gomba.Gomba
+ * @see tekton.Tekton
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author todortoth
+ * @version 1.0
+ * @version 1.1 - comment Update
+ * @date 2025-03-22
  */
 public class VagasGatloSpora extends Spora {
     /**
@@ -13,12 +33,21 @@ public class VagasGatloSpora extends Spora {
         super(sz);
         System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
     }
-    /// VagasGatloSpora törlése
+    /**
+     * Spóra törlése
+     */
+    @Override
     public void torles() {
         System.out.println("\t\t>VagasGatloSpora->torles()");
     }
-    /// VagasGatloSpora osztály rovarra nézett vágás gátló hatásának kifejtése
-    public void hatasKifejtes() {
+
+    /**
+     * Spóra hatásának kifejtése
+     * @param rovar a rovar akin a hatást kívánja kifejteni
+     */
+    @Override
+    public boolean hatasKifejtes(Rovar rovar) {
         System.out.println("\t\t>VagasGatloSpora->hatasKifejtes()");
+        return false;
     }
 }

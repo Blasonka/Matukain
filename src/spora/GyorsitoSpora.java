@@ -1,8 +1,28 @@
 package spora;
 
+import rovar.Rovar;
+
 /**
- * Osztály gyorsító hatású spórák tárolására
+ * GyorsítóSpóra osztály
+ *
+ * @class GyorsitoSpora
+ *
+ * @brief GyorsítóSpórákat reprezentáló osztály
+ *
+ * @details
+ * Osztály gyorsító hatású spóráktárolására
  * Őse az absztrak Spora osztály
+ *
+ * @see spora.Spora
+ * @see gomba.Gomba
+ * @see tekton.Tekton
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author todortoth
+ * @version 1.0
+ * @version 1.1 - comment Update
+ * @date 2025-03-22
  */
 public class GyorsitoSpora extends Spora {
     /**
@@ -13,12 +33,21 @@ public class GyorsitoSpora extends Spora {
         super(sz);
         System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }
-    /// GyorsitoSpora törlése
+
+    /**
+     * Spóra törlése
+     */
     public void torles() {
         System.out.println("\t\t>GyorsitoSpora->torles()");
     }
-    /// GyorsitoSpora osztály rovarra nézett gyorsító hatásának kifejtése
-    public void hatasKifejtes() {
+
+    /**
+     * Spóra hatásának kifejtése
+     * @param rovar a rovar akin a hatást kívánja kifejteni
+     */
+    @Override
+    public boolean hatasKifejtes(Rovar rovar) {
         System.out.println("\t\t>GyorsitoSpora->hatasKifejtes()");
+        return false;
     }
 }
