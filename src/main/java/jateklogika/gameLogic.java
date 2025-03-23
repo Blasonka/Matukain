@@ -1,9 +1,19 @@
 package jateklogika;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import felhasznalo.Felhasznalo;
 import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
+import gomba.Gomba;
+import rovar.Rovar;
+import tekton.FelszivodosTekton;
+import tekton.MaxEgyFonalTekton;
 import tekton.Tekton;
+import tekton.TobbFonalTekton;
+import tekton.GombatestNelkuliTekton;
+
 /**
  * Osztály a játék szabályainak megvalósításához
  * Szüksége van a Tekton,felhasználó osztályokra
@@ -16,7 +26,29 @@ public class gameLogic {
     /**
      * Default konstruktor
      */
-    gameLogic() {}
+    gameLogic() 
+    {
+        this.map=new ArrayList<>();
+    }
+    /**
+      * Sima getterek és setterek a későbbi feladatokhoz
+      */
+      public int getKorszamlalo()
+      {
+        return korSzamlalo;
+      }
+      public void setKorszamlalo(int szam)
+      {
+        korSzamlalo=szam;
+      }
+      public void setMap(List<Tekton> m) 
+      {
+        map=m;
+      }
+      public List<Tekton> getMapTekton() 
+      {
+        return  map;
+      }
 
     /**
      * Gombászok lekérdezése
@@ -53,9 +85,41 @@ public class gameLogic {
      * @param g adja meg a gombász felhasználókat
      * @param r adja meg a rovarász felhasználókat
      */
-    public void jatekKezdes(List<Felhasznalo> g,List<Felhasznalo> r) 
+    public void jatekKezdes() 
     {
-        System.out.println("gameLogic->1 játékos");
+        List<Gombasz> gombaszok = new ArrayList<>();
+        List<Rovarasz> rovaraszok = new ArrayList<>();
+        Random rand = new Random();
+        Tekton[] tektonok = new Tekton[3];
+
+        for (int i = 0; i < 3; i++) 
+        {
+        int randomIndex = rand.nextInt(4); 
+        switch (randomIndex) {
+            case 0 -> tektonok[i] = new FelszivodosTekton(1, 2, 2);
+            case 1 -> tektonok[i] = new GombatestNelkuliTekton(2, 4, 5);
+            case 2 -> tektonok[i] = new MaxEgyFonalTekton(3, 6, 4);
+            case 3 -> tektonok[i] = new TobbFonalTekton(3, 6, 4);
+        }
+        map.add(tektonok[i]);
+        }
+        Gombasz g1= new Gombasz(0, 5,0 );
+        Gombasz g2= new Gombasz(0,5,0);
+        Rovarasz r1 = new Rovarasz(0,5,0);
+        Rovarasz r2 = new Rovarasz(0,5,0);
+        Rovar rovar1 = new Rovar(null);
+        Rovar rovar2 = new Rovar(null);
+        Gomba gomba1 = new Gomba(null);
+        Gomba gomba2 = new Gomba(null);
+        korSzamlalo=0;
+
+        gombaszok.add(g1);
+        gombaszok.add(g2);
+        rovaraszok.add(r1);
+        rovaraszok.add(r2);
+            
+        System.out.println("Játék inicializálva. Játékosok, tektonok, rovarok, gombák létrehozva.");
+        
     }
     
     /**
