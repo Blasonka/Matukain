@@ -102,7 +102,7 @@ public class Rovar {
         System.out.print("\t");
         boolean szomszedos = tekton.szomszedosTekton(kovetkezo);
         if (szomszedos) {
-            tekton = kovetkezo;
+            setTekton(kovetkezo);
             System.out.println("A rovar áttelepült a következő tektonra.");
         } else {
             System.out.println("A két tekton nem szomszédos, nem lehet áttenni a rovart.");
@@ -118,6 +118,14 @@ public class Rovar {
         System.out.println("Rovar->removeSpora(spora)");
         elfogyasztottSporak.remove(spora);
         System.out.println("A spóra törölve lett.");
+    }
+
+    /**
+     * Beállítja a rovar tektonját, amin van.
+     * @param tekton a beállítandó tekton.
+     */
+    public void setTekton(Tekton tekton) {
+        this.tekton = tekton;
     }
 
     /**
