@@ -86,7 +86,7 @@ public class Rovar {
                         List<Gombafonal> gombafonalak = gomba.getGombafonalak();
                         for (Gombafonal gombafonal : gombafonalak) {
                             if (gombafonal.equals(fonal)) {
-                                g.getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
+                                gomg.get(gomg.indexOf(g)).getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
                                 System.out.println("A gombafonal elvágva.");
                                 return;
                             }
