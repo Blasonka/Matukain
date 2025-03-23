@@ -16,11 +16,16 @@ for /r bin %%i in (*.class) do (
     echo %%i >> sources.txt
 )
 
+rem MANIFEST.MF fájl létrehozása
+echo Manifest-Version: 1.0 > MANIFEST.MF
+echo Main-Class: tesztelo.Tesztelo >> MANIFEST.MF
+
 rem .jar fájl készítése
-jar cf szkeleton.jar -C bin .
+jar cmf MANIFEST.MF szkeleton.jar -C bin .
 
 rem Fájl törlés
 del sources.txt
+del MANIFEST.MF
 
 echo Fordítás és .jar fájl kész!
 exit
