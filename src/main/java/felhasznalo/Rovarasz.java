@@ -53,7 +53,7 @@ public class Rovarasz extends Felhasznalo {
      * Rovar mozgatása
      * @param t2 a tekton amire mozogni fog a rovar
      */
-    public void rovarMozgas(Tekton t2) {
+    public void attesz(Tekton t2) {
         System.out.println(">Rovarasz->rovarMozgas(t2)");
     }
 
