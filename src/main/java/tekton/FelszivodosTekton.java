@@ -1,10 +1,26 @@
 package tekton;
 
 /**
+ * FelszivodosTekton osztály
+ *
+ * @class FelszivodosTekton
+ *
+ * @brief A FelszivodosTekton reprezentáló osztály
+ *
+ * @details
  * Osztály olyan Tektonok adatainak tárolására, melyeken adott idő után felszívódnak a gombafonalak
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author Monostori
+ * @version 1.0
+ * @date 2025-03-21
  */
 public class FelszivodosTekton extends Tekton{
-    /// Számláló, mely alapján meghatározható, hogy mikor szívódjon fel a gombafonal
+    /**
+     * @var int szamlalo
+     * @brief Számláló, mely alapján meghatározható, hogy mikor szívódjon fel a gombafonal
+     */
     private int szamlalo;
 
     /**
@@ -21,6 +37,7 @@ public class FelszivodosTekton extends Tekton{
 
     /**
      * Visszaadja a számláló értékét
+     * @return a számláló értéke
      */
     public int getSzamlalo(){
         return szamlalo;
@@ -28,9 +45,16 @@ public class FelszivodosTekton extends Tekton{
 
     /**
      * Kifejti a Tekton hatását, azaz egy gombafonal adott idő után felszívódik
+     * @param gomba a gomba, amelyiken a hatást kifejti
      */
     @Override
-    public void hatasKifejtes(){
-        System.out.println("FelszivodosTekton hatás kifejtve, azaz egy gombafonal adott idő után felszívódik");
+    public void hatasKifejtes(Gomba gomba){
+        if (szamlalo>=2){
+            gomba.getGombaFonalak().remove(0);
+            System.out.println("A gombafonal felszívódott");
+        }
+        else{
+            System.out.println("A gombafonal még nem szívódott fel");
+        }
     }
 }

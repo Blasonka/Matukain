@@ -8,32 +8,49 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Tekton osztály
+ *
+ * @class Tekton
+ *
+ * @brief A Tektonokat reprezentáló osztály
+ *
+ * @details
  * Absztrakt osztály Tektonok adatainak tárolására
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author Monostori
+ * @version 1.0
+ * @date 2025-03-21
  */
-
 public abstract class Tekton {
     /**
-     * Tekton azonosítóját tárolja
+     * @var int id
+     * @brief Tekton azonosítóját tárolja
      */
     private int id;
 
     /**
-     * Tekton X koordinátáját tárolja
+     * @var int koordinataX
+     * @brief Tekton X koordinátáját tárolja
      */
     private int koordinataX;
 
     /**
-     * Tekton Y koordinátáját tárolja
+     * @var int koordinataY
+     * @brief Tekton Y koordinátáját tárolja
      */
     private int koordinataY;
 
     /**
-     * Tektonon lévő spórákat tárolja egy listában
+     * @var List<Spora> sporak
+     * @brief Tektonon lévő spórákat tárolja egy listában
      */
     private List<Spora> sporak;
 
     /**
-     * Tektonon lévő gombát tárolja
+     * @var Gomba gomba
+     * @brief Tektonon lévő gombát tárolja
      */
     private Gomba gomba;
 
@@ -54,6 +71,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja a tekton ID-ját
+     * @return id, a tekton ID-ja
      */
     public int getID() {
         return id;
@@ -61,6 +79,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja a tekton X koordinátáját
+     * @return koordinataX, a tekton X koordinátája
      */
     public int getKoordinataX() {
         return koordinataX;
@@ -68,6 +87,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja a tekton Y koordinátáját
+     * @return koordinataY, a tekton Y koordinátája
      */
     public int getKoordinataY() {
         return koordinataY;
@@ -75,6 +95,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja a tektonon lévő spórákat
+     * @return sporak, a tektonon lévő spórák listája
      */
     public List<Spora> getSporak() {
         return sporak;
@@ -82,6 +103,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja a tektonon lévő gombát, vagy null-t, ha nincs rajta gomba
+     * @return gomba, a tektonon lévő gomba
      */
     public Gomba getGomba() {
         return gomba;
@@ -115,6 +137,8 @@ public abstract class Tekton {
 
     /**
      * Meghatározza a szomszédos tektonokat
+     * @param szomszed a tekton, amiről megmondja, hogy szomszédosak-e
+     * @return true, ha szomszédosak, false egyébként
      */
     public boolean szomszedosTekton(Tekton szomszed){
         System.out.println("Tekton->szomszedosTekton(szomszed)");
@@ -134,6 +158,7 @@ public abstract class Tekton {
 
     /**
      * Visszaadja, hogy az adott tekton szabad-e
+     * @return true, ha szabad, false egyébként
      */
     public boolean szabadTekton(){
         if (gomba != null){
@@ -154,6 +179,9 @@ public abstract class Tekton {
         System.out.println("Új gomba nőtt erre a tektonra");
     }
 
-    /// Tekton hatásának kifejtése, absztrakt metódus
-    public abstract void hatasKifejtes();
+    /**
+     * Tekton hatásának kifejtése, absztrakt metódus
+     * @param gomba, a gomba, amelyre a hatás kifejtésre kerül
+     */
+    public abstract void hatasKifejtes(Gomba gomba);
 }

@@ -1,7 +1,20 @@
 package tekton;
 
 /**
+ * GombatestNelkuliTekton osztály
+ *
+ * @class GombatestNelkuliTekton
+ *
+ * @brief A GombatestNelkuliTekton reprezentáló osztály
+ *
+ * @details
  * Osztály olyan Tektonok adatainak tárolására, melyeken nem nőhet gombatest
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author Monostori
+ * @version 1.0
+ * @date 2025-03-21
  */
 class GombatestNelkuliTekton extends Tekton {
     /**
@@ -17,9 +30,11 @@ class GombatestNelkuliTekton extends Tekton {
 
     /**
      * Kifejti a Tekton hatását, azaz nem nőhet rajta gombatest
+     * @param gomba a gomba, amelyiken a hatást kifejti
      */
     @Override
-    public void hatasKifejtes(){
+    public void hatasKifejtes(Gomba gomba){
+        gomba = null;
         System.out.println("GombatestNelkuliTekton hatás kifejtve, azaz nem nőhet rajta gombatest");
     }
 }
