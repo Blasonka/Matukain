@@ -3,10 +3,35 @@ package gomba;
 import tekton.Tekton;
 
 /**
- * A gombafonalakat reprezentáló osztály
+ * Gombafonal osztály
+ *
+ * @class Gombafonal
+ *
+ * @brief A gombafonalakat reprezentáló osztály
+ *
+ * @details
+ * Ez az osztály felelős a gombafonalak reprezentálásáért, azokkal kapcsolatos műveletek végzéséért.
+ * Az osztály tartalmazza a gombafonalak végpontjait, valamint a gombafonalakhoz kapcsolódó műveleteket.
+ *
+ * @see felhasznalo.Gombasz
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author Blasek
+ * @version 1.0
+ * @date 2025-03-22
  */
 public class Gombafonal {
+    /**
+     * A gombafonal egyik végpontja
+     * @var Tekton hatar1
+     */
     private Tekton hatar1;
+
+    /**
+     * A gombafonal másik végpontja
+     * @var Tekton hatar2
+     */
     private Tekton hatar2;
 
     /**

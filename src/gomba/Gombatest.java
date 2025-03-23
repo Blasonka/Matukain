@@ -1,17 +1,50 @@
 package gomba;
 
-import spora.Spora;
+import spora.*;
 import tekton.Tekton;
 
 import java.util.Random;
 
 /**
- * A gombatesteket reprezentáló osztály
+ * Gombatest osztály
+ *
+ * @class Gombatest
+ *
+ * @brief A gombatesteket reprezentáló osztály
+ *
+ * @details
+ * Ez az osztály felelős a gombatestek reprezentálásáért, azokkal kapcsolatos műveletek végzéséért.
+ * Az osztály tartalmazza a gombatestek élettartamát, a gombatestekből kilőhető spórák számát, valamint a gombatestek fejlettségét.
+ *
+ * @see felhasznalo.Gombasz
+ *
+ * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ *
+ * @author Blasek
+ * @version 1.0
+ * @date 2025-03-22
  */
 public class Gombatest {
 
+    /**
+     * A gombatest élettartama
+     * @var int elettartam
+     * @brief A gombatest élettartamát tároló változó.
+     */
     private int elettartam;
+
+    /**
+     * A gombatestből kilőhető spórák száma
+     * @var int kilohetoSporakSzama
+     * @brief A gombatestből kilőhető spórák számát tároló változó.
+     */
     private int kilohetoSporakSzama;
+
+    /**
+     * A gombatest fejlettsége
+     * @var boolean fejlett
+     * @brief A gombatest fejlettségét tároló változó.
+     */
     private boolean fejlett;
 
     /**
@@ -54,34 +87,26 @@ public class Gombatest {
      */
     public void sporaLoves(Tekton tekton) {
         Random rand = new Random();
-        Spora spora;
+        Spora spora = null;
         int randomSpora = rand.nextInt(4);
         switch (randomSpora) {
             case 0:
-                spora = Spora.FEKETE;
+                spora = new BenitoSpora(rand.nextInt(4));
                 break;
             case 1:
-                spora = Spora.FEHER;
+                spora = new GyorsitoSpora(rand.nextInt(4));
                 break;
             case 2:
-                spora = Spora.PIROS;
+                spora = new LassitoSpora(rand.nextInt(4));
                 break;
             case 3:
-                spora = Spora.ZOLD;
+                spora = new VagasGatloSpora(rand.nextInt(4));
                 break;
             default:
-                spora = Spora.FEKETE;
                 break;
         }
-        System.out.println("Gombatest->sporaLoves()");
-    }
-
-    /**
-     * Fonal növesztése
-     * @param tekton1 az egyik tekton, amelyen a fonál növekszik
-     * @param tekton2 a másik tekton, amelyen a fonál növekszik
-     */
-    public void fonalNovesztes(Tekton tekton1, Tekton tekton2) {
-        System.out.println("Gombatest->fonalNovesztes()");
+        kilohetoSporakSzama--;
+        tekton.addSpora(spora);
+        System.out.println("Spóra kilőve a gombatestből a tektonra");
     }
 }
