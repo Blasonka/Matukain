@@ -5,7 +5,8 @@ import gomba.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import tesztelo.Tesztelo;
 
 /**
  * Tekton osztály
@@ -143,9 +144,7 @@ public abstract class Tekton {
     public boolean szomszedosTekton(Tekton szomszed){
         System.out.println("Tekton->szomszedosTekton(szomszed)");
         System.out.println("A két tekton szomszédos?(Y/N)");
-        Scanner scanner = new Scanner(System.in);
-        String valasz = scanner.nextLine();
-        scanner.close();
+        String valasz = Tesztelo.scanner.nextLine();
         if (valasz.equals("Y")) {
             System.out.println("A két tekton szomszédos");
             return true;

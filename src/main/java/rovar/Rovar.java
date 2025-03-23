@@ -5,10 +5,10 @@ import gomba.Gomba;
 import gomba.Gombafonal;
 import spora.Spora;
 import tekton.Tekton;
+import tesztelo.Tesztelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Rovar osztály
@@ -71,14 +71,10 @@ public class Rovar {
     public void fonalElvagas(Gombafonal fonal, List<Gombasz> gomg){
         System.out.println("Rovar->fonalElvagas(fonal)");
         System.out.println("Van hatással VagasGatloSpora? (Y/N)");
-        Scanner scanner1 = new Scanner(System.in);
-        String valasz1 = scanner1.nextLine();
-        scanner1.close();
+        String valasz1 = Tesztelo.scanner.nextLine();
         if (valasz1.equals("N")) {
             System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
-            Scanner scanner2 = new Scanner(System.in);
-            String valasz2 = scanner2.nextLine();
-            scanner2.close();
+            String valasz2 = Tesztelo.scanner.nextLine();
             if (valasz2.equals("Y")) {
                 for (Gombasz g : gomg) {
                     List<Gomba> gombak = g.getGombak();
