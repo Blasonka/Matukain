@@ -46,8 +46,7 @@ public class GyorsitoSpora extends Spora {
      * @param rovar a rovar akin a hatást kívánja kifejteni
      */
     @Override
-    public boolean hatasKifejtes(Rovar rovar) {
+    public void hatasKifejtes(Rovar rovar) {
         System.out.println("\t\t>GyorsitoSpora->hatasKifejtes()");
-        return false;
     }
 }

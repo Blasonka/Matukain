@@ -51,5 +51,5 @@ public abstract class Spora {
      * Spóra hatásának kifejtése, absztrakt metódus
      * @param rovar a rovar akin a hatást kívánja kifejteni
      */
-    public abstract boolean hatasKifejtes(Rovar rovar);
+    public abstract void hatasKifejtes(Rovar rovar);
 }

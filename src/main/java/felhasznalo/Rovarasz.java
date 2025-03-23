@@ -56,6 +56,8 @@ public class Rovarasz extends Felhasznalo {
      */
     public void attesz(Tekton t2) {
         System.out.println(">Rovarasz->rovarMozgas(t2)");
+        System.out.println(">A mozgást az (1). számú rovar fogja végezni");
+        rovarak.get(0).attesz(t2);
     }
 
     /**
@@ -64,6 +66,8 @@ public class Rovarasz extends Felhasznalo {
      */
     public void elfogyaszt(Spora sp1) {
         System.out.println(">Rovarasz->elfogyaszt(sp1)");
+        System.out.println(">A spóra elfogyasztást az (1). számú rovar fogja végezni");
+        rovarak.get(0).elfogyaszt(sp1);
     }
 
     /**
@@ -72,7 +76,7 @@ public class Rovarasz extends Felhasznalo {
      */
     public void fonalElvagas(Gombafonal gf1) {
         System.out.println(">Rovarasz->fonalElvagas(gf1)");
-        System.out.println(">A fonalelvágást az (1). számú rovar fogja végezni");
+        System.out.println(">A fonalvágást az (1). számú rovar fogja végezni");
         rovarak.get(0).fonalElvagas(gf1, gameLogic.getGombaszok());
     }
 }

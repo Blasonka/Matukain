@@ -61,13 +61,6 @@ public class Gombasz extends Felhasznalo {
         } return null;
     }
     /**
-     * Gombák létrehozása
-     * @param t1 a tekton amire a létrheozás megvalósítandó
-     */
-    public void gombaLetrehozas(Tekton t1) {
-        System.out.println(">Gombasz->gombaLetrehozas()");
-    }
-    /**
      * Gombafonal növesztése két tekton között
      * @param t1 egyik tekton
      * @param t2 másik tekton
@@ -75,6 +68,8 @@ public class Gombasz extends Felhasznalo {
      */
     public void fonalNovesztes(Tekton t1, Tekton t2) {
         System.out.println(">Gombasz->FonalNovesztes()");
+        System.out.println(">A fonalnövesztést az (1). számú gomba fogja végezni");
+        gombak.get(0).fonalNovesztes(t1, t2);
     }
     /**
      * Spóra lövése egy kiválasztott tektonra
@@ -82,6 +77,8 @@ public class Gombasz extends Felhasznalo {
      */
     public void sporaLoves(Tekton t1) {
         System.out.println(">Gombasz->sporaLoves()");
+        System.out.println(">A spóralövést az (1). számú gomba gombateste fogja végezni");
+        gombak.get(0).getGombatest().sporaLoves(t1);
     }
 
     /**

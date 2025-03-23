@@ -46,8 +46,7 @@ public class VagasGatloSpora extends Spora {
      * @param rovar a rovar akin a hatást kívánja kifejteni
      */
     @Override
-    public boolean hatasKifejtes(Rovar rovar) {
+    public void hatasKifejtes(Rovar rovar) {
         System.out.println("\t\t>VagasGatloSpora->hatasKifejtes()");
-        return false;
     }
 }
