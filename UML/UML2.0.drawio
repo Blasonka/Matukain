@@ -1,26 +1,20 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.0.16">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.2.9">
   <diagram id="n8wK8Lypo35vt5M8F3ag" name="Page-1">
-    <mxGraphModel dx="1165" dy="996" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2471" dy="1037" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gomba&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- fonalak: List&amp;lt;Gombafonal&amp;gt;&lt;br&gt;- gombatestek: List&amp;lt;Gombatest&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalOsszekoti(Tekton, Tekton): boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalNovesztes(Tekton, Tekton): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ addFonal(Gombafonal): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ removeFonal(Gombafonal): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gomba&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- gombafonalak: List&amp;lt;Gombafonal&amp;gt;&lt;br&gt;- gombatest: Gombatest&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- tekton: Tekton&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalOsszekoti(Tekton, Tekton): boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalNovesztes(Tekton, Tekton): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ addFonal(Gombafonal): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ removeFonal(Gombafonal): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
           <mxGeometry x="680" y="190" width="270" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="mghHyxVknunxmGEl4J68-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="node6" target="node4">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="node6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gombafonal&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- elragva: boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- pusztulasSzamlalo: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- test: Gombatest&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- hatar1: Tekton&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- hatar2: Tekton&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ megesziRovart(Rovar): boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ eltartva(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ gombatestNovesztes(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-          <mxGeometry x="490" y="460" width="238" height="250" as="geometry" />
-        </mxCell>
-        <mxCell id="node4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gombatest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- tekton: Tekton&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- maxSporaKiloves: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- eddigiSzorasok: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- kilohetoSporakSzama: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- fejlett: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ tudSporatSzorni(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ sporaSzoras(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ fonalNovesztes(): Gombafonal&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ elpusztul(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-          <mxGeometry x="820" y="470" width="263" height="260" as="geometry" />
+        <mxCell id="node4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gombatest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- elattartam: int&lt;br&gt;- kilohetoSporakSzama: int&lt;br&gt;- fejlett: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ sporaLoves(Tekton): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="820" y="470" width="263" height="150" as="geometry" />
         </mxCell>
         <mxCell id="node7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;JatekLogika&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- kor: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- terkep: List&amp;lt;Tekton&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ jatekOsszegzes(): void&lt;br&gt;+ tektonTores(Tekton): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ pontOsztas(Felhasznalo): void&lt;br&gt;+ jatekKezdes(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ kor(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ elettartamCsokkentes(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
           <mxGeometry x="890" y="-270" width="247" height="230" as="geometry" />
         </mxCell>
         <mxCell id="node1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Rovar&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- tekton: Tekton&lt;br&gt;- telitettseg: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- List&amp;lt;Spora&amp;gt; elfogyasztottSporak&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ fonalElvagas(Gombafonal): void&lt;br&gt;+ elfogyaszt(Spora): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ attesz(Tekton): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-          <mxGeometry x="1000" y="194" width="245" height="196" as="geometry" />
+          <mxGeometry x="1279.13" y="170" width="245" height="196" as="geometry" />
         </mxCell>
         <mxCell id="node10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;Abstract&amp;gt;&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Spora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- szamlalo: int&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ torles(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ &lt;i&gt;hatasKifejtes(): void&lt;/i&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
           <mxGeometry x="-310" y="-260" width="233.5" height="150" as="geometry" />
@@ -57,39 +51,26 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="5_aaQBfsUFT6gXeQ77lQ-17" value="0..n" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=0;" parent="1" source="node0" target="node6" edge="1">
-          <mxGeometry x="-0.5895" relative="1" as="geometry">
-            <mxPoint x="870" y="294" as="sourcePoint" />
-            <mxPoint x="1030" y="294" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="5_aaQBfsUFT6gXeQ77lQ-18" value="*" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="node0" target="node4" edge="1">
-          <mxGeometry x="-0.8183" y="12" relative="1" as="geometry">
-            <mxPoint x="870" y="294" as="sourcePoint" />
-            <mxPoint x="780" y="354" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ORYn2ecQLFNMLpVwUOiA-1" value="1" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1.001;entryY=0.941;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="node1" target="node3" edge="1">
+        <mxCell id="ORYn2ecQLFNMLpVwUOiA-1" value="1" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="node1" edge="1">
           <mxGeometry x="-0.9724" y="-7" relative="1" as="geometry">
-            <mxPoint x="580" y="100" as="sourcePoint" />
-            <mxPoint x="640" y="140" as="targetPoint" />
+            <mxPoint x="859.13" y="96" as="sourcePoint" />
+            <mxPoint x="920" y="20" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1123" y="18" />
-              <mxPoint x="670" y="18" />
+              <mxPoint x="1402" y="14" />
+              <mxPoint x="670" y="14" />
+              <mxPoint x="670" y="20" />
             </Array>
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Dxf281jyct19hYOZ6DB2-53" value="0...n" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="node1" target="node10" edge="1">
+        <mxCell id="Dxf281jyct19hYOZ6DB2-53" value="0...n" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="node1" edge="1">
           <mxGeometry x="-0.9857" relative="1" as="geometry">
-            <mxPoint x="430" y="50" as="sourcePoint" />
-            <mxPoint x="590" y="50" as="targetPoint" />
+            <mxPoint x="709.13" y="46" as="sourcePoint" />
+            <mxPoint x="85.88" y="-264.0000000000001" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1184" y="-360" />
-              <mxPoint x="-151" y="-360" />
-              <mxPoint x="-151" y="-260" />
+              <mxPoint x="1463.13" y="-364" />
+              <mxPoint x="128.13" y="-364" />
+              <mxPoint x="128.13" y="-264" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -193,23 +174,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Dxf281jyct19hYOZ6DB2-73" value="1" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.895;exitY=0.004;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.997;entryY=0.939;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="node0" target="node3" edge="1">
+        <mxCell id="Dxf281jyct19hYOZ6DB2-73" value="1" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.895;exitY=0.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.997;entryY=0.939;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="Wrzv-WKuPT4GOURQbkhB-1" target="node3" edge="1">
           <mxGeometry x="-0.9503" relative="1" as="geometry">
             <mxPoint x="640" y="40" as="sourcePoint" />
             <mxPoint x="800" y="40" as="targetPoint" />
             <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="m4AigPFPe-4AWxtqMWHj-1" value="1, 2" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.119;exitY=0.019;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.002;entryY=0.946;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="node6" target="node3" edge="1">
-          <mxGeometry x="-0.9634" relative="1" as="geometry">
-            <mxPoint x="500" y="230" as="sourcePoint" />
-            <mxPoint x="660" y="230" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="518" y="390" />
-              <mxPoint x="30" y="390" />
-              <mxPoint x="30" y="21" />
+              <mxPoint x="922" y="18" />
             </Array>
-            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="FeJMoY2HrBhlAUw-9pZi-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;RovarOsztoSpora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
@@ -236,23 +208,226 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="FeJMoY2HrBhlAUw-9pZi-5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;HusevoGombafonal&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): GombaTest&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-          <mxGeometry x="120" y="495" width="238" height="70" as="geometry" />
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gomba&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- fonalak: List&amp;lt;Gombafonal&amp;gt;&lt;br&gt;- gombatestek: List&amp;lt;Gombatest&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalOsszekoti(Tekton, Tekton): boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ fonalNovesztes(Tekton, Tekton, Gombatest): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- addFonal(Gombafonal): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ removeFonal(Gombafonal): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ addGombatest(Gombatest): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ removeGombatest(Gombatest): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="180" width="340" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="FeJMoY2HrBhlAUw-9pZi-7" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.607;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.657;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="FeJMoY2HrBhlAUw-9pZi-5" target="node6" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="380" y="540" as="sourcePoint" />
-            <mxPoint x="570" y="470" as="targetPoint" />
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-3" target="Wrzv-WKuPT4GOURQbkhB-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gombafonal&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- elragva: boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- pusztulasSzamlalo: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- test: Gombatest&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- hatar1: Tekton&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- hatar2: Tekton&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ eltartva(): boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="483.75" width="238" height="192.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gombatest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- tekton: Tekton&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- maxSporaKiloves: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- eddigiSzorasok: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- kilohetoSporakSzama: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- fejlett: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ tudSporatSzorni(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ sporaSzoras(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="470" width="263" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;JatekLogika&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- kor: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- terkep: List&amp;lt;Tekton&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ jatekOsszegzes(): void&lt;br&gt;+ tektonTores(Tekton): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ pontOsztas(Felhasznalo): void&lt;br&gt;+ jatekKezdes(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ kor(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ elettartamCsokkentes(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="-270" width="247" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;Abstract&amp;gt;&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Spora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- szamlalo: int&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ torles(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ &lt;i&gt;hatasKifejtes(): void&lt;/i&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="-260" width="233.5" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;Abstract&amp;gt;&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Tekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- id: int&lt;br&gt;- koordinataY: int&lt;br&gt;- koordinataX: int&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- sporak: List&amp;lt;Spora&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- gomba: Gomba&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ tores(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ addSpora(Spora): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ removeSpora(Spora): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ szomszedosTekton(Tekton): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ szabadTekton(): boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px; line-height: 1.6;&quot;&gt;+ gombaNovesztes(): void&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ &lt;i&gt;hatasKifejtes(Gomba)&lt;/i&gt;: void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="-310" width="350" height="349.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-9" value="" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;endFill=0;exitX=1.002;exitY=0.54;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675.6999999999998" y="-111.26999999999998" as="sourcePoint" />
+            <mxPoint x="500" y="-310" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="358" y="545" />
+              <mxPoint x="755" y="-111" />
+              <mxPoint x="755" y="-340" />
+              <mxPoint x="500" y="-340" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="mghHyxVknunxmGEl4J68-2" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="790" y="570" width="30" height="30" as="geometry" />
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-10" value="0..n" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;" connectable="0" vertex="1" parent="Wrzv-WKuPT4GOURQbkhB-9">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="9" y="-27" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="mghHyxVknunxmGEl4J68-3" value="*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="725" y="558" width="30" height="30" as="geometry" />
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-11" value="0..n" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;align=left;verticalAlign=bottom;rounded=0;endFill=0;edgeStyle=orthogonalEdgeStyle;exitX=-0.003;exitY=0.584;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.002;entryY=0.885;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-5" target="Wrzv-WKuPT4GOURQbkhB-8">
+          <mxGeometry x="-0.7516" relative="1" as="geometry">
+            <mxPoint x="820" y="-140" as="sourcePoint" />
+            <mxPoint x="690" y="-2" as="targetPoint" />
+            <mxPoint x="-1" as="offset" />
+            <Array as="points">
+              <mxPoint x="870" y="-136" />
+              <mxPoint x="790" y="-136" />
+              <mxPoint x="790" y="-2" />
+              <mxPoint x="671" y="-2" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-12" value="*" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-1" target="Wrzv-WKuPT4GOURQbkhB-3">
+          <mxGeometry x="-0.646" relative="1" as="geometry">
+            <mxPoint x="870" y="294" as="sourcePoint" />
+            <mxPoint x="1030" y="294" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-13" value="*" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-1" target="Wrzv-WKuPT4GOURQbkhB-4">
+          <mxGeometry x="-0.571" y="5" relative="1" as="geometry">
+            <mxPoint x="870" y="294" as="sourcePoint" />
+            <mxPoint x="780" y="354" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;GombatestNelkuliTekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Gomba): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MaxEgyFonalTekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Gomba): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="432" y="160" width="188" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-18" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;TobbFonalTekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Gomba): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="160" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-19" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FelszivodosTekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- szamlalo: int&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Gomba): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-20" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0.343;entryY=1.002;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="Wrzv-WKuPT4GOURQbkhB-8">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="250" y="110" as="sourcePoint" />
+            <mxPoint x="440" y="60" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="440" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-21" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;startFill=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-18">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="450" y="70" as="sourcePoint" />
+            <mxPoint x="470" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="299" y="110" />
+              <mxPoint x="430" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-22" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;startFill=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-17">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="309" y="170" as="sourcePoint" />
+            <mxPoint x="440" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="550" y="110" />
+              <mxPoint x="440" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-23" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;startFill=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-16">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="571" y="160" as="sourcePoint" />
+            <mxPoint x="460" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="680" y="110" />
+              <mxPoint x="460" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-24" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;GyorsitoSpora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="-55" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-25" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;VagasGatloSpora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-400" y="40" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-26" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;LassitoSpora&lt;/b&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; background-color: transparent; text-align: left;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bp%20style%3D%26quot%3Bmargin%3A0px%3Bmargin-top%3A4px%3Btext-align%3Acenter%3B%26quot%3B%26gt%3B%26lt%3Bb%26gt%3BGyorsitoSpora%26lt%3B%2Fb%26gt%3B%26lt%3B%2Fp%26gt%3B%26lt%3Bhr%20size%3D%26quot%3B1%26quot%3B%26gt%3B%26lt%3Bp%20style%3D%26quot%3Bmargin%3A0%200%200%204px%3Bline-height%3A1.6%3B%26quot%3B%26gt%3B%2B%20hatasKifejtes()%3A%20void%26lt%3B%2Fp%26gt%3B%22%20style%3D%22verticalAlign%3Dtop%3Balign%3Dleft%3Boverflow%3Dfill%3BfontSize%3D14%3BfontFamily%3DHelvetica%3Bhtml%3D1%3Brounded%3D0%3Bshadow%3D0%3Bcomic%3D0%3BlabelBackgroundColor%3Dnone%3BstrokeWidth%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-420%22%20y%3D%22150%22%20width%3D%22238%22%20height%3D%2270%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="40" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-27" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;BenitoSpora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="-60" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-28" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-24" target="Wrzv-WKuPT4GOURQbkhB-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-270" y="-30" as="sourcePoint" />
+            <mxPoint x="-88" y="-80" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-193" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-29" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;startFill=0;exitX=0.548;exitY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-25">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-300" y="30" as="sourcePoint" />
+            <mxPoint x="-200" y="-20" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-301" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-30" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;startFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-26">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-291" y="50" as="sourcePoint" />
+            <mxPoint x="-200" y="-20" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-90" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-31" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;startFill=0;exitX=-0.001;exitY=0.57;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-27">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-60" y="-20" as="sourcePoint" />
+            <mxPoint x="-200" y="-20" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-110" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-33" value="1, 2" style="endArrow=none;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.119;exitY=0.019;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.002;entryY=0.946;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-3" target="Wrzv-WKuPT4GOURQbkhB-8">
+          <mxGeometry x="-0.9634" relative="1" as="geometry">
+            <mxPoint x="500" y="230" as="sourcePoint" />
+            <mxPoint x="660" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="538" y="440" />
+              <mxPoint x="538" y="390" />
+              <mxPoint x="30" y="390" />
+              <mxPoint x="30" y="21" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-34" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;RovarOsztoSpora&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Rovar): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="-283.25" y="150" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-35" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;startFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-34">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-138.25" y="40" as="sourcePoint" />
+            <mxPoint x="-248.25" y="-20" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-193" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-36" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FonalMegtartoTekton&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hatasKifejtes(Gomba): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="280" width="188" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-37" value="" style="endArrow=none;endSize=16;endFill=0;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;startFill=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-36">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="426" y="160" as="sourcePoint" />
+            <mxPoint x="340" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="404" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-38" target="Wrzv-WKuPT4GOURQbkhB-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-47" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Wrzv-WKuPT4GOURQbkhB-38" target="Wrzv-WKuPT4GOURQbkhB-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-38" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;HusevoGombafonal&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- evettRovart: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ megesziRovart(Rovar): boolean&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="527.5" width="248" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-40" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="790" y="550" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-41" value="*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="740" y="550" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-43" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="605" y="448" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wrzv-WKuPT4GOURQbkhB-44" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="945" y="448" width="30" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
