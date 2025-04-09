@@ -1,0 +1,60 @@
+@startuml
+
+class Gomba {
+    - fonalak: List<Gombafonal>
+    - gombatestek: List<Gombatest>
+    --
+    + iranyit(): void
+    + frissit(): void
+}
+
+class Gombatest {
+    - sporaTermelesSzamlalo: int
+    - sporaKibocsatasKuszob: int
+    - maxSzorasokSzama: int
+    - eddigiSzorasok: int
+    - tekton: Tekton
+    --
+    + tudSporaSzorni(): boolean
+    + sporatSzor(): void
+    + novelFonalat(): Gombafonal
+    + elpusztul(): void
+}
+
+class Gombafonal {
+    - elragva: boolean
+    - pusztulasSzamlalo: int
+    - tulelesiIdoElragasUtan: int
+    - kapcsoltGombatest: Gombatest
+    - tekton: Tekton
+    --
+    + elvag(): void
+    + frissit(): void
+    + isEltartva(): boolean
+    + megesziRovart(rovar: Rovar): boolean
+    + novelGombatestet(): void
+}
+
+class Tekton {
+    - eltartFonalat: boolean
+    --
+    + isEltarto(): boolean
+}
+
+class Rovar {
+    - benult: boolean
+    --
+    + isBenult(): boolean
+    + elpusztul(): void
+}
+
+Gomba "1" o-- "*" Gombatest
+Gomba "1" o-- "*" Gombafonal
+Gombafonal "1" --> "1" Gombatest : kapcsolt
+Gombafonal --> Tekton
+Gombafonal --> Rovar : megeszi
+Gombatest --> Tekton
+Rovar --> Tekton
+Tekton --> Gombafonal : eltartás
+
+@enduml
