@@ -110,6 +110,10 @@ public abstract class Tekton {
         return gomba;
     }
 
+    public void setGomba(Gomba gomba) {
+        this.gomba = gomba;
+    }
+
     /**
      * Tekton törése
      */
