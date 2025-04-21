@@ -37,7 +37,6 @@ public class FonalMegtartoTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        gomba = null;
         System.out.println("FonalMegtartoTekton hatás kifejtve, azaz a gombafonal akkor is megmarad, ha nincs gombatesthez kötve");
     }
 }

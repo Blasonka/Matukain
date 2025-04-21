@@ -36,7 +36,9 @@ public class GombatestNelkuliTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        gomba = null;
+        if (this.getGomba() != null){
+            this.setGomba(null);
+        }
         System.out.println("GombatestNelkuliTekton hatás kifejtve, azaz nem nőhet rajta gombatest");
     }
 }

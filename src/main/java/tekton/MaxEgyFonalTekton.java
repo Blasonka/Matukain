@@ -38,6 +38,11 @@ public class MaxEgyFonalTekton extends Tekton{
         if (gomba.getGombafonalak().size()==0){
             System.out.println("A gomba növeszthet egy fonalat");
         }
-        System.out.println("A gomba nem növeszthet fonalat");
+        else{
+            for (int i=1; i<gomba.getGombafonalak().size(); i++){
+                gomba.removeFonal(gomba.getGombafonalak().get(i));
+            }
+            System.out.println("A gomba nem növeszthet fonalat");
+        }
     }
 }
