@@ -24,13 +24,13 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class GyorsitoSpora extends Spora {
+public class GyorsitoSpora extends Spora implements HatasKifejtes {
     /**
      * Gyorsító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public GyorsitoSpora(int sz) {
-        super(sz);
+    public GyorsitoSpora(int sz,HatasKifejtes h, String s) {
+        super(sz,h,s);
         System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }
 
@@ -47,6 +47,6 @@ public class GyorsitoSpora extends Spora {
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        System.out.println("\t\t>GyorsitoSpora->hatasKifejtes()");
+        rovar.sebesseg=3;
     }
 }

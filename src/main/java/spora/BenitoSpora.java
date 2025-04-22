@@ -24,13 +24,13 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class BenitoSpora extends Spora {
+public class BenitoSpora extends Spora implements HatasKifejtes {
     /**
      * BenitoSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public BenitoSpora(int sz) {
-        super(sz);
+    public BenitoSpora(int sz, HatasKifejtes h, String s) {
+        super(sz,h,s);
         System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
 
@@ -46,6 +46,6 @@ public class BenitoSpora extends Spora {
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        System.out.println("\t\t>BenitoSpora->hatasKifejtes()");
+        rovar.sebesseg=0;
     }
 }

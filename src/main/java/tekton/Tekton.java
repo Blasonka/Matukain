@@ -1,5 +1,6 @@
 package tekton;
 
+import rovar.*;
 import spora.*;
 import gomba.*;
 
@@ -48,6 +49,8 @@ public abstract class Tekton {
      * @brief Tektonon lévő spórákat tárolja egy listában
      */
     private List<Spora> sporak;
+
+    private List<Rovar> rovarok;
 
     /**
      * @var Gomba gomba
@@ -130,6 +133,8 @@ public abstract class Tekton {
         System.out.println("Az adott spóra hozzá lett adva a tektonhoz");
     }
 
+   
+
     /**
      * Spóra törlése
      * @param spora törli az adott spórát
@@ -180,6 +185,14 @@ public abstract class Tekton {
     public void gombaNovesztes(){
         gomba = new Gomba(this);
         System.out.println("Új gomba nőtt erre a tektonra");
+    }
+
+    public void addRovar(Rovar rovar) {
+        rovarok.add(rovar);
+    }
+
+    public List<Rovar> getRovarok() {
+        return rovarok;
     }
 
     /**

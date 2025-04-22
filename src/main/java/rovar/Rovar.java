@@ -50,7 +50,16 @@ public class Rovar {
      * @brief Az elfogyasztott spórákat tároló lista.
      */
     private List<Spora> elfogyasztottSporak;
-
+    /*
+    *
+    *ÚJ RÉSZ!!! Spórához kelleltt!
+    *
+    */
+    public int sebesseg;
+    public boolean vaghate;
+    public Tekton getTekton(){
+        return tekton;
+    }
     /**
      * Default constructor
      * @brief Inicializálja a kezdő tektont, valamint alapértelmezett értéket ad a telitettsegnek és az elfogyasztottSporaknak.
@@ -160,5 +169,6 @@ public class Rovar {
     public void setTelitettseg(int telitettseg) {
         this.telitettseg = telitettseg;
     }
+    
 
 }
