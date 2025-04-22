@@ -8,6 +8,7 @@ import jateklogika.gameLogic;
 import rovar.Rovar;
 import tekton.*;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -96,6 +97,30 @@ public class ParancsFeldolgozo {
                 case "/adds":
                     adds(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), command[5].charAt(0));
                     break;
+                case "/addf":
+                    addf(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[7].charAt(0));
+                    break;
+                case "/addgt":
+                    addgt(Integer.parseInt(command[1]), Integer.parseInt(command[2]) == 1, Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]));
+                    break;
+                case "/random":
+                    rand(command[1].charAt(0), Integer.parseInt(command[2]), Integer.parseInt(command[3]));
+                    break;
+                case "/save":
+                    save(command[1], (command.length == 3 ? command[2].charAt(1) : '0'));
+                    break;
+                case "/load":
+                    load(command[1]);
+                    break;
+                case "/help":
+                    help();
+                    break;
+                case "/move":
+                    move(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]));
+                    break;
+                default:
+                    System.out.println("Érvénytelen parancs! (/help a parancsok listájához)");
+                    break;
             }
         } catch (NumberFormatException e) {
             System.out.println("A parancs valamely paraméterének formátuma nem megfelelő!");
@@ -112,7 +137,7 @@ public class ParancsFeldolgozo {
      * @param pontszam játékos kezdő pontszáma
      */
     private void addro(int id, String nev, int pontszam) {
-        // TODO Rovarasz megfelelő paraméterei
+        // TODO Rovarasz megfelelő paraméterezése
         jatekLogika.jatekosok.add(new Rovarasz(0, 0, 0));
     }
 
@@ -124,7 +149,7 @@ public class ParancsFeldolgozo {
      * @param pontszam játékos kezdő pontszáma
      */
     private void addgo (int id, String nev, int pontszam) {
-        // TODO Gombasz megfelelő paraméterei
+        // TODO Gombasz megfelelő paraméterezése
         jatekLogika.jatekosok.add(new Gombasz(0, 0, 0));
     }
 
@@ -176,6 +201,7 @@ public class ParancsFeldolgozo {
         switch (type) {
             case 'L':
                 // TODO Életbentrartó tekton implementálása
+                // jatekLogika.getMapTekton().add(new EletbenTartoTekon(id, x, y));
                 break;
             case 'M':
                 jatekLogika.getMapTekton().add(new MaxEgyFonalTekton(id, x, y));
@@ -189,32 +215,206 @@ public class ParancsFeldolgozo {
             case 'G':
                 jatekLogika.getMapTekton().add(new GombatestNelkuliTekton(id, x, y));
                 break;
+            default:
+                System.out.println("Érvénytelen Tektontípus! (/help a megadható értékek listájához)");
+                break;
         }
     }
 
     /**
      * Spóra felvétele
+     * Az ilyen módon történő felvétel NEM fogyasztja a felhasználó akciópontjait
      * @param id azonosító
      * @param tektonID tekton, amelyen a spóra megtalálható
      * @param gombaID gomba, amelyhez a spóra tartozik
      * @param jatekosID játékos, akihez a spóra tartozik
      * @param type spóra típusa [O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]
      */
-    private void adds (int id, int tektonID, int gombaID, int jatekosID, char type) {
+    private void adds(int id, int tektonID, int gombaID, int jatekosID, char type) {
         // TODO spórák tárolásának implementálása
-        Gomba g = ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID);
-        switch(type) {
-            case 'O':
-                // TODO RovarOsztóSpóra implementálása
+        try {
+            switch (type) {
+                case 'O':
+                    // TODO RovarOsztóSpóra implementálása
+                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new RovarOsztoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    break;
+                case 'L':
+                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new LassitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    break;
+                case 'G':
+                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new GyorsitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    break;
+                case 'B':
+                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new BenitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    break;
+                case 'V':
+                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new VagasGatloSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    break;
+                default:
+                    System.out.println("Érvénytelen Spóratípus! (/help a megadható értékek listájához)");
+                    break;
+            }
+        }  catch (IndexOutOfBoundsException e) {
+            System.out.println("Spóra felvétele sikertelen!\n" +
+                    "Lehetséges hibahelyek: Gombász ID nem létezik, Gomba ID nem létezik, tekton ID nem létezik");
+        }
+    }
+
+    /**
+     * Gombafonal felvétele
+     * Az így felvett gombafonalak NEM fogyasztják a felhasználó akciópontjait
+     * @param id gombafonal ID-ja
+     * @param tektonID1 a gombafonalat határoló tekton ID-ja
+     * @param tektonID2 a gombafonalat határoló másik tekton ID-ja (ha a gombafonal egy tektonon van, akkor azonos tektonID1-el)
+     * @param gombatestID a gombafonalat "lehelyező" gombatest azonosítója
+     * @param jatekosID a játékos azonosítója, akihez a gombafonal tartozik
+     * @param type a gombafonal típusa [S (sima), H (húsevő)]
+     */
+    private void addf(int id, int tektonID1, int tektonID2, int gombatestID, int jatekosID, char type) {
+        // TODO gombafonalak új tárolási módjának implementálása
+        try {
+            switch (type) {
+                case 'S':
+                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getFonalak().add(
+                    // new Gombafonal(id, jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2),
+                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID)));
+                    break;
+                case 'H':
+                    // TODO HusevoGombafonal létrehozása
+                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getFonalak().add(
+                    // new HusevoGombafonal(id, jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2),
+                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID)));
+                    break;
+                default:
+                    System.out.println("Érvénytelen Gombafonaltípus! (/help a megadható értékek listájához)");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Gombafonal felvétele sikertelen!\n" +
+                    "Lehetséges hibahelyek: Gombász ID nem létezik, Gomba ID nem létezik," +
+                    "Gombatest ID nem létezik, Tekton ID nem létezik");
+        }
+    }
+
+    /**
+     * Gombatest felvétele
+     * @param id gombatest azonosítója
+     * @param fejlett gombatest fejlettségi szintje
+     * @param tektonID azon tekton azonosítója, amin a gombatest van
+     * @param gombaID gombatesthez tartozó gomba azonosítója
+     */
+    private void addgt(int id, boolean fejlett, int tektonID, int gombaID, int gombaszID) {
+        // TODO gombatestek új tárolási módjának implementálása
+        // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().add(
+        // new Gombatest(id, jatekLogika.getMapTekton().get(tektonID), fejlett);
+    }
+
+    /**
+     * Randomizálás ki- és bekapcsolása
+     * @param val a randomizálás ki és bekapcsolása [E: be, D: ki]
+     * @param tores a tektontörés valószínűsége (0 és 1 között)
+     * @param megmaradas a gombafonal elrágás utáni megmaradásának ideje
+     */
+    private void rand(char val, int tores, int megmaradas) {
+        // TODO gameLogic-ba ennek megfelelő publikus globális változók implementálása, amit aztán a többi osztály (tekton, gombafonal) figyelni tud
+        switch (val) {
+            case 'D':
+                // jatekLogika.tekton = tores;
+                // jateklogika.fonal = megmaradas;
                 break;
-            case 'L':
-                break;
-            case 'G':
-                break;
-            case 'B':
-                break;
-            case 'V':
-                break;
+            case 'E':
+                // jatekLogika.visszadefaultra
+            default:
+                System.out.println("Érvénytelen érték! (/help a megadható értékek listájához)");
+        }
+    }
+
+    /**
+     * Mentés elvégzése
+     * A gameLogic osztályt menti szerializáció segítségével
+     * @param pathToFile a fájl elérési útja
+     * @param k opcionálisan megadható kapcsoló: -k esetén a kimenetet menti el és nem a játékállást
+     */
+    private void save(String pathToFile, char k) {
+        // TODO gameLogic felkészítése a mentésre
+        try {
+            if (k == 'k') {
+                BufferedWriter bfr = new BufferedWriter(new FileWriter(pathToFile));
+                bfr.write(kimenet.toString());
+                bfr.close();
+                System.out.println("Kimenet elmentve: " + pathToFile);
+            } else {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(pathToFile));
+                out.writeObject(jatekLogika);
+                out.close();
+                System.out.println("Játékállás elmentve: " + pathToFile);
+            }
+        } catch (IOException e) {
+            System.err.println("Mentés sikertelen!");
+        }
+    }
+
+    /**
+     * Tetszőleges, korábban elmentett játékállás betöltése
+     * @param pathToFile a fájl elérési útja
+     */
+    private void load(String pathToFile) {
+        // TODO gameLogic felkészítése a betöltésre
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(pathToFile));
+            jatekLogika = (gameLogic) in.readObject();
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("A megadott helyen a fálj nem található!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Beolvasási hiba!");
+        }
+    }
+
+    /**
+     * Parancsok leírása
+     * Tartalmazza a paracsok listáját, az egyes parancsok rövid jeletését, a kapcsolók lehetséges értékeit
+     */
+    private void help() {
+        // TODO Rovar parancsok játékosID hozzáadása
+        System.out.println("parancsok:\n" +
+                "rovarász hozzáadása:\t/addro [ID] [Név] [Pontszám]\n" +
+                "gombász hozzáadása:\t/addgo [ID] [Név] [Pontszám]\n" +
+                "gomba hozzáadása:\t/addg [ID] [TektonID] [JátékosID]\n" +
+                "rovar hozzáadása:\t/addr [ID] [TektonID] [JátékosID]\n" +
+                "tekton hozzáadása:\t/addt [ID] [X Koordináta] [Y Koordináta] [Típus: L (életbentartó), M (egyfonal) F (felszívódós), T (többfonalas) G (gombatest nélküli)]\n" +
+                "spóra hozzáadása:\t/adds [ID] [TektonID] [GombaID] [FelhasználóID] [Típus: O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]\n" +
+                "fonal hozzáadása:\t/addf [ID] [TektonID1] [TektonID2] [GombaID] [GombatestID] [JátékosID] [Típus: S (sima), H (húsevő)]\n" +
+                "gombatest hozzáadása:\t/addgt [ID] [Fejlettség (0: Sima, 1: Fejlett)] [TektonID] [GombaID] [JátékosID]\n" +
+                "randomizálás:\t/random [E: be, D:ki] [Tektontörés valószínűsége (0-1)] [Gombafonal elrágás utáni megmaradásának ideje (kör)]\n" +
+                "játékállás mentése:\t/save [PATH/TO/FILE] [-k: kimenet mentése (opcionális)]\n" +
+                "játékállás betöltése:\t/load [PATH/TO/FILE]\n" +
+                "rovarmozgatás:\t/move [RovarID] [JátékosID] [JelenlegiTektonID] [CéltektonID]\n" +
+                "fonalvágás:\t/cut [RovarID] [JátékosID] [FonalID]\n" +
+                "spóraevés:\t/eat [RovarID] [JátékosID] [SpóraID]\n" +
+                "rovarevés:\t/consume [FonalID] [RovarID]\n" +
+                "térkép listázása:\t/list\n" +
+                "felhasználók listája:\t/lista\n" +
+                "egy tekton kettétörése:\t/trigger_tores [TektonID]\n" +
+                "spóralövés:\t/sporagombatesttel [ID] [TektonX] [TektonY] [Típus (ld. /adds)]\n" +
+                "kör szimulálása:\t/simulate_round\n" +
+                "fonalnövesztés:\t/fonal_novesztes [ID] [GombatestID] [TektonID] [TektonID] [Típus (ld /addf)]\n" +
+                "gombatestnövesztés: /gombatestnovesztes [ID] [SpóraID1] [SpóraID2] [SpóraID3] [TektonID] [FelhasznaloID]");
+    }
+
+    /**
+     * Rovar mozgatása
+     * @param rovarID mozgatandó rovar
+     * @param rovaraszID játékos akihez a rovar tartozik
+     * @param jelenlegiTektonID jelenlegi tekton
+     * @param TektonID tekton amire áttenni szeretnénk a rovart
+     */
+    private void move(int rovarID, int rovaraszID, int jelenlegiTektonID, int TektonID) {
+        try {
+            // TODO attesz-ben valahogy rovar megadása
+            ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).attesz(jatekLogika.getMapTekton().get(TektonID));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Rovar mozgatása sikertelen!\n" +
+                    "Lehetséges hibahelyek: Rovarász ID nem létezik, Rovar ID nem létezik, Tekton ID nem létezik");
         }
     }
 }
