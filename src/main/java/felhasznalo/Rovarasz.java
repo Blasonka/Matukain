@@ -50,6 +50,10 @@ public class Rovarasz extends Felhasznalo {
         System.out.println(">Rovarasz->Rovarasz()");
     }
 
+    public List<Rovar> getRovarak() {
+        return rovarak;
+    }
+
     /**
      * Rovar mozgatása
      * @param t2 a tekton amire mozogni fog a rovar

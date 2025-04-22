@@ -38,7 +38,8 @@ import tekton.GombatestNelkuliTekton;
 public class gameLogic {
     int korSzamlalo;
     List<Tekton> map;
-    static List<Gombasz> gombaszok;
+    public static List<Gombasz> gombaszok;
+    public List<Felhasznalo> jatekosok = new ArrayList<>();
     /**
      * Default konstruktor
      */
