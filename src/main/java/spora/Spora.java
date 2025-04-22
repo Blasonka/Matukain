@@ -1,6 +1,7 @@
 package spora;
 
 import rovar.Rovar;
+import tekton.Tekton;
 
 /**
  * Spora osztály
@@ -26,30 +27,31 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public abstract class Spora {
+public abstract class Spora implements HatasKifejtes {
     /**
      * Spóra élettartamát nyilvántartó számláló
      * @var int szamlalo
      * @brief Élettartam
      */
     protected int szamlalo;
+    protected String nev;
+    private HatasKifejtes effekt;
     /**
      * Spora osztály konstruktora
      * @param sz számláló értéke
      */
-    public Spora(int sz) {
+    public Spora(int sz, HatasKifejtes h, String s) {
         szamlalo = sz;
+        effekt=h;
+        nev =s;
         System.out.println(">Spora->Spora()");
     }
     /**
      * Spóra törlése
      */
     public void torles() {
-        System.out.println(">Spora->torles()");
+       
     }
-    /**
-     * Spóra hatásának kifejtése, absztrakt metódus
-     * @param rovar a rovar akin a hatást kívánja kifejteni
-     */
-    public abstract void hatasKifejtes(Rovar rovar);
+    
+    
 }

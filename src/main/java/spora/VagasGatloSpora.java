@@ -24,13 +24,13 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class VagasGatloSpora extends Spora {
+public class VagasGatloSpora extends Spora implements HatasKifejtes {
     /**
      * VagasGatloSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public VagasGatloSpora(int sz) {
-        super(sz);
+    public VagasGatloSpora(int sz, HatasKifejtes h, String s) {
+        super(sz,h, s);
         System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
     }
     /**
@@ -47,6 +47,6 @@ public class VagasGatloSpora extends Spora {
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        System.out.println("\t\t>VagasGatloSpora->hatasKifejtes()");
+        rovar.vaghate=false;
     }
 }

@@ -24,13 +24,13 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class LassitoSpora extends Spora {
+public class LassitoSpora extends Spora implements HatasKifejtes {
     /**
      * Lassító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public LassitoSpora(int sz) {
-        super(sz);
+    public LassitoSpora(int sz, HatasKifejtes h, String s) {
+        super(sz,h,s );
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
 
@@ -47,7 +47,7 @@ public class LassitoSpora extends Spora {
      * @param rovar a rovar akin a hatást kívánja kifejteni
      */
     @Override
-    public void hatasKifejtes(Rovar rovar) {
-        System.out.println("\t\t>LassitoSpora->hatasKifejtes()");
+    public void hatasKifejtes(Rovar rovar){
+        rovar.sebesseg =1;
     }
 }
