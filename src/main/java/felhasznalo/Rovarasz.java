@@ -45,7 +45,7 @@ public class Rovarasz extends Felhasznalo {
      * @param h a felhasználó körben felhasználható akciópontjainak száma
      */
     public Rovarasz(int p, int a, int h) {
-        super(p, a, h);
+        super(p, "Gyuri", h);
         rovarak = new ArrayList<>();
         System.out.println(">Rovarasz->Rovarasz()");
     }

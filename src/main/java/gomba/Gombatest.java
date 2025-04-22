@@ -91,16 +91,16 @@ public class Gombatest {
         int randomSpora = rand.nextInt(4);
         switch (randomSpora) {
             case 0:
-                spora = new BenitoSpora(rand.nextInt(4));
+                //spora = new BenitoSpora(rand.nextInt(4));
                 break;
             case 1:
-                spora = new GyorsitoSpora(rand.nextInt(4));
+                //spora = new GyorsitoSpora(rand.nextInt(4));
                 break;
             case 2:
-                spora = new LassitoSpora(rand.nextInt(4));
+                //spora = new LassitoSpora(rand.nextInt(4));
                 break;
             case 3:
-                spora = new VagasGatloSpora(rand.nextInt(4));
+                //spora = new VagasGatloSpora(rand.nextInt(4));
                 break;
             default:
                 break;

@@ -42,7 +42,7 @@ public class Gombasz extends Felhasznalo {
      * @param h a felhasználó körben felhasználható akciópontjainak száma
      */
     public Gombasz(int p, int a, int h) {
-        super(p, a, h);
+        super(p, "Jani", h);
         gombak = new ArrayList<>();
         System.out.println(">Gombasz->Gombasz()");
     }
