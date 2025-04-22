@@ -11,53 +11,59 @@ package felhasznalo;
  * Felhasználó osztály, melyből a különböző felhasználók (rovarász, gombész) származnak.
  * Az osztály feladata a felhasználók pontjainak tárolása.
  *
+ * @see felhasznalo.Jatekos
  * @see felhasznalo.Rovarasz
  * @see felhasznalo.Gombasz
- *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
  *
  * @author todortoth
  * @version 1.0
  * @version 1.1 - comment Update
  * @date 2025-03-22
+ * @version 2.0 - Prototípus, interface bevezetése
+ * @date 2025-04-22
  */
-public abstract class Felhasznalo {
+public abstract class Felhasznalo implements Jatekos {
+    /**
+     * A játékos egyedi azonosítója
+     * @var int ID
+     * @brief A felhasználót egyértelműen azonosító szám
+     */
+    protected int ID;
     /**
      * A felhasználó pontjainak számát tároló tagváltozó
      * @var int pontokSzama
      * @brief A felhasználó pontjainak száma
      */
-    protected int pontokSzama;
+    int pontokSzama;
     /**
      * A körben még felhasználható akciópontok számát tároló tagváltozó
      * @var int hatralevoAkciopont
      * @brief A még felhasználható akciópontok száma
      */
-    protected int hatralevoAkciopont;
+    int hatralevoAkciopont;
     /**
-     * Az alap akciópontok számát tároló tagváltozó
-     * @var int alapAkciopont
-     * @brief Az alap akciópontok száma
+     * A felhasználó nevét tároló változó
+     * @var String nev
+     * @brief az a név, amellyel a felhasználó megjelenik a játékban
      */
-    protected int alapAkciopont;
+    String nev;
+
     /**
      * Felhasználó konstruktora
+     * @param id a felhasználó azonosítója
+     * @param n a felhasználó neve
      * @param p a felhasználó pontjainak száma
-     * @param a a felhasználó alap akciópontjainak száma
-     * @param h a felhasználó körben felhasználható akciópontjainak száma
      */
-    public Felhasznalo(int p, int a, int h) {
+    public Felhasznalo(int id, String n, int p) {
+        ID = id;
+        nev = n;
         pontokSzama = p;
-        alapAkciopont = a;
-        hatralevoAkciopont = h;
-        System.out.println(">Felhasznalo->Felhasznalo()");
     }
     /**
      * Kezdő akciópontok számának lekérdezése
      * @return akcioPontok
      */
     public int getAlapAkciopont() {
-        System.out.println("\t>Felhasznalo->getAlapAkciopont(): " + alapAkciopont);
         return alapAkciopont;
     }
     /**
@@ -65,7 +71,6 @@ public abstract class Felhasznalo {
      * @return hatralevoAkciopont
      */
     public int getHatralevoAkciopont() {
-        System.out.println("\t>Felhasznalo->getHatralevoAkciopont(): " + hatralevoAkciopont);
         return hatralevoAkciopont;
     }
     /**
@@ -73,16 +78,14 @@ public abstract class Felhasznalo {
      * @return pontokSzama
      */
     public int getPontokSzama() {
-        System.out.println("\t>Felhasznalo->getPontokSzama(): " + pontokSzama);
         return pontokSzama;
     }
     /**
-     * Alap akciópontok számának beállítása
-     * @param alapAkciopont beállítandó alap akciópont
+     * Nevek számának lekérdezése
+     * @return nev
      */
-    public void setAlapAkciopont(int alapAkciopont) {
-        this.alapAkciopont = alapAkciopont;
-        System.out.println("\t>Felhasznalo->setAlapAkciopont(" + alapAkciopont + ")");
+    public String getNev() {
+        return nev;
     }
     /**
      * Határolévő akciópontok számának beállítása
@@ -90,7 +93,6 @@ public abstract class Felhasznalo {
      */
     public void setHatralevoAkciopont(int hatralevoAkciopont) {
         this.hatralevoAkciopont = hatralevoAkciopont;
-        System.out.println("\t>Felhasznalo->setHatralevoAkciopont(" + hatralevoAkciopont + ")");
     }
     /**
      * Pontok számának beállítása
@@ -98,6 +100,12 @@ public abstract class Felhasznalo {
      */
     public void setPontokSzama(int pontokSzama) {
         this.pontokSzama = pontokSzama;
-        System.out.println("\t>Felhasznalo->setPontokSzama(" + pontokSzama + ")");
+    }
+    /**
+     * Játékos nevének beállítása
+     * @param n beállítandó név
+     */
+    public void setNev(String n) {
+        nev = n;
     }
 }
