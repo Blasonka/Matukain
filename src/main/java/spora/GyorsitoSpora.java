@@ -1,7 +1,7 @@
 package spora;
 
 import rovar.Rovar;
-
+import interfészek.*;
 /**
  * GyorsítóSpóra osztály
  *
@@ -24,12 +24,12 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class GyorsitoSpora extends Spora implements HatasKifejtes {
+    public class GyorsitoSpora extends Spora implements hatasKifejtes {
     /**
      * Gyorsító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public GyorsitoSpora(int sz,HatasKifejtes h, String s) {
+    public GyorsitoSpora(int sz,hatasKifejtes h, String s) {
         super(sz,h,s);
         System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }

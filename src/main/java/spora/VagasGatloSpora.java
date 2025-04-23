@@ -1,6 +1,7 @@
 package spora;
 
 import rovar.Rovar;
+import interfészek.hatasKifejtes;
 
 /**
  * VágásGátlóSpóra osztály
@@ -24,12 +25,12 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class VagasGatloSpora extends Spora implements HatasKifejtes {
+public class VagasGatloSpora extends Spora implements hatasKifejtes {
     /**
      * VagasGatloSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public VagasGatloSpora(int sz, HatasKifejtes h, String s) {
+    public VagasGatloSpora(int sz, hatasKifejtes h, String s) {
         super(sz,h, s);
         System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
     }

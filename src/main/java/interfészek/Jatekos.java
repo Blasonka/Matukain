@@ -1,4 +1,6 @@
-package felhasznalo;
+package interfészek;
+
+import felhasznalo.Felhasznalo;
 
 /**
  * Játékos interface

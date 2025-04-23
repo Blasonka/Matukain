@@ -1,5 +1,7 @@
 package felhasznalo;
 
+import interfészek.Jatekos;
+
 /**
  * Felhasznalo osztály
  *
@@ -11,7 +13,7 @@ package felhasznalo;
  * Felhasználó osztály, melyből a különböző felhasználók (rovarász, gombész) származnak.
  * Az osztály feladata a felhasználók pontjainak tárolása.
  *
- * @see felhasznalo.Jatekos
+ * @see interfészek.Jatekos
  * @see felhasznalo.Rovarasz
  * @see felhasznalo.Gombasz
  *
