@@ -79,7 +79,7 @@ public class Rovar {
      * @brief A rovar elvágja az adott gombafonalat.
      * @param fonal a fonal, amit el kell vágni.
      */
-    public void fonalElvagas(Gombafonal fonal, gameLogic jatekLogika) {
+    public void fonalElvagas(Gombafonal fonal) {
         if (!vaghate) {
             return;
         }
@@ -91,19 +91,7 @@ public class Rovar {
             return;
         }
 
-        List<Gombasz> gsz = jatekLogika.getGombaszok();
-        for (Gombasz gsz1 : gsz){
-            List<Gomba> gombak = gsz1.getGombak();
-            for (Gomba gomba : gombak) {
-                List<Gombafonal> gombafonalak = gomba.getGombafonalak();
-                for (Gombafonal gombafonal : gombafonalak) {
-                    if (gombafonal.equals(fonal)) {
-                        gomba.removeFonal(gombafonal);
-                        return;
-                    }
-                }
-            }
-        }
+        fonal
 
 
         /*

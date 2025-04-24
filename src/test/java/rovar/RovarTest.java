@@ -4,6 +4,7 @@ import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import gomba.Gombafonal;
+import gomba.Gombatest;
 import jateklogika.gameLogic;
 import org.junit.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,170 +19,229 @@ import static org.junit.Assert.*;
 
 
 public class RovarTest {
-    private Rovar rovar;
-    private Tekton rovarTekton;
-    private Tekton tekton1;
-    private Tekton tekton2;
-    private Gombafonal gombafonal;
-    private Gomba gomba;
-    private Gombasz gombasz;
     private gameLogic jatekLogika;
-    private Spora spora;
-    private OsztoSpora rovarOsztoSpora;
     private Rovarasz rovarasz;
+    private Gombasz gombasz;
+    private Rovar rovar;
+    private Gomba gomba;
+    private Gombatest gombatest;
+    private Tekton t0, t1, t2;
+    private Gombafonal fonal;
 
     @BeforeEach
-    public void setUp() {
-        rovarTekton = new TobbFonalTekton(1, 0, 0);
-        rovar = new Rovar(rovarTekton);
-        tekton1 = new TobbFonalTekton(2, 1, 1);
-        tekton2 = new TobbFonalTekton(3, 2, 2);
-        gombafonal = new Gombafonal(rovarTekton, tekton2);
-        gomba = new Gomba(tekton1);
-        gombasz = new Gombasz(10, 0, 0);
+    void setUp() {
         jatekLogika = new gameLogic();
-        spora = new OsztoSpora(false);
-        rovarOsztoSpora = new OsztoSpora(false);
-        rovarasz = new Rovarasz(10, 0, 0);
-
-        rovar.setVaghate(true);
-        rovar.setTekton(rovarTekton);
-        rovar.setSebesseg(2);
-        rovar.setRovarHandler(rovarasz);
-    }
-
-    // fonalElvagas tesztek
-    @Test
-    public void fonalElvagas_vaghateFalse_doesNothing() {
-        rovar.setVaghate(false);
-        rovar.fonalElvagas(gombafonal, jatekLogika);
-        assertFalse(gombafonal.isElpusztult());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void fonalElvagas_tektonNotMatching_doesNothing() {
-        gombafonal = new Gombafonal(tekton1, tekton2);
-        rovar.fonalElvagas(gombafonal, jatekLogika);
-        assertFalse(gombafonal.isElpusztult());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void fonalElvagas_tektonMatching_fonalNotFound_callsPontLevonas() {
+        rovarasz = new Rovarasz("Gyuri");
+        gombasz = new Gombasz(10);
+        rovar = new Rovar();
+        gomba = new Gomba();
+        t0 = new Tekton(0, 1);
+        t1 = new Tekton(2, 3);
+        t2 = new Tekton(4, 5);
+        jatekLogika.addRovarasz(rovarasz);
         jatekLogika.addGombasz(gombasz);
+        rovarasz.addRovar(rovar);
         gombasz.addGomba(gomba);
-        rovar.fonalElvagas(gombafonal);
-        assertFalse(gombafonal.isElpusztult());
+    }
+
+    @Test
+    void testFonalElvagas() {
+        t0.addSzomszed(t1);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        rovar.setTekton(t0);
+        rovar.fonalElvagas(fonal);
+        assertTrue(fonal.isElpusztult());
         assertEquals(8, rovarasz.getHatralevoAkciopont()); // sebesseg = 2
+        // Hibahely: rossz tekton
+        rovar.setTekton(t2);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        rovar.fonalElvagas(fonal);
+        assertFalse(fonal.isElpusztult());
     }
 
     @Test
-    public void fonalElvagas_tektonMatching_fonalFound_callsElpusztulAndPontLevonas() {
-        jatekLogika.addGombasz(gombasz);
-        gombasz.addGomba(gomba);
-        gomba.addGombafonal(gombafonal);
-        rovar.fonalElvagas(gombafonal);
-        assertTrue(gombafonal.isElpusztult());
-        assertEquals(8, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void fonalElvagas_emptyGombaszList_callsPontLevonas() {
-        rovar.fonalElvagas(gombafonal);
-        assertFalse(gombafonal.isElpusztult());
-        assertEquals(8, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void fonalElvagas_nullFonal_doesNothing() {
-        rovar.fonalElvagas(null, jatekLogika);
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
-    }
-
-    // elfogyaszt tesztek
-    @Test
-    public void elfogyaszt_normalSpora_addsToListAndCallsPontLevonas() {
+    void testSporaElfogyasztasa() {
+        t0.addSzomszed(t1);
+        BenitoSpora spora = new BenitoSpora(false);
+        t1.addSpora(spora);
+        rovar.setTekton(t1);
         rovar.elfogyaszt(spora);
         assertTrue(rovar.getElfogyasztottSporak().contains(spora));
+        assertFalse(t1.getSporak().contains(spora));
         assertEquals(8, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void elfogyaszt_rovarOsztoSpora_doesNotAddToList_callsPontLevonas() {
-        rovar.elfogyaszt(rovarOsztoSpora);
-        assertFalse(rovar.getElfogyasztottSporak().contains(rovarOsztoSpora));
-        assertEquals(8, rovarasz.getHatralevoAkciopont());
-    }
-
-    @Test
-    public void elfogyaszt_nullSpora_doesNothing() {
+        // Hibahely: null spóra
         rovar.elfogyaszt(null);
-        assertTrue(rovar.getElfogyasztottSporak().isEmpty());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
-    }
-
-    // attesz tesztek
-    @Test
-    public void attesz_szomszedosTekton_updatesTektonAndCallsPontLevonas() {
-        rovarTekton.addSzomszed(tekton1);
-        rovar.attesz(tekton1);
-        assertEquals(tekton1, rovar.getTekton());
         assertEquals(8, rovarasz.getHatralevoAkciopont());
     }
 
     @Test
-    public void attesz_nemSzomszedosTekton_doesNothing() {
-        rovar.attesz(tekton1);
-        assertEquals(rovarTekton, rovar.getTekton());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
+    void testRovarAttelepitese() {
+        t0.addSzomszed(t1);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        gombatest = new Gombatest(t0);
+        gomba.addGombatest(gombatest);
+        rovar.setTekton(t0);
+        rovar.attesz(t1);
+        assertEquals(t1, rovar.getTekton());
+        assertEquals(8, rovarasz.getHatralevoAkciopont());
+        // Hibahely: nem szomszédos tekton
+        rovar.setTekton(t0);
+        rovar.attesz(t2);
+        assertEquals(t0, rovar.getTekton());
     }
 
     @Test
-    public void attesz_nullTekton_doesNothing() {
-        rovar.attesz(null);
-        assertEquals(rovarTekton, rovar.getTekton());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
+    void testBenitoSporaHatasKifejtese() {
+        t0.addSzomszed(t1);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        gombatest = new Gombatest(t0);
+        gomba.addGombatest(gombatest);
+        BenitoSpora spora = new BenitoSpora(false);
+        t1.addSpora(spora);
+        rovar.setTekton(t1);
+        rovar.elfogyaszt(spora);
+        jatekLogika.simulateRound();
+        rovar.attesz(t0);
+        assertEquals(t1, rovar.getTekton()); // Nem mozoghat
+        assertEquals(0, rovar.getSebesseg());
+        // Hibahely: mozgás mégis sikerül
+        rovar.setSebesseg(2);
+        rovar.attesz(t0);
+        assertEquals(t0, rovar.getTekton());
     }
 
     @Test
-    public void attesz_nullRovarTekton_doesNothing() {
-        rovar.setTekton(null);
-        rovar.attesz(tekton1);
-        assertNull(rovar.getTekton());
-        assertEquals(10, rovarasz.getHatralevoAkciopont());
+    void testGyorsitoSporaHatasKifejtese() {
+        t0.addSzomszed(t1);
+        t1.addSzomszed(t2);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        Gombafonal fonal2 = new Gombafonal(t1, t2);
+        gomba.addGombafonal(fonal2);
+        gombatest = new Gombatest(t1);
+        gomba.addGombatest(gombatest);
+        GyorsitoSpora spora = new GyorsitoSpora(false);
+        t0.addSpora(spora);
+        rovar.setTekton(t0);
+        rovar.elfogyaszt(spora);
+        jatekLogika.simulateRound();
+        assertEquals(3, rovar.getSebesseg());
+        rovar.attesz(t1);
+        rovar.attesz(t0);
+        rovar.attesz(t1);
+        rovar.attesz(t2);
+        rovar.attesz(t1);
+        rovar.attesz(t0);
+        assertEquals(t0, rovar.getTekton());
+        assertTrue(rovarasz.getHatralevoAkciopont() >= 0);
+        // Hibahely: akciópontok elfogynak
+        rovar.setSebesseg(2);
+        rovar.setTekton(t0);
+        rovar.attesz(t1);
+        rovar.attesz(t0);
+        rovar.attesz(t1);
+        rovar.attesz(t2);
+        assertTrue(rovarasz.getHatralevoAkciopont() < 0 || rovar.getTekton() != t2);
     }
 
-    // sporaManager tesztek
     @Test
-    public void sporaManager_emptyList_doesNothing() {
-        rovar.sporaManager();
-        assertTrue(rovar.getElfogyasztottSporak().isEmpty());
+    void testLassitoSporaHatasKifejtese() {
+        t0.addSzomszed(t1);
+        t1.addSzomszed(t2);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        Gombafonal fonal2 = new Gombafonal(t1, t2);
+        gomba.addGombafonal(fonal2);
+        gombatest = new Gombatest(t1);
+        gomba.addGombatest(gombatest);
+        LassitoSpora spora = new LassitoSpora(false);
+        t0.addSpora(spora);
+        rovar.setTekton(t0);
+        rovar.elfogyaszt(spora);
+        jatekLogika.simulateRound();
+        assertEquals(1, rovar.getSebesseg());
+        rovar.attesz(t1);
+        rovar.attesz(t0);
+        rovar.attesz(t1);
+        assertEquals(t0, rovar.getTekton()); // Nem tud tovább lépni
+        // Hibahely: túl sok lépés
+        rovar.setSebesseg(2);
+        rovar.setTekton(t0);
+        rovar.attesz(t1);
+        rovar.attesz(t0);
+        rovar.attesz(t1);
+        assertEquals(t1, rovar.getTekton());
     }
 
     @Test
-    public void sporaManager_expiredSpora_removesSpora() {
-        Spora lejartSpora = new Spora(true);
-        rovar.getElfogyasztottSporak().add(lejartSpora);
-        rovar.sporaManager();
-        assertFalse(rovar.getElfogyasztottSporak().contains(lejartSpora));
+    void testVagasGatloSporaHatasKifejtese() {
+        t0.addSzomszed(t1);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        gombatest = new Gombatest(t0);
+        gomba.addGombatest(gombatest);
+        VagasGatloSpora spora = new VagasGatloSpora(false);
+        t1.addSpora(spora);
+        rovar.setTekton(t1);
+        rovar.elfogyaszt(spora);
+        jatekLogika.simulateRound();
+        rovar.fonalElvagas(fonal);
+        assertFalse(fonal.isElpusztult());
+        assertFalse(rovar.isVaghate());
+        // Hibahely: fonal mégis elvágódik
+        rovar.setVaghate(true);
+        rovar.fonalElvagas(fonal);
+        assertTrue(fonal.isElpusztult());
     }
 
     @Test
-    public void sporaManager_validSpora_callsHatasKifejtes() {
-        rovar.getElfogyasztottSporak().add(spora);
-        rovar.sporaManager();
-        assertTrue(rovar.getElfogyasztottSporak().contains(spora));
-        // hatasKifejtes dummy, nincs mit ellenőrizni
+    void testRovarokOsztodasa() {
+        t0.addSzomszed(t1);
+        gombatest = new Gombatest(t0);
+        gomba.addGombatest(gombatest);
+        RovarOsztoSpora spora = new RovarOsztoSpora(false);
+        t1.addSpora(spora);
+        rovar.setTekton(t1);
+        rovar.elfogyaszt(spora);
+        jatekLogika.simulateRound();
+        assertEquals(2, rovarasz.getRovarok().size());
+        assertEquals(t1, rovarasz.getRovarok().get(1).getTekton());
+        // Hibahely: nem osztódik
+        rovar.getElfogyasztottSporak().clear();
+        rovarasz.getRovarok().clear();
+        rovarasz.addRovar(rovar);
+        jatekLogika.simulateRound();
+        assertEquals(1, rovarasz.getRovarok().size());
     }
 
     @Test
-    public void sporaManager_mixedSporas_handlesCorrectly() {
-        Spora lejartSpora = new Spora(true);
-        rovar.getElfogyasztottSporak().add(lejartSpora);
-        rovar.getElfogyasztottSporak().add(spora);
-        rovar.sporaManager();
-        assertFalse(rovar.getElfogyasztottSporak().contains(lejartSpora));
-        assertTrue(rovar.getElfogyasztottSporak().contains(spora));
+    void testMozgasFonalvagasSporaLoves() {
+        t0.addSzomszed(t1);
+        t1.addSzomszed(t2);
+        fonal = new Gombafonal(t0, t1);
+        gomba.addGombafonal(fonal);
+        gombatest = new Gombatest(t0);
+        gomba.addGombatest(gombatest);
+        rovar.setTekton(t2);
+        rovar.attesz(t1);
+        rovar.fonalElvagas(fonal);
+        gombatest.sporaLoves(t1);
+        assertEquals(t1, rovar.getTekton());
+        assertTrue(fonal.isElpusztult());
+        assertFalse(t1.getSporak().isEmpty());
+        assertTrue(t1.getSporak().get(0) instanceof VagasGatloSpora);
+        // Hibahely: mozgás, vágás vagy spóralövés sikertelen
+        rovar.setTekton(t2);
+        rovar.attesz(t0); // Nem szomszédos
+        assertEquals(t2, rovar.getTekton());
+        rovar.setVaghate(false);
+        fonal = new Gombafonal(t0, t1);
+        rovar.fonalElvagas(fonal);
+        assertFalse(fonal.isElpusztult());
     }
+
 }

@@ -41,12 +41,10 @@ public class Rovarasz extends Felhasznalo {
 
     /**
      * Rovarasz konstruktora
-     * @param p a felhasználó pontjainak száma
-     * @param a a felhasználó alap akciópontjainak száma
-     * @param h a felhasználó körben felhasználható akciópontjainak száma
+     * @param name - a felhasználó neve
      */
-    public Rovarasz(int p, int a, int h) {
-        super(p, "Gyuri", h);
+    public Rovarasz(String name) {
+        super(0, name, 6);
         rovarok = new ArrayList<>();
         System.out.println(">Rovarasz->Rovarasz()");
     }
@@ -55,35 +53,7 @@ public class Rovarasz extends Felhasznalo {
         return rovarok;
     }
 
-    /**
-     * Rovar mozgatása
-     * @param t2 a tekton amire mozogni fog a rovar
-     */
-    public void attesz(Tekton t2) {
-        System.out.println(">Rovarasz->rovarMozgas(t2)");
-        System.out.println(">A mozgást az (1). számú rovar fogja végezni");
-        rovarok.get(0).attesz(t2);
-    }
 
-    /**
-     * A rovar egy tetszőlegesen választott spórát elfogyaszt
-     * @param sp1 az elfogyasztandó spóra
-     */
-    public void elfogyaszt(Spora sp1) {
-        System.out.println(">Rovarasz->elfogyaszt(sp1)");
-        System.out.println(">A spóra elfogyasztást az (1). számú rovar fogja végezni");
-        rovarok.get(0).elfogyaszt(sp1);
-    }
-
-    /**
-     * A rovar egy tetszőlegesen választott fonalat megsemmisít
-     * @param gf1 az elvágandó gombafonal
-     */
-    public void fonalElvagas(Gombafonal gf1) {
-        System.out.println(">Rovarasz->fonalElvagas(gf1)");
-        System.out.println(">A fonalvágást az (1). számú rovar fogja végezni");
-        rovarok.get(0).fonalElvagas(gf1, gameLogic.getGombaszok());
-    }
 
     public void addRovar(Rovar r){
         rovarok.add(r);
