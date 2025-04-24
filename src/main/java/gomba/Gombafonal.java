@@ -69,7 +69,7 @@ public class Gombafonal {
         return hatar2;
     }
 
-    public boolean eltratva() {
+    public boolean eltartva() {
         return test != null;
     }
 

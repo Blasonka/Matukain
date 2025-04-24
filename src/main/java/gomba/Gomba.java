@@ -31,30 +31,18 @@ public class Gomba {
      * @var List<Gombafonal> gombafonalak
      * @brief A gombafonalakat tároló lista.
      */
-    private List<Gombafonal> gombafonalak;
+    private List<Gombafonal> fonalak;
 
     /**
      * Gombatest
      * @var Gombatest gombatest
      * @brief A gombatest, amely a gombához tartozik.
      */
-    private Gombatest gombatest;
+    private List<Gombatest> gombatestek;
 
-    /**
-     * Tekton
-     * @var Tekton tekton
-     * @brief A tekton, amin a gomba található.
-     */
-    private Tekton tekton;
-
-    /**
-     * Gomba konstruktora
-     * @param tekton a tekton, amin a gomba található
-     */
-    public Gomba(Tekton tekton) {
-        this.gombafonalak = new ArrayList<Gombafonal>();
-        this.gombatest = null;
-        this.tekton = tekton;
+    public Gomba() {
+        this.fonalak = new ArrayList<Gombafonal>();
+        this.gombatestek = new ArrayList<Gombatest>();
     }
 
     /**

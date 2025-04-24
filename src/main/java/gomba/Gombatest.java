@@ -26,13 +26,9 @@ import java.util.Random;
  */
 public class Gombatest {
 
-    /**
-     * A gombatest élettartama
-     * @var int elettartam
-     * @brief A gombatest élettartamát tároló változó.
-     */
-    private int elettartam;
-
+    private Tekton tekton;
+    private int maxSporaKiloves;
+    private int eddigiSzorasok;
     /**
      * A gombatestből kilőhető spórák száma
      * @var int kilohetoSporakSzama
@@ -50,20 +46,14 @@ public class Gombatest {
     /**
      * Gombatest konstruktora
      */
-    public Gombatest() {
-        this.elettartam = 0;
-        this.kilohetoSporakSzama = 6;
+    public Gombatest(Tekton t) {
+        this.tekton = t;
+        this.maxSporaKiloves = 6;
+        this.eddigiSzorasok = 0;
+        this.kilohetoSporakSzama = 3;
         this.fejlett = false;
-        System.out.println("Gombatest létrejött");
     }
 
-    /**
-     * Visszaadja a gombatest élettartamát
-     * @return a gombatest élettartama
-     */
-    public int getElettartam() {
-        return elettartam;
-    }
 
     /**
      * Visszaadja a gombatestből kihelyezhető spórák számát
@@ -81,26 +71,30 @@ public class Gombatest {
         return fejlett;
     }
 
+    public boolean tudSporatSzorni() {
+        return kilohetoSporakSzama > 0 && eddigiSzorasok < maxSporaKiloves;
+    }
+
     /**
      * Spóra elhelyezése
      * @param tekton a tekton, amin elhelyezzük az új spórát
      */
-    public void sporaLoves(Tekton tekton) {
+    public void sporaSzoras(Tekton tekton) {
         Random rand = new Random();
         Spora spora = null;
         int randomSpora = rand.nextInt(4);
         switch (randomSpora) {
             case 0:
-                //spora = new BenitoSpora(rand.nextInt(4));
+                spora = new BenitoSpora(rand.nextInt(1,4));
                 break;
             case 1:
-                //spora = new GyorsitoSpora(rand.nextInt(4));
+                spora = new GyorsitoSpora(rand.nextInt(1,4));
                 break;
             case 2:
-                //spora = new LassitoSpora(rand.nextInt(4));
+                spora = new LassitoSpora(rand.nextInt(1,4));
                 break;
             case 3:
-                //spora = new VagasGatloSpora(rand.nextInt(4));
+                spora = new VagasGatloSpora(rand.nextInt(1,4));
                 break;
             default:
                 break;
