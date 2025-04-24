@@ -347,11 +347,13 @@ public class ParancsFeldolgozo {
         // TODO gameLogic-ba ennek megfelelő publikus globális változók implementálása, amit aztán a többi osztály (tekton, gombafonal) figyelni tud
         switch (val) {
             case 'D':
-                // jatekLogika.tekton = tores;
-                // jateklogika.fonal = megmaradas;
+                 jatekLogika.veletlenEsemenyekEngedelyezve = false;
+                 jatekLogika.toresEsely = tores;
+                 //jateklogika.fonal = megmaradas;
                 break;
             case 'E':
-                // jatekLogika.visszadefaultra
+                jatekLogika.toresEsely = 0.2;
+                jatekLogika.veletlenEsemenyekEngedelyezve = true;
             default:
                 System.out.println("Érvénytelen érték! (/help a megadható értékek listájához)");
         }

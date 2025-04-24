@@ -44,6 +44,8 @@ public class gameLogic implements Serializable {
     public static List<Rovarasz> rovarasz;
     public List<Felhasznalo> jatekosok = new ArrayList<>();
     public boolean veletlenEsemenyekEngedelyezve = true;
+    public double toresEsely;
+
     /**
      * Default konstruktor
      */
@@ -95,7 +97,7 @@ public class gameLogic implements Serializable {
             Tekton current = t.get(i);
 
             // 20% chance to split (0.0 to 1.0, so 0.2 is 20%)
-            if (rand.nextDouble() < 0.2) {
+            if (rand.nextDouble() < toresEsely) {
 
                 int ujId = current.getID() +500;
                 int ujX = current.getKoordinataX() -1;
