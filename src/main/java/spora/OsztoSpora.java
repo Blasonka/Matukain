@@ -4,6 +4,8 @@ import rovar.Rovar;
 import tekton.Tekton;
 import interfészek.*;
 
+import java.util.Random;
+
 public class OsztoSpora extends Spora implements hatasKifejtes {
     
     public OsztoSpora() {
@@ -13,10 +15,9 @@ public class OsztoSpora extends Spora implements hatasKifejtes {
 
     public void hatasKifejtes(Rovar rovar){
        Tekton jelenlegi = rovar.getTekton();
-        Rovar ujRovar = new Rovar(jelenlegi);
+        Random r = new Random();
+        Rovar ujRovar = new Rovar(jelenlegi, r.nextInt(1000));
 
-        
-        jelenlegi.addRovar(ujRovar); 
 
         System.out.println("Új rovar jött létre a spóra hatására.");
     }

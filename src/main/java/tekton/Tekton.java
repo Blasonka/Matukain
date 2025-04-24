@@ -50,7 +50,11 @@ public abstract class Tekton {
      */
     private List<Spora> sporak;
 
+    /**
     private List<Rovar> rovarok;
+    */
+
+    private List<Tekton> szomszedok;
 
     /**
      * @var Gomba gomba
@@ -70,7 +74,20 @@ public abstract class Tekton {
         this.koordinataY = koordinataY;
         sporak = new ArrayList<>();
         gomba = null;
+        szomszedok = new ArrayList<>();
         System.out.println("Tekton->Tekton()");
+    }
+
+    /**
+     *
+     * Új rész!!!!!!!!!
+     *
+     */
+    public void addSzomszed(Tekton szomszed) {
+        szomszedok.add(szomszed);
+    }
+    public List<Tekton> getSzomszedok() {
+        return szomszedok;
     }
 
     /**
@@ -183,16 +200,8 @@ public abstract class Tekton {
      * Gombát növeszt a tektonra
      */
     public void gombaNovesztes(){
-        gomba = new Gomba(this);
+        gomba = new Gomba();
         System.out.println("Új gomba nőtt erre a tektonra");
-    }
-
-    public void addRovar(Rovar rovar) {
-        rovarok.add(rovar);
-    }
-
-    public List<Rovar> getRovarok() {
-        return rovarok;
     }
 
     /**

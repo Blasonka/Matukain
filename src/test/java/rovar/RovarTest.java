@@ -6,14 +6,12 @@ import gomba.Gomba;
 import gomba.Gombafonal;
 import gomba.Gombatest;
 import jateklogika.gameLogic;
-import org.junit.*;
-import org.junit.jupiter.api.BeforeEach;
 import spora.*;
-import tekton.Tekton;
 import tekton.TobbFonalTekton;
 
-import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 
@@ -31,8 +29,8 @@ public class RovarTest {
     public void setUp() {
         jatekLogika = new gameLogic();
         rovarasz = new Rovarasz("Gyuri");
-        gombasz = new Gombasz(10);
-        rovar = new Rovar();
+        gombasz = new Gombasz("Jani");
+        rovar = new Rovar(t0);
         gomba = new Gomba();
         t0 = new TobbFonalTekton(0, 1, 1);
         t1 = new TobbFonalTekton(2, 3, 3);
@@ -46,16 +44,16 @@ public class RovarTest {
     @Test
     public void testFonalElvagas() {
         t0.addSzomszed(t1);
-        fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        fonal = new Gombafonal(t0, t1, gombatest);
+        gomba.addFonal(fonal);
         rovar.setTekton(t0);
         rovar.fonalElvagas(fonal);
         assertTrue(fonal.getElragva());
         assertEquals(8, rovarasz.getHatralevoAkciopont()); // sebesseg = 2
         // Hibahely: rossz tekton
         rovar.setTekton(t2);
-        fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        fonal = new Gombafonal(t0, t1, gombatest);
+        gomba.addFonal(fonal);
         rovar.fonalElvagas(fonal);
         assertFalse(fonal.getElragva());
     }
@@ -78,7 +76,7 @@ public class RovarTest {
     @Test
     public void testRovarAttelepitese() {
         t0.addSzomszed(t1);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
@@ -95,7 +93,7 @@ public class RovarTest {
     @Test
     public void testBenitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
@@ -117,9 +115,9 @@ public class RovarTest {
     public void testGyorsitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
-        Gombafonal fonal2 = new Gombafonal(t1, t2);
+        Gombafonal fonal2 = new Gombafonal(t1, t2, gombatest);
         gomba.addFonal(fonal2);
         gombatest = new Gombatest(t1);
         gomba.addGombatest(gombatest);
@@ -151,9 +149,9 @@ public class RovarTest {
     public void testLassitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
-        Gombafonal fonal2 = new Gombafonal(t1, t2);
+        Gombafonal fonal2 = new Gombafonal(t1, t2, gombatest);
         gomba.addFonal(fonal2);
         gombatest = new Gombatest(t1);
         gomba.addGombatest(gombatest);
@@ -179,7 +177,7 @@ public class RovarTest {
     @Test
     public void testVagasGatloSporaHatasKifejtese() {
         t0.addSzomszed(t1);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
@@ -221,7 +219,7 @@ public class RovarTest {
     public void testMozgasFonalvagasSporaLoves() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
@@ -238,7 +236,7 @@ public class RovarTest {
         rovar.attesz(t0); // Nem szomszédos
         assertEquals(t2, rovar.getTekton());
         rovar.setVaghate(false);
-        fonal = new Gombafonal(t0, t1);
+        fonal = new Gombafonal(t0, t1, gombatest);
         rovar.fonalElvagas(fonal);
         assertFalse(fonal.getElragva());
     }

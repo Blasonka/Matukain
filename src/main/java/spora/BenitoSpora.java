@@ -47,6 +47,6 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      */
 
     public void hatasKifejtes(Rovar rovar) {
-        rovar.sebesseg=0;
+        rovar.setSebesseg(0);
     }
 }

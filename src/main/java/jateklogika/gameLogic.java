@@ -137,14 +137,14 @@ public class gameLogic {
         }
         map.add(tektonok[i]);
         }
-        Gombasz g1= new Gombasz(0, 5,0 );
-        Gombasz g2= new Gombasz(0,5,0);
-        Rovarasz r1 = new Rovarasz(0,5,0);
-        Rovarasz r2 = new Rovarasz(0,5,0);
-        Rovar rovar1 = new Rovar(null);
-        Rovar rovar2 = new Rovar(null);
-        Gomba gomba1 = new Gomba(null);
-        Gomba gomba2 = new Gomba(null);
+        Gombasz g1= new Gombasz("Gombasz1");
+        Gombasz g2= new Gombasz("Gombasz2");
+        Rovarasz r1 = new Rovarasz("Rovarasz1");
+        Rovarasz r2 = new Rovarasz("Rovarasz2");
+        Rovar rovar1 = new Rovar(null, 1);
+        Rovar rovar2 = new Rovar(null, 2);
+        Gomba gomba1 = new Gomba();
+        Gomba gomba2 = new Gomba();
         korSzamlalo=0;
 
         gombaszok2.add(g1);
@@ -174,5 +174,14 @@ public class gameLogic {
     public void addGombasz(Gombasz g)
     {
         gombaszok.add(g);
+    }
+
+    /**
+     *
+     * Új rész!!!!!!!!!
+     *
+     */
+    public void simulateRound(){
+
     }
 }

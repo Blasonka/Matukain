@@ -47,6 +47,6 @@ import interfészek.*;
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        if(rovar.sebesseg)rovar.sebesseg=+1;
+        if (rovar.getSebesseg() < 3) rovar.setSebesseg(rovar.getSebesseg() + 1);
     }
 }
