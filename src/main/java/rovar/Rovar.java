@@ -1,8 +1,10 @@
 package rovar;
 
 import felhasznalo.Gombasz;
+import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import gomba.Gombafonal;
+import jateklogika.gameLogic;
 import spora.Spora;
 import tekton.Tekton;
 import tesztelo.ParancsFeldolgozo;
@@ -77,9 +79,34 @@ public class Rovar {
      * @brief A rovar elvágja az adott gombafonalat.
      * @param fonal a fonal, amit el kell vágni.
      */
-    public void fonalElvagas(Gombafonal fonal, List<Gombasz> gomg){
-        System.out.println("Rovar->fonalElvagas(fonal)");
-        System.out.println("Van hatással VagasGatloSpora? (Y/N)");
+    public void fonalElvagas(Gombafonal fonal, gameLogic jatekLogika) {
+        if (!vaghate) {
+            return;
+        }
+
+        Tekton t1 = fonal.getHatar1();
+        Tekton t2 = fonal.getHatar2();
+
+        if (t1 != tekton && t2 != tekton) {
+            return;
+        }
+
+        List<Gombasz> gsz = jatekLogika.getGombaszok();
+        for (Gombasz gsz1 : gsz){
+            List<Gomba> gombak = gsz1.getGombak();
+            for (Gomba gomba : gombak) {
+                List<Gombafonal> gombafonalak = gomba.getGombafonalak();
+                for (Gombafonal gombafonal : gombafonalak) {
+                    if (gombafonal.equals(fonal)) {
+                        gomba.removeFonal(gombafonal);
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        /*
         String valasz1 = ""; // Tesztelo.scanner.nextLine();
         if (valasz1.equals("N")) {
             System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
@@ -104,6 +131,7 @@ public class Rovar {
         } else {
             System.out.println("A gombafonalat nem lehet elvágni.");
         }
+         */
     }
 
     /**
@@ -170,5 +198,33 @@ public class Rovar {
         this.telitettseg = telitettseg;
     }
     
+    public void setVaghate(boolean vaghate) {
+        this.vaghate = vaghate;
+    }
 
+    public List<Spora> getElfogyasztottSporak() {
+        return elfogyasztottSporak;
+    }
+
+    private void resetEffects(){
+        sebesseg = 2;
+        vaghate = true;
+    }
+
+    public void sporaManager(){
+        resetEffects();
+        for (Spora s : elfogyasztottSporak) {
+            if (s.getSzamlalo() <= 0) {
+                elfogyasztottSporak.remove(s);
+            } else {
+                s.hatasKifejtes(this);
+            }
+        }
+    }
+    private void pontLevonas(){
+
+    }
+    public void setRovarHandler(Rovarasz rsz){
+        rsz.addRovar(this);
+    }
 }

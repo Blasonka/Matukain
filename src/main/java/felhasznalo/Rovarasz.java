@@ -36,7 +36,7 @@ public class Rovarasz extends Felhasznalo {
      * @var List<Rovar> rovarak
      * @brief rovarak listája
       */
-    List<Rovar> rovarak;
+    List<Rovar> rovarok;
 
     /**
      * Rovarasz konstruktora
@@ -46,12 +46,12 @@ public class Rovarasz extends Felhasznalo {
      */
     public Rovarasz(int p, int a, int h) {
         super(p, "Gyuri", h);
-        rovarak = new ArrayList<>();
+        rovarok = new ArrayList<>();
         System.out.println(">Rovarasz->Rovarasz()");
     }
 
-    public List<Rovar> getRovarak() {
-        return rovarak;
+    public List<Rovar> getRovarok() {
+        return rovarok;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Rovarasz extends Felhasznalo {
     public void attesz(Tekton t2) {
         System.out.println(">Rovarasz->rovarMozgas(t2)");
         System.out.println(">A mozgást az (1). számú rovar fogja végezni");
-        rovarak.get(0).attesz(t2);
+        rovarok.get(0).attesz(t2);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Rovarasz extends Felhasznalo {
     public void elfogyaszt(Spora sp1) {
         System.out.println(">Rovarasz->elfogyaszt(sp1)");
         System.out.println(">A spóra elfogyasztást az (1). számú rovar fogja végezni");
-        rovarak.get(0).elfogyaszt(sp1);
+        rovarok.get(0).elfogyaszt(sp1);
     }
 
     /**
@@ -81,6 +81,10 @@ public class Rovarasz extends Felhasznalo {
     public void fonalElvagas(Gombafonal gf1) {
         System.out.println(">Rovarasz->fonalElvagas(gf1)");
         System.out.println(">A fonalvágást az (1). számú rovar fogja végezni");
-        rovarak.get(0).fonalElvagas(gf1, gameLogic.getGombaszok());
+        rovarok.get(0).fonalElvagas(gf1, gameLogic.getGombaszok());
+    }
+
+    public void addRovar(Rovar r){
+        rovarok.add(r);
     }
 }
