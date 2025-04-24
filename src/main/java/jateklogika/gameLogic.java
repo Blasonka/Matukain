@@ -104,7 +104,7 @@ public class gameLogic implements Serializable {
               
               if (g.getHatralevoAkciopont() >= 1) {
                   
-                  g.sporaLoves(null);  
+                  g.sporaLoves(null);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
                   System.out.println(g.getNev() + " szórt egy spórát.");
               }

@@ -195,7 +195,7 @@ public class ParancsFeldolgozo {
         // TODO Gomba ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().add(new Gomba());
+            ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().add(new Gomba(0));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Gomba felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, tekton ID nem létezik");

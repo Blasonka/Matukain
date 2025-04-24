@@ -31,7 +31,7 @@ public class RovarTest {
         rovarasz = new Rovarasz("Gyuri");
         gombasz = new Gombasz("Jani");
         rovar = new Rovar(t0, 0);
-        gomba = new Gomba();
+        gomba = new Gomba(0);
         t0 = new TobbFonalTekton(0, 1, 1);
         t1 = new TobbFonalTekton(2, 3, 3);
         t2 = new TobbFonalTekton(4, 5, 5);
@@ -78,7 +78,7 @@ public class RovarTest {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(0,t0, t1, gombatest);
         gomba.addFonal(fonal);
-        gombatest = new Gombatest(t0);
+        gombatest = new Gombatest(1, t0);
         gomba.addGombatest(gombatest);
         rovar.setTekton(t0);
         rovar.attesz(t1);
@@ -95,7 +95,7 @@ public class RovarTest {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(0,t0, t1, gombatest);
         gomba.addFonal(fonal);
-        gombatest = new Gombatest(t0);
+        gombatest = new Gombatest(1, t0);
         gomba.addGombatest(gombatest);
         BenitoSpora spora = new BenitoSpora(2);
         t1.addSpora(spora);
@@ -119,7 +119,7 @@ public class RovarTest {
         gomba.addFonal(fonal);
         Gombafonal fonal2 = new Gombafonal(1,t1, t2, gombatest);
         gomba.addFonal(fonal2);
-        gombatest = new Gombatest(t1);
+        gombatest = new Gombatest(2,t1);
         gomba.addGombatest(gombatest);
         GyorsitoSpora spora = new GyorsitoSpora(2);
         t0.addSpora(spora);
@@ -153,7 +153,7 @@ public class RovarTest {
         gomba.addFonal(fonal);
         Gombafonal fonal2 = new Gombafonal(1,t1, t2, gombatest);
         gomba.addFonal(fonal2);
-        gombatest = new Gombatest(t1);
+        gombatest = new Gombatest(2,t1);
         gomba.addGombatest(gombatest);
         LassitoSpora spora = new LassitoSpora(2);
         t0.addSpora(spora);
@@ -179,7 +179,7 @@ public class RovarTest {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(0,t0, t1, gombatest);
         gomba.addFonal(fonal);
-        gombatest = new Gombatest(t0);
+        gombatest = new Gombatest(1, t0);
         gomba.addGombatest(gombatest);
         VagasGatloSpora spora = new VagasGatloSpora(2);
         t1.addSpora(spora);
@@ -198,7 +198,7 @@ public class RovarTest {
     @Test
     public void testRovarokOsztodasa() {
         t0.addSzomszed(t1);
-        gombatest = new Gombatest(t0);
+        gombatest = new Gombatest(1, t0);
         gomba.addGombatest(gombatest);
         OsztoSpora spora = new OsztoSpora();
         t1.addSpora(spora);
@@ -221,7 +221,7 @@ public class RovarTest {
         t1.addSzomszed(t2);
         fonal = new Gombafonal(0,t0, t1, gombatest);
         gomba.addFonal(fonal);
-        gombatest = new Gombatest(t0);
+        gombatest = new Gombatest(1, t0);
         gomba.addGombatest(gombatest);
         rovar.setTekton(t2);
         rovar.attesz(t1);
