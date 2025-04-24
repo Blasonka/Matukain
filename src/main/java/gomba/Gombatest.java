@@ -14,25 +14,42 @@ import java.util.Random;
  *
  * @details
  * Ez az osztály felelős a gombatestek reprezentálásáért, azokkal kapcsolatos műveletek végzéséért.
- * Az osztály tartalmazza a gombatestek élettartamát, a gombatestekből kilőhető spórák számát, valamint a gombatestek fejlettségét.
+ * Az osztály tartalmazza a tektont ahol helyezkedik a test, a gombatestekből kilőhető spórák számát, az eddig kilőtt spórák számát, valamint a gombatestek fejlettségét.
  *
  * @see felhasznalo.Gombasz
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van.
  *
  * @author Blasek
- * @version 1.0
- * @date 2025-03-22
+ * @version 2.0
+ * @date 2025-04-24
  */
 public class Gombatest {
 
+    /**
+     * A gombatesthez tartozó tekton
+     * @var Tekton tekton
+     * @brief A gombatesthez tartozó tekton.
+     */
     private Tekton tekton;
+
+    /**
+     * A gombatestből maximálisan kilőhető spórák maximális száma
+     * @var int maxSporaKiloves
+     * @brief A gombatestből kilőhető spórák maximális számát tároló változó.
+     */
     private int maxSporaKiloves;
+
+    /**
+     * A gombatestből eddig kilőtt spórák száma
+     * @var int eddigiSzorasok
+     * @brief A gombatestből eddig kilőtt spórák számát tároló változó.
+     */
     private int eddigiSzorasok;
     /**
-     * A gombatestből kilőhető spórák száma
+     * A gombatestből jelen pillanatban kilőhető spórák száma
      * @var int kilohetoSporakSzama
-     * @brief A gombatestből kilőhető spórák számát tároló változó.
+     * @brief A gombatestből jelenleg kilőhető spórák számát tároló változó.
      */
     private int kilohetoSporakSzama;
 
@@ -54,10 +71,27 @@ public class Gombatest {
         this.fejlett = false;
     }
 
+    /**
+     * Visszaadja a gombatesthez tartozó tekton
+     * @return a gombatesthez tartozó tekton
+     */
+    public Tekton getTekton() { return tekton; }
 
     /**
-     * Visszaadja a gombatestből kihelyezhető spórák számát
-     * @return a gombatestből kihelyezhető spórák száma
+     * Visszaadja a gombatestből maximálisan kilőhető spórák számát
+     * @return a gombatestből maximálisan kilőhető spórák száma
+     */
+    public int getMaxSporaKiloves() { return maxSporaKiloves; }
+
+    /**
+     * Visszaadja a gombatestből eddig kilőtt spórák számát
+     * @return a gombatestből eddig kilőtt spórák száma
+     */
+    public int getEddigiSzorasok() { return eddigiSzorasok; }
+
+    /**
+     * Visszaadja a gombatestből jelenleg kihelyezhető spórák számát
+     * @return a gombatestből jelenleg kihelyezhető spórák száma
      */
     public int getKilohetoSporakSzama() {
         return kilohetoSporakSzama;
@@ -71,6 +105,10 @@ public class Gombatest {
         return fejlett;
     }
 
+    /**
+     * Visszaadja, hogy a gombatest tud-e még spórát szórni
+     * @return true, ha még tud spórát szórni, false egyébként
+     */
     public boolean tudSporatSzorni() {
         return kilohetoSporakSzama > 0 && eddigiSzorasok < maxSporaKiloves;
     }
@@ -100,6 +138,7 @@ public class Gombatest {
                 break;
         }
         kilohetoSporakSzama--;
+        eddigiSzorasok++;
         tekton.addSpora(spora);
     }
 }
