@@ -32,8 +32,8 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
      * Lassító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public LassitoSpora(int sz, String s) {
-        super(sz, s );
+    public LassitoSpora(int sz) {
+        super(sz, "lassito" );
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
 
