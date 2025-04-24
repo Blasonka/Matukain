@@ -30,8 +30,8 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      * BenitoSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public BenitoSpora(int sz, hatasKifejtes h, String s) {
-        super(sz,h,s);
+    public BenitoSpora(int sz, String s) {
+        super(sz,s);
         System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
 
@@ -45,7 +45,7 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      * Spóra hatásának kifejtése
      * @param rovar a rovar akin a hatást kívánja kifejteni
      */
-    @Override
+
     public void hatasKifejtes(Rovar rovar) {
         rovar.sebesseg=0;
     }

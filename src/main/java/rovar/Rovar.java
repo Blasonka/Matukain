@@ -57,8 +57,8 @@ public class Rovar {
     *ÚJ RÉSZ!!! Spórához kelleltt!
     *
     */
-    public int sebesseg;
-    public boolean vaghate;
+    private int sebesseg;
+    private boolean vaghate;
     public Tekton getTekton(){
         return tekton;
     }
@@ -91,35 +91,7 @@ public class Rovar {
             return;
         }
 
-        fonal
-
-
-        /*
-        String valasz1 = ""; // Tesztelo.scanner.nextLine();
-        if (valasz1.equals("N")) {
-            System.out.println("A gombafonal egyik vége azonos tektonon van, amelyiken rovar is? (Y/N)");
-            String valasz2 = ""; // = Tesztelo.scanner.nextLine();
-            if (valasz2.equals("Y")) {
-                for (Gombasz g : gomg) {
-                    List<Gomba> gombak = g.getGombak();
-                    for (Gomba gomba : gombak) {
-                        List<Gombafonal> gombafonalak = gomba.getGombafonalak();
-                        for (Gombafonal gombafonal : gombafonalak) {
-                            if (gombafonal.equals(fonal)) {
-                                gomg.get(gomg.indexOf(g)).getGombak().get(g.getGombak().indexOf(gomba)).removeFonal(gombafonal);
-                                System.out.println("A gombafonal elvágva.");
-                                return;
-                            }
-                        }
-                    }
-                }
-            } else {
-                System.out.println("A gombafonalat nem lehet elvágni.");
-            }
-        } else {
-            System.out.println("A gombafonalat nem lehet elvágni.");
-        }
-         */
+        fonal.elragas();
     }
 
     /**

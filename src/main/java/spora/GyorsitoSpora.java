@@ -29,8 +29,8 @@ import interfészek.*;
      * Gyorsító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public GyorsitoSpora(int sz,hatasKifejtes h, String s) {
-        super(sz,h,s);
+    public GyorsitoSpora(int sz, String s) {
+        super(sz, s);
         System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }
 
@@ -47,6 +47,6 @@ import interfészek.*;
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        rovar.sebesseg=3;
+        if(rovar.sebesseg)rovar.sebesseg=+1;
     }
 }

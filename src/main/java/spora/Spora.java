@@ -1,5 +1,6 @@
 package spora;
 
+import interfészek.hatasKifejtes;
 import rovar.Rovar;
 import tekton.Tekton;
 
@@ -27,7 +28,7 @@ import tekton.Tekton;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public abstract class Spora implements HatasKifejtes {
+public abstract class Spora implements hatasKifejtes {
     /**
      * Spóra élettartamát nyilvántartó számláló
      * @var int szamlalo
@@ -35,24 +36,28 @@ public abstract class Spora implements HatasKifejtes {
      */
     protected int szamlalo;
     protected String nev;
-    private HatasKifejtes effekt;
+
     /**
      * Spora osztály konstruktora
      * @param sz számláló értéke
      */
-    public Spora(int sz, HatasKifejtes h, String s) {
+    public Spora(int sz, String s) {
         szamlalo = sz;
-        effekt=h;
-        nev =s;
+        nev = s;
         System.out.println(">Spora->Spora()");
     }
     /**
      * Spóra törlése
      */
-    public void torles() {
-       
+    public abstract void torles();
+    public void hatasKifejtes(Object obj) {
+        if (obj instanceof Rovar) {
+            hatasKifejtes((Rovar) obj);
+        } else {
+            throw new IllegalArgumentException("Invalid object type. Expected Rovar.");
+        }
     }
-    
+    public abstract void hatasKifejtes(Rovar target);
     public int getSzamlalo() {
         return szamlalo;
     }

@@ -6,13 +6,11 @@ import interfészek.*;
 
 public class OsztoSpora extends Spora implements hatasKifejtes {
     
-    public OsztoSpora(int sz, hatasKifejtes h, String s) {
-        super(sz, h, s);
+    public OsztoSpora(int sz, String s) {
+        super(sz, s);
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
 
-    
-    @Override
     public void hatasKifejtes(Rovar rovar){
        Tekton jelenlegi = rovar.getTekton();
         Rovar ujRovar = new Rovar(jelenlegi);
@@ -22,6 +20,8 @@ public class OsztoSpora extends Spora implements hatasKifejtes {
 
         System.out.println("Új rovar jött létre a spóra hatására.");
     }
+    public void torles(){
 
+    }
 
 }
