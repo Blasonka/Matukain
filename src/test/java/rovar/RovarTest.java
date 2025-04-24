@@ -8,8 +8,7 @@ import gomba.Gombatest;
 import jateklogika.gameLogic;
 import org.junit.*;
 import org.junit.jupiter.api.BeforeEach;
-import spora.OsztoSpora;
-import spora.Spora;
+import spora.*;
 import tekton.Tekton;
 import tekton.TobbFonalTekton;
 
@@ -25,19 +24,19 @@ public class RovarTest {
     private Rovar rovar;
     private Gomba gomba;
     private Gombatest gombatest;
-    private Tekton t0, t1, t2;
+    private TobbFonalTekton t0, t1, t2;
     private Gombafonal fonal;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         jatekLogika = new gameLogic();
         rovarasz = new Rovarasz("Gyuri");
         gombasz = new Gombasz(10);
         rovar = new Rovar();
         gomba = new Gomba();
-        t0 = new Tekton(0, 1);
-        t1 = new Tekton(2, 3);
-        t2 = new Tekton(4, 5);
+        t0 = new TobbFonalTekton(0, 1, 1);
+        t1 = new TobbFonalTekton(2, 3, 3);
+        t2 = new TobbFonalTekton(4, 5, 5);
         jatekLogika.addRovarasz(rovarasz);
         jatekLogika.addGombasz(gombasz);
         rovarasz.addRovar(rovar);
@@ -45,26 +44,26 @@ public class RovarTest {
     }
 
     @Test
-    void testFonalElvagas() {
+    public void testFonalElvagas() {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(t0, t1);
         gomba.addGombafonal(fonal);
         rovar.setTekton(t0);
         rovar.fonalElvagas(fonal);
-        assertTrue(fonal.isElpusztult());
+        assertTrue(fonal.getElragva());
         assertEquals(8, rovarasz.getHatralevoAkciopont()); // sebesseg = 2
         // Hibahely: rossz tekton
         rovar.setTekton(t2);
         fonal = new Gombafonal(t0, t1);
         gomba.addGombafonal(fonal);
         rovar.fonalElvagas(fonal);
-        assertFalse(fonal.isElpusztult());
+        assertFalse(fonal.getElragva());
     }
 
     @Test
-    void testSporaElfogyasztasa() {
+    public void testSporaElfogyasztasa() {
         t0.addSzomszed(t1);
-        BenitoSpora spora = new BenitoSpora(false);
+        BenitoSpora spora = new BenitoSpora(2);
         t1.addSpora(spora);
         rovar.setTekton(t1);
         rovar.elfogyaszt(spora);
@@ -77,10 +76,10 @@ public class RovarTest {
     }
 
     @Test
-    void testRovarAttelepitese() {
+    public void testRovarAttelepitese() {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
         rovar.setTekton(t0);
@@ -94,13 +93,13 @@ public class RovarTest {
     }
 
     @Test
-    void testBenitoSporaHatasKifejtese() {
+    public void testBenitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
-        BenitoSpora spora = new BenitoSpora(false);
+        BenitoSpora spora = new BenitoSpora(2);
         t1.addSpora(spora);
         rovar.setTekton(t1);
         rovar.elfogyaszt(spora);
@@ -115,16 +114,16 @@ public class RovarTest {
     }
 
     @Test
-    void testGyorsitoSporaHatasKifejtese() {
+    public void testGyorsitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         Gombafonal fonal2 = new Gombafonal(t1, t2);
-        gomba.addGombafonal(fonal2);
+        gomba.addFonal(fonal2);
         gombatest = new Gombatest(t1);
         gomba.addGombatest(gombatest);
-        GyorsitoSpora spora = new GyorsitoSpora(false);
+        GyorsitoSpora spora = new GyorsitoSpora(2);
         t0.addSpora(spora);
         rovar.setTekton(t0);
         rovar.elfogyaszt(spora);
@@ -149,16 +148,16 @@ public class RovarTest {
     }
 
     @Test
-    void testLassitoSporaHatasKifejtese() {
+    public void testLassitoSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         Gombafonal fonal2 = new Gombafonal(t1, t2);
-        gomba.addGombafonal(fonal2);
+        gomba.addFonal(fonal2);
         gombatest = new Gombatest(t1);
         gomba.addGombatest(gombatest);
-        LassitoSpora spora = new LassitoSpora(false);
+        LassitoSpora spora = new LassitoSpora(2);
         t0.addSpora(spora);
         rovar.setTekton(t0);
         rovar.elfogyaszt(spora);
@@ -178,32 +177,32 @@ public class RovarTest {
     }
 
     @Test
-    void testVagasGatloSporaHatasKifejtese() {
+    public void testVagasGatloSporaHatasKifejtese() {
         t0.addSzomszed(t1);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
-        VagasGatloSpora spora = new VagasGatloSpora(false);
+        VagasGatloSpora spora = new VagasGatloSpora(2);
         t1.addSpora(spora);
         rovar.setTekton(t1);
         rovar.elfogyaszt(spora);
         jatekLogika.simulateRound();
         rovar.fonalElvagas(fonal);
-        assertFalse(fonal.isElpusztult());
+        assertFalse(fonal.getElragva());
         assertFalse(rovar.isVaghate());
         // Hibahely: fonal mégis elvágódik
         rovar.setVaghate(true);
         rovar.fonalElvagas(fonal);
-        assertTrue(fonal.isElpusztult());
+        assertTrue(fonal.getElragva());
     }
 
     @Test
-    void testRovarokOsztodasa() {
+    public void testRovarokOsztodasa() {
         t0.addSzomszed(t1);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
-        RovarOsztoSpora spora = new RovarOsztoSpora(false);
+        OsztoSpora spora = new OsztoSpora();
         t1.addSpora(spora);
         rovar.setTekton(t1);
         rovar.elfogyaszt(spora);
@@ -219,19 +218,19 @@ public class RovarTest {
     }
 
     @Test
-    void testMozgasFonalvagasSporaLoves() {
+    public void testMozgasFonalvagasSporaLoves() {
         t0.addSzomszed(t1);
         t1.addSzomszed(t2);
         fonal = new Gombafonal(t0, t1);
-        gomba.addGombafonal(fonal);
+        gomba.addFonal(fonal);
         gombatest = new Gombatest(t0);
         gomba.addGombatest(gombatest);
         rovar.setTekton(t2);
         rovar.attesz(t1);
         rovar.fonalElvagas(fonal);
-        gombatest.sporaLoves(t1);
+        gombatest.sporaSzoras(t1);
         assertEquals(t1, rovar.getTekton());
-        assertTrue(fonal.isElpusztult());
+        assertTrue(fonal.getElragva());
         assertFalse(t1.getSporak().isEmpty());
         assertTrue(t1.getSporak().get(0) instanceof VagasGatloSpora);
         // Hibahely: mozgás, vágás vagy spóralövés sikertelen
@@ -241,7 +240,7 @@ public class RovarTest {
         rovar.setVaghate(false);
         fonal = new Gombafonal(t0, t1);
         rovar.fonalElvagas(fonal);
-        assertFalse(fonal.isElpusztult());
+        assertFalse(fonal.getElragva());
     }
 
 }

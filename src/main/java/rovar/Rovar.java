@@ -52,16 +52,21 @@ public class Rovar {
      * @brief Az elfogyasztott spórákat tároló lista.
      */
     private List<Spora> elfogyasztottSporak;
-    /*
-    *
-    *ÚJ RÉSZ!!! Spórához kelleltt!
-    *
-    */
+
+    /**
+     * Sebesség.
+     * @var int sebesseg
+     * @brief A rovar sebessége.
+     */
     private int sebesseg;
+
+    /**
+     * Vágási lehetőség.
+     * @var boolean vaghate
+     * @brief A rovar vágási lehetősége.
+     */
     private boolean vaghate;
-    public Tekton getTekton(){
-        return tekton;
-    }
+
     /**
      * Default constructor
      * @brief Inicializálja a kezdő tektont, valamint alapértelmezett értéket ad a telitettsegnek és az elfogyasztottSporaknak.
@@ -72,6 +77,14 @@ public class Rovar {
         this.telitettseg = 3;
         this.elfogyasztottSporak = new ArrayList<>();
         System.out.println("Rovar.init()");
+    }
+
+    /**
+     * Visszaadja a rovar aktuális tektonját
+     * @return a rovar aktuális tektonja
+     */
+    public Tekton getTekton(){
+        return tekton;
     }
 
     /**
@@ -124,17 +137,6 @@ public class Rovar {
     }
 
     /**
-     * Spóra eltávolítása
-     * @brief Az adott spóra eltávolítása a rovarból.
-     * @param spora a spóra, amit eltávolít.
-     */
-    public void removeSpora(Spora spora){
-        System.out.println("Rovar->removeSpora(spora)");
-        elfogyasztottSporak.remove(spora);
-        System.out.println("A spóra törölve lett.");
-    }
-
-    /**
      * Beállítja a rovar tektonját, amin van.
      * @param tekton a beállítandó tekton.
      */
@@ -157,20 +159,34 @@ public class Rovar {
     public void setTelitettseg(int telitettseg) {
         this.telitettseg = telitettseg;
     }
-    
+
+    /**
+     * Beállítja a rovar vágási lehetőségét
+     * @return a rovar vágási lehetősége
+     */
     public void setVaghate(boolean vaghate) {
         this.vaghate = vaghate;
     }
 
+    /**
+     * Visszaadja a rovar elfogyasztott spóráit
+     * @return a rovar elfogyasztott spórái
+     */
     public List<Spora> getElfogyasztottSporak() {
         return elfogyasztottSporak;
     }
 
+    /**
+     * Visszaállítja a rovart az eredeti állapotába
+     */
     private void resetEffects(){
         sebesseg = 2;
         vaghate = true;
     }
 
+    /**
+     * Spórák hatásának kifejtése
+     */
     public void sporaManager(){
         resetEffects();
         for (Spora s : elfogyasztottSporak) {
@@ -181,10 +197,43 @@ public class Rovar {
             }
         }
     }
+
+    /**
+     * Pontlevonás
+     */
     private void pontLevonas(){
 
     }
+
+    /**
+     * Hozzáadja a rovart a rovarászhoz
+     * @param rsz a rovarász, akinek a rovart hozzáadjuk
+     */
     public void setRovarHandler(Rovarasz rsz){
         rsz.addRovar(this);
+    }
+
+    /**
+     * Beállítja a rovar sebességét
+     * @param sebesseg a rovar sebessége
+     */
+    public void setSebesseg(int sebesseg) {
+        this.sebesseg = sebesseg;
+    }
+
+    /**
+     * Visszaadja a rovar sebességét
+     * @return a rovar sebessége
+     */
+    public int getSebesseg() {
+        return sebesseg;
+    }
+
+    /**
+     * Visszaadja a rovar vágási lehetőségét
+     * @return a rovar vágási lehetősége
+     */
+    public boolean isVaghate() {
+        return vaghate;
     }
 }
