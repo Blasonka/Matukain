@@ -4,6 +4,7 @@ import tekton.Tekton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Gomba osztály
@@ -70,7 +71,14 @@ public class Gomba {
             System.out.println("Már van fonal a két tekton között");
         } else {
             if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
-                Gombafonal gombafonal = new Gombafonal(tekton1, tekton2, gombatest);
+                Random rand = new Random();
+                int nextId = rand.nextInt(100);
+                for (Gombafonal gombafonal : gombafonalak) {
+                    if (gombafonal.getId() == nextId) {
+                        nextId = rand.nextInt(100);
+                    }
+                }
+                Gombafonal gombafonal = new Gombafonal(nextId, tekton1, tekton2, gombatest);
                 addFonal(gombafonal);
             } else {
                 System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");

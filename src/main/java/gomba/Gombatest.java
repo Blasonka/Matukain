@@ -27,6 +27,13 @@ import java.util.Random;
 public class Gombatest {
 
     /**
+     * A gombatest azonosítója
+     * @var int id
+     * @brief A gombatest azonosítóját tároló változó.
+     */
+    private int id;
+
+    /**
      * A gombatesthez tartozó tekton
      * @var Tekton tekton
      * @brief A gombatesthez tartozó tekton.
@@ -63,7 +70,8 @@ public class Gombatest {
     /**
      * Gombatest konstruktora
      */
-    public Gombatest(Tekton t) {
+    public Gombatest(int id, Tekton t) {
+        this.id = id;
         this.tekton = t;
         this.maxSporaKiloves = 6;
         this.eddigiSzorasok = 0;
