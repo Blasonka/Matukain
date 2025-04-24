@@ -1,7 +1,7 @@
 package spora;
 
 import rovar.Rovar;
-import interfészek.hatasKifejtes;
+import interfaces.hatasKifejtes;
 
 /**
  * VágásGátlóSpóra osztály

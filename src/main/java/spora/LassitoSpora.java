@@ -1,9 +1,7 @@
 package spora;
 
 import rovar.Rovar;
-import interfészek.*;
-
-import java.util.Objects;
+import interfaces.*;
 
 /**
  * LassítóSpóra osztály

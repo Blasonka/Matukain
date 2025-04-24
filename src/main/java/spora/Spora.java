@@ -1,8 +1,7 @@
 package spora;
 
-import interfészek.hatasKifejtes;
+import interfaces.hatasKifejtes;
 import rovar.Rovar;
-import tekton.Tekton;
 
 /**
  * Spora osztály

@@ -1,4 +1,4 @@
-package interfészek;
+package interfaces;
 
 /**
  * Játékos interface

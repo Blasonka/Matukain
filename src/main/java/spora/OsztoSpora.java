@@ -2,7 +2,7 @@ package spora;
 
 import rovar.Rovar;
 import tekton.Tekton;
-import interfészek.*;
+import interfaces.*;
 
 import java.util.Random;
 

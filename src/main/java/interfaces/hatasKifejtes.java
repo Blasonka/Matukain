@@ -1,5 +1,4 @@
-package interfészek;
-import rovar.Rovar;
+package interfaces;
 
 /**
  * Interfész a rovar hatás kifejtéséhez.
