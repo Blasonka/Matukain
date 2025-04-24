@@ -2,6 +2,8 @@ package gomba;
 
 import tekton.Tekton;
 
+import java.util.Random;
+
 /**
  * Gombafonal osztály
  *
@@ -22,6 +24,9 @@ import tekton.Tekton;
  * @date 2025-03-22
  */
 public class Gombafonal {
+    private boolean elragva;
+    private int pusztulasSzamlalo;
+    private Gombatest test;
     /**
      * A gombafonal egyik végpontja
      * @var Tekton hatar1
@@ -40,6 +45,10 @@ public class Gombafonal {
      * @param hatar2 a másik végpontja a gombafonalnak
      */
     public Gombafonal(Tekton hatar1, Tekton hatar2) {
+        Random rand = new Random();
+        elragva = false;
+        pusztulasSzamlalo = rand.nextInt(2) + 1;
+        test = null;
         this.hatar1 = hatar1;
         this.hatar2 = hatar2;
         System.out.println("Gombafonal létrejött");
@@ -60,4 +69,11 @@ public class Gombafonal {
         return hatar2;
     }
 
+    public boolean eltratva() {
+        return test != null;
+    }
+
+    public void elragas() {
+        elragva = true;
+    }
 }
