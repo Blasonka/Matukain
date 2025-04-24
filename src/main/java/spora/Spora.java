@@ -53,5 +53,7 @@ public abstract class Spora implements HatasKifejtes {
        
     }
     
-    
+    public int getSzamlalo() {
+        return szamlalo;
+    }
 }
