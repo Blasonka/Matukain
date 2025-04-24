@@ -96,6 +96,23 @@ public class Gomba {
         System.out.println("Fonal eltávolítva");
     }
 
+    /**
+     * Visszaadja a gombatestet
+     * @return a gombatest
+     */
+    public void addGombatest(Gombatest gombatest) {
+        gombatestek.add(gombatest);
+        System.out.println("Gombatest hozzáadva");
+    }
+
+    /**
+     * Gombatest eltávolítása
+     * @param gombatest az eltávolítandó gombatest
+     */
+    public void removeGombatest(Gombatest gombatest) {
+        gombatestek.remove(gombatest);
+        System.out.println("Gombatest eltávolítva");
+    }
 
     /**
      * Visszaadja a gomba által növesztett gombafonalakat
@@ -109,23 +126,7 @@ public class Gomba {
      * Visszaadja a gomba testjét
      * @return a gombatest
      */
-    public Gombatest getGombatest() {
-        return gombatest;
-    }
-
-    /**
-     * Vissszaadja a tektont, amelyiken a gomba található
-     * @return a tekton
-     */
-    public Tekton getTekton() {
-        return tekton;
-    }
-
-    /**
-     * Beállítja a gomba testjét
-     * @param gombatest a beállítandó gombatest
-     */
-    public void setGombatest(Gombatest gombatest) {
-        this.gombatest = gombatest;
+    public List<Gombatest> getGombatest() {
+        return gombatestek;
     }
 }
