@@ -2,6 +2,7 @@ package tesztelo;
 
 import jateklogika.gameLogic;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -53,7 +54,7 @@ public class Menu {
                     "(1) Manuális mód\n" +
                     "(2) Teszt mód");
             try {
-                valasztas = Integer.parseInt(beolvaso.next());
+                valasztas = Integer.parseInt(beolvaso.nextLine());
                 switch (valasztas) {
                     case 0:
                         beolvaso.close();
@@ -61,13 +62,34 @@ public class Menu {
                     case 1:
                         System.out.println("A program várja a parancsokat!\n" +
                                 "(/help a parancsok listájáért)");
-                        parancsFeldolgozo = new ParancsFeldolgozo(beolvaso, jatekLogika);
+                        parancsFeldolgozo = new ParancsFeldolgozo(jatekLogika);
                         while (beolvaso.hasNext()) {
                             parancsFeldolgozo.interpret(beolvaso.nextLine());
                         }
                         break;
                     case 2:
-                        // TODO
+                        System.out.println("Add meg a futtatni kívánt teszt mappa elérési útját! (pl: C:\\Matukain\\test1)");
+                        String mappa = beolvaso.nextLine();
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(mappa + "\\input.txt"));
+                            parancsFeldolgozo = new ParancsFeldolgozo(jatekLogika);
+                            while (reader.ready()) {
+                                parancsFeldolgozo.interpret(reader.readLine());
+                            } parancsFeldolgozo.interpret("/save " + mappa + "\\output.txt" + " -k");
+                            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\output.txt", mappa + "\\expected.txt");
+                            Process p = pb.start();
+                            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                            String kimenet;
+                            while ((kimenet = stdInput.readLine()) != null) {
+                                System.out.println(kimenet);
+                            } p.waitFor();
+                        } catch (FileNotFoundException e) {
+                            System.err.println("A megadott mappában nem található a keresett fájl: " + mappa);
+                        } catch (IOException e) {
+                            System.err.println("Beolvasási hiba történt.");
+                        } catch (InterruptedException e) {
+                            System.err.println("Hiba a fájlok összehasonlításában.");
+                        }
                         break;
                     default:
                         System.out.println("Érvénytelen választás!");

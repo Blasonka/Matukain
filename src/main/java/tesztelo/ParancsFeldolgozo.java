@@ -40,11 +40,6 @@ public class ParancsFeldolgozo {
      */
     StringBuffer kimenet = new StringBuffer();
 
-    /**
-     * A Menu osztály beolvaso változójának referenciája
-     * @see tesztelo.Menu
-     */
-    Scanner beolvaso;
 
     /**
      * A Menu osztály jatekLogika változójának referenciája
@@ -54,11 +49,9 @@ public class ParancsFeldolgozo {
 
     /**
      * A ParancsFeldolgozo osztály konstruktora, mely a tagváltozókat beállítja
-     * @param be beolvaso
      * @param logika jatekLogika
      */
-    ParancsFeldolgozo(Scanner be, gameLogic logika) {
-        beolvaso = be;
+    ParancsFeldolgozo(gameLogic logika) {
         jatekLogika = logika;
     }
 
