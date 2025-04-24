@@ -44,11 +44,11 @@ public class Gombafonal {
      * @param hatar1 az egyik végpontja a gombafonalnak
      * @param hatar2 a másik végpontja a gombafonalnak
      */
-    public Gombafonal(Tekton hatar1, Tekton hatar2) {
+    public Gombafonal(Tekton hatar1, Tekton hatar2, Gombatest test) {
         Random rand = new Random();
-        elragva = false;
-        pusztulasSzamlalo = rand.nextInt(2) + 1;
-        test = null;
+        this.elragva = false;
+        this.pusztulasSzamlalo = rand.nextInt(2) + 1;
+        this.test = test;
         this.hatar1 = hatar1;
         this.hatar2 = hatar2;
         System.out.println("Gombafonal létrejött");
@@ -67,6 +67,10 @@ public class Gombafonal {
      */
     public Tekton getHatar2() {
         return hatar2;
+    }
+
+    public boolean getElragva() {
+        return elragva;
     }
 
     public boolean eltartva() {

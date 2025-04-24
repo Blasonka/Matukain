@@ -31,7 +31,7 @@ public class Gomba {
      * @var List<Gombafonal> gombafonalak
      * @brief A gombafonalakat tároló lista.
      */
-    private List<Gombafonal> fonalak;
+    private List<Gombafonal> gombafonalak;
 
     /**
      * Gombatest
@@ -41,7 +41,7 @@ public class Gomba {
     private List<Gombatest> gombatestek;
 
     public Gomba() {
-        this.fonalak = new ArrayList<Gombafonal>();
+        this.gombafonalak = new ArrayList<Gombafonal>();
         this.gombatestek = new ArrayList<Gombatest>();
     }
 
@@ -52,11 +52,9 @@ public class Gomba {
     public boolean fonalOsszekoti(Tekton tekton1, Tekton tekton2) {
         for (Gombafonal gombafonal : gombafonalak) {
             if (gombafonal.getHatar1() == tekton1 && gombafonal.getHatar2() == tekton2) {
-                System.out.println("Van fonal a két tekton között");
                 return true;
             }
         }
-        System.out.println("Nincs fonal a két tekton között");
         return false;
     }
 
@@ -65,14 +63,14 @@ public class Gomba {
      * @param tekton1 az egyik tekton, amelyen a fonál növekszik
      * @param tekton2 a másik tekton, amelyen a fonál növekszik
      */
-    public void fonalNovesztes(Tekton tekton1, Tekton tekton2) {
-        if (gombatest == null) {
+    public void fonalNovesztes(Tekton tekton1, Tekton tekton2, Gombatest gombatest) {
+        if (gombatestek.isEmpty()) {
             System.out.println("Nincs gombatest, nem lehet fonalat növeszteni");
         } else if (fonalOsszekoti(tekton1, tekton2)) {
             System.out.println("Már van fonal a két tekton között");
         } else {
             if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
-                Gombafonal gombafonal = new Gombafonal(tekton1, tekton2);
+                Gombafonal gombafonal = new Gombafonal(tekton1, tekton2, gombatest);
                 addFonal(gombafonal);
             } else {
                 System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");

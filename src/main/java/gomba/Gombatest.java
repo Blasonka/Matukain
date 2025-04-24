@@ -101,6 +101,5 @@ public class Gombatest {
         }
         kilohetoSporakSzama--;
         tekton.addSpora(spora);
-        System.out.println("Spóra kilőve a gombatestből a tektonra");
     }
 }
