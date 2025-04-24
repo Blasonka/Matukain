@@ -68,15 +68,31 @@ public class Rovar {
     private boolean vaghate;
 
     /**
+     * Rovar azonosítója.
+     * @var int ID
+     * @brief A rovar egyedi azonosítója.
+     */
+    private int ID;
+
+    /**
      * Default constructor
      * @brief Inicializálja a kezdő tektont, valamint alapértelmezett értéket ad a telitettsegnek és az elfogyasztottSporaknak.
      * @param tekton a kezdő tekton.
      */
-    public Rovar(Tekton tekton) {
+    public Rovar(Tekton tekton, int ID) {
         this.tekton = tekton;
         this.telitettseg = 3;
         this.elfogyasztottSporak = new ArrayList<>();
         System.out.println("Rovar.init()");
+        this.ID = ID;
+    }
+
+    /**
+     * Visszaadja a rovar azonosítóját
+     * @return a rovar azonosítója
+     */
+    public int getID() {
+        return ID;
     }
 
     /**
@@ -201,8 +217,8 @@ public class Rovar {
     /**
      * Pontlevonás
      */
-    private void pontLevonas(){
-
+    private void pontLevonas(Rovarasz rsz){
+        rsz.setHatralevoAkciopont(rsz.getHatralevoAkciopont() - sebesseg);
     }
 
     /**

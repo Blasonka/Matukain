@@ -38,12 +38,10 @@ public class Gombasz extends Felhasznalo {
     List<Gomba> gombak;
     /**
      * Gombasz konstruktora
-     * @param p a felhasználó pontjainak száma
-     * @param a a felhasználó alap akciópontjainak száma
-     * @param h a felhasználó körben felhasználható akciópontjainak száma
+     * @param name - a felhasználó neve
      */
-    public Gombasz(int p, int a, int h) {
-        super(p, "Jani", h);
+    public Gombasz(String name) {
+        super(0, name, 6);
         gombak = new ArrayList<>();
         System.out.println(">Gombasz->Gombasz()");
     }
@@ -67,21 +65,25 @@ public class Gombasz extends Felhasznalo {
      * @param t2 másik tekton
      * @note Ha ugyanarra a tektonra akarja elhelyezni, akkor t2 lehet null, vagy t1=t2
      */
+    /*
     public void fonalNovesztes(Tekton t1, Tekton t2) {
         System.out.println(">Gombasz->FonalNovesztes()");
         System.out.println(">A fonalnövesztést az (1). számú gomba fogja végezni");
         gombak.get(0).fonalNovesztes(t1, t2);
     }
+    */
+
     /**
      * Spóra lövése egy kiválasztott tektonra
      * @param t1 a tekton amire a spóra kerül
      */
+    /*
     public void sporaLoves(Tekton t1) {
         System.out.println(">Gombasz->sporaLoves()");
         System.out.println(">A spóralövést az (1). számú gomba gombateste fogja végezni");
         gombak.get(0).getGombatest().sporaLoves(t1);
     }
-
+*/
     /**
      * Gombák listájának lekérdezése
      * @return gombák listája

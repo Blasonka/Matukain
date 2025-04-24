@@ -50,6 +50,6 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
      * @param r a rovar akin a hatást kívánja kifejteni
      */
     public void hatasKifejtes(Rovar r){
-        if (!(r.sebesseg<=0)) r.sebesseg-=1;
+        if (!(r.getSebesseg()<=0)) r.setSebesseg(r.getSebesseg()-1);
     }
 }

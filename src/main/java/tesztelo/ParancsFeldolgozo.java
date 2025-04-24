@@ -1,5 +1,6 @@
 package tesztelo;
 
+import felhasznalo.Felhasznalo;
 import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
 import gomba.Gomba;
@@ -11,6 +12,7 @@ import spora.Spora;
 import tekton.*;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -166,7 +168,7 @@ public class ParancsFeldolgozo {
      */
     private void addro(int id, String nev, int pontszam) {
         // TODO Rovarasz megfelelő paraméterezése
-        jatekLogika.jatekosok.add(new Rovarasz(0, 0, 0));
+        jatekLogika.jatekosok.add(new Rovarasz("Rovarasz" + id));
     }
 
     /**
@@ -178,7 +180,7 @@ public class ParancsFeldolgozo {
      */
     private void addgo (int id, String nev, int pontszam) {
         // TODO Gombasz megfelelő paraméterezése
-        jatekLogika.jatekosok.add(new Gombasz(0, 0, 0));
+        jatekLogika.jatekosok.add(new Gombasz("Gombasz" + id));
     }
 
     /**
@@ -193,7 +195,7 @@ public class ParancsFeldolgozo {
         // TODO Gomba ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().add(new Gomba(jatekLogika.getMapTekton().get(tektonID)));
+            ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().add(new Gomba());
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Gomba felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, tekton ID nem létezik");
@@ -210,7 +212,7 @@ public class ParancsFeldolgozo {
         // TODO Rovar ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Rovarasz) jatekLogika.jatekosok.get(jatekosID)).getRovarak().add(new Rovar(jatekLogika.getMapTekton().get(tektonID)));
+            ((Rovarasz) jatekLogika.jatekosok.get(jatekosID)).getRovarok().add(new Rovar(jatekLogika.getMapTekton().get(tektonID), id));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Rovar felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, tekton ID nem létezik");
@@ -440,7 +442,21 @@ public class ParancsFeldolgozo {
     private void move(int rovarID, int rovaraszID, int jelenlegiTektonID, int TektonID) {
         try {
             // TODO attesz-ben valahogy rovar megadása
-            ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).attesz(jatekLogika.getMapTekton().get(TektonID));
+            List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+            List<Tekton> tektonok = jatekLogika.getMapTekton();
+            Tekton ujTekton = null;
+            for (Tekton t : tektonok) {
+                if (t.getID() == jelenlegiTektonID) {
+                    ujTekton = t;
+                    break;
+                }
+            }
+            for (Rovar r : rovarok) {
+                if (r.getID()==rovarID) {
+                    r.attesz(ujTekton);
+                    break;
+                }
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Rovar mozgatása sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, Rovar ID nem létezik, Tekton ID nem létezik");
@@ -468,7 +484,16 @@ public class ParancsFeldolgozo {
                 }
             }
             // TODO rovarásznál fonalvágásnál vágás végző rovart megadni
-            if (keresett != null) ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).fonalElvagas(keresett);
+            if (keresett != null){
+                List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+
+                for (Rovar r : rovarok) {
+                    if (r.getID()==rovarID) {
+                        r.fonalElvagas(keresett);
+                        break;
+                    }
+                }
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Fonal elrágása sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, Rovar ID nem létezik, Fonal ID nem létezik");
@@ -493,7 +518,16 @@ public class ParancsFeldolgozo {
                 */
                 }
             }
-            if (keresett != null) ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).elfogyaszt(keresett);
+            if (keresett != null) {
+                List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+
+                for (Rovar r : rovarok) {
+                    if (r.getID()==rovarID) {
+                        r.elfogyaszt(keresett);
+                        break;
+                    }
+                }
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Spóra elfogyasztása sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, Rovar ID nem létezik, Spóra ID nem létezik");
@@ -599,8 +633,15 @@ public class ParancsFeldolgozo {
                     }
             } */
             }
-            if (keresett != null)
-                ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).fonalNovesztes(jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2));
+            if (keresett != null) {
+                List<Gomba> gombak = ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak();
+                for (Gomba r : gombak) {
+                    if (r.getID()==id) {
+                        r.fonalNovesztes(jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2), keresett);
+                        break;
+                    }
+                }
+            }
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Fonal felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, Gombatest ID nem létezik, tekton ID nem létezik");

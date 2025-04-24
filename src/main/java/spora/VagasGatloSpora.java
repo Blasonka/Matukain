@@ -48,6 +48,6 @@ public class VagasGatloSpora extends Spora implements hatasKifejtes {
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        rovar.vaghate=false;
+        rovar.setVaghate(false);
     }
 }
