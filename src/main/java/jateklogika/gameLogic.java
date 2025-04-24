@@ -40,6 +40,7 @@ public class gameLogic {
     int korSzamlalo;
     List<Tekton> map;
     public static List<Gombasz> gombaszok;
+    public static List<Rovarasz> rovarasz;
     public List<Felhasznalo> jatekosok = new ArrayList<>();
     /**
      * Default konstruktor
@@ -166,4 +167,12 @@ public class gameLogic {
         System.out.println("gameLogic->gameLogic");
     }
 
+    public void addRovarasz(Rovarasz r)
+    {
+        rovarasz.add(r);
+    }
+    public void addGombasz(Gombasz g)
+    {
+        gombaszok.add(g);
+    }
 }

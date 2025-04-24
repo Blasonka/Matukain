@@ -6,8 +6,8 @@ import interfészek.*;
 
 public class OsztoSpora extends Spora implements hatasKifejtes {
     
-    public OsztoSpora(int sz) {
-        super(sz, "oszto");
+    public OsztoSpora() {
+        super(0, "oszto");
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
 

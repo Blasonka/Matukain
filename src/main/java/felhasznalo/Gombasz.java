@@ -89,4 +89,8 @@ public class Gombasz extends Felhasznalo {
     public List<Gomba> getGombak() {
         return gombak;
     }
+
+    public void addGomba(Gomba gomba) {
+        gombak.add(gomba);
+    }
 }
