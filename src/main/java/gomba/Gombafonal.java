@@ -25,6 +25,7 @@ import java.util.Random;
  */
 public class Gombafonal {
 
+    private int id;
     /**
      * A gombafonal elragva állapota
      * @var boolean elragva
@@ -64,8 +65,9 @@ public class Gombafonal {
      * @param hatar2 a másik végpontja a gombafonalnak
      * @param test a gombatest, amiből kinőtt a gombafonal
      */
-    public Gombafonal(Tekton hatar1, Tekton hatar2, Gombatest test) {
+    public Gombafonal(int id, Tekton hatar1, Tekton hatar2, Gombatest test) {
         Random rand = new Random();
+        this.id = id;
         this.elragva = false;
         this.pusztulasSzamlalo = rand.nextInt(1,3);
         this.test = test;
@@ -73,6 +75,12 @@ public class Gombafonal {
         this.hatar2 = hatar2;
         System.out.println("Gombafonal létrejött");
     }
+
+    /**
+     * Visszaadja a gombafonal azonosítóját
+     * @return a gombafonal azonosítója
+     */
+    public int getId() { return id; }
 
     /**
      * Visszaadja a gombafonal elragva állapotát
