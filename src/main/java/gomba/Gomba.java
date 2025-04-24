@@ -28,6 +28,13 @@ import java.util.Random;
 public class Gomba {
 
     /**
+     * A gomba azonosítója
+     * @var int id
+     * @brief A gomba azonosítóját tároló változó.
+     */
+    private int id;
+
+    /**
      * Gombafonalak listája
      * @var List<Gombafonal> gombafonalak
      * @brief A gombafonalakat tároló lista.
@@ -41,7 +48,8 @@ public class Gomba {
      */
     private List<Gombatest> gombatestek;
 
-    public Gomba() {
+    public Gomba(int id) {
+        this.id = id;
         this.gombafonalak = new ArrayList<Gombafonal>();
         this.gombatestek = new ArrayList<Gombatest>();
     }
