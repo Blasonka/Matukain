@@ -2,6 +2,7 @@ package jateklogika;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.Serializable;
 
 import felhasznalo.Felhasznalo;
 import felhasznalo.Gombasz;
@@ -36,7 +37,7 @@ import tekton.GombatestNelkuliTekton;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class gameLogic {
+public class gameLogic implements Serializable {
     int korSzamlalo;
     List<Tekton> map;
     public static List<Gombasz> gombaszok;
@@ -68,6 +69,9 @@ public class gameLogic {
       {
         return  map;
       }
+      public List<Felhasznalo> jatekosok() {
+        return jatekosok;
+      }
 
     /**
      * Gombászok lekérdezése
@@ -91,17 +95,97 @@ public class gameLogic {
 
     }
 
-    public void gombaszKor(){
+    public void gombaszKor() {
+      System.out.println("--- Gombászok köre ---");
+      for (Gombasz g : gombaszok) {
+          g.setHatralevoAkciopont(5);
+  
+          while (g.getHatralevoAkciopont() > 0) {
+              
+              if (g.getHatralevoAkciopont() >= 1) {
+                  
+                  g.sporaLoves(null);  
+                  g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
+                  System.out.println(g.getNev() + " szórt egy spórát.");
+              }
+  
+              
+              if (g.getHatralevoAkciopont() >= 1) {
+                  Gomba gomba = new Gomba();
+                  g.getGombak().add(gomba);
+                  g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
+                  System.out.println(g.getNev() + " gombatestet növesztett.");
+              }
+  
+              
+              if (g.getHatralevoAkciopont() >= 1 ) {
+                  g.fonalNovesztes(null, null);
+                  g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
+                  System.out.println(g.getNev() + " gombafonalat növesztett.");
+              }
+  
+              
+              break;
+          }
+      }
+  }
+  
 
-    }
-
-    public void rovaraszKor()
+  public void rovaraszKor()
     {
+      for (Felhasznalo f : jatekosok) {
+        if (f instanceof Rovarasz r) {
+            r.setHatralevoAkciopont(5);
+            Rovar rovar = r.getRovarak(); 
 
+            while (r.getHatralevoAkciopont() > 0) {
+
+                // 1. Spórák elfogyasztása
+                if (r.getHatralevoAkciopont() >= 1 ) {
+                    rovar.elfogyaszt(null);
+                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
+                    System.out.println(r.getNev() + " elfogyasztotta a spórákat.");
+                    continue;
+                }
+
+                // 2. Gombafonal elvágása
+                if (r.getHatralevoAkciopont() >= 1 ) {
+                    rovar.fonalElvagas(null, gombaszok);
+                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
+                    System.out.println(r.getNev() + " elvágott egy gombafonalat.");
+                    continue;
+                }
+
+                // 3. Mozgás
+                int sebesseg = rovar.getSebesseg();
+                if (sebesseg == 1 && r.getHatralevoAkciopont() >= 0) {
+                    rovar.attesz(null);
+                    System.out.println(r.getNev() + " mozgott (seb=1).");
+                } else if (sebesseg == 2 && r.getHatralevoAkciopont() >= 1) {
+                    rovar.attesz(null);
+                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
+                    System.out.println(r.getNev() + " mozgott (seb=2).");
+                } else if (sebesseg == 3 && r.getHatralevoAkciopont() >= 2) {
+                    rovar.attesz(null); // dupla mozgás
+                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 2);
+                    System.out.println(r.getNev() + " kétszer mozgott (seb=3).");
+                } else {
+                    break; // nincs több lehetőség
+                }
+              }  }
+        }
     }
 
     public void kor() {
-      
+      System.out.println("Kör kezdete: #" + korSzamlalo);
+
+        gombaszKor();        // 1. Gombászok körei
+        rovaraszKor();       // 2. Rovarászok körei
+        tektonTores(map);    // 3. Tekton törések
+        korSzamlalo++;       // 4. Körszámláló növelése
+
+        System.out.println("Kör vége. Új körszám: " + korSzamlalo);
+
     }
 
     /**
