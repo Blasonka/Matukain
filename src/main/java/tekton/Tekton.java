@@ -62,6 +62,8 @@ public abstract class Tekton {
      */
     private Gomba gomba;
 
+
+
     /**
      * Tekton osztály konstruktora
      * @param id beállítja az id értékét
@@ -77,6 +79,8 @@ public abstract class Tekton {
         szomszedok = new ArrayList<>();
         System.out.println("Tekton->Tekton()");
     }
+
+    public abstract Tekton klonoz(int ujID, int ujX, int ujY);
 
     /**
      *
@@ -200,7 +204,7 @@ public abstract class Tekton {
      * Gombát növeszt a tektonra
      */
     public void gombaNovesztes(){
-        gomba = new Gomba();
+        gomba = new Gomba(0);
         System.out.println("Új gomba nőtt erre a tektonra");
     }
 

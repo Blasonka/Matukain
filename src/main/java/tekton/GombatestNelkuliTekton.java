@@ -41,4 +41,8 @@ public class GombatestNelkuliTekton extends Tekton {
         }
         System.out.println("GombatestNelkuliTekton hatás kifejtve, azaz nem nőhet rajta gombatest");
     }
+    @Override
+    public Tekton klonoz(int ujID, int ujX, int ujY) {
+        return new GombatestNelkuliTekton(ujID, ujX, ujY);
+    }
 }

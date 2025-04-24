@@ -37,6 +37,11 @@ public class FelszivodosTekton extends Tekton{
         System.out.println("Létrejött egy FelszivodosTekton");
     }
 
+    @Override
+    public Tekton klonoz(int ujID, int ujX, int ujY) {
+        return new FelszivodosTekton(ujID, ujX, ujY);
+    }
+
     /**
      * Visszaadja a számláló értékét
      * @return a számláló értéke

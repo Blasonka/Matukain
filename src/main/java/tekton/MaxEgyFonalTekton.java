@@ -45,4 +45,9 @@ public class MaxEgyFonalTekton extends Tekton{
             System.out.println("A gomba nem növeszthet fonalat");
         }
     }
+
+    @Override
+    public Tekton klonoz(int ujID, int ujX, int ujY) {
+        return new MaxEgyFonalTekton(ujID, ujX, ujY);
+    }
 }

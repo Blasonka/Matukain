@@ -151,4 +151,8 @@ public class Gomba {
     public List<Gombatest> getGombatest() {
         return gombatestek;
     }
+
+    public int getID() {
+        return id;
+    }
 }

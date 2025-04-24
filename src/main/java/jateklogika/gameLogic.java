@@ -1,4 +1,4 @@
-package jateklogika;
+ package jateklogika;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,6 +43,7 @@ public class gameLogic implements Serializable {
     public static List<Gombasz> gombaszok;
     public static List<Rovarasz> rovarasz;
     public List<Felhasznalo> jatekosok = new ArrayList<>();
+    public boolean veletlenEsemenyekEngedelyezve = true;
     /**
      * Default konstruktor
      */
@@ -86,13 +87,35 @@ public class gameLogic implements Serializable {
      * Meghívja a tektonnak a tores() függvényét, ha a tektonnak ketté kell törnie
      * @param t adja meg a Tektonok listáját
      */
-    public void tektonTores(List<Tekton> t)
-    {
-      for(int i=0; i< t.size();i++)
-      {
-        System.out.println("Jateklogika->Tekton->tores()");
-      }
+    public void tektonTores(List<Tekton> t) {
+        Random rand = new Random();
 
+        // Use a regular for loop with index to avoid ConcurrentModificationException
+        for (int i = 0; i < t.size(); i++) {
+            Tekton current = t.get(i);
+
+            // 20% chance to split (0.0 to 1.0, so 0.2 is 20%)
+            if (rand.nextDouble() < 0.2) {
+
+                int ujId = current.getID() +500;
+                int ujX = current.getKoordinataX() -1;
+                int ujY = current.getKoordinataY();
+
+                Tekton ujTekton = current.klonoz(ujId, ujX, ujY);
+
+
+
+                if (ujTekton != null) {
+
+                    current.addSzomszed(ujTekton);
+                    ujTekton.addSzomszed(current);
+
+
+                    t.add(ujTekton);
+                    System.out.println("Új tekton létrehozva ID: " + ujTekton.getID() + " hol (" + ujTekton.getKoordinataX() + ", " + ujTekton.getKoordinataY() + ")");
+                }
+            }
+        }
     }
 
     public void gombaszKor() {
@@ -104,14 +127,14 @@ public class gameLogic implements Serializable {
               
               if (g.getHatralevoAkciopont() >= 1) {
                   
-                  g.sporaLoves(null);
+                  //g.sporaLoves(null);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
                   System.out.println(g.getNev() + " szórt egy spórát.");
               }
   
               
               if (g.getHatralevoAkciopont() >= 1) {
-                  Gomba gomba = new Gomba();
+                  Gomba gomba = new Gomba(0);
                   g.getGombak().add(gomba);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
                   System.out.println(g.getNev() + " gombatestet növesztett.");
@@ -119,7 +142,7 @@ public class gameLogic implements Serializable {
   
               
               if (g.getHatralevoAkciopont() >= 1 ) {
-                  g.fonalNovesztes(null, null);
+                  //.fonalNovesztes(null,null);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
                   System.out.println(g.getNev() + " gombafonalat növesztett.");
               }
@@ -132,49 +155,10 @@ public class gameLogic implements Serializable {
   
 
   public void rovaraszKor()
-    {
-      for (Felhasznalo f : jatekosok) {
-        if (f instanceof Rovarasz r) {
-            r.setHatralevoAkciopont(5);
-            Rovar rovar = r.getRovarak(); 
+  {
 
-            while (r.getHatralevoAkciopont() > 0) {
 
-                // 1. Spórák elfogyasztása
-                if (r.getHatralevoAkciopont() >= 1 ) {
-                    rovar.elfogyaszt(null);
-                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
-                    System.out.println(r.getNev() + " elfogyasztotta a spórákat.");
-                    continue;
-                }
-
-                // 2. Gombafonal elvágása
-                if (r.getHatralevoAkciopont() >= 1 ) {
-                    rovar.fonalElvagas(null, gombaszok);
-                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
-                    System.out.println(r.getNev() + " elvágott egy gombafonalat.");
-                    continue;
-                }
-
-                // 3. Mozgás
-                int sebesseg = rovar.getSebesseg();
-                if (sebesseg == 1 && r.getHatralevoAkciopont() >= 0) {
-                    rovar.attesz(null);
-                    System.out.println(r.getNev() + " mozgott (seb=1).");
-                } else if (sebesseg == 2 && r.getHatralevoAkciopont() >= 1) {
-                    rovar.attesz(null);
-                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 1);
-                    System.out.println(r.getNev() + " mozgott (seb=2).");
-                } else if (sebesseg == 3 && r.getHatralevoAkciopont() >= 2) {
-                    rovar.attesz(null); // dupla mozgás
-                    r.setHatralevoAkciopont(r.getHatralevoAkciopont() - 2);
-                    System.out.println(r.getNev() + " kétszer mozgott (seb=3).");
-                } else {
-                    break; // nincs több lehetőség
-                }
-              }  }
-        }
-    }
+  }
 
     public void kor() {
       System.out.println("Kör kezdete: #" + korSzamlalo);
@@ -199,8 +183,7 @@ public class gameLogic implements Serializable {
     /**
      * Inicializálja a játékteret, és véletlenszerűen sorrended
      * rak a felhsznaálók között
-     * @param g adja meg a gombász felhasználókat
-     * @param r adja meg a rovarász felhasználókat
+     *
      */
     public void jatekKezdes() 
     {
@@ -227,8 +210,8 @@ public class gameLogic implements Serializable {
         Rovarasz r2 = new Rovarasz("Rovarasz2");
         Rovar rovar1 = new Rovar(null, 1);
         Rovar rovar2 = new Rovar(null, 2);
-        Gomba gomba1 = new Gomba();
-        Gomba gomba2 = new Gomba();
+        Gomba gomba1 = new Gomba(0);
+        Gomba gomba2 = new Gomba(1);
         korSzamlalo=0;
 
         gombaszok2.add(g1);
