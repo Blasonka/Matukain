@@ -13,20 +13,39 @@ import java.util.Random;
  *
  * @details
  * Ez az osztály felelős a gombafonalak reprezentálásáért, azokkal kapcsolatos műveletek végzéséért.
- * Az osztály tartalmazza a gombafonalak végpontjait, valamint a gombafonalakhoz kapcsolódó műveleteket.
+ * Az osztály tartalmazza a gombafonalak végpontjait, a gombatestet amiből kinőttek, hogy el lett-e rágva egy rovar által valamint a gombafonalakhoz kapcsolódó műveleteket.
  *
  * @see felhasznalo.Gombasz
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van.
  *
  * @author Blasek
- * @version 1.0
- * @date 2025-03-22
+ * @version 2.0
+ * @date 2025-04-24
  */
 public class Gombafonal {
+
+    /**
+     * A gombafonal elragva állapota
+     * @var boolean elragva
+     * @brief A gombafonal elragva állapotát tároló változó.
+     */
     private boolean elragva;
+
+    /**
+     * A gombafonal pusztulásának számlálója
+     * @var int pusztulasSzamlalo
+     * @brief A gombafonal pusztulásának számlálóját tároló változó (hány körig van még életben).
+     */
     private int pusztulasSzamlalo;
+
+    /**
+     * A gombafonalhoz tartozó gombatest
+     * @var Gombatest test
+     * @brief A gombafonalhoz tartozó gombatest.
+     */
     private Gombatest test;
+
     /**
      * A gombafonal egyik végpontja
      * @var Tekton hatar1
@@ -43,16 +62,42 @@ public class Gombafonal {
      * Létrehoz egy gombafonalat a megadott két tekton között
      * @param hatar1 az egyik végpontja a gombafonalnak
      * @param hatar2 a másik végpontja a gombafonalnak
+     * @param test a gombatest, amiből kinőtt a gombafonal
      */
     public Gombafonal(Tekton hatar1, Tekton hatar2, Gombatest test) {
         Random rand = new Random();
         this.elragva = false;
-        this.pusztulasSzamlalo = rand.nextInt(2) + 1;
+        this.pusztulasSzamlalo = rand.nextInt(1,3);
         this.test = test;
         this.hatar1 = hatar1;
         this.hatar2 = hatar2;
         System.out.println("Gombafonal létrejött");
     }
+
+    /**
+     * Visszaadja a gombafonal elragva állapotát
+     * @return true, ha elragva, false egyébként
+     */
+    public boolean getElragva() {
+        return elragva;
+    }
+
+    /**
+     * Visszaadja a gombafonal pusztulásának számlálóját
+     * @return a gombafonal pusztulásának számlálója
+     */
+    public int getPusztulasSzamlalo() {
+        return pusztulasSzamlalo;
+    }
+
+    /**
+     * Visszaadja a gombafonalhoz tartozó gombatestet
+     * @return a gombafonalhoz tartozó gombatest
+     */
+    public Gombatest getTest() {
+        return test;
+    }
+
     /**
      * Visszaadja a gombafonal egyik végpontját
      * @return a gombafonal egyik végpontja
@@ -69,14 +114,14 @@ public class Gombafonal {
         return hatar2;
     }
 
-    public boolean getElragva() {
-        return elragva;
-    }
-
     public boolean eltartva() {
         return test != null;
     }
 
+    /**
+     * Beállítja a gombafonal elragva állapotát elrágvára.
+     * @brief A gombafonal elragva állapotának beállítása (igazra).
+     */
     public void elragas() {
         elragva = true;
     }
