@@ -80,10 +80,16 @@ public class Gomba {
         } else {
             if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
                 Random rand = new Random();
-                int nextId = rand.nextInt(100);
-                for (Gombafonal gombafonal : gombafonalak) {
-                    if (gombafonal.getId() == nextId) {
-                        nextId = rand.nextInt(100);
+                boolean validId = false;
+                int nextId = 0;
+                while (!validId) {
+                    nextId = rand.nextInt(100);
+                    validId = true;
+                    for (Gombafonal gombafonal : gombafonalak) {
+                        if (gombafonal.getId() == nextId) {
+                            validId = false;
+                            break;
+                        }
                     }
                 }
                 Gombafonal gombafonal = new Gombafonal(nextId, tekton1, tekton2, gombatest);
