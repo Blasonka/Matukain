@@ -18,11 +18,11 @@ import java.util.List;
  *
  * @see felhasznalo.Gombasz
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van.
  *
  * @author Blasek
- * @version 1.0
- * @date 2025-03-22
+ * @version 2.0
+ * @date 2025-04-24
  */
 public class Gomba {
 
@@ -34,9 +34,9 @@ public class Gomba {
     private List<Gombafonal> gombafonalak;
 
     /**
-     * Gombatest
-     * @var Gombatest gombatest
-     * @brief A gombatest, amely a gombához tartozik.
+     * Gombatestek listája
+     * @var List<Gombatest> gombatestek
+     * @brief A gombatesteket tároló lista.
      */
     private List<Gombatest> gombatestek;
 
@@ -59,7 +59,7 @@ public class Gomba {
     }
 
     /**
-     * Fonal növesztése
+     * Fonal növesztése két tekton közés, vagy egy darab tektonra (ekkor a másik tekton ugyan az mint az első)
      * @param tekton1 az egyik tekton, amelyen a fonál növekszik
      * @param tekton2 a másik tekton, amelyen a fonál növekszik
      */
@@ -97,7 +97,7 @@ public class Gomba {
     }
 
     /**
-     * Visszaadja a gombatestet
+     * Gombatest hozzáadása
      * @return a gombatest
      */
     public void addGombatest(Gombatest gombatest) {
@@ -123,8 +123,8 @@ public class Gomba {
     }
 
     /**
-     * Visszaadja a gomba testjét
-     * @return a gombatest
+     * Visszaadja a gombatesteket
+     * @return a gombatestek listája
      */
     public List<Gombatest> getGombatest() {
         return gombatestek;
