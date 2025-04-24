@@ -2,10 +2,11 @@ package spora;
 
 import rovar.Rovar;
 import tekton.Tekton;
+import interfészek.*;
 
-public class OsztoSpora extends Spora implements HatasKifejtes {
+public class OsztoSpora extends Spora implements hatasKifejtes {
     
-    public OsztoSpora(int sz, HatasKifejtes h, String s) {
+    public OsztoSpora(int sz, hatasKifejtes h, String s) {
         super(sz, h, s);
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }

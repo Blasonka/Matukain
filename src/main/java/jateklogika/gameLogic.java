@@ -9,6 +9,7 @@ import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import rovar.Rovar;
 import tekton.FelszivodosTekton;
+import tekton.FonalMegtartoTekton;
 import tekton.MaxEgyFonalTekton;
 import tekton.Tekton;
 import tekton.TobbFonalTekton;
@@ -88,6 +89,20 @@ public class gameLogic {
       }
 
     }
+
+    public void gombaszKor(){
+
+    }
+
+    public void rovaraszKor()
+    {
+
+    }
+
+    public void kor() {
+      
+    }
+
     /**
      * Az aktuális játékosnak ad pontot a tevékenysége alapján
      * @param f-től kapja meg az aktuális játékost
@@ -111,12 +126,13 @@ public class gameLogic {
 
         for (int i = 0; i < 3; i++) 
         {
-        int randomIndex = rand.nextInt(4); 
+        int randomIndex = rand.nextInt(5); 
         switch (randomIndex) {
             case 0 -> tektonok[i] = new FelszivodosTekton(1, 2, 2);
-            case 1 -> tektonok[i] = new GombatestNelkuliTekton(2, 4, 5);
-            case 2 -> tektonok[i] = new MaxEgyFonalTekton(3, 6, 4);
-            case 3 -> tektonok[i] = new TobbFonalTekton(3, 6, 4);
+            case 1 -> tektonok[i] = new GombatestNelkuliTekton(2, 3, 3);
+            case 2 -> tektonok[i] = new MaxEgyFonalTekton(3, 4, 4);
+            case 3 -> tektonok[i] = new TobbFonalTekton(4, 5, 5);
+            case 4 -> tektonok[i] = new FonalMegtartoTekton(5,6, 6);
         }
         map.add(tektonok[i]);
         }

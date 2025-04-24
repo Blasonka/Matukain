@@ -1,6 +1,7 @@
 package spora;
 
 import rovar.Rovar;
+import interfészek.*;
 
 /**
  * LassítóSpóra osztály
@@ -24,12 +25,12 @@ import rovar.Rovar;
  * @version 1.1 - comment Update
  * @date 2025-03-22
  */
-public class LassitoSpora extends Spora implements HatasKifejtes {
+public class LassitoSpora extends Spora implements hatasKifejtes {
     /**
      * Lassító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public LassitoSpora(int sz, HatasKifejtes h, String s) {
+    public LassitoSpora(int sz, hatasKifejtes h, String s) {
         super(sz,h,s );
         System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
