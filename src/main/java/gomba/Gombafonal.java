@@ -133,4 +133,14 @@ public class Gombafonal {
     public void elragas() {
         elragva = true;
     }
+
+
+    public void setPusztulasSzamlalo(int ertek) {
+        this.pusztulasSzamlalo = ertek;
+    }
+
+    public boolean csokkentPusztulasSzamlalo() {
+        this.pusztulasSzamlalo--;
+        return this.pusztulasSzamlalo <= 0;
+    }
 }

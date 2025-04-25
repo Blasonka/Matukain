@@ -1,5 +1,6 @@
  package jateklogika;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import tekton.MaxEgyFonalTekton;
 import tekton.Tekton;
 import tekton.TobbFonalTekton;
 import tekton.GombatestNelkuliTekton;
+import gomba.Gombafonal;
 
 /**
  * gameLogic
@@ -42,10 +44,12 @@ public class gameLogic implements Serializable {
     List<Tekton> map;
     public static List<Gombasz> gombaszok;
     public static List<Rovarasz> rovarasz;
-    public List<Felhasznalo> jatekosok = new ArrayList<>();
+    public List<Gombasz> jatekosok = new ArrayList<>();
+    public List<Rovarasz> rovarjatekosok = new ArrayList<>();
     public boolean veletlenEsemenyekEngedelyezve = true;
     public double toresEsely;
-
+    public List<Gombafonal> fonalak = new ArrayList<>();
+    public int fonalelet;
     /**
      * Default konstruktor
      */
@@ -72,9 +76,19 @@ public class gameLogic implements Serializable {
       {
         return  map;
       }
-      public List<Felhasznalo> jatekosok() {
+      public List<Gombasz> getJatekosok() {
         return jatekosok;
       }
+      public List<Rovarasz> getRovarjatekosok() { return rovarjatekosok;}
+      public List<Gombafonal> getFonalak() {return fonalak; }
+    public void setFonalakElete(int fonalelet) {
+        this.fonalelet = fonalelet;
+        for (Gombafonal fonal : fonalak) {
+            fonal.setPusztulasSzamlalo(fonalelet);
+        }
+    }
+
+
 
     /**
      * Gombászok lekérdezése
@@ -92,11 +106,11 @@ public class gameLogic implements Serializable {
     public void tektonTores(List<Tekton> t) {
         Random rand = new Random();
 
-        // Use a regular for loop with index to avoid ConcurrentModificationException
+        
         for (int i = 0; i < t.size(); i++) {
             Tekton current = t.get(i);
 
-            // 20% chance to split (0.0 to 1.0, so 0.2 is 20%)
+            
             if (rand.nextDouble() < toresEsely) {
 
                 int ujId = current.getID() +500;
@@ -104,7 +118,7 @@ public class gameLogic implements Serializable {
                 int ujY = current.getKoordinataY();
 
                 Tekton ujTekton = current.klonoz(ujId, ujX, ujY);
-
+                current.tores();
 
 
                 if (ujTekton != null) {
@@ -116,6 +130,18 @@ public class gameLogic implements Serializable {
                     t.add(ujTekton);
                     System.out.println("Új tekton létrehozva ID: " + ujTekton.getID() + " hol (" + ujTekton.getKoordinataX() + ", " + ujTekton.getKoordinataY() + ")");
                 }
+            }
+        }
+    }
+
+    public void csokkentFonalakElete() {
+        Iterator<Gombafonal> iterator = fonalak.iterator();
+        while (iterator.hasNext()) {
+            Gombafonal fonal = iterator.next();
+            boolean elpusztult = fonal.csokkentPusztulasSzamlalo();
+            if (elpusztult) {
+                System.out.println("Gombafonal ID " + fonal.getId() + " elpusztult.");
+                iterator.remove(); // Remove threads that have expired
             }
         }
     }

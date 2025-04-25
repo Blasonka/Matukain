@@ -161,7 +161,7 @@ public class ParancsFeldolgozo {
      */
     private void addro(int id, String nev, int pontszam) {
         // TODO Rovarasz megfelelő paraméterezése
-        jatekLogika.jatekosok.add(new Rovarasz("Rovarasz" + id));
+        jatekLogika.rovarjatekosok.add(new Rovarasz("Rovarasz" + id));
     }
 
     /**
@@ -205,7 +205,7 @@ public class ParancsFeldolgozo {
         // TODO Rovar ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Rovarasz) jatekLogika.jatekosok.get(jatekosID)).getRovarok().add(new Rovar(jatekLogika.getMapTekton().get(tektonID), id));
+            ((Rovarasz) jatekLogika.rovarjatekosok.get(jatekosID)).getRovarok().add(new Rovar(jatekLogika.getMapTekton().get(tektonID), id));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Rovar felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, tekton ID nem létezik");
@@ -342,7 +342,8 @@ public class ParancsFeldolgozo {
             case 'D':
                  jatekLogika.veletlenEsemenyekEngedelyezve = false;
                  jatekLogika.toresEsely = tores;
-                 //jateklogika.fonal = megmaradas;
+                 jatekLogika.setFonalakElete(megmaradas);
+                 jatekLogika.csokkentFonalakElete();
                 break;
             case 'E':
                 jatekLogika.toresEsely = 0.2;
@@ -437,7 +438,7 @@ public class ParancsFeldolgozo {
     private void move(int rovarID, int rovaraszID, int jelenlegiTektonID, int TektonID) {
         try {
             // TODO attesz-ben valahogy rovar megadása
-            List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+            List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
             List<Tekton> tektonok = jatekLogika.getMapTekton();
             Tekton ujTekton = null;
             for (Tekton t : tektonok) {
@@ -480,7 +481,7 @@ public class ParancsFeldolgozo {
             }
             // TODO rovarásznál fonalvágásnál vágás végző rovart megadni
             if (keresett != null){
-                List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+                List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
 
                 for (Rovar r : rovarok) {
                     if (r.getID()==rovarID) {
@@ -514,7 +515,7 @@ public class ParancsFeldolgozo {
                 }
             }
             if (keresett != null) {
-                List<Rovar> rovarok = ((Rovarasz) jatekLogika.jatekosok.get(rovaraszID)).getRovarok();
+                List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
 
                 for (Rovar r : rovarok) {
                     if (r.getID()==rovarID) {
