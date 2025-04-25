@@ -3,6 +3,12 @@ package tesztelo;
 import jateklogika.gameLogic;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -76,13 +82,24 @@ public class Menu {
                             while (reader.ready()) {
                                 parancsFeldolgozo.interpret(reader.readLine());
                             } parancsFeldolgozo.interpret("/save " + mappa + "\\output.txt" + " -k");
-                            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\output.txt", mappa + "\\expected.txt");
+
+                            Path tmp_exp = Paths.get(mappa + "\\tmp_expected.txt");
+                            Path tmp_out = Paths.get(mappa + "\\tmp_output.txt");
+                            List<String> lines = Files.readAllLines(Paths.get(mappa + "\\expected.txt"), StandardCharsets.UTF_8);
+                            Files.write(tmp_exp, lines, Charset.forName("windows-1250"));
+                            List<String> lines2 = Files.readAllLines(Paths.get(mappa + "\\output.txt"), StandardCharsets.UTF_8);
+                            Files.write(tmp_out, lines2, Charset.forName("windows-1250"));
+
+                            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\tmp_output.txt", mappa + "\\tmp_expected.txt");
                             Process p = pb.start();
                             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                             String kimenet;
                             while ((kimenet = stdInput.readLine()) != null) {
                                 System.out.println(kimenet);
                             } p.waitFor();
+
+                            if (Files.exists(tmp_exp)) Files.delete(tmp_exp);
+                            if (Files.exists(tmp_out)) Files.delete(tmp_out);
                         } catch (FileNotFoundException e) {
                             System.err.println("A megadott mappában nem található a keresett fájl: " + mappa);
                         } catch (IOException e) {

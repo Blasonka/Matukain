@@ -1,6 +1,5 @@
 package tesztelo;
 
-import felhasznalo.Felhasznalo;
 import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
 import gomba.Gomba;
@@ -13,7 +12,6 @@ import tekton.*;
 
 import java.io.*;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Parancsfeldolgozó osztály
@@ -59,11 +57,12 @@ public class ParancsFeldolgozo {
      * Print metódus
      * A paraméterként kapott stringet elmenti az osztály StringBuffer kimenet változójába,
      * emellett elhelyezi a standard kimenetre
+     * A parancs a könyebb megvalósítás érdekében nem tesz \n-t a sor végére!
      * @param ki kimenetnek szánt string
      */
     public void print(String ki) {
         kimenet.append(ki);
-        System.out.println(ki);
+        System.out.print(ki);
     }
 
     /**
