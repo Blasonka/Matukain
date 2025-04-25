@@ -6,6 +6,7 @@ import rovar.Rovar;
 import spora.Spora;
 import tekton.Tekton;
 
+import static tesztelo.Menu.parancsFeldolgozo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,12 @@ public class Rovarasz extends Felhasznalo {
     }
 
 
-
+    // Bocsi hogy belenyúltam csak akartam tesztelni - Tódor
     public void addRovar(Rovar r){
+        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok paraméterének érétke megváltozott: ");
+        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
+        parancsFeldolgozo.print(" -> ");
         rovarok.add(r);
+        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
     }
 }

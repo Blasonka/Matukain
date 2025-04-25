@@ -49,7 +49,7 @@ public class Menu {
      * @var ParancsFeldolgozo parancsFeldolgozo
      * @brief Bemeneti nyelven megadott parancsok értelmezését végzi
      */
-    static ParancsFeldolgozo parancsFeldolgozo;
+    public static ParancsFeldolgozo parancsFeldolgozo;
 
     public static void main(String[] args) {
         int valasztas;
@@ -82,14 +82,14 @@ public class Menu {
                             while (reader.ready()) {
                                 parancsFeldolgozo.interpret(reader.readLine());
                             } parancsFeldolgozo.interpret("/save " + mappa + "\\output.txt" + " -k");
-
+                            // Az fc windows-1250 kódolást szereti, viszont a fájlok alapvetően utf-8-ban vannak, szóval ezt meg kell kerülni különben olvashatatlan lesz
                             Path tmp_exp = Paths.get(mappa + "\\tmp_expected.txt");
                             Path tmp_out = Paths.get(mappa + "\\tmp_output.txt");
                             List<String> lines = Files.readAllLines(Paths.get(mappa + "\\expected.txt"), StandardCharsets.UTF_8);
                             Files.write(tmp_exp, lines, Charset.forName("windows-1250"));
                             List<String> lines2 = Files.readAllLines(Paths.get(mappa + "\\output.txt"), StandardCharsets.UTF_8);
                             Files.write(tmp_out, lines2, Charset.forName("windows-1250"));
-
+                            // fc meghívása
                             ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\tmp_output.txt", mappa + "\\tmp_expected.txt");
                             Process p = pb.start();
                             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -97,7 +97,7 @@ public class Menu {
                             while ((kimenet = stdInput.readLine()) != null) {
                                 System.out.println(kimenet);
                             } p.waitFor();
-
+                            // Töröljük a létrejövő fájlt windows-1250 fájlt
                             if (Files.exists(tmp_exp)) Files.delete(tmp_exp);
                             if (Files.exists(tmp_out)) Files.delete(tmp_out);
                         } catch (FileNotFoundException e) {

@@ -79,6 +79,8 @@ public class Gombatest {
         this.fejlett = false;
     }
 
+    public int getID() {return id;}
+
     /**
      * Visszaadja a gombatesthez tartozó tekton
      * @return a gombatesthez tartozó tekton

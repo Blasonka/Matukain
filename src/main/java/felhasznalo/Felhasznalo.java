@@ -61,6 +61,12 @@ public abstract class Felhasznalo implements Jatekos {
         nev = n;
         pontokSzama = p;
     }
+
+    /**
+     * Felhasználói azonosító lekérdezése
+     * @return ID
+     */
+    public int getID() {return ID;}
     /**
      * Kezdő akciópontok számának lekérdezése
      * @return akcioPontok

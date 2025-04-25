@@ -5,9 +5,10 @@ import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import gomba.Gombafonal;
 import gomba.Gombatest;
+import gomba.HusevoGombafonal;
 import jateklogika.gameLogic;
 import rovar.Rovar;
-import spora.Spora;
+import spora.*;
 import tekton.*;
 
 import java.io.*;
@@ -140,6 +141,8 @@ public class ParancsFeldolgozo {
                     break;
                 case "/fonal_novesztes":
                     fonal_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), command[7].charAt(0));
+                case "/gombatest_novesztes":
+                    gombatest_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), Integer.parseInt(command[7]));
                 default:
                     System.out.println("Érvénytelen parancs! (/help a parancsok listájához)");
                     break;
@@ -160,7 +163,7 @@ public class ParancsFeldolgozo {
      */
     private void addro(int id, String nev, int pontszam) {
         // TODO Rovarasz megfelelő paraméterezése
-        jatekLogika.rovarjatekosok.add(new Rovarasz("Rovarasz" + id));
+        jatekLogika.addRovarasz(new Rovarasz("Rovarasz" + id));
     }
 
     /**
@@ -172,7 +175,7 @@ public class ParancsFeldolgozo {
      */
     private void addgo (int id, String nev, int pontszam) {
         // TODO Gombasz megfelelő paraméterezése
-        jatekLogika.jatekosok.add(new Gombasz("Gombasz" + id));
+        jatekLogika.addGombasz(new Gombasz("Gombasz" + id));
     }
 
     /**
@@ -184,10 +187,9 @@ public class ParancsFeldolgozo {
      * @param jatekosID melyik felhasználóhoz tartozik a gomba
      */
     private void addg(int id, int tektonID, int jatekosID) {
-        // TODO Gomba ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().add(new Gomba(0));
+            jatekLogika.getGombasz(jatekosID).addGomba(new Gomba(id));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Gomba felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, tekton ID nem létezik");
@@ -201,10 +203,9 @@ public class ParancsFeldolgozo {
      * @param jatekosID melyik felhasználóhoz tartozik a gomba
      */
     private void addr(int id, int tektonID, int jatekosID) {
-        // TODO Rovar ID változójának hozzáadása
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            ((Rovarasz) jatekLogika.rovarjatekosok.get(jatekosID)).getRovarok().add(new Rovar(jatekLogika.getMapTekton().get(tektonID), id));
+            jatekLogika.getRovarasz(jatekosID).addRovar(new Rovar(jatekLogika.getMapTekton().get(tektonID), id));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Rovar felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Rovarász ID nem létezik, tekton ID nem létezik");
@@ -219,23 +220,22 @@ public class ParancsFeldolgozo {
      * @param type tekton típusa [L (életbentartó), M (egyfonal) F (felszívódós), T (többfonalas) G (gombatest nélküli)]
      */
     private void addt(int id, int x, int y, char type) {
-        // TODO Tekton szomszédosság lekezelése
         switch (type) {
             case 'L':
                 // TODO Életbentrartó tekton implementálása
                 // jatekLogika.getMapTekton().add(new EletbenTartoTekon(id, x, y));
                 break;
             case 'M':
-                jatekLogika.getMapTekton().add(new MaxEgyFonalTekton(id, x, y));
+                jatekLogika.addTekton(new MaxEgyFonalTekton(id, x, y));
                 break;
             case 'F':
-                jatekLogika.getMapTekton().add(new FelszivodosTekton(id, x, y));
+                jatekLogika.addTekton(new FelszivodosTekton(id, x, y));
                 break;
             case 'T':
-                jatekLogika.getMapTekton().add(new TobbFonalTekton(id, x, y));
+                jatekLogika.addTekton(new TobbFonalTekton(id, x, y));
                 break;
             case 'G':
-                jatekLogika.getMapTekton().add(new GombatestNelkuliTekton(id, x, y));
+                jatekLogika.addTekton(new GombatestNelkuliTekton(id, x, y));
                 break;
             default:
                 System.out.println("Érvénytelen Tektontípus! (/help a megadható értékek listájához)");
@@ -253,23 +253,23 @@ public class ParancsFeldolgozo {
      * @param type spóra típusa [O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]
      */
     private void adds(int id, int tektonID, int gombaID, int jatekosID, char type) {
+        // TODO spóraáknak ID, gomba paraméterek
         try {
             switch (type) {
                 case 'O':
-                    // TODO RovarOsztóSpóra implementálása
-                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new RovarOsztoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    jatekLogika.getTekton(tektonID).addSpora(new OsztoSpora());
                     break;
                 case 'L':
-                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new LassitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    jatekLogika.getTekton(tektonID).addSpora(new LassitoSpora(0));
                     break;
                 case 'G':
-                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new GyorsitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    jatekLogika.getTekton(tektonID).addSpora(new GyorsitoSpora(0));
                     break;
                 case 'B':
-                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new BenitoSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    jatekLogika.getTekton(tektonID).addSpora(new BenitoSpora(0));
                     break;
                 case 'V':
-                    // jatekLogika.getMapTekton().get(tektonID).sporak.add(new VagasGatloSpora(id, ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID)));
+                    jatekLogika.getTekton(tektonID).addSpora(new VagasGatloSpora(0));
                     break;
                 default:
                     System.out.println("Érvénytelen Spóratípus! (/help a megadható értékek listájához)");
@@ -292,22 +292,23 @@ public class ParancsFeldolgozo {
      * @param type a gombafonal típusa [S (sima), H (húsevő)]
      */
     private void addf(int id, int tektonID1, int tektonID2, int gombatestID, int jatekosID, char type) {
-        // TODO gombafonalak új tárolási módjának implementálása
         try {
-            switch (type) {
-                case 'S':
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getFonalak().add(
-                    // new Gombafonal(id, jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2),
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID)));
-                    break;
-                case 'H':
-                    // TODO HusevoGombafonal létrehozása
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getFonalak().add(
-                    // new HusevoGombafonal(id, jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2),
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID)));
-                    break;
-                default:
-                    System.out.println("Érvénytelen Gombafonaltípus! (/help a megadható értékek listájához)");
+            for (Gomba gomba : jatekLogika.getGombasz(jatekosID).getGombak()) {
+                for (Gombatest gt : gomba.getGombatest()) {
+                    if (gt.getID() == gombatestID) {
+                        switch (type) {
+                            case 'S':
+                                gomba.addFonal(new Gombafonal(id, jatekLogika.getTekton(tektonID1), jatekLogika.getTekton(tektonID2), gt));
+                                break;
+                            case 'H':
+                                gomba.addFonal(new HusevoGombafonal(id, jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2), gt));
+                                break;
+                            default:
+                                System.out.println("Érvénytelen Gombafonaltípus! (/help a megadható értékek listájához)");
+                                break;
+                        }
+                    }
+                }
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Gombafonal felvétele sikertelen!\n" +
@@ -324,9 +325,12 @@ public class ParancsFeldolgozo {
      * @param gombaID gombatesthez tartozó gomba azonosítója
      */
     private void addgt(int id, boolean fejlett, int tektonID, int gombaID, int gombaszID) {
-        // TODO gombatestek új tárolási módjának implementálása
-        // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().add(
-        // new Gombatest(id, jatekLogika.getMapTekton().get(tektonID), fejlett);
+        // TODO gombatest fejlettségi állapotának beállítása konstruktorban
+        for (Gomba gomba : jatekLogika.getGombasz(gombaszID).getGombak()) {
+            if (gomba.getID() == gombaID) {
+                gomba.addGombatest(new Gombatest(id, jatekLogika.getTekton(tektonID)));
+            }
+        }
     }
 
     /**
@@ -336,17 +340,19 @@ public class ParancsFeldolgozo {
      * @param megmaradas a gombafonal elrágás utáni megmaradásának ideje
      */
     private void rand(char val, int tores, int megmaradas) {
-        // TODO gameLogic-ba ennek megfelelő publikus globális változók implementálása, amit aztán a többi osztály (tekton, gombafonal) figyelni tud
         switch (val) {
             case 'D':
                  jatekLogika.veletlenEsemenyekEngedelyezve = false;
                  jatekLogika.toresEsely = tores;
                  jatekLogika.setFonalakElete(megmaradas);
-                 jatekLogika.csokkentFonalakElete();
+                 print("Véletlenszerű események kikapcsolva\n" +
+                         "Tektontörés valószínűsége: " + tores +
+                         "\nFonal elrágás utáni megmaradásának ideje: " + megmaradas + " kör\n");
                 break;
             case 'E':
                 jatekLogika.toresEsely = 0.2;
                 jatekLogika.veletlenEsemenyekEngedelyezve = true;
+                print("Véletlenszerű események bekapcsolva\n");
             default:
                 System.out.println("Érvénytelen érték! (/help a megadható értékek listájához)");
         }
@@ -359,7 +365,6 @@ public class ParancsFeldolgozo {
      * @param k opcionálisan megadható kapcsoló: -k esetén a kimenetet menti el és nem a játékállást
      */
     private void save(String pathToFile, char k) {
-        // TODO gameLogic felkészítése a mentésre
         try {
             if (k == 'k') {
                 BufferedWriter bfr = new BufferedWriter(new FileWriter(pathToFile));
@@ -382,7 +387,6 @@ public class ParancsFeldolgozo {
      * @param pathToFile a fájl elérési útja
      */
     private void load(String pathToFile) {
-        // TODO gameLogic felkészítése a betöltésre
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(pathToFile));
             jatekLogika = (gameLogic) in.readObject();
@@ -399,9 +403,7 @@ public class ParancsFeldolgozo {
      * Tartalmazza a paracsok listáját, az egyes parancsok rövid jeletését, a kapcsolók lehetséges értékeit
      */
     private void help() {
-        // TODO Rovar parancsok játékosID hozzáadása
-        // TODO sporagombatesttel gomba, gombatest és játékos hozzáadása
-        // TODO fonal_novesztes játékosID hozzáadása
+        // TODO parancsok átnézése: rovar mozgatás, stb parancsokban játékosID, sporagombatesttel (gomba, gombatest, játékos), fonalnövesztés játékosID
         System.out.println("parancsok:\n" +
                 "rovarász hozzáadása:\t/addro [ID] [Név] [Pontszám]\n" +
                 "gombász hozzáadása:\t/addgo [ID] [Név] [Pontszám]\n" +
@@ -436,17 +438,14 @@ public class ParancsFeldolgozo {
      */
     private void move(int rovarID, int rovaraszID, int jelenlegiTektonID, int TektonID) {
         try {
-            // TODO attesz-ben valahogy rovar megadása
-            List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
-            List<Tekton> tektonok = jatekLogika.getMapTekton();
             Tekton ujTekton = null;
-            for (Tekton t : tektonok) {
+            for (Tekton t : jatekLogika.getMapTekton()) {
                 if (t.getID() == jelenlegiTektonID) {
                     ujTekton = t;
                     break;
                 }
             }
-            for (Rovar r : rovarok) {
+            for (Rovar r : jatekLogika.getRovarasz(rovaraszID).getRovarok()) {
                 if (r.getID()==rovarID) {
                     r.attesz(ujTekton);
                     break;
@@ -470,19 +469,13 @@ public class ParancsFeldolgozo {
             Gombafonal keresett = null;
             for (Tekton t : jatekLogika.getMapTekton()) {
                 for (Gombafonal f : t.getGomba().getGombafonalak()) {
-                    /*
-                    // TODO gombafonal ID paramétere
-                    if (f.id == fonalID) {
+                    if (f.getId() == fonalID) {
                         keresett = f;
                     }
-                    */
                 }
             }
-            // TODO rovarásznál fonalvágásnál vágás végző rovart megadni
             if (keresett != null){
-                List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
-
-                for (Rovar r : rovarok) {
+                for (Rovar r : jatekLogika.getRovarasz(rovaraszID).getRovarok()) {
                     if (r.getID()==rovarID) {
                         r.fonalElvagas(keresett);
                         break;
@@ -506,17 +499,13 @@ public class ParancsFeldolgozo {
             Spora keresett = null;
             for (Tekton t : jatekLogika.getMapTekton()) {
                 for (Spora s : t.getSporak()) {
-                /*
-                if (s.id == sporaID) {
-                    keresett = s;
-                }
-                */
+                    if (s.getID() == sporaID) {
+                        keresett = s;
+                    }
                 }
             }
             if (keresett != null) {
-                List<Rovar> rovarok = ((Rovarasz) jatekLogika.rovarjatekosok.get(rovaraszID)).getRovarok();
-
-                for (Rovar r : rovarok) {
+                for (Rovar r : jatekLogika.getRovarasz(rovaraszID).getRovarok()) {
                     if (r.getID()==rovarID) {
                         r.elfogyaszt(keresett);
                         break;
@@ -535,21 +524,43 @@ public class ParancsFeldolgozo {
      * @param rovarID bénított rovar
      */
     private void consume(int fonalID, int rovarID) {
-        // TODO Husevo gombafonal elkészítése
+        HusevoGombafonal keresett = null;
+        for (Gombasz gombasz : jatekLogika.getGombaszok()) {
+            for (Gomba gomba : gombasz.getGombak()) {
+                for (Gombafonal fonal : gomba.getGombafonalak()) {
+                    if (fonal.getId() == fonalID) {
+                        try {
+                            keresett = (HusevoGombafonal) fonal;
+                        } catch (ClassCastException e) {
+                            System.out.println("A megadott helyen nem megfelelő gombafonal található.");
+                        }
+                    }
+                }
+            }
+        } Rovar keresettRovar = null;
+        for (Rovarasz rovarasz : jatekLogika.getRovaraszok()) {
+            for (Rovar rovar : rovarasz.getRovarok()) {
+                if (rovar.getID() == rovarID) {
+                    keresettRovar = rovar;
+                }
+            }
+        } if (keresett != null && keresettRovar != null) {
+            keresett.megesziRovart(keresettRovar);
+        }
     }
 
     /**
      * Játék aktuális állapotát kilistázó metódust hívja meg
      */
     private void list() {
-        // TODO minden listázása gameLogic-ban
+        jatekLogika.list();
     }
 
     /**
      * Felhasználókat és hozzájuk tartozó pontszámokat listázza ki
      */
     private void lista() {
-        // TODO felhasználók listázása gameLogic-ban
+        jatekLogika.lista();
     }
 
     /**
@@ -557,8 +568,7 @@ public class ParancsFeldolgozo {
      * @param tektonID a törendő tekton
      */
     private void trigger_tores(int tektonID) {
-        // TODO metódus implementálása játéklogikában
-        // jatekLogika.tores(jatekLogika.getMapTekton().get(tektonID));
+        jatekLogika.getTekton(tektonID).tores();
     }
 
     /**
@@ -571,23 +581,43 @@ public class ParancsFeldolgozo {
      * @param type spóra típusa [O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]
      */
     private void sporagombatesttel(int id, int tektonID, int gombaID, int gombatestID, int jatekosID, char type) {
+        // TODO manuálisan megadható spórafajta a sporaSzorasba
         try {
             switch (type) {
                 case 'O':
-                    // TODO RovarOsztóSpóra implementálása
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID).sporaszoras(jatekLogika.getMapTekton().get(tektonID));
+                    for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                        }
+                    }
                     break;
                 case 'L':
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID).sporaszoras(jatekLogika.getMapTekton().get(tektonID));
+                    for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                        }
+                    }
                     break;
                 case 'G':
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID).sporaszoras(jatekLogika.getMapTekton().get(tektonID));
+                    for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                        }
+                    }
                     break;
                 case 'B':
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID).sporaszoras(jatekLogika.getMapTekton().get(tektonID));
+                    for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                        }
+                    }
                     break;
                 case 'V':
-                    // ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak().get(gombaID).getgombatestek().get(gombatestID).sporaszoras(jatekLogika.getMapTekton().get(tektonID));
+                    for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Érvénytelen Spóratípus! (/help a megadható értékek listájához)");
@@ -603,8 +633,8 @@ public class ParancsFeldolgozo {
      * Kör szimulálása
      */
     private void simulate_round() {
-        // TODO kör szimulálása játéklogikában
-        //jateklogika.kor()
+        // TODO kör szimulálása játéklogikában (életkorok csökkentése, hatások kifejtése, stb)
+        jatekLogika.simulateRound();
     }
 
     /**
@@ -617,19 +647,20 @@ public class ParancsFeldolgozo {
      * @param type a gombafonal típusa [S (sima), H (húsevő)]
      */
     private void fonal_novesztes(int id, int gombatestID, int jatekosID, int tektonID1, int tektonID2, char type) {
+        // TODO fonalnovesztesben típus megadására lehetőség
         try {
             Gombatest keresett = null;
-            for (Tekton t : jatekLogika.getMapTekton()) {
-            /*
-            for (Gombatest g : t.getGomba().getGombatestek()) {
-                    // TODO gombatest ID paramétere
-                    if (g.id == gombatestID) {
-                        keresett = g;
+            for (Gombasz gombasz : jatekLogika.getGombaszok()) {
+                for (Gomba gomba : gombasz.getGombak()) {
+                    for (Gombatest gombatest : gomba.getGombatest()) {
+                        if (gombatest.getID() == gombatestID) {
+                            keresett = gombatest;
+                        }
                     }
-            } */
+                }
             }
             if (keresett != null) {
-                List<Gomba> gombak = ((Gombasz) jatekLogika.jatekosok.get(jatekosID)).getGombak();
+                List<Gomba> gombak = jatekLogika.getGombasz(jatekosID).getGombak();
                 for (Gomba r : gombak) {
                     if (r.getID()==id) {
                         r.fonalNovesztes(jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2), keresett);

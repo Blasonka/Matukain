@@ -10,6 +10,7 @@ import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import rovar.Rovar;
+import spora.Spora;
 import tekton.FelszivodosTekton;
 import tekton.FonalMegtartoTekton;
 import tekton.MaxEgyFonalTekton;
@@ -18,7 +19,9 @@ import tekton.TobbFonalTekton;
 import tekton.GombatestNelkuliTekton;
 import gomba.Gombafonal;
 
-/**
+import static tesztelo.Menu.parancsFeldolgozo;
+
+ /**
  * gameLogic
  *
  * @class gameLogic
@@ -42,10 +45,8 @@ import gomba.Gombafonal;
 public class gameLogic implements Serializable {
     int korSzamlalo;
     List<Tekton> map;
-    public static List<Gombasz> gombaszok;
-    public static List<Rovarasz> rovarasz;
-    public List<Gombasz> jatekosok = new ArrayList<>();
-    public List<Rovarasz> rovarjatekosok = new ArrayList<>();
+    List<Gombasz> gombaszok = new ArrayList<>();
+    List<Rovarasz> rovaraszok = new ArrayList<>();
     public boolean veletlenEsemenyekEngedelyezve = true;
     public double toresEsely;
     public List<Gombafonal> fonalak = new ArrayList<>();
@@ -76,10 +77,10 @@ public class gameLogic implements Serializable {
       {
         return  map;
       }
-      public List<Gombasz> getJatekosok() {
-        return jatekosok;
+      public List<Gombasz> getGombaszok() {
+        return gombaszok;
       }
-      public List<Rovarasz> getRovarjatekosok() { return rovarjatekosok;}
+      public List<Rovarasz> getRovaraszok() { return rovaraszok;}
       public List<Gombafonal> getFonalak() {return fonalak; }
     public void setFonalakElete(int fonalelet) {
         this.fonalelet = fonalelet;
@@ -89,16 +90,6 @@ public class gameLogic implements Serializable {
     }
 
 
-
-    /**
-     * Gombászok lekérdezése
-     * @details statikus metódus, mely így elérhető lesz a Rovarasz osztály számára,
-     * aki ezáltal a Rovar osztályban megtalálhatja a megfelelő gombafonalat
-     * @return gombaszok
-     */
-    public static List<Gombasz> getGombaszok() {
-        return gombaszok;
-    }
     /**
      * Meghívja a tektonnak a tores() függvényét, ha a tektonnak ketté kell törnie
      * @param t adja meg a Tektonok listáját
@@ -264,11 +255,38 @@ public class gameLogic implements Serializable {
 
     public void addRovarasz(Rovarasz r)
     {
-        rovarasz.add(r);
+        rovaraszok.add(r);
     }
     public void addGombasz(Gombasz g)
     {
         gombaszok.add(g);
+    }
+
+    public void addTekton(Tekton t) {
+        map.add(t);
+    }
+    public Tekton getTekton(int id) {
+        for (Tekton t : map) {
+            if (t.getID() == id) {
+                return t;
+            }
+        } return null;
+    }
+
+    public Gombasz getGombasz(int id) {
+        for (Gombasz gombasz : gombaszok) {
+            if (gombasz.getID() == id) {
+                return gombasz;
+            }
+        } return null;
+    }
+
+    public Rovarasz getRovarasz(int id) {
+        for (Rovarasz rovarasz : rovaraszok) {
+            if (rovarasz.getID() == id) {
+                return rovarasz;
+            }
+        } return null;
     }
 
     /**
@@ -278,5 +296,19 @@ public class gameLogic implements Serializable {
      */
     public void simulateRound(){
 
+    }
+
+    public void list() {
+        for (Tekton t : map) {
+            parancsFeldolgozo.print("Tekton (" + t.getID() + ")\n");
+            for (Spora sp : t.getSporak()) {
+                //TODO ...
+            }
+        }
+    }
+
+    public void lista() {
+        for (Gombasz g : gombaszok) parancsFeldolgozo.print("Gombász (" + g.getNev() + ")\n");
+        for (Rovarasz r : rovaraszok) parancsFeldolgozo.print("Rovarasz (" + r.getNev() + ")\n");
     }
 }
