@@ -61,6 +61,6 @@ public class Rovarasz extends Felhasznalo {
         for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
         parancsFeldolgozo.print(" -> ");
         rovarok.add(r);
-        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
+        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "\n" : ", "));
     }
 }

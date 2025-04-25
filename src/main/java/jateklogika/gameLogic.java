@@ -299,22 +299,19 @@ public class gameLogic implements Serializable {
      *
      */
     public void simulateRound(){
-         parancsFeldolgozo.print("Kör szimulálsa...");
+         parancsFeldolgozo.print("Kör szimulálsa...\n");
          int regi = korSzamlalo;
          korSzamlalo ++;
-         parancsFeldolgozo.print("A kör értéke megváltozott: " + regi + "->" + korSzamlalo+"\n");
+         parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + "->" + korSzamlalo+"\n");
         for (Tekton t : map) {
             if (t.getGomba() != null) {
                 t.hatasKifejtes(t.getGomba());
             }
-
-
             for (Rovar rovar : getRovarok()) {
                 rovar.sporaManager();
             }
-
         }
-
+        csokkentFonalakElete();
     }
 
     public void list() {
