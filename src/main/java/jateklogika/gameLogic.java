@@ -9,6 +9,7 @@ import felhasznalo.Felhasznalo;
 import felhasznalo.Gombasz;
 import felhasznalo.Rovarasz;
 import gomba.Gomba;
+import gomba.Gombatest;
 import rovar.Rovar;
 import spora.Spora;
 import tekton.FelszivodosTekton;
@@ -44,13 +45,15 @@ import static tesztelo.Menu.parancsFeldolgozo;
  */
 public class gameLogic implements Serializable {
     int korSzamlalo;
-    List<Tekton> map;
-    List<Gombasz> gombaszok = new ArrayList<>();
-    List<Rovarasz> rovaraszok = new ArrayList<>();
+    private List<Tekton> map;
+    private List<Gombasz> gombaszok = new ArrayList<>();
+    private List<Rovarasz> rovaraszok = new ArrayList<>();
     public boolean veletlenEsemenyekEngedelyezve = true;
     public double toresEsely;
-    public List<Gombafonal> fonalak = new ArrayList<>();
+    private List<Gombafonal> fonalak = new ArrayList<>();
     public int fonalelet;
+    private List<Rovar> rovarok = new ArrayList<>();
+
     /**
      * Default konstruktor
      */
@@ -82,7 +85,8 @@ public class gameLogic implements Serializable {
       }
       public List<Rovarasz> getRovaraszok() { return rovaraszok;}
       public List<Gombafonal> getFonalak() {return fonalak; }
-    public void setFonalakElete(int fonalelet) {
+      public List<Rovar> getRovarok() {return rovarok; }
+     public void setFonalakElete(int fonalelet) {
         this.fonalelet = fonalelet;
         for (Gombafonal fonal : fonalak) {
             fonal.setPusztulasSzamlalo(fonalelet);
@@ -295,16 +299,46 @@ public class gameLogic implements Serializable {
      *
      */
     public void simulateRound(){
+         parancsFeldolgozo.print("Kör szimulálsa...");
+         int regi = korSzamlalo;
+         korSzamlalo ++;
+         parancsFeldolgozo.print("A kör értéke megváltozott: " + regi + "->" + korSzamlalo+"\n");
+        for (Tekton t : map) {
+            if (t.getGomba() != null) {
+                t.hatasKifejtes(t.getGomba());
+            }
+
+
+            for (Rovar rovar : getRovarok()) {
+                rovar.sporaManager();
+            }
+
+        }
 
     }
 
     public void list() {
         for (Tekton t : map) {
-            parancsFeldolgozo.print("Tekton (" + t.getID() + ")\n");
+            parancsFeldolgozo.print("Tekton (ID: " + t.getID() + ", Koordináták: " + t.getKoordinataX() + ", " + t.getKoordinataY() + ")\n");
+
             for (Spora sp : t.getSporak()) {
-                //TODO ...
+                parancsFeldolgozo.print("  -> Spóra (ID: " + sp.getID() + ", Élettartam: " + sp.getSzamlalo()+"\n");
+            }
+
+            for (Gombatest gombatest : t.getGomba().getGombatest() ) {
+                parancsFeldolgozo.print("  -> Gomba (ID: " + gombatest.getID() + ", Helye: " + gombatest.getTekton().getKoordinataY() + gombatest.getTekton().getKoordinataX()+ ")\n");
+            }
+
+            for (Gombafonal gombafonal : getFonalak()) {
+                parancsFeldolgozo.print("  -> Gombafonal (ID: " + gombafonal.getId() + ", Élettartam: " + gombafonal.getPusztulasSzamlalo() + "Szomszédos Tektonok:" + gombafonal.getHatar1() + gombafonal.getHatar2()+ ")\n");
+            }
+
+            for (Rovar rovar : getRovarok() ) {
+                parancsFeldolgozo.print("  -> Rovar (ID: " + rovar.getID() + "Sebessége:" + rovar.getSebesseg()+ "Vághat-e: " + rovar.isVaghate() + ")\n");
             }
         }
+
+
     }
 
     public void lista() {

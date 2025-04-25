@@ -143,4 +143,11 @@ public class Gombafonal {
         this.pusztulasSzamlalo--;
         return this.pusztulasSzamlalo <= 0;
     }
+
+    public Tekton getHatar() {
+        return hatar1;
+    }
+    public Tekton getMasikHatar() {
+        return hatar2;
+    }
 }
