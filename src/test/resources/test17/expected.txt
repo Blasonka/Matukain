@@ -1,0 +1,22 @@
+Véletlenszerű események kikapcsolva
+Tektontörés valószínűsége: 0%
+Fonal elrágás utáni megmaradásának ideje: 1 kör
+Rovarász (0) rovarok értéke megváltozott: -> Rovar (0)
+Gombász (1) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Gomba (0) fonalak értéke megváltozott: Fonal (0) -> Fonal (0), Fonal (1)
+Tekton (2) sporak értéke megváltozott: -> Spora (0)
+Rovar (0) elfogyasztotta Spora (0)
+Rovar (0) elfogyasztottsporak értéke megváltozott: -> Spora (0)
+Tekton (2) sporak értéke megváltozott: Spora (0) ->
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 1 -> 2
+Rovar (0) sebesseg értéke megváltozott: 2 -> 3
+Rovar (0) elfogyasztottsporak értéke megváltozott: Spora (0) ->
+Rovar (0) tekton értéke megváltozott: Tekton (2) -> Tekton (1)
+Rovar (0) tekton értéke megváltozott: Tekton (1) -> Tekton (0)
+Rovar (0) tekton értéke megváltozott: Tekton (0) -> Tekton (1)
+Rovar (0) tekton értéke megváltozott: Tekton (1) -> Tekton (2)
+Rovar (0) tekton értéke megváltozott: Tekton (2) -> Tekton (1)
+Rovar (0) tekton értéke megváltozott: Tekton (1) -> Tekton (0)

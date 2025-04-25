@@ -1,0 +1,12 @@
+Véletlenszerű események kikapcsolva
+Tektontörés valószínűsége: 0%
+Fonal elrágás utáni megmaradásának ideje: 1 kör
+Rovarász (0) rovarok értéke megváltozott: -> Rovar (0)
+Gombász (1) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Rovar (0) elrágta Fonal (0)
+Fonal (0) elragva értéke megváltozott: false -> true
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 1 -> 2
+Fonal (0) pusztulasSzamlalo értéke NEM változott: 1

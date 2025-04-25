@@ -1,0 +1,5 @@
+Gombasz (0) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Spóra (0) Lassító elhelyezve Tekton (1) Gombatest (0) által
+Tekton (1) sporak értéke megváltozott: -> Spóra (0)
+Spóra (2) Lassító NEM elhelyezve Tekton (2) Gombatest (0) által

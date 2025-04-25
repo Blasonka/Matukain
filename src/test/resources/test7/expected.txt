@@ -1,0 +1,7 @@
+Gombász (0) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest(0)
+Tekton (0) sporak értéke megváltozott: -> Spóra (0)
+Tekton (0) sporak értéke megváltozott: Spóra (0) -> Spóra (0), Spóra (1)
+Tekton (0) sporak értéke megváltozott: Spóra (0), Spóra (1) -> Spóra (0), Spóra (1), Spóra (2)
+Gombatest (1) elhelyezve Tekton (1) Gombász (0) által
+Gomba (0) gombatestek értéke megváltozott: Gombatest (0) -> Gombstest (0), Gombatest (1)

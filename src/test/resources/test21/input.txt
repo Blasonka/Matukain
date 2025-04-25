@@ -1,0 +1,13 @@
+/random D 0 1
+/addt 0 1 2 T 1
+/addt 1 3 4 T 0 2
+/addt 2 5 6 T 1
+/addro 0 Jani 0
+/addr 0 2 0
+/addgo 1 Peti 0
+/addg 0 0 1
+/addgt 0 0 0 1
+/addf 0 1 2 0 1 S
+/move 0 2 1
+/cut 0 0
+/sporagombatesttel 0 3 4 V

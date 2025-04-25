@@ -1,0 +1,9 @@
+/addt 0 0 1 T 1
+/addt 1 2 3 T 0
+/addgo 0 Peti 0
+/addg 0 0 0
+/addgt 0 0 0 0
+/adds 0 1 0 1 G
+/adds 1 1 0 1 G
+/adds 2 1 0 1 G
+/gombatestnovesztes 1 0 1 2 1 0

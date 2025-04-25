@@ -1,0 +1,8 @@
+/addt 0 0 1 T 1
+/addt 1 2 3 T 0 2
+/addt 2 4 5 T 1
+/addgo 0 Peti 0
+/addg 0 0 0
+/addgt 0 0 0 0
+/sporagombatesttel 0 2 3 L
+/sporagombatesttel 1 4 5 L

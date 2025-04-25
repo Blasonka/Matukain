@@ -1,0 +1,20 @@
+/random D 0 1
+/addt 0 0 1 T 1
+/addt 1 2 3 T 0 2
+/addt 2 4 5 T 1
+/addro 0 Jani 0
+/addr 0 2 0
+/addgo 1 Peti 0
+/addg 0 1 1
+/addgt 0 0 1 0
+/addf 0 0 1 0 1 S
+/addf 1 1 2 0 1 S
+/adds 0 2 0 1 G
+/eat 0 0
+/simulate_round
+/move 0 2 1
+/move 0 1 0
+/move 0 0 1
+/move 0 1 2
+/move 0 2 1
+/move 0 1 0
