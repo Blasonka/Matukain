@@ -1,6 +1,11 @@
 package tekton;
 
+import felhasznalo.Gombasz;
 import gomba.Gomba;
+import gomba.Gombafonal;
+import gomba.HusevoGombafonal;
+
+import static tesztelo.Menu.jatekLogika;
 
 /**
  * FonalMegtartoTekton osztály
@@ -37,6 +42,15 @@ public class FonalMegtartoTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
+        for (Gombasz gombasz : jatekLogika.getGombaszok()) {
+            for (Gomba gomba1 : gombasz.getGombak()) {
+                for (Gombafonal fonal : gomba1.getGombafonalak()) {
+                    if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
+                        fonal.setPusztulasSzamlalo(fonal.getPusztulasSzamlalo()+1);
+                    }
+                }
+            }
+        }
         System.out.println("FonalMegtartoTekton hatás kifejtve, azaz a gombafonal akkor is megmarad, ha nincs gombatesthez kötve");
     }
     @Override

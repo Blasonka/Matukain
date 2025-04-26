@@ -1,6 +1,7 @@
 package tekton;
 
 import gomba.Gomba;
+import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
  * FelszivodosTekton osztály
@@ -56,9 +57,12 @@ public class FelszivodosTekton extends Tekton{
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (szamlalo>=2){
+        szamlalo--;
+        parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo);
+        if (szamlalo==0){
             gomba.getGombafonalak().remove(0);
             System.out.println("A gombafonal felszívódott");
+            parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + gomba.getGombafonalak().get(0).getId() + ") eltűnt");
         }
         else{
             System.out.println("A gombafonal még nem szívódott fel");

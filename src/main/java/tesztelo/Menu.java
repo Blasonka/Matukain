@@ -35,7 +35,7 @@ public class Menu {
      * @var gameLogic jatekLogika
      * @brief a rovarászok, gombászok, tektonok listáját tartalmazó elem
      */
-    static gameLogic jatekLogika = new gameLogic();
+    public static gameLogic jatekLogika = new gameLogic();
 
     /**
      * A standard bemenetről történő beolvasásért felelős változó

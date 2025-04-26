@@ -142,6 +142,11 @@ public abstract class Tekton {
      * Tekton törése
      */
     public void tores(){
+        for (Gombafonal fonal : gomba.getGombafonalak()) {
+            if (fonal.getHatar1() == this || fonal.getHatar2() == this){
+                gomba.removeFonal(fonal);
+            }
+        }
         System.out.println("A tekton törölve lett");
     }
 
