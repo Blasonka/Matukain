@@ -1,6 +1,8 @@
 package tekton;
 
 import gomba.Gomba;
+import gomba.Gombafonal;
+
 import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
@@ -60,12 +62,12 @@ public class FelszivodosTekton extends Tekton{
         szamlalo--;
         parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo);
         if (szamlalo==0){
-            gomba.getGombafonalak().remove(0);
-            System.out.println("A gombafonal felszívódott");
-            parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + gomba.getGombafonalak().get(0).getId() + ") eltűnt");
-        }
-        else{
-            System.out.println("A gombafonal még nem szívódott fel");
+            for (Gombafonal fonal : gomba.getGombafonalak()) {
+                if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
+                    gomba.removeFonal(fonal);
+                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getId() + ") eltűnt");
+                }
+            }
         }
     }
 }

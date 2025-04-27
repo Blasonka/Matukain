@@ -2,6 +2,8 @@ package tekton;
 
 import gomba.Gomba;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * GombatestNelkuliTekton osztály
  *
@@ -36,10 +38,10 @@ public class GombatestNelkuliTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (this.getGomba() != null){
-            this.setGomba(null);
+        if (this.getGomba().getGombatest().size() != 0){
+            this.getGomba().getGombatest().clear();
+            parancsFeldolgozo.print("Gombatest (" + gomba.getGombatest().get(0).getID() + ") NEM sikerült elhelyezni");
         }
-        System.out.println("GombatestNelkuliTekton hatás kifejtve, azaz nem nőhet rajta gombatest");
     }
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {
