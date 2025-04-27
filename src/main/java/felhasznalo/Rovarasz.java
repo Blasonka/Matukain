@@ -47,20 +47,61 @@ public class Rovarasz extends Felhasznalo {
     public Rovarasz(int id, String name) {
         super(id, name, 6);
         rovarok = new ArrayList<>();
-        System.out.println(">Rovarasz->Rovarasz()");
     }
 
+    /**
+     * Visszaadja a rovarász rovarait
+     * @return rovarok - a rovarász rovarait tartalmazó lista
+     */
     public List<Rovar> getRovarok() {
         return rovarok;
     }
 
-
-    // Bocsi hogy belenyúltam csak akartam tesztelni - Tódor
+    /**
+     * Hozzáad egy rovar objektumot a rovarok listájához
+     * @param r - a hozzáadni kívánt rovar
+     */
     public void addRovar(Rovar r){
-        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok paraméterének érétke megváltozott: ");
+        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok paraméterének értéke megváltozott: ");
         for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
         parancsFeldolgozo.print(" -> ");
         rovarok.add(r);
         for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "\n" : ", "));
+    }
+
+    /**
+     * Rovar mozgatása egy másik tektonra
+     * @param rovar - a rovar, amelyet mozgatni szeretnénk
+     * @param celTekton - a cél tekton, ahova a rovart szeretnénk mozgatni
+     */
+    public void rovarMozgat(Rovar rovar, Tekton celTekton) {
+        if (hatralevoAkciopont > rovar.getSebesseg() && rovar.getSebesseg()!=0) {
+            rovar.attesz(celTekton);
+            hatralevoAkciopont -= (4-rovar.getSebesseg());
+        }
+    }
+
+    /**
+     * Rovar elvág egy gombafonalat
+     * @param rovar - a rovar, amelyik elvágja a gombafonalat
+     * @param fonal - a gombafonal, amelyet elvágnak
+     */
+    public void rovarFonalatVag(Rovar rovar, Gombafonal fonal){
+        if (hatralevoAkciopont > 0 && rovar.getSebesseg() != 0 && rovar.isVaghate()) {
+            rovar.fonalElvagas(fonal);
+            hatralevoAkciopont -= (4-rovar.getSebesseg());
+        }
+    }
+
+    /**
+     * Rovar elfogyaszt egy spórát
+     * @param rovar - a rovar, amelyik elfogyasztja a spórát
+     * @param spora - a spóra, amelyet elfogyasztanak
+     */
+    public void rovarSporatFogyaszt(Rovar rovar, Spora spora){
+        if (hatralevoAkciopont > 0 && rovar.getSebesseg() != 0) {
+            rovar.elfogyaszt(spora);
+            hatralevoAkciopont -= (4-rovar.getSebesseg());
+        }
     }
 }
