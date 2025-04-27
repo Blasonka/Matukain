@@ -96,8 +96,8 @@ public class Gombasz extends Felhasznalo {
 
     public void addGomba(Gomba gomba) {
         parancsFeldolgozo.print("Gombász (" + getID() + ") gombak értéke megváltozott: ");
-        for (int i = 0; i < gombak.size(); i++) parancsFeldolgozo.print("Gomba (" + gombak.get(i).getID() + ")" + (i == gombak.size() - 1 ? "" : ", "));
-        parancsFeldolgozo.print(" -> ");
+        for (int i = 0; i < gombak.size(); i++) parancsFeldolgozo.print("Gomba (" + gombak.get(i).getID() + ")" + (i == gombak.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("-> ");
         gombak.add(gomba);
         for (int i = 0; i < gombak.size(); i++) parancsFeldolgozo.print("Gomba (" + gombak.get(i).getID() + ")" + (i == gombak.size() - 1 ? "\n" : ", "));
     }

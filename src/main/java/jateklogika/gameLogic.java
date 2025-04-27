@@ -299,7 +299,7 @@ public class gameLogic implements Serializable {
      *
      */
     public void simulateRound(){
-         parancsFeldolgozo.print("Kör szimulálsa...\n");
+         parancsFeldolgozo.print("Kör szimulálása...\n");
          int regi = korSzamlalo;
          korSzamlalo ++;
          parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + " -> " + korSzamlalo+"\n");
