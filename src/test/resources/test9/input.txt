@@ -7,5 +7,5 @@
 /addg 0 0 1
 /addgt 0 0 0 0
 /addf 0 0 1 0 1 S
-/cut 0 0
+/cut 0 0 0
 /simulate_round

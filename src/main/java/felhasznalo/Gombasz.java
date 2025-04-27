@@ -40,8 +40,8 @@ public class Gombasz extends Felhasznalo {
      * Gombasz konstruktora
      * @param name - a felhasználó neve
      */
-    public Gombasz(String name) {
-        super(0, name, 6);
+    public Gombasz(int id, String name) {
+        super(id, name, 6);
         gombak = new ArrayList<>();
         System.out.println(">Gombasz->Gombasz()");
     }

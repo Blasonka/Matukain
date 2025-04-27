@@ -38,10 +38,11 @@ public class GombatestNelkuliTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (this.getGomba().getGombatest().size() != 0){
-            this.getGomba().getGombatest().clear();
+        if (gomba.getGombatest().size() != 0){
+            gomba.getGombatest().clear();
             parancsFeldolgozo.print("Gombatest (" + gomba.getGombatest().get(0).getID() + ") NEM sikerült elhelyezni");
         }
+        //parancsFeldolgozo.print("meghivodott a GombatestNelkuliTekton hatasKifejtes metódusa");
     }
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {

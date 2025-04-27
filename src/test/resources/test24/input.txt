@@ -10,14 +10,14 @@
 /addf 0 0 1 0 1 S
 /addf 1 1 2 0 1 S
 /adds 0 2 0 1 B
-/sporagombatesttel 1 1 2 G
+/sporagombatesttel 1 0 0 0 1 G
 /fonal_novesztes 2 0 2 2 H
-/eat 0 1
+/eat 0 0 1
 /simulate_round
 /move 0 0 1
-/cut 0 0
+/cut 0 0 0
 /move 0 1 2
-/cut 0 1
-/eat 0 1
+/cut 0 0 1
+/eat 0 0 0
 /simulate_round
 /consume 0 0

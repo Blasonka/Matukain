@@ -8,4 +8,4 @@
 /addgt 0 0 0 0
 /addf 0 0 1 0 1 S
 /adds 0 1 0 1 B
-/eat 0 0
+/eat 0 0 0
