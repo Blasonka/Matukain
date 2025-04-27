@@ -79,7 +79,6 @@ public abstract class Tekton {
         sporak = new ArrayList<>();
         gomba = null;
         szomszedok = new ArrayList<>();
-        System.out.println("Tekton->Tekton()");
     }
 
     public abstract Tekton klonoz(int ujID, int ujX, int ujY);

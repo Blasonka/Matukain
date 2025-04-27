@@ -1,6 +1,10 @@
 package tekton;
 
 import gomba.Gomba;
+import gomba.Gombatest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static tesztelo.Menu.parancsFeldolgozo;
 
@@ -38,9 +42,14 @@ public class GombatestNelkuliTekton extends Tekton {
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (gomba.getGombatest().size() != 0){
-            gomba.getGombatest().clear();
-            parancsFeldolgozo.print("Gombatest (" + gomba.getGombatest().get(0).getID() + ") NEM sikerült elhelyezni\n");
+        if (!gomba.getGombatest().isEmpty()){
+            List<Gombatest> gombaTestek = new ArrayList<>();
+            for (Gombatest gombaTest : gomba.getGombatest()) {
+                gombaTestek.add(gombaTest);
+                parancsFeldolgozo.print("Gombatest (" + gombaTest.getID() + ") NEM sikerült elhelyezni\n");
+            } for (Gombatest gombaTest : gombaTestek) {
+                gomba.removeGombatest(gombaTest);
+            }
         }
         //parancsFeldolgozo.print("meghivodott a GombatestNelkuliTekton hatasKifejtes metódusa");
     }

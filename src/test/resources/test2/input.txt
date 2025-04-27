@@ -1,4 +1,5 @@
 /addt 0 0 1 G
 /addgo 0 Peti 0
 /addg 0 0 0
-/addgt 0 0 0 0
+/addgt 0 0 0 0 0
+/simulate_round

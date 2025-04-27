@@ -1,2 +1,6 @@
 Gombász (0) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
 Gombatest (0) NEM sikerült elhelyezni
+Gomba (0) gombatestek értéke megváltozott: Gombatest (0) ->

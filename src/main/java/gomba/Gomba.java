@@ -157,6 +157,7 @@ public class Gomba {
      */
     public void removeGombatest(Gombatest gombatest) {
         gombatestek.remove(gombatest);
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: Gombatest ("+ gombatest.getID() +") ->\n");
     }
 
     /**
