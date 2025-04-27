@@ -165,7 +165,6 @@ public class ParancsFeldolgozo {
      * @param pontszam játékos kezdő pontszáma
      */
     private void addro(int id, String nev, int pontszam) {
-        // TODO Rovarasz megfelelő paraméterezése
         jatekLogika.addRovarasz(new Rovarasz(id, "Rovarasz" + id));
     }
 
@@ -226,7 +225,6 @@ public class ParancsFeldolgozo {
     private void addt(int id, int x, int y, char type) {
         switch (type) {
             case 'L':
-                // TODO Életbentrartó tekton implementálása
                  jatekLogika.getMapTekton().add(new FonalMegtartoTekton(id, x, y));
                 break;
             case 'M':
@@ -407,8 +405,7 @@ public class ParancsFeldolgozo {
      * Tartalmazza a paracsok listáját, az egyes parancsok rövid jeletését, a kapcsolók lehetséges értékeit
      */
     private void help() {
-        // TODO parancsok átnézése: rovar mozgatás, stb parancsokban játékosID, sporagombatesttel (gomba, gombatest, játékos), fonalnövesztés játékosID
-        System.out.println("parancsok:\n" +
+        System.out.println("Parancsok:\n" +
                 "rovarász hozzáadása:\t/addro [ID] [Név] [Pontszám]\n" +
                 "gombász hozzáadása:\t/addgo [ID] [Név] [Pontszám]\n" +
                 "gomba hozzáadása:\t/addg [ID] [TektonID] [JátékosID]\n" +
@@ -639,7 +636,6 @@ public class ParancsFeldolgozo {
      * Kör szimulálása
      */
     private void simulate_round() {
-        // TODO kör szimulálása játéklogikában (életkorok csökkentése, hatások kifejtése, stb)
         jatekLogika.simulateRound();
     }
 
