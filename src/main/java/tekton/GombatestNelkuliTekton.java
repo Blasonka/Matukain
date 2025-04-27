@@ -40,7 +40,7 @@ public class GombatestNelkuliTekton extends Tekton {
     public void hatasKifejtes(Gomba gomba){
         if (gomba.getGombatest().size() != 0){
             gomba.getGombatest().clear();
-            parancsFeldolgozo.print("Gombatest (" + gomba.getGombatest().get(0).getID() + ") NEM sikerült elhelyezni");
+            parancsFeldolgozo.print("Gombatest (" + gomba.getGombatest().get(0).getID() + ") NEM sikerült elhelyezni\n");
         }
         //parancsFeldolgozo.print("meghivodott a GombatestNelkuliTekton hatasKifejtes metódusa");
     }

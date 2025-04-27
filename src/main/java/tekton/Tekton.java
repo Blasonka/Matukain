@@ -166,7 +166,7 @@ public abstract class Tekton {
         for (int i=0; i<sporak.size()-1; i++){
             parancsFeldolgozo.print(" " + sporak.get(i).getID() + ",");
         }
-        parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()));
+        parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()) + "\n");
     }
 
    
