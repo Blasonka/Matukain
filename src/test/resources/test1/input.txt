@@ -5,3 +5,4 @@
 /addf 0 0 0 0 0 S
 /random D 0 1
 /simulate_round
+/simulate_round
