@@ -1,6 +1,10 @@
 package tekton;
 
 import gomba.Gomba;
+import gomba.Gombafonal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static tesztelo.Menu.parancsFeldolgozo;
 
@@ -21,6 +25,7 @@ import static tesztelo.Menu.parancsFeldolgozo;
  * @date 2025-03-21
  */
 public class MaxEgyFonalTekton extends Tekton{
+    Gombafonal fonal;
     /**
      * MaxEgyFonalTekton osztály konstruktora
      * @param id beállítja az id értékét
@@ -40,11 +45,18 @@ public class MaxEgyFonalTekton extends Tekton{
             System.out.println("A gomba növeszthet egy fonalat");
         }
         else{
-            for (int i=1; i<gomba.getGombafonalak().size(); i++){
-                gomba.removeFonal(gomba.getGombafonalak().get(i));
-                parancsFeldolgozo.print("Fonal (" + gomba.getGombafonalak().get(i).getID() + ") NEM sikerült elhelyezni\n");
+            List<Gombafonal> fonalak = new ArrayList<>();
+            for (int i = 0; i < gomba.getGombafonalak().size(); i++){
+                if (fonal == null) {
+                    fonal = gomba.getGombafonalak().get(i);
+                } else {
+                    fonalak.add(gomba.getGombafonalak().get(i));
+                    parancsFeldolgozo.print("Fonal (" + gomba.getGombafonalak().get(i).getID() + ") NEM sikerült elhelyezni\n");
+                }
             }
-            System.out.println("A gomba nem növeszthet fonalat");
+            for (Gombafonal fonal1 : fonalak) {
+                gomba.removeFonal(fonal1);
+            }
         }
     }
 

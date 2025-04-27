@@ -304,11 +304,26 @@ public class gameLogic implements Serializable {
          korSzamlalo ++;
          parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + " -> " + korSzamlalo+"\n");
         for (Tekton t : map) {
-            if (t.getGomba() != null) {
-                t.hatasKifejtes(t.getGomba());
-            }
             for (Rovar rovar : getRovarok()) {
                 rovar.sporaManager();
+            }
+        } List<Tekton> tektonok = new ArrayList<>();
+        for (Gombasz g : gombaszok) {
+            for (Gomba gombak : g.getGombak() ) {
+                for (Tekton t : map) {
+                    if (!gombak.getGombafonalak().isEmpty()) {
+                        for (Gombafonal f : gombak.getGombafonalak()) {
+                            if (f.getHatar1() == t || f.getHatar2() == t) {
+                                tektonok.add(t);
+                            }
+                        }
+                        for (Tekton teki : tektonok) {
+                            teki.hatasKifejtes(gombak);
+                        } tektonok.clear();
+                    } else if (t.getGomba() != null) {
+                        t.hatasKifejtes(gombak);
+                    }
+                }
             }
         }
         csokkentFonalakElete();

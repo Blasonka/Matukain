@@ -131,10 +131,10 @@ public class Gomba {
      */
     public void addFonal(Gombafonal gombafonal) {
         parancsFeldolgozo.print("Gomba (" + getID() + ") fonalak értéke megváltozott: ");
-        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
-        parancsFeldolgozo.print("-> ");
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Fonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("->");
         gombafonalak.add(gombafonal);
-        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ", "));
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print(" Fonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ","));
     }
 
     /**
@@ -143,10 +143,10 @@ public class Gomba {
      */
     public void removeFonal(Gombafonal gombafonal) {
         parancsFeldolgozo.print("Gomba (" + getID() + ") fonalak értéke megváltozott: ");
-        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
-        parancsFeldolgozo.print("-> ");
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Fonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("->");
         gombafonalak.remove(gombafonal);
-        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ", "));
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print(" Fonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ","));
     }
 
     /**
@@ -156,9 +156,9 @@ public class Gomba {
     public void addGombatest(Gombatest gombatest) {
         parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: ");
         for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? " " : ", "));
-        parancsFeldolgozo.print("-> ");
+        parancsFeldolgozo.print("->");
         gombatestek.add(gombatest);
-        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ", "));
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print(" Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ","));
     }
 
     /**
@@ -168,9 +168,9 @@ public class Gomba {
     public void removeGombatest(Gombatest gombatest) {
         parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: ");
         for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? " " : ", "));
-        parancsFeldolgozo.print("-> ");
+        parancsFeldolgozo.print("->");
         gombatestek.remove(gombatest);
-        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ", "));
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print(" Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ","));
     }
 
     /**

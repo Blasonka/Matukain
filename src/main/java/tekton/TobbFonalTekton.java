@@ -35,7 +35,6 @@ public class TobbFonalTekton extends Tekton{
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        System.out.println("TobbFonalTekton hatás kifejtve, azaz több gomba fonalai is nőhetnek rajta");
     }
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {
