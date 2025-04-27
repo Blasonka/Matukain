@@ -347,7 +347,7 @@ public class ParancsFeldolgozo {
                  jatekLogika.toresEsely = tores;
                  jatekLogika.setFonalakElete(megmaradas);
                  print("Véletlenszerű események kikapcsolva\n" +
-                         "Tektontörés valószínűsége: " + tores +
+                         "Tektontörés valószínűsége: " + tores * 100 + "%" +
                          "\nFonal elrágás utáni megmaradásának ideje: " + megmaradas + " kör\n");
                 break;
             case 'E':
