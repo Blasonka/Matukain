@@ -229,8 +229,8 @@ public class gameLogic implements Serializable {
         }
         Gombasz g1= new Gombasz(0, "Gombasz1");
         Gombasz g2= new Gombasz(1, "Gombasz2");
-        Rovarasz r1 = new Rovarasz("Rovarasz1");
-        Rovarasz r2 = new Rovarasz("Rovarasz2");
+        Rovarasz r1 = new Rovarasz(2, "Rovarasz1");
+        Rovarasz r2 = new Rovarasz(3, "Rovarasz2");
         Rovar rovar1 = new Rovar(null, 1);
         Rovar rovar2 = new Rovar(null, 2);
         Gomba gomba1 = new Gomba(0);

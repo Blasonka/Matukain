@@ -44,8 +44,8 @@ public class Rovarasz extends Felhasznalo {
      * Rovarasz konstruktora
      * @param name - a felhasználó neve
      */
-    public Rovarasz(String name) {
-        super(0, name, 6);
+    public Rovarasz(int id, String name) {
+        super(id, name, 6);
         rovarok = new ArrayList<>();
         System.out.println(">Rovarasz->Rovarasz()");
     }

@@ -166,7 +166,7 @@ public class ParancsFeldolgozo {
      */
     private void addro(int id, String nev, int pontszam) {
         // TODO Rovarasz megfelelő paraméterezése
-        jatekLogika.addRovarasz(new Rovarasz("Rovarasz" + id));
+        jatekLogika.addRovarasz(new Rovarasz(id, "Rovarasz" + id));
     }
 
     /**
@@ -191,7 +191,9 @@ public class ParancsFeldolgozo {
     private void addg(int id, int tektonID, int jatekosID) {
         // Azzal a feltételezéssel élve, hogy a tektonID és a jatekosID megfeleltethető az elfoglalt helyével (a tesztekben elvileg igaz)
         try {
-            jatekLogika.getGombasz(jatekosID).addGomba(new Gomba(id));
+            Gomba uj = new Gomba(id);
+            jatekLogika.getGombasz(jatekosID).addGomba(uj);
+            jatekLogika.getTekton(tektonID).setGomba(uj);
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Gomba felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, tekton ID nem létezik");
@@ -470,9 +472,11 @@ public class ParancsFeldolgozo {
         try {
             Gombafonal keresett = null;
             for (Tekton t : jatekLogika.getMapTekton()) {
-                for (Gombafonal f : t.getGomba().getGombafonalak()) {
-                    if (f.getId() == fonalID) {
-                        keresett = f;
+                if (t.getGomba() != null) {
+                    for (Gombafonal f : t.getGomba().getGombafonalak()) {
+                        if (f.getId() == fonalID) {
+                            keresett = f;
+                        }
                     }
                 }
             }
