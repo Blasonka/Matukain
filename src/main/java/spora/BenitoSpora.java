@@ -34,7 +34,6 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      */
     public BenitoSpora(int sz, int id) {
         super(sz,"benito", id);
-        System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
 
     /**
@@ -51,6 +50,5 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
     public void hatasKifejtes(Rovar rovar) {
         int regi= rovar.getSebesseg();
         rovar.setSebesseg(0);
-        parancsFeldolgozo.print("A rovar sebessege megvaltozott: "+regi+" -> "+rovar.getSebesseg());
     }
 }

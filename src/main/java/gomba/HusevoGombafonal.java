@@ -5,6 +5,8 @@ import felhasznalo.Gombasz;
 import rovar.Rovar;
 import tekton.Tekton;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * HusevoGombafonal osztály
  *
@@ -60,6 +62,9 @@ public class HusevoGombafonal extends Gombafonal {
      * @return true, ha a gombafonal megeszi a rovart, false, ha sikertelen
      */
     public boolean megesziRovart(Rovar rovar) {
+        evettRovart = true;
+        parancsFeldolgozo.print("Fonal (" + getID() + ") elfogyasztotta Rovar (" + rovar.getID()+ ")\n");
+        parancsFeldolgozo.print("Fonal (" + getID() + ") evettRovart értéke megváltozott: " + (!evettRovart ? "true" : "false") + " -> " + (evettRovart ? "true" : "false") + "\n");
         return false;
     }
 }

@@ -88,6 +88,7 @@ public class Rovar {
         this.elfogyasztottSporak = new ArrayList<>();
         this.ID = ID;
         this.vaghate = true;
+        this.sebesseg = 1;
     }
 
     /**
@@ -139,7 +140,7 @@ public class Rovar {
         parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztotta Spóra ("+spora.getID()+")\n");
         if(!(spora instanceof OsztoSpora)) {
             elfogyasztottSporak.add(spora);
-            parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: -> Spora ("+spora.getID()+")\n");
+            parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: -> Spóra ("+spora.getID()+")\n");
             spora.hatasKifejtes(this);
         }
     }
@@ -214,13 +215,24 @@ public class Rovar {
      */
     public void sporaManager(){
         resetEffects();
+        List<Spora> sporak = new ArrayList<>();
         for (Spora s : elfogyasztottSporak) {
-            if (s.getSzamlalo() <= 0) {
-                parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: Spora ("+s.getID()+") ->\n");
-                elfogyasztottSporak.remove(s);
+            s.csokkentSzamlalo(1);
+            if (s.getSzamlalo() == 0) {
+                sporak.add(s);
+                s.hatasKifejtes(this);
             } else {
                 s.hatasKifejtes(this);
             }
+        } parancsFeldolgozo.print("Rovar (" + ID + ") sebesség értéke megváltozott: " + 2 + " -> " + sebesseg + "\n");
+        if (!sporak.isEmpty()) {
+            parancsFeldolgozo.print("Rovar (" + ID + ") elfogyasztottsporak értéke megváltozott: ");
+            for (int i = 0; i < elfogyasztottSporak.size(); i++) parancsFeldolgozo.print("Spóra (" + elfogyasztottSporak.get(i).getID() + ")" + (i == elfogyasztottSporak.size() - 1 ? " " : ", "));
+            parancsFeldolgozo.print("->");
+            for (Spora s : sporak) {
+                elfogyasztottSporak.remove(s);
+            } for (int i = 0; i < elfogyasztottSporak.size(); i++) parancsFeldolgozo.print("Spóra (" + elfogyasztottSporak.get(i).getID() + ")" + (i == elfogyasztottSporak.size() - 1 ? "\n" : ","));
+            parancsFeldolgozo.print("\n");
         }
     }
 

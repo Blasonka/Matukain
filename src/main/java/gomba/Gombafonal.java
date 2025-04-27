@@ -144,11 +144,12 @@ public class Gombafonal {
     }
 
     public boolean csokkentPusztulasSzamlalo() {
+        if (!elragva) return false;
         if (pusztulasSzamlalo == 2) {
             this.pusztulasSzamlalo--;
             parancsFeldolgozo.print("Fonal (" + this.getID() + ") pusztulasSzamlalo értéke NEM változott: " + this.getPusztulasSzamlalo() + "\n");
         }
-        else {
+        else if (pusztulasSzamlalo > 0) {
             this.pusztulasSzamlalo--;
             parancsFeldolgozo.print("Fonal (" + id + ") pusztulasSzamlalo értéke megváltozott: " + (pusztulasSzamlalo + 1) + " -> " + pusztulasSzamlalo + "\n" );
         }

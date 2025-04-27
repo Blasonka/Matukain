@@ -51,7 +51,7 @@ public class gameLogic implements Serializable {
     public boolean veletlenEsemenyekEngedelyezve = true;
     public double toresEsely;
     private List<Gombafonal> fonalak = new ArrayList<>();
-    public int fonalelet;
+    public int fonalelet = 3;
     private List<Rovar> rovarok = new ArrayList<>();
 
     /**
@@ -305,8 +305,8 @@ public class gameLogic implements Serializable {
          int regi = korSzamlalo;
          korSzamlalo ++;
          parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + " -> " + korSzamlalo+"\n");
-        for (Tekton t : map) {
-            for (Rovar rovar : getRovarok()) {
+        for (Rovarasz rovarasz : rovaraszok) {
+            for (Rovar rovar : rovarasz.getRovarok()) {
                 rovar.sporaManager();
             }
         } List<Tekton> tektonok = new ArrayList<>();

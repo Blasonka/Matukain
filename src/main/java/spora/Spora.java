@@ -61,6 +61,7 @@ public abstract class Spora implements hatasKifejtes {
     public int getSzamlalo() {
         return szamlalo;
     }
+    public void csokkentSzamlalo(int ertek) {szamlalo -= ertek;}
 
     public int getID() {return id;}
 }

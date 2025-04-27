@@ -8,3 +8,4 @@ Kör szimulálása...
 Játéklogika kor értéke megváltozott: 0 -> 1
 Fonal (1) NEM sikerült elhelyezni
 Gomba (1) fonalak értéke megváltozott: Fonal (1) ->
+Fonal (0) pusztulasSzamlalo értéke megváltozott: 3 -> 2

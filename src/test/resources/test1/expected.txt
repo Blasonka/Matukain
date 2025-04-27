@@ -7,6 +7,7 @@ Fonal elrágás utáni megmaradásának ideje: 1 kör
 Kör szimulálása...
 Játéklogika kor értéke megváltozott: 0 -> 1
 Tekton (0) szamlalo értéke megváltozott: 2 -> 1
+Fonal (0) pusztulasSzamlalo értéke megváltozott: 0 -> -1
 Kör szimulálása...
 Játéklogika kor értéke megváltozott: 1 -> 2
 Tekton (0) szamlalo értéke megváltozott: 1 -> 0
