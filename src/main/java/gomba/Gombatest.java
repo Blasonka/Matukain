@@ -80,9 +80,22 @@ public class Gombatest {
         this.kilohetoSporakSzama = 3;
         this.fejlett = false;
         parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
-
     }
 
+    public Gombatest(int id, Tekton t, boolean fejlett) {
+        this.id = id;
+        this.tekton = t;
+        this.maxSporaKiloves = 6;
+        this.eddigiSzorasok = 0;
+        this.kilohetoSporakSzama = 3;
+        this.fejlett = fejlett;
+        parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
+    }
+
+    /**
+     * Visszaadja a gombatest azonosítóját
+     * @return a gombatest azonosítója
+     */
     public int getID() {return id;}
 
     /**
@@ -151,6 +164,12 @@ public class Gombatest {
             default:
                 break;
         }
+        kilohetoSporakSzama--;
+        eddigiSzorasok++;
+        tekton.addSpora(spora);
+    }
+
+    public void sporaSzoras(Tekton tekton, Spora spora) {
         kilohetoSporakSzama--;
         eddigiSzorasok++;
         tekton.addSpora(spora);

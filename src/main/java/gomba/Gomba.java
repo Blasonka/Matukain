@@ -75,6 +75,7 @@ public class Gomba {
      * Fonal növesztése két tekton közés, vagy egy darab tektonra (ekkor a másik tekton ugyan az mint az első)
      * @param tekton1 az egyik tekton, amelyen a fonál növekszik
      * @param tekton2 a másik tekton, amelyen a fonál növekszik
+     * @param gombatest a gombatest, amelyhez a fonal tartozik
      */
     public void fonalNovesztes(Tekton tekton1, Tekton tekton2, Gombatest gombatest) {
         if (gombatestek.isEmpty()) {
@@ -97,6 +98,27 @@ public class Gomba {
                     }
                 }
                 Gombafonal gombafonal = new Gombafonal(nextId, tekton1, tekton2, gombatest);
+                addFonal(gombafonal);
+            } else {
+                System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");
+            }
+        }
+    }
+
+    /**
+     * Fonal növesztése két tekton közés, vagy egy darab tektonra (ekkor a másik tekton ugyan az mint az első)
+     * @param tekton1 az egyik tekton, amelyen a fonál növekszik
+     * @param tekton2 a másik tekton, amelyen a fonál növekszik
+     * @param gombatest a gombatest, amelyhez a fonal tartozik
+     * @param gombafonal a gombafonal, amelyet hozzáadunk
+     */
+    public void fonalNovesztes(Tekton tekton1, Tekton tekton2, Gombatest gombatest, Gombafonal gombafonal) {
+        if (gombatestek.isEmpty()) {
+            System.out.println("Nincs gombatest, nem lehet fonalat növeszteni");
+        } else if (fonalOsszekoti(tekton1, tekton2)) {
+            System.out.println("Már van fonal a két tekton között");
+        } else {
+            if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
                 addFonal(gombafonal);
             } else {
                 System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");
