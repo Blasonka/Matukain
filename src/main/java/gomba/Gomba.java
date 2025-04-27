@@ -147,8 +147,11 @@ public class Gomba {
      * @return a gombatest
      */
     public void addGombatest(Gombatest gombatest) {
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: ");
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("-> ");
         gombatestek.add(gombatest);
-        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: -> Gombatest ("+ gombatest.getID() +")\n");
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ", "));
     }
 
     /**
@@ -156,8 +159,11 @@ public class Gomba {
      * @param gombatest az eltávolítandó gombatest
      */
     public void removeGombatest(Gombatest gombatest) {
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: ");
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("-> ");
         gombatestek.remove(gombatest);
-        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: Gombatest ("+ gombatest.getID() +") ->\n");
+        for (int i = 0; i < gombatestek.size(); i++) parancsFeldolgozo.print("Gombatest ("+ gombatestek.get(i).getID() +")" + (i == gombatestek.size() - 1 ? "\n" : ", "));
     }
 
     /**

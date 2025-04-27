@@ -100,6 +100,7 @@ public class Menu {
                             // Töröljük a létrejövő fájlt windows-1250 fájlt
                             if (Files.exists(tmp_exp)) Files.delete(tmp_exp);
                             if (Files.exists(tmp_out)) Files.delete(tmp_out);
+                            jatekLogika = new gameLogic();
                         } catch (FileNotFoundException e) {
                             System.err.println("A megadott mappában nem található a keresett fájl: " + mappa);
                         } catch (IOException e) {
