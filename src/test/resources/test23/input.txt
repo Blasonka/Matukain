@@ -9,5 +9,5 @@
 /addf 0 0 1 0 1 S
 /adds 0 1 0 1 O
 /move 0 0 1
-/eat 0 0
+/eat 0 0 0
 /trigger_tores 2
