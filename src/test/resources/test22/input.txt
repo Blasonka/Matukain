@@ -10,4 +10,4 @@
 /simulate_round
 /simulate_round
 /fonal_novesztes 2 0 1 1 S
-/sporagombatesttel 0 5 6 V
+/sporagombatesttel 0 2 0 0 1 V

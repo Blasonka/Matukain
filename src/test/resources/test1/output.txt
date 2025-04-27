@@ -1,5 +1,0 @@
-Véletlenszerű események kikapcsolva
-Tektontörés valószínűsége: 0
-Fonal elrágás utáni megmaradásának ideje: 1 kör
-Kör szimulálsa...
-Játéklogika kor értéke megváltozott: 0->1
