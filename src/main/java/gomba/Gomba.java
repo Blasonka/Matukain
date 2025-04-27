@@ -131,7 +131,7 @@ public class Gomba {
      */
     public void addFonal(Gombafonal gombafonal) {
         gombafonalak.add(gombafonal);
-        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: -> Fonal ("+ gombafonal.getID() +")\n");
+        parancsFeldolgozo.print("Gomba ("+ getID() +") fonalak értéke megváltozott: -> Fonal ("+ gombafonal.getID() +")\n");
     }
 
     /**
@@ -148,7 +148,7 @@ public class Gomba {
      */
     public void addGombatest(Gombatest gombatest) {
         gombatestek.add(gombatest);
-        parancsFeldolgozo.print("Gomba ("+ getID() +") fonalak értéke megváltozott: -> Gombatest ("+ gombatest.getID() +")\n");
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: -> Gombatest ("+ gombatest.getID() +")\n");
     }
 
     /**
