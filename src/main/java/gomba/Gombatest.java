@@ -5,6 +5,8 @@ import tekton.Tekton;
 
 import java.util.Random;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * Gombatest osztály
  *
@@ -77,6 +79,8 @@ public class Gombatest {
         this.eddigiSzorasok = 0;
         this.kilohetoSporakSzama = 3;
         this.fejlett = false;
+        parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
+
     }
 
     public int getID() {return id;}

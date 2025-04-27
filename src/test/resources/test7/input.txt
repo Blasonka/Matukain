@@ -6,4 +6,4 @@
 /adds 0 1 0 1 G
 /adds 1 1 0 1 G
 /adds 2 1 0 1 G
-/gombatestnovesztes 1 0 1 2 1 0
+/gombatest_novesztes 1 0 1 2 1 0

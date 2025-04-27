@@ -95,7 +95,7 @@ public class ParancsFeldolgozo {
                     adds(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), command[5].charAt(0));
                     break;
                 case "/addf":
-                    addf(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[7].charAt(0));
+                    addf(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[6].charAt(0));
                     break;
                 case "/addgt":
                     addgt(Integer.parseInt(command[1]), Integer.parseInt(command[2]) == 1, Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]));
@@ -141,8 +141,10 @@ public class ParancsFeldolgozo {
                     break;
                 case "/fonal_novesztes":
                     fonal_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), command[7].charAt(0));
+                    break;
                 case "/gombatest_novesztes":
-                    gombatest_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), Integer.parseInt(command[7]));
+                    gombatest_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), Integer.parseInt(command[6]));
+                    break;
                 default:
                     System.out.println("Érvénytelen parancs! (/help a parancsok listájához)");
                     break;
@@ -223,7 +225,7 @@ public class ParancsFeldolgozo {
         switch (type) {
             case 'L':
                 // TODO Életbentrartó tekton implementálása
-                // jatekLogika.getMapTekton().add(new EletbenTartoTekon(id, x, y));
+                 jatekLogika.getMapTekton().add(new FonalMegtartoTekton(id, x, y));
                 break;
             case 'M':
                 jatekLogika.addTekton(new MaxEgyFonalTekton(id, x, y));
