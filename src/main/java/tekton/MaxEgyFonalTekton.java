@@ -2,6 +2,8 @@ package tekton;
 
 import gomba.Gomba;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * MaxEgyFonalTekton osztály
  *
@@ -41,6 +43,7 @@ public class MaxEgyFonalTekton extends Tekton{
         else{
             for (int i=1; i<gomba.getGombafonalak().size(); i++){
                 gomba.removeFonal(gomba.getGombafonalak().get(i));
+                parancsFeldolgozo.print("fonal (" + gomba.getGombafonalak().get(i).getID() + ") NEM sikerült elhelyezni\n");
             }
             System.out.println("A gomba nem növeszthet fonalat");
         }
