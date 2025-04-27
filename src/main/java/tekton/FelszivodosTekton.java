@@ -60,12 +60,12 @@ public class FelszivodosTekton extends Tekton{
     @Override
     public void hatasKifejtes(Gomba gomba){
         szamlalo--;
-        parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo);
+        parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo + "\n");
         if (szamlalo==0){
             for (Gombafonal fonal : gomba.getGombafonalak()) {
                 if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
                     gomba.removeFonal(fonal);
-                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getId() + ") eltűnt");
+                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getId() + ") eltűnt\n");
                 }
             }
         }
