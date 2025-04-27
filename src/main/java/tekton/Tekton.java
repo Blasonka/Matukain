@@ -9,6 +9,8 @@ import java.util.List;
 
 import tesztelo.ParancsFeldolgozo;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * Tekton osztály
  *
@@ -155,8 +157,16 @@ public abstract class Tekton {
      * @param spora spórát hozzáadja a tektonhoz
      */
     public void addSpora(Spora spora){
+        parancsFeldolgozo.print("Tekton (" + this.getID() + ") sporak értéke megváltozott: ");
+        for (int i=0; i<sporak.size()-1; i++){
+            parancsFeldolgozo.print(sporak.get(i).getID() + ", ");
+        }
+        parancsFeldolgozo.print(sporak.get(sporak.size()-1).getID() + " ->");
         sporak.add(spora);
-        System.out.println("Az adott spóra hozzá lett adva a tektonhoz");
+        for (int i=0; i<sporak.size()-1; i++){
+            parancsFeldolgozo.print(" " + sporak.get(i).getID() + ",");
+        }
+        parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()));
     }
 
    
