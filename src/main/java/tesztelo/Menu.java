@@ -90,7 +90,7 @@ public class Menu {
                             List<String> lines2 = Files.readAllLines(Paths.get(mappa + "\\output.txt"), StandardCharsets.UTF_8);
                             Files.write(tmp_out, lines2, Charset.forName("windows-1250"));
                             // fc meghívása
-                            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\tmp_output.txt", mappa + "\\tmp_expected.txt");
+                            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "fc", mappa + "\\output.txt", mappa + "\\expected.txt");
                             Process p = pb.start();
                             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                             String kimenet;
