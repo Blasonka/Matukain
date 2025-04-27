@@ -198,7 +198,13 @@ public abstract class Tekton {
      * @return true, ha szomszédosak, false egyébként
      */
     public boolean szomszedosTekton(Tekton szomszed){
-        return true;
+        double tavolsag = Math.sqrt(Math.pow(this.koordinataX - szomszed.getKoordinataX(), 2) + Math.pow(this.koordinataY - szomszed.getKoordinataY(), 2));
+        if (tavolsag < 5){
+            return true;
+        }
+        else {
+            return false;
+        }
         /*
         System.out.println("Tekton->szomszedosTekton(szomszed)");
         System.out.println("A két tekton szomszédos?(Y/N)");
