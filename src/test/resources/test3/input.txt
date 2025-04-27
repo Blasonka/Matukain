@@ -8,3 +8,4 @@
 /addgt 1 0 2 1 0
 /addf 0 0 1 0 0 S
 /addf 1 1 2 1 0 S
+/simulate_round

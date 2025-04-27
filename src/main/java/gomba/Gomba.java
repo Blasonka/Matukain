@@ -130,8 +130,11 @@ public class Gomba {
      * @param gombafonal a hozzáadandó fonal
      */
     public void addFonal(Gombafonal gombafonal) {
+        parancsFeldolgozo.print("Gomba (" + getID() + ") fonalak értéke megváltozott: ");
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("-> ");
         gombafonalak.add(gombafonal);
-        parancsFeldolgozo.print("Gomba ("+ getID() +") fonalak értéke megváltozott: -> Fonal ("+ gombafonal.getID() +")\n");
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ", "));
     }
 
     /**
@@ -139,7 +142,11 @@ public class Gomba {
      * @param gombafonal az eltávolítandó fonal
      */
     public void removeFonal(Gombafonal gombafonal) {
+        parancsFeldolgozo.print("Gomba (" + getID() + ") fonalak értéke megváltozott: ");
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? " " : ", "));
+        parancsFeldolgozo.print("-> ");
         gombafonalak.remove(gombafonal);
+        for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print("Gombafonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ", "));
     }
 
     /**
