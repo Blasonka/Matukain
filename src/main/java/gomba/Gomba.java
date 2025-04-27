@@ -140,7 +140,6 @@ public class Gomba {
      */
     public void removeFonal(Gombafonal gombafonal) {
         gombafonalak.remove(gombafonal);
-        System.out.println("Fonal eltávolítva");
     }
 
     /**
@@ -158,7 +157,6 @@ public class Gomba {
      */
     public void removeGombatest(Gombatest gombatest) {
         gombatestek.remove(gombatest);
-        System.out.println("Gombatest eltávolítva");
     }
 
     /**

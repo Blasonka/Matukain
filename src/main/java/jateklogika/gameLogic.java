@@ -135,7 +135,7 @@ public class gameLogic implements Serializable {
             Gombafonal fonal = iterator.next();
             boolean elpusztult = fonal.csokkentPusztulasSzamlalo();
             if (elpusztult) {
-                System.out.println("Gombafonal ID " + fonal.getId() + " elpusztult.");
+                System.out.println("Gombafonal ID " + fonal.getID() + " elpusztult.");
                 iterator.remove(); // Remove threads that have expired
             }
         }
@@ -327,7 +327,7 @@ public class gameLogic implements Serializable {
             }
 
             for (Gombafonal gombafonal : getFonalak()) {
-                parancsFeldolgozo.print("  -> Gombafonal (ID: " + gombafonal.getId() + ", Élettartam: " + gombafonal.getPusztulasSzamlalo() + "Szomszédos Tektonok:" + gombafonal.getHatar1() + gombafonal.getHatar2()+ ")\n");
+                parancsFeldolgozo.print("  -> Gombafonal (ID: " + gombafonal.getID() + ", Élettartam: " + gombafonal.getPusztulasSzamlalo() + "Szomszédos Tektonok:" + gombafonal.getHatar1() + gombafonal.getHatar2()+ ")\n");
             }
 
             for (Rovar rovar : getRovarok() ) {

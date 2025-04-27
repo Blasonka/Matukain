@@ -113,7 +113,7 @@ public class Rovar {
      */
     public void fonalElvagas(Gombafonal fonal) {
         if (!vaghate) {
-            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getId()+")\n");
+            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getID()+")\n");
             return;
         }
 
@@ -121,12 +121,12 @@ public class Rovar {
         Tekton t2 = fonal.getHatar2();
 
         if (t1 != tekton && t2 != tekton) {
-            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getId()+")\n");
+            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getID()+")\n");
             return;
         }
 
         fonal.elragas();
-        parancsFeldolgozo.print("Rovar ("+ID+") elvágta Fonal ("+fonal.getId()+") \n");
+        parancsFeldolgozo.print("Rovar ("+ID+") elvágta Fonal ("+fonal.getID()+") \n");
     }
 
     /**

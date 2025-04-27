@@ -65,7 +65,7 @@ public class FelszivodosTekton extends Tekton{
             for (Gombafonal fonal : gomba.getGombafonalak()) {
                 if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
                     gomba.removeFonal(fonal);
-                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getId() + ") eltűnt");
+                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getID() + ") eltűnt");
                 }
             }
         }

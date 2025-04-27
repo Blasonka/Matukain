@@ -470,7 +470,7 @@ public class ParancsFeldolgozo {
             for (Tekton t : jatekLogika.getMapTekton()) {
                 if (t.getGomba() != null) {
                     for (Gombafonal f : t.getGomba().getGombafonalak()) {
-                        if (f.getId() == fonalID) {
+                        if (f.getID() == fonalID) {
                             keresett = f;
                         }
                     }
@@ -530,7 +530,7 @@ public class ParancsFeldolgozo {
         for (Gombasz gombasz : jatekLogika.getGombaszok()) {
             for (Gomba gomba : gombasz.getGombak()) {
                 for (Gombafonal fonal : gomba.getGombafonalak()) {
-                    if (fonal.getId() == fonalID) {
+                    if (fonal.getID() == fonalID) {
                         try {
                             keresett = (HusevoGombafonal) fonal;
                         } catch (ClassCastException e) {
