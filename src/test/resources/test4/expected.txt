@@ -9,4 +9,5 @@ Rovar (0) elvágta Fonal (0)
 Fonal (0) elragva értéke megváltozott: false -> true
 Kör szimulálása...
 Játéklogika kor értéke megváltozott: 0 -> 1
+Rovar (0) sebesség értéke megváltozott: 2 -> 2
 Fonal (0) pusztulasSzamlalo értéke NEM változott: 1
