@@ -323,15 +323,14 @@ public class gameLogic implements Serializable {
                     if (!gombak.getGombafonalak().isEmpty()) {
                         for (Gombafonal f : gombak.getGombafonalak()) {
                             if (f.getHatar1() == t || f.getHatar2() == t) {
-                                tektonok.add(t);
+                                if (!tektonok.contains(t)) tektonok.add(t);
                             }
                         }
-                        for (Tekton teki : tektonok) {
-                            teki.hatasKifejtes(gombak);
-                        } tektonok.clear();
                     } else if (t.getGomba() != null) {
                         t.hatasKifejtes(gombak);
                     }
+                } for (Tekton teki : tektonok) {
+                    teki.hatasKifejtes(gombak);
                 }
             }
         }
