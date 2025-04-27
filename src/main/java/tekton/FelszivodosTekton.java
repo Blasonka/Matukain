@@ -3,6 +3,9 @@ package tekton;
 import gomba.Gomba;
 import gomba.Gombafonal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
@@ -62,12 +65,15 @@ public class FelszivodosTekton extends Tekton{
         szamlalo--;
         parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo);
         if (szamlalo==0){
+            List<Gombafonal> fonalak = new ArrayList<>();
             for (Gombafonal fonal : gomba.getGombafonalak()) {
                 if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
-                    gomba.removeFonal(fonal);
+                    fonalak.add(fonal);
                     parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getID() + ") eltűnt");
                 }
-            }
+            } for (Gombafonal fonal : fonalak) {
+                gomba.removeFonal(fonal);
+            } szamlalo = 2;
         }
     }
 }
