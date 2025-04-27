@@ -80,7 +80,7 @@ public class Gombafonal {
      * Visszaadja a gombafonal azonosítóját
      * @return a gombafonal azonosítója
      */
-    public int getId() { return id; }
+    public int getID() { return id; }
 
     /**
      * Visszaadja a gombafonal elragva állapotát
