@@ -439,7 +439,7 @@ public class ParancsFeldolgozo {
         try {
             Tekton ujTekton = null;
             for (Tekton t : jatekLogika.getMapTekton()) {
-                if (t.getID() == jelenlegiTektonID) {
+                if (t.getID() == TektonID) {
                     ujTekton = t;
                     break;
                 }

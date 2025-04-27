@@ -13,6 +13,6 @@ Kör szimulálása...
 Játéklogika kor értéke megváltozott: 0 -> 1
 Rovar (0) sebesség értéke megváltozott: 2 -> 1
 Rovar (0) elfogyasztottsporak értéke megváltozott: Spóra (0) ->
-Rovar (0) tekton értéke megváltozott: Tekton (2) -> Tekton (2)
 Rovar (0) tekton értéke megváltozott: Tekton (2) -> Tekton (1)
 Rovar (0) tekton értéke megváltozott: Tekton (1) -> Tekton (0)
+Rovar (0) tekton értéke megváltozott: Tekton (0) -> Tekton (1)

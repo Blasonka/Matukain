@@ -149,7 +149,7 @@ public class Gomba {
         gombafonalak.remove(gombafonal);
         gombafonal.setPusztulasSzamlalo(-1);
         for (int i = 0; i < gombafonalak.size(); i++) parancsFeldolgozo.print(" Fonal ("+ gombafonalak.get(i).getID() +")" + (i == gombafonalak.size() - 1 ? "\n" : ","));
-        parancsFeldolgozo.print("\n");
+        if (gombafonalak.isEmpty()) parancsFeldolgozo.print("\n");
     }
 
     /**
