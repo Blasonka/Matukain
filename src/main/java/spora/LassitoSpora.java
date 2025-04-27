@@ -52,7 +52,6 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
         int regi = r.getSebesseg();
         if (!(r.getSebesseg() <= 0)) {
             r.setSebesseg(r.getSebesseg() - 1);
-            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+r.getSebesseg());
         }
     }
 }

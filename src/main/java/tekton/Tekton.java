@@ -194,9 +194,11 @@ public abstract class Tekton {
      * @return true, ha szomszédosak, false egyébként
      */
     public boolean szomszedosTekton(Tekton szomszed){
+        return true;
+        /*
         System.out.println("Tekton->szomszedosTekton(szomszed)");
         System.out.println("A két tekton szomszédos?(Y/N)");
-        String valasz = "Y"; // = Tesztelo.scanner.nextLine();
+        String valasz = ""; // = Tesztelo.scanner.nextLine();
         if (valasz.equals("Y")) {
             System.out.println("A két tekton szomszédos");
             return true;
@@ -204,7 +206,7 @@ public abstract class Tekton {
             System.out.println("A két tekton nem szomszédos");
             return false;
         }
-
+        */
     }
 
     /**
