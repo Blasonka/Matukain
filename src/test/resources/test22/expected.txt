@@ -15,5 +15,4 @@ Tekton(1) hatására Fonal (0) eltűnt
 Tekton(1) hatására Fonal (1) eltűnt
 Gomba (0) fonalak értéke megváltozott: Fonal (0), Fonal (1) -> Fonal (1)
 Gomba (0) fonalak értéke megváltozott: Fonal (1) ->
-Spóra (0) Vágásgátló elhelyezve Tekton (2) Gombatest (0) által
-Tekton (2) sporak értéke megváltozott: -> Spóra (0)
+Spóra (0) Vágásgátló NEM elhelyezve Tekton (2) Gombatest (0) által

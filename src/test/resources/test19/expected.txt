@@ -10,6 +10,5 @@ Rovar (0) elfogyasztotta Spóra (0)
 Rovar (0) elfogyasztottsporak értéke megváltozott: -> Spóra (0)
 Kör szimulálása...
 Játéklogika kor értéke megváltozott: 0 -> 1
-Rovar (0) sebesség értéke megváltozott: 2 -> 2
 Rovar (0) elfogyasztottsporak értéke megváltozott: Spóra (0) ->
 Rovar (0) NEM elrágta Fonal (0)
