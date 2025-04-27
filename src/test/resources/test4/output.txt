@@ -1,7 +1,0 @@
-Véletlenszerű események kikapcsolva
-Tektontörés valószínűsége: 0
-Fonal elrágás utáni megmaradásának ideje: 1 kör
-Rovarász (0) rovarok paraméterének értéke megváltozott:  -> Rovar (0)
-Gomba sikeresen létrejött
-Kör szimulálsa...
-Játéklogika kor értéke megváltozott: 0->1

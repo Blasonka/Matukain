@@ -134,7 +134,7 @@ public class ParancsFeldolgozo {
                     trigger_tores(Integer.parseInt(command[1]));
                     break;
                 case "/sporagombatesttel":
-                    sporagombatesttel(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), command[7].charAt(0));
+                    sporagombatesttel(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[6].charAt(0));
                     break;
                 case "/simulate_round":
                     simulate_round();
@@ -254,23 +254,22 @@ public class ParancsFeldolgozo {
      * @param type spóra típusa [O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]
      */
     private void adds(int id, int tektonID, int gombaID, int jatekosID, char type) {
-        // TODO spóraáknak ID, gomba paraméterek
         try {
             switch (type) {
                 case 'O':
-                    jatekLogika.getTekton(tektonID).addSpora(new OsztoSpora());
+                    jatekLogika.getTekton(tektonID).addSpora(new OsztoSpora(1, id));
                     break;
                 case 'L':
-                    jatekLogika.getTekton(tektonID).addSpora(new LassitoSpora(0));
+                    jatekLogika.getTekton(tektonID).addSpora(new LassitoSpora(1, id));
                     break;
                 case 'G':
-                    jatekLogika.getTekton(tektonID).addSpora(new GyorsitoSpora(0));
+                    jatekLogika.getTekton(tektonID).addSpora(new GyorsitoSpora(1, id));
                     break;
                 case 'B':
-                    jatekLogika.getTekton(tektonID).addSpora(new BenitoSpora(0));
+                    jatekLogika.getTekton(tektonID).addSpora(new BenitoSpora(1, id));
                     break;
                 case 'V':
-                    jatekLogika.getTekton(tektonID).addSpora(new VagasGatloSpora(0));
+                    jatekLogika.getTekton(tektonID).addSpora(new VagasGatloSpora(1, id));
                     break;
                 default:
                     System.out.println("Érvénytelen Spóratípus! (/help a megadható értékek listájához)");
@@ -582,41 +581,40 @@ public class ParancsFeldolgozo {
      * @param type spóra típusa [O (osztó), L (lassító), G (gyorsító), B (bénító), V (vágásgátló)]
      */
     private void sporagombatesttel(int id, int tektonID, int gombaID, int gombatestID, int jatekosID, char type) {
-        // TODO manuálisan megadható spórafajta a sporaSzorasba
         try {
             switch (type) {
                 case 'O':
                     for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
                         if (gombatest.getID() == gombatestID) {
-                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID), 'O', id);
                         }
                     }
                     break;
                 case 'L':
                     for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
                         if (gombatest.getID() == gombatestID) {
-                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID), 'L', id);
                         }
                     }
                     break;
                 case 'G':
                     for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
                         if (gombatest.getID() == gombatestID) {
-                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID), 'G', id);
                         }
                     }
                     break;
                 case 'B':
                     for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
                         if (gombatest.getID() == gombatestID) {
-                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID), 'B', id);
                         }
                     }
                     break;
                 case 'V':
                     for (Gombatest gombatest : jatekLogika.getGombasz(jatekosID).getGombak().get(gombaID).getGombatest()) {
                         if (gombatest.getID() == gombatestID) {
-                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID));
+                            gombatest.sporaSzoras(jatekLogika.getMapTekton().get(tektonID), 'V', id);
                         }
                     }
                     break;
@@ -627,6 +625,7 @@ public class ParancsFeldolgozo {
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Spóra felvétele sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, Gomba ID nem létezik, tekton ID nem létezik");
+            e.printStackTrace();
         }
     }
 

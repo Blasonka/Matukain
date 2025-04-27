@@ -35,15 +35,16 @@ public abstract class Spora implements hatasKifejtes {
      */
     protected int szamlalo;
     protected String nev;
+    protected int id;
 
     /**
      * Spora osztály konstruktora
      * @param sz számláló értéke
      */
-    public Spora(int sz, String s) {
+    public Spora(int sz, String s, int i) {
         szamlalo = sz;
         nev = s;
-        System.out.println(">Spora->Spora()");
+        id = i;
     }
     /**
      * Spóra törlése

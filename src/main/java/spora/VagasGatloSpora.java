@@ -30,9 +30,8 @@ public class VagasGatloSpora extends Spora implements hatasKifejtes {
      * VagasGatloSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public VagasGatloSpora(int sz) {
-        super(sz, "vagas");
-        System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
+    public VagasGatloSpora(int sz, int i) {
+        super(sz, "vagas", i);
     }
     /**
      * Spóra törlése

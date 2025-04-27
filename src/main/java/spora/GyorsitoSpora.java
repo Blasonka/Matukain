@@ -32,9 +32,8 @@ import static tesztelo.Menu.parancsFeldolgozo;
      * Gyorsító spóra osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public GyorsitoSpora(int sz) {
-        super(sz, "gyorsito");
-        System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
+    public GyorsitoSpora(int sz, int id) {
+        super(sz, "gyorsito", id);
     }
 
     /**

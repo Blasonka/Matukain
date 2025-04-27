@@ -130,13 +130,15 @@ public class gameLogic implements Serializable {
     }
 
     public void csokkentFonalakElete() {
-        Iterator<Gombafonal> iterator = fonalak.iterator();
-        while (iterator.hasNext()) {
-            Gombafonal fonal = iterator.next();
-            boolean elpusztult = fonal.csokkentPusztulasSzamlalo();
-            if (elpusztult) {
-                System.out.println("Gombafonal ID " + fonal.getID() + " elpusztult.");
-                iterator.remove(); // Remove threads that have expired
+        for (Gombasz gombasz : gombaszok) {
+            for (Gomba gombak : gombasz.getGombak()) {
+                for (Gombafonal fonal : gombak.getGombafonalak()) {
+                    boolean elpusztult = fonal.csokkentPusztulasSzamlalo();
+                    if (elpusztult) {
+                        System.out.println("Gombafonal ID " + fonal.getID() + " elpusztult.");
+                        fonalak.remove(fonal);
+                    }
+                }
             }
         }
     }

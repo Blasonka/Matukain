@@ -142,25 +142,53 @@ public class Gombatest {
      * Spóra elhelyezése
      * @param tekton a tekton, amin elhelyezzük az új spórát
      */
-    public void sporaSzoras(Tekton tekton) {
-        Random rand = new Random();
+    public void sporaSzoras(Tekton tekton, char type, int id) {
         Spora spora = null;
-        int randomSpora = rand.nextInt(4);
-        switch (randomSpora) {
-            case 0:
-                spora = new BenitoSpora(rand.nextInt(1,4));
+        switch (type) {
+            case 'O':
+                spora = new OsztoSpora(1, id);
+                parancsFeldolgozo.print("Spóra (" + id + ") Osztó elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
                 break;
-            case 1:
-                spora = new GyorsitoSpora(rand.nextInt(1,4));
+            case 'L':
+                spora = new LassitoSpora(1, id);
+                parancsFeldolgozo.print("Spóra (" + id + ") Lassító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
                 break;
-            case 2:
-                spora = new LassitoSpora(rand.nextInt(1,4));
+            case 'G':
+                spora = new GyorsitoSpora(1, id);
+                parancsFeldolgozo.print("Spóra (" + id + ") Gyorsító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
                 break;
-            case 3:
-                spora = new VagasGatloSpora(rand.nextInt(1,4));
+            case 'B':
+                spora = new BenitoSpora(1, id);
+                parancsFeldolgozo.print("Spóra (" + id + ") Bénító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
                 break;
-            default:
+            case 'V':
+                spora = new VagasGatloSpora(1, id);
+                parancsFeldolgozo.print("Spóra (" + id + ") Vágásgátló elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
                 break;
+            default : {
+                Random rand = new Random();
+                int randomSpora = rand.nextInt(4);
+                switch (randomSpora) {
+                    case 0:
+                        spora = new BenitoSpora(rand.nextInt(1, 4), id);
+                        parancsFeldolgozo.print("Spóra (" + id + ") Bénító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
+                        break;
+                    case 1:
+                        spora = new GyorsitoSpora(rand.nextInt(1, 4), id);
+                        parancsFeldolgozo.print("Spóra (" + id + ") Gyorsító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
+                        break;
+                    case 2:
+                        spora = new LassitoSpora(rand.nextInt(1, 4), id);
+                        parancsFeldolgozo.print("Spóra (" + id + ") Lassító elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
+                        break;
+                    case 3:
+                        spora = new VagasGatloSpora(rand.nextInt(1, 4), id);
+                        parancsFeldolgozo.print("Spóra (" + id + ") Vágásgátló elhelyezve Tekton (" + tekton.getID() + ") Gombatest (" + id + ") által\n");
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         kilohetoSporakSzama--;
         eddigiSzorasok++;

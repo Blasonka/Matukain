@@ -3,8 +3,8 @@
 /addt 2 4 0 T 0 1
 /addgo 0 Peti 0
 /addg 0 0 0
-/addgt 0 0 0 0
+/addgt 0 0 0 0 0
 /addg 1 2 0
-/addgt 1 0 2 1
-/addf 0 1 1 0 1 S
-/addf 1 1 1 1 1 S
+/addgt 1 0 2 1 0
+/addf 0 1 1 0 0 S
+/addf 1 1 1 1 0 S

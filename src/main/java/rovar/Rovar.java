@@ -86,8 +86,8 @@ public class Rovar {
         this.tekton = tekton;
         this.telitettseg = 3;
         this.elfogyasztottSporak = new ArrayList<>();
-        System.out.println("Rovar.init()");
         this.ID = ID;
+        this.vaghate = true;
     }
 
     /**
@@ -125,8 +125,8 @@ public class Rovar {
             return;
         }
 
+        parancsFeldolgozo.print("Rovar ("+ID+") elvágta Fonal ("+fonal.getID()+")\n");
         fonal.elragas();
-        parancsFeldolgozo.print("Rovar ("+ID+") elvágta Fonal ("+fonal.getID()+") \n");
     }
 
     /**

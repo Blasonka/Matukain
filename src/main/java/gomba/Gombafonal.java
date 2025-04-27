@@ -1,8 +1,12 @@
 package gomba;
 
+import jateklogika.gameLogic;
 import tekton.Tekton;
 
 import java.util.Random;
+
+import static tesztelo.Menu.parancsFeldolgozo;
+import static tesztelo.Menu.jatekLogika;
 
 /**
  * Gombafonal osztály
@@ -69,7 +73,7 @@ public class Gombafonal {
         Random rand = new Random();
         this.id = id;
         this.elragva = false;
-        this.pusztulasSzamlalo = rand.nextInt(1,3);
+        this.pusztulasSzamlalo = jatekLogika.fonalelet;
         this.test = test;
         this.hatar1 = hatar1;
         this.hatar2 = hatar2;
@@ -131,6 +135,7 @@ public class Gombafonal {
      */
     public void elragas() {
         elragva = true;
+        parancsFeldolgozo.print("Fonal (" + id + ") elragva értéke megváltozott: " + (!elragva ? "true" : "false") + " -> " + (elragva ? "true" : "false") + "\n" );
     }
 
 
@@ -139,7 +144,11 @@ public class Gombafonal {
     }
 
     public boolean csokkentPusztulasSzamlalo() {
-        this.pusztulasSzamlalo--;
+        if (pusztulasSzamlalo == 2) {
+            this.pusztulasSzamlalo--;
+            parancsFeldolgozo.print("Fonal (" + this.getID() + ") pusztulasSzamlalo értéke NEM változott: " + this.getPusztulasSzamlalo() + "\n");
+        }
+        else this.pusztulasSzamlalo--;
         return this.pusztulasSzamlalo <= 0;
     }
 

@@ -8,9 +8,8 @@ import java.util.Random;
 
 public class OsztoSpora extends Spora implements hatasKifejtes {
     
-    public OsztoSpora() {
-        super(0, "oszto");
-        System.out.println("\t>LassitoSpora->LassitoSpora()");
+    public OsztoSpora(int sz, int id) {
+        super(sz, "oszto", id);
     }
 
     public void hatasKifejtes(Rovar rovar){

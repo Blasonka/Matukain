@@ -62,11 +62,11 @@ public class Rovarasz extends Felhasznalo {
      * @param r - a hozzáadni kívánt rovar
      */
     public void addRovar(Rovar r){
-        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok paraméterének értéke megváltozott: ");
+        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok értéke megváltozott: ");
         for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
-        parancsFeldolgozo.print(" -> ");
+        parancsFeldolgozo.print("->");
         rovarok.add(r);
-        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "\n" : ", "));
+        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print(" Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "\n" : ","));
     }
 
     /**

@@ -158,14 +158,13 @@ public abstract class Tekton {
     public void addSpora(Spora spora){
         parancsFeldolgozo.print("Tekton (" + this.getID() + ") sporak értéke megváltozott: ");
         for (int i=0; i<sporak.size()-1; i++){
-            parancsFeldolgozo.print(sporak.get(i).getID() + ", ");
+            parancsFeldolgozo.print("Spóra (" + sporak.get(i).getID() + ")" + (i == sporak.size() - 1 ? "" : ", "));
         }
-        parancsFeldolgozo.print(sporak.get(sporak.size()-1).getID() + " ->");
+        parancsFeldolgozo.print("->");
         sporak.add(spora);
-        for (int i=0; i<sporak.size()-1; i++){
-            parancsFeldolgozo.print(" " + sporak.get(i).getID() + ",");
+        for (int i=0; i<sporak.size(); i++){
+            parancsFeldolgozo.print(" Spóra (" + sporak.get(i).getID() + ")" + (i == sporak.size() - 1 ? "\n" : ","));
         }
-        parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()) + "\n");
     }
 
    

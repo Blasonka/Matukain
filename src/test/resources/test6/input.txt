@@ -2,5 +2,5 @@
 /addt 1 2 3 T 0
 /addgo 0 Peti 0
 /addg 0 0 0
-/addgt 0 0 0 0
+/addgt 0 0 0 0 0
 /sporagombatesttel 0 1 0 0 0 L

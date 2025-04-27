@@ -32,8 +32,8 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      * BenitoSpora osztály konstruktora
      * @param sz beállítja a számláló értékét
      */
-    public BenitoSpora(int sz) {
-        super(sz,"benito");
+    public BenitoSpora(int sz, int id) {
+        super(sz,"benito", id);
         System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
 

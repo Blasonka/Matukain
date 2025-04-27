@@ -6,6 +6,7 @@ import gomba.Gombafonal;
 import gomba.HusevoGombafonal;
 
 import static tesztelo.Menu.jatekLogika;
+import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
  * FonalMegtartoTekton osztály
@@ -33,7 +34,6 @@ public class FonalMegtartoTekton extends Tekton {
      */
     public FonalMegtartoTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("Létrejött egy FonalMegtartoTekton");
     }
 
     /**
@@ -51,7 +51,6 @@ public class FonalMegtartoTekton extends Tekton {
                 }
             }
         }
-        System.out.println("FonalMegtartoTekton hatás kifejtve, azaz a gombafonal akkor is megmarad, ha nincs gombatesthez kötve");
     }
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {
