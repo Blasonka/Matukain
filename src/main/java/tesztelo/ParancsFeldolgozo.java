@@ -151,7 +151,6 @@ public class ParancsFeldolgozo {
             }
         } catch (NumberFormatException e) {
             System.out.println("A parancs valamely paraméterének formátuma nem megfelelő!");
-            e.printStackTrace();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("A parancs paramétereinek száma nem megfelelő!");
         }

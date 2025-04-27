@@ -146,10 +146,14 @@ public abstract class Tekton {
      */
     public void tores(){
         if (gomba != null) {
+            List<Gombafonal> fonalak = new ArrayList<>();
             for (Gombafonal fonal : gomba.getGombafonalak()) {
                 if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
-                    gomba.removeFonal(fonal);
+                    fonalak.add(fonal);
                 }
+            } for (Gombafonal fonal : fonalak) {
+                gomba.removeFonal(fonal);
+                parancsFeldolgozo.print("Tektontörés hatására Fonal (" + fonal.getID() + ") eltűnt\n");
             }
         } int maxID = 0;
         for (Tekton tekton : jatekLogika.getMapTekton()) {
@@ -157,7 +161,7 @@ public abstract class Tekton {
                 maxID = tekton.getID();
             }
         };
-        parancsFeldolgozo.print("Tekton (" + id + ") eltört: Tekton (" + id + ") + Tekton (" + (maxID + 1) + ")");
+        parancsFeldolgozo.print("Tekton (" + id + ") eltört: Tekton (" + id + ") + Tekton (" + (maxID + 1) + ")\n");
     }
 
     /**

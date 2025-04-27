@@ -138,11 +138,9 @@ public class Rovar {
     public void elfogyaszt(Spora spora){
         telitettseg=3;
         parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztotta Spóra ("+spora.getID()+")\n");
-        if(!(spora instanceof OsztoSpora)) {
-            elfogyasztottSporak.add(spora);
-            parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: -> Spóra ("+spora.getID()+")\n");
-            spora.hatasKifejtes(this);
-        }
+        elfogyasztottSporak.add(spora);
+        parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: -> Spóra ("+spora.getID()+")\n");
+        spora.hatasKifejtes(this);
     }
 
     /**
@@ -222,7 +220,7 @@ public class Rovar {
             } else {
                 s.hatasKifejtes(this);
             }
-        } parancsFeldolgozo.print("Rovar (" + ID + ") sebesség értéke megváltozott: " + 2 + " -> " + sebesseg + "\n");
+        } if (sebesseg != 2) parancsFeldolgozo.print("Rovar (" + ID + ") sebesség értéke megváltozott: " + 2 + " -> " + sebesseg + "\n");
         if (!sporak.isEmpty()) {
             parancsFeldolgozo.print("Rovar (" + ID + ") elfogyasztottsporak értéke megváltozott: ");
             for (int i = 0; i < elfogyasztottSporak.size(); i++) parancsFeldolgozo.print("Spóra (" + elfogyasztottSporak.get(i).getID() + ")" + (i == elfogyasztottSporak.size() - 1 ? " " : ", "));

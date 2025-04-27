@@ -9,5 +9,4 @@
 /addf 1 1 1 0 1 S
 /simulate_round
 /simulate_round
-/fonal_novesztes 2 0 1 1 1 S
 /sporagombatesttel 0 2 0 0 1 V

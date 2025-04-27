@@ -11,11 +11,9 @@ Tekton (1) szamlalo értéke megváltozott: 2 -> 1
 Kör szimulálása...
 Játéklogika kor értéke megváltozott: 1 -> 2
 Tekton (1) szamlalo értéke megváltozott: 1 -> 0
-Te
-Tekton (1)  hatására Fonal (1) eltűnt
-Gomba (0) fonalak értéke megváltozott: Fonal (0), Fonal (1) -> Fonal (0)
-Gombatest (0) fejlesztett értéke megváltozott: false -> true
-Fonal (2) Sima elhelyezve Tekton (1) Tekton (1) Gomba (0) által
-Gomba (0) fonalak értéke megváltozott: Fonal (0) -> Fonal (0), Fonal (2)
+Tekton(1) hatására Fonal (0) eltűnt
+Tekton(1) hatására Fonal (1) eltűnt
+Gomba (0) fonalak értéke megváltozott: Fonal (0), Fonal (1) -> Fonal (1)
+Gomba (0) fonalak értéke megváltozott: Fonal (1) ->
 Spóra (0) Vágásgátló elhelyezve Tekton (2) Gombatest (0) által
 Tekton (2) sporak értéke megváltozott: -> Spóra (0)

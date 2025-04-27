@@ -6,6 +6,8 @@ import interfaces.*;
 
 import java.util.Random;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 public class OsztoSpora extends Spora implements hatasKifejtes {
     
     public OsztoSpora(int sz, int id) {
@@ -17,8 +19,7 @@ public class OsztoSpora extends Spora implements hatasKifejtes {
         Random r = new Random();
         Rovar ujRovar = new Rovar(jelenlegi, r.nextInt(1000));
 
-
-        System.out.println("Új rovar jött létre a spóra hatására.");
+        parancsFeldolgozo.print("Spóra (" + getID() + ") hatására Rovar (" + rovar.getID() + ") osztódott: Rovar (" + rovar.getID() + ") + Rovar (" + (rovar.getID() + 1) + ")\n");
     }
     public void torles(){
 
