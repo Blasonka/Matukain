@@ -36,7 +36,7 @@ public class FelszivodosTekton extends Tekton{
      */
     public FelszivodosTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        szamlalo = 2;
+        szamlalo = 0;
         System.out.println("Létrejött egy FelszivodosTekton");
     }
 
