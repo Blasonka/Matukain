@@ -18,7 +18,7 @@ for /r bin %%i in (*.class) do (
 
 rem MANIFEST.MF fájl létrehozása
 echo Manifest-Version: 1.0 > MANIFEST.MF
-echo Main-Class: tesztelo.Tesztelo >> MANIFEST.MF
+echo Main-Class: tesztelo.Menu >> MANIFEST.MF
 
 rem .jar fájl készítése
 jar cmf MANIFEST.MF szkeleton.jar -C bin .
