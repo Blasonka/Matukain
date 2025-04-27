@@ -79,7 +79,6 @@ public class Gombatest {
         this.eddigiSzorasok = 0;
         this.kilohetoSporakSzama = 3;
         this.fejlett = false;
-        parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
     }
 
     public Gombatest(int id, Tekton t, boolean fejlett) {
@@ -89,7 +88,6 @@ public class Gombatest {
         this.eddigiSzorasok = 0;
         this.kilohetoSporakSzama = 3;
         this.fejlett = fejlett;
-        parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
     }
 
     /**

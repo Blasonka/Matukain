@@ -326,10 +326,9 @@ public class ParancsFeldolgozo {
      * @param gombaID gombatesthez tartozó gomba azonosítója
      */
     private void addgt(int id, boolean fejlett, int tektonID, int gombaID, int gombaszID) {
-        // TODO gombatest fejlettségi állapotának beállítása konstruktorban
         for (Gomba gomba : jatekLogika.getGombasz(gombaszID).getGombak()) {
             if (gomba.getID() == gombaID) {
-                gomba.addGombatest(new Gombatest(id, jatekLogika.getTekton(tektonID)));
+                gomba.addGombatest(new Gombatest(id, jatekLogika.getTekton(tektonID), fejlett));
             }
         }
     }
