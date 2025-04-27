@@ -10,6 +10,7 @@ import java.util.List;
 
 import tesztelo.ParancsFeldolgozo;
 
+import static tesztelo.Menu.jatekLogika;
 import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
@@ -144,12 +145,19 @@ public abstract class Tekton {
      * Tekton törése
      */
     public void tores(){
-        for (Gombafonal fonal : gomba.getGombafonalak()) {
-            if (fonal.getHatar1() == this || fonal.getHatar2() == this){
-                gomba.removeFonal(fonal);
+        if (gomba != null) {
+            for (Gombafonal fonal : gomba.getGombafonalak()) {
+                if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
+                    gomba.removeFonal(fonal);
+                }
             }
-        }
-        System.out.println("A tekton törölve lett");
+        } int maxID = 0;
+        for (Tekton tekton : jatekLogika.getMapTekton()) {
+            if (tekton.getID() > maxID) {
+                maxID = tekton.getID();
+            }
+        };
+        parancsFeldolgozo.print("Tekton (" + id + ") eltört: Tekton (" + id + ") + Tekton (" + (maxID + 1) + ")");
     }
 
     /**

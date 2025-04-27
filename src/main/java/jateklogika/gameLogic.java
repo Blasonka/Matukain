@@ -101,6 +101,13 @@ public class gameLogic implements Serializable {
     public void tektonTores(List<Tekton> t) {
         Random rand = new Random();
 
+        if (toresEsely == 0) return;
+        else if (toresEsely == 1) {
+            for (Tekton tekton : t) {
+                tekton.tores();
+            } return;
+        }
+
         
         for (int i = 0; i < t.size(); i++) {
             Tekton current = t.get(i);
@@ -329,6 +336,7 @@ public class gameLogic implements Serializable {
             }
         }
         csokkentFonalakElete();
+        tektonTores(map);
     }
 
     public void list() {
