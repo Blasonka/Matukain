@@ -55,7 +55,6 @@ public class Gomba {
         this.id = id;
         this.gombafonalak = new ArrayList<Gombafonal>();
         this.gombatestek = new ArrayList<Gombatest>();
-        parancsFeldolgozo.print("Gomba sikeresen létrejött\n");
     }
 
     /**
@@ -91,7 +90,7 @@ public class Gomba {
                     nextId = rand.nextInt(100);
                     validId = true;
                     for (Gombafonal gombafonal : gombafonalak) {
-                        if (gombafonal.getId() == nextId) {
+                        if (gombafonal.getID() == nextId) {
                             validId = false;
                             break;
                         }
@@ -132,7 +131,7 @@ public class Gomba {
      */
     public void addFonal(Gombafonal gombafonal) {
         gombafonalak.add(gombafonal);
-        System.out.println("Fonal növesztve");
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: -> Gombatest"+ gombafonal.getID() +"\n");
     }
 
     /**
@@ -150,7 +149,7 @@ public class Gomba {
      */
     public void addGombatest(Gombatest gombatest) {
         gombatestek.add(gombatest);
-        System.out.println("Gombatest hozzáadva");
+        parancsFeldolgozo.print("Gomba ("+ getID() +") gombatestek értéke megváltozott: -> Gombatest"+ gombatest.getID() +"\n");
     }
 
     /**
