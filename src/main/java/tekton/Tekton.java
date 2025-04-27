@@ -1,5 +1,6 @@
 package tekton;
 
+import felhasznalo.Gombasz;
 import rovar.*;
 import spora.*;
 import gomba.*;
@@ -157,8 +158,8 @@ public abstract class Tekton {
      */
     public void addSpora(Spora spora){
         parancsFeldolgozo.print("Tekton (" + this.getID() + ") sporak értéke megváltozott: ");
-        for (int i=0; i<sporak.size()-1; i++){
-            parancsFeldolgozo.print("Spóra (" + sporak.get(i).getID() + ")" + (i == sporak.size() - 1 ? "" : ", "));
+        for (int i=0; i<sporak.size(); i++){
+            parancsFeldolgozo.print("Spóra (" + sporak.get(i).getID() + ")" + (i == sporak.size() - 1 ? " " : ", "));
         }
         parancsFeldolgozo.print("->");
         sporak.add(spora);
@@ -187,7 +188,7 @@ public abstract class Tekton {
     public boolean szomszedosTekton(Tekton szomszed){
         System.out.println("Tekton->szomszedosTekton(szomszed)");
         System.out.println("A két tekton szomszédos?(Y/N)");
-        String valasz = ""; // = Tesztelo.scanner.nextLine();
+        String valasz = "Y"; // = Tesztelo.scanner.nextLine();
         if (valasz.equals("Y")) {
             System.out.println("A két tekton szomszédos");
             return true;
@@ -216,9 +217,11 @@ public abstract class Tekton {
     /**
      * Gombát növeszt a tektonra
      */
-    public void gombaNovesztes(){
-        gomba = new Gomba(0);
-        System.out.println("Új gomba nőtt erre a tektonra");
+    public void gombaNovesztes(int id, Gombasz gombasz){
+        sporak.clear();
+        gomba = new Gomba(id);
+        parancsFeldolgozo.print("Gomba (" +  id + ") elhelyezve Tekton (" + getID() + ") Gombász (" + gombasz.getID() + ") által\n");
+        gombasz.addGomba(gomba);
     }
 
     /**

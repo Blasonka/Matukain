@@ -140,7 +140,7 @@ public class ParancsFeldolgozo {
                     simulate_round();
                     break;
                 case "/fonal_novesztes":
-                    fonal_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]), command[7].charAt(0));
+                    fonal_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[6].charAt(0));
                     break;
                 case "/gombatest_novesztes":
                     gombatest_novesztes(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), Integer.parseInt(command[6]));
@@ -151,6 +151,7 @@ public class ParancsFeldolgozo {
             }
         } catch (NumberFormatException e) {
             System.out.println("A parancs valamely paraméterének formátuma nem megfelelő!");
+            e.printStackTrace();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("A parancs paramétereinek száma nem megfelelő!");
         }
@@ -646,7 +647,6 @@ public class ParancsFeldolgozo {
      * @param type a gombafonal típusa [S (sima), H (húsevő)]
      */
     private void fonal_novesztes(int id, int gombatestID, int jatekosID, int tektonID1, int tektonID2, char type) {
-        // TODO fonalnovesztesben típus megadására lehetőség
         try {
             Gombatest keresett = null;
             for (Gombasz gombasz : jatekLogika.getGombaszok()) {
@@ -662,7 +662,7 @@ public class ParancsFeldolgozo {
                 List<Gomba> gombak = jatekLogika.getGombasz(jatekosID).getGombak();
                 for (Gomba r : gombak) {
                     if (r.getID()==id) {
-                        r.fonalNovesztes(jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2), keresett);
+                        r.fonalNovesztes(jatekLogika.getMapTekton().get(tektonID1), jatekLogika.getMapTekton().get(tektonID2), keresett, id);
                         break;
                     }
                 }
@@ -684,8 +684,7 @@ public class ParancsFeldolgozo {
      */
     private void gombatest_novesztes(int id, int sporaID1, int sporaID2, int sporaID3, int tektonID, int felhasznaloID) {
         try {
-            // TODO gombanövesztéshez felhasználó, spóra1-2-3 hozzáadása
-            jatekLogika.getMapTekton().get(tektonID).gombaNovesztes();
+            jatekLogika.getMapTekton().get(tektonID).gombaNovesztes(id, jatekLogika.getGombasz(felhasznaloID));
         }  catch (IndexOutOfBoundsException e) {
             System.out.println("Gombatest növesztése sikertelen!\n" +
                     "Lehetséges hibahelyek: Gombász ID nem létezik, spóra ID nem létezik, tekton ID nem létezik");

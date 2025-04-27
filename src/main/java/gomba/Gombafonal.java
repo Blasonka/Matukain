@@ -148,7 +148,11 @@ public class Gombafonal {
             this.pusztulasSzamlalo--;
             parancsFeldolgozo.print("Fonal (" + this.getID() + ") pusztulasSzamlalo értéke NEM változott: " + this.getPusztulasSzamlalo() + "\n");
         }
-        else this.pusztulasSzamlalo--;
+        else {
+            this.pusztulasSzamlalo--;
+            parancsFeldolgozo.print("Fonal (" + id + ") pusztulasSzamlalo értéke megváltozott: " + (pusztulasSzamlalo + 1) + " -> " + pusztulasSzamlalo + "\n" );
+        }
+        if (this.pusztulasSzamlalo == 0) parancsFeldolgozo.print("Fonal (" + id + ") elpusztult");
         return this.pusztulasSzamlalo <= 0;
     }
 
