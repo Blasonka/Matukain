@@ -2,9 +2,9 @@
 /addt 0 0 1 T 1
 /addt 1 2 3 T 0
 /addro 0 Jani 0
-/addr 0 1 0
+/addr 0 0 0
 /addgo 1 Peti 0
 /addg 0 0 1
-/addgt 0 0 0 0
+/addgt 0 0 0 0 1
 /addf 0 0 1 0 1 S
-/move 0 1 0
+/move 0 0 1 0

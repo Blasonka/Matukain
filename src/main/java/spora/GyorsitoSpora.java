@@ -52,7 +52,6 @@ import static tesztelo.Menu.parancsFeldolgozo;
         int regi = rovar.getSebesseg();
         if (rovar.getSebesseg() < 3) {
             rovar.setSebesseg(rovar.getSebesseg() + 1);
-            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+rovar.getSebesseg());
         }
     }
 }

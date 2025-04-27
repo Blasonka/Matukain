@@ -151,8 +151,6 @@ public class Rovar {
      * @param kovetkezo a következő tekton.
      */
     public void attesz(Tekton kovetkezo){
-        System.out.println("Rovar->attesz(t1, t2)");
-        System.out.print("\t");
         boolean szomszedos = tekton.szomszedosTekton(kovetkezo);
         if (szomszedos) {
             parancsFeldolgozo.print("Rovar ("+ID+") tekton értéke megváltozott: Tekton ("+tekton.getID()+") -> Tekton ("+kovetkezo.getID()+")\n");
