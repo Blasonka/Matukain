@@ -23,11 +23,11 @@ import static tesztelo.Menu.parancsFeldolgozo;
  * @details
  * Absztrakt osztály Tektonok adatainak tárolására
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van, a grafikus részek nincsenek implementálva.
  *
  * @author Monostori
- * @version 1.0
- * @date 2025-03-21
+ * @version 2.0
+ * @date 2025-04-27
  */
 public abstract class Tekton {
     /**
@@ -83,12 +83,14 @@ public abstract class Tekton {
         szomszedok = new ArrayList<>();
     }
 
+    /**
+     * Klonozza a Tekton objektumot
+     */
     public abstract Tekton klonoz(int ujID, int ujX, int ujY);
 
     /**
-     *
-     * Új rész!!!!!!!!!
-     *
+     * Szomszédos tekton hozzáadása
+     * @param szomszed tekton, amit hozzáadunk a szomszédok listájához
      */
     public void addSzomszed(Tekton szomszed) {
         szomszedok.add(szomszed);
@@ -189,7 +191,6 @@ public abstract class Tekton {
     public void removeSpora(Spora spora){
         spora.torles();
         sporak.remove(spora);
-        System.out.println("Az adott spóra törölve lett a tektonról");
     }
 
     /**
@@ -205,18 +206,6 @@ public abstract class Tekton {
         else {
             return false;
         }
-        /*
-        System.out.println("Tekton->szomszedosTekton(szomszed)");
-        System.out.println("A két tekton szomszédos?(Y/N)");
-        String valasz = ""; // = Tesztelo.scanner.nextLine();
-        if (valasz.equals("Y")) {
-            System.out.println("A két tekton szomszédos");
-            return true;
-        } else {
-            System.out.println("A két tekton nem szomszédos");
-            return false;
-        }
-        */
     }
 
     /**
@@ -225,11 +214,9 @@ public abstract class Tekton {
      */
     public boolean szabadTekton(){
         if (gomba != null){
-            System.out.println("A tekton nem szabad");
             return false;
         }
         else {
-            System.out.println("A tekton szabad");
             return true;
         }
     }

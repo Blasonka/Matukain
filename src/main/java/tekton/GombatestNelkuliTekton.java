@@ -18,11 +18,11 @@ import static tesztelo.Menu.parancsFeldolgozo;
  * @details
  * Osztály olyan Tektonok adatainak tárolására, melyeken nem nőhet gombatest
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van, a grafikus részek nincsenek implementálva.
  *
  * @author Monostori
- * @version 1.0
- * @date 2025-03-21
+ * @version 2.0
+ * @date 2025-04-27
  */
 public class GombatestNelkuliTekton extends Tekton {
     /**
@@ -33,7 +33,6 @@ public class GombatestNelkuliTekton extends Tekton {
      */
     public GombatestNelkuliTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("Létrejött egy GombatestNelkuliTekton");
     }
 
     /**
@@ -51,7 +50,6 @@ public class GombatestNelkuliTekton extends Tekton {
                 gomba.removeGombatest(gombaTest);
             }
         }
-        //parancsFeldolgozo.print("meghivodott a GombatestNelkuliTekton hatasKifejtes metódusa");
     }
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {

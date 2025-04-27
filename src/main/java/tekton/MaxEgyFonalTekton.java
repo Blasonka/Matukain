@@ -18,11 +18,11 @@ import static tesztelo.Menu.parancsFeldolgozo;
  * @details
  * Osztály olyan Tektonok adatainak tárolására, melyeken maximum egy fonal nőhet
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van, a grafikus részek nincsenek implementálva.
  *
  * @author Monostori
- * @version 1.0
- * @date 2025-03-21
+ * @version 2.0
+ * @date 2025-04-27
  */
 public class MaxEgyFonalTekton extends Tekton{
     Gombafonal fonal;
@@ -41,10 +41,7 @@ public class MaxEgyFonalTekton extends Tekton{
      */
     @Override
     public void hatasKifejtes(Gomba gomba){
-        if (gomba.getGombafonalak().size()==0){
-            System.out.println("A gomba növeszthet egy fonalat");
-        }
-        else{
+        if (gomba.getGombafonalak().size()!=0){
             List<Gombafonal> fonalak = new ArrayList<>();
             for (int i = 0; i < gomba.getGombafonalak().size(); i++){
                 if (fonal == null) {

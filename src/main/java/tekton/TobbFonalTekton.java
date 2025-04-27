@@ -12,11 +12,11 @@ import gomba.Gomba;
  * @details
  * Osztály olyan Tektonok adatainak tárolására, melyeken több gomba fonalai is nőhetnek
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van, a grafikus részek nincsenek implementálva.
  *
  * @author Monostori
- * @version 1.0
- * @date 2025-03-21
+ * @version 2.0
+ * @date 2025-04-27
  */
 public class TobbFonalTekton extends Tekton{
     /**
@@ -36,6 +36,7 @@ public class TobbFonalTekton extends Tekton{
     @Override
     public void hatasKifejtes(Gomba gomba){
     }
+
     @Override
     public Tekton klonoz(int ujID, int ujX, int ujY) {
         return new TobbFonalTekton(ujID, ujX, ujY);
