@@ -302,7 +302,7 @@ public class gameLogic implements Serializable {
          parancsFeldolgozo.print("Kör szimulálsa...\n");
          int regi = korSzamlalo;
          korSzamlalo ++;
-         parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + "->" + korSzamlalo+"\n");
+         parancsFeldolgozo.print("Játéklogika kor értéke megváltozott: " + regi + " -> " + korSzamlalo+"\n");
         for (Tekton t : map) {
             if (t.getGomba() != null) {
                 t.hatasKifejtes(t.getGomba());
