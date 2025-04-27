@@ -74,6 +74,7 @@ public class ParancsFeldolgozo {
      */
     public void interpret(String cmd) {
         String[] command = cmd.split(" ");
+        System.out.println("Parancs: " + command[0]);
         try {
             switch (command[0]) {
                 case "/addro":
@@ -98,7 +99,7 @@ public class ParancsFeldolgozo {
                     addf(Integer.parseInt(command[1]), Integer.parseInt(command[2]), Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]), command[6].charAt(0));
                     break;
                 case "/addgt":
-                    addgt(Integer.parseInt(command[1]), Integer.parseInt(command[2]) == 1, Integer.parseInt(command[3]), Integer.parseInt(command[5]), Integer.parseInt(command[6]));
+                    addgt(Integer.parseInt(command[1]), Integer.parseInt(command[2]) == 1, Integer.parseInt(command[3]), Integer.parseInt(command[4]), Integer.parseInt(command[5]));
                     break;
                 case "/random":
                     rand(command[1].charAt(0), Integer.parseInt(command[2]), Integer.parseInt(command[3]));
@@ -176,8 +177,7 @@ public class ParancsFeldolgozo {
      * @param pontszam játékos kezdő pontszáma
      */
     private void addgo (int id, String nev, int pontszam) {
-        // TODO Gombasz megfelelő paraméterezése
-        jatekLogika.addGombasz(new Gombasz("Gombasz" + id));
+        jatekLogika.addGombasz(new Gombasz(id, "Gombasz"));
     }
 
     /**

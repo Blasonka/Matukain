@@ -29,7 +29,7 @@ public class RovarTest {
     public void setUp() {
         jatekLogika = new gameLogic();
         rovarasz = new Rovarasz("Gyuri");
-        gombasz = new Gombasz("Jani");
+        gombasz = new Gombasz(0, "Jani");
         rovar = new Rovar(t0, 0);
         gomba = new Gomba(0);
         t0 = new TobbFonalTekton(0, 1, 1);

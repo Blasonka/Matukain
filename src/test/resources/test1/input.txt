@@ -1,7 +1,7 @@
 /addt 0 0 1 F
 /addgo 0 Peti 0
 /addg 0 0 0
-/addgt 0 0 0 0
-/addf 0 1 1 0 1 S
+/addgt 0 0 0 0 0
+/addf 0 0 0 0 0 S
 /random D 0 1
 /simulate_round
