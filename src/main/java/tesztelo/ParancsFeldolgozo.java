@@ -74,7 +74,6 @@ public class ParancsFeldolgozo {
      */
     public void interpret(String cmd) {
         String[] command = cmd.split(" ");
-        System.out.println("Parancs: " + command[0]);
         try {
             switch (command[0]) {
                 case "/addro":
