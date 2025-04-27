@@ -5,12 +5,15 @@ import felhasznalo.Rovarasz;
 import gomba.Gomba;
 import gomba.Gombafonal;
 import jateklogika.gameLogic;
+import spora.OsztoSpora;
 import spora.Spora;
 import tekton.Tekton;
 import tesztelo.ParancsFeldolgozo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static tesztelo.Menu.parancsFeldolgozo;
 
 /**
  * Rovar osztály
@@ -110,6 +113,7 @@ public class Rovar {
      */
     public void fonalElvagas(Gombafonal fonal) {
         if (!vaghate) {
+            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getId()+")\n");
             return;
         }
 
@@ -117,10 +121,12 @@ public class Rovar {
         Tekton t2 = fonal.getHatar2();
 
         if (t1 != tekton && t2 != tekton) {
+            parancsFeldolgozo.print("Rovar ("+ID+") NEM elrágta Fonal ("+fonal.getId()+")\n");
             return;
         }
 
         fonal.elragas();
+        parancsFeldolgozo.print("Rovar ("+ID+") elvágta Fonal ("+fonal.getId()+") \n");
     }
 
     /**
@@ -129,10 +135,13 @@ public class Rovar {
      * @param spora a spóra, amit elfogyaszt.
      */
     public void elfogyaszt(Spora spora){
-        System.out.println("Rovar->elfogyaszt(spora)");
         telitettseg=3;
-        elfogyasztottSporak.add(spora);
-        System.out.println("A spóra elfogyasztva.");
+        parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztotta Spóra ("+spora.getID()+")\n");
+        if(!(spora instanceof OsztoSpora)) {
+            elfogyasztottSporak.add(spora);
+            parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: -> Spora ("+spora.getID()+")\n");
+            spora.hatasKifejtes(this);
+        }
     }
 
     /**
@@ -145,10 +154,10 @@ public class Rovar {
         System.out.print("\t");
         boolean szomszedos = tekton.szomszedosTekton(kovetkezo);
         if (szomszedos) {
+            parancsFeldolgozo.print("Rovar ("+ID+") tekton értéke megváltozott: Tekton ("+tekton.getID()+") -> Tekton ("+kovetkezo.getID()+")\n");
             setTekton(kovetkezo);
-            System.out.println("A rovar áttelepült a következő tektonra.");
         } else {
-            System.out.println("A két tekton nem szomszédos, nem lehet áttenni a rovart.");
+            parancsFeldolgozo.print("Rovar ("+ID+") tekton értéke NEM változott: Tekton ("+tekton.getID()+")\n");
         }
     }
 
@@ -207,6 +216,7 @@ public class Rovar {
         resetEffects();
         for (Spora s : elfogyasztottSporak) {
             if (s.getSzamlalo() <= 0) {
+                parancsFeldolgozo.print("Rovar ("+ID+") elfogyasztottsporak értéke megváltozott: Spora ("+s.getID()+") ->\n");
                 elfogyasztottSporak.remove(s);
             } else {
                 s.hatasKifejtes(this);
@@ -219,14 +229,6 @@ public class Rovar {
      */
     private void pontLevonas(Rovarasz rsz){
         rsz.setHatralevoAkciopont(rsz.getHatralevoAkciopont() - sebesseg);
-    }
-
-    /**
-     * Hozzáadja a rovart a rovarászhoz
-     * @param rsz a rovarász, akinek a rovart hozzáadjuk
-     */
-    public void setRovarHandler(Rovarasz rsz){
-        rsz.addRovar(this);
     }
 
     /**
