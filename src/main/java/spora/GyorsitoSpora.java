@@ -2,6 +2,9 @@ package spora;
 
 import rovar.Rovar;
 import interfaces.*;
+
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * GyorsítóSpóra osztály
  *
@@ -47,6 +50,10 @@ import interfaces.*;
      */
     @Override
     public void hatasKifejtes(Rovar rovar) {
-        if (rovar.getSebesseg() < 3) rovar.setSebesseg(rovar.getSebesseg() + 1);
+        int regi = rovar.getSebesseg();
+        if (rovar.getSebesseg() < 3) {
+            rovar.setSebesseg(rovar.getSebesseg() + 1);
+            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+rovar.getSebesseg());
+        }
     }
 }

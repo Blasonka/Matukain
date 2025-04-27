@@ -3,6 +3,8 @@ package spora;
 import rovar.Rovar;
 import interfaces.*;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * BénítóSpóra osztály
  *
@@ -47,6 +49,8 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      */
 
     public void hatasKifejtes(Rovar rovar) {
+        int regi= rovar.getSebesseg();
         rovar.setSebesseg(0);
+        parancsFeldolgozo.print("A rovar sebessege megvaltozott: "+regi+" -> "+rovar.getSebesseg());
     }
 }

@@ -3,6 +3,8 @@ package spora;
 import rovar.Rovar;
 import interfaces.*;
 
+import static tesztelo.Menu.parancsFeldolgozo;
+
 /**
  * LassítóSpóra osztály
  *
@@ -47,7 +49,11 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
      * Spóra hatásának kifejtése
      * @param r a rovar akin a hatást kívánja kifejteni
      */
-    public void hatasKifejtes(Rovar r){
-        if (!(r.getSebesseg()<=0)) r.setSebesseg(r.getSebesseg()-1);
+    public void hatasKifejtes(Rovar r) {
+        int regi = r.getSebesseg();
+        if (!(r.getSebesseg() <= 0)) {
+            r.setSebesseg(r.getSebesseg() - 1);
+            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+r.getSebesseg());
+        }
     }
 }
