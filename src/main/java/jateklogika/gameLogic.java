@@ -130,7 +130,6 @@ public class gameLogic implements Serializable {
 
 
                     t.add(ujTekton);
-                    System.out.println("Új tekton létrehozva ID: " + ujTekton.getID() + " hol (" + ujTekton.getKoordinataX() + ", " + ujTekton.getKoordinataY() + ")");
                 }
             }
         }
@@ -142,7 +141,6 @@ public class gameLogic implements Serializable {
                 for (Gombafonal fonal : gombak.getGombafonalak()) {
                     boolean elpusztult = fonal.csokkentPusztulasSzamlalo();
                     if (elpusztult) {
-                        System.out.println("Gombafonal ID " + fonal.getID() + " elpusztult.");
                         fonalak.remove(fonal);
                     }
                 }
@@ -151,7 +149,6 @@ public class gameLogic implements Serializable {
     }
 
     public void gombaszKor() {
-      System.out.println("--- Gombászok köre ---");
       for (Gombasz g : gombaszok) {
           g.setHatralevoAkciopont(5);
   
@@ -161,7 +158,6 @@ public class gameLogic implements Serializable {
                   
                   //g.sporaLoves(null);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
-                  System.out.println(g.getNev() + " szórt egy spórát.");
               }
   
               
@@ -169,14 +165,12 @@ public class gameLogic implements Serializable {
                   Gomba gomba = new Gomba(0);
                   g.getGombak().add(gomba);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
-                  System.out.println(g.getNev() + " gombatestet növesztett.");
               }
   
               
               if (g.getHatralevoAkciopont() >= 1 ) {
                   //.fonalNovesztes(null,null);
                   g.setHatralevoAkciopont(g.getHatralevoAkciopont() - 1);
-                  System.out.println(g.getNev() + " gombafonalat növesztett.");
               }
   
               
@@ -193,14 +187,11 @@ public class gameLogic implements Serializable {
   }
 
     public void kor() {
-      System.out.println("Kör kezdete: #" + korSzamlalo);
 
         gombaszKor();        // 1. Gombászok körei
         rovaraszKor();       // 2. Rovarászok körei
         tektonTores(map);    // 3. Tekton törések
         korSzamlalo++;       // 4. Körszámláló növelése
-
-        System.out.println("Kör vége. Új körszám: " + korSzamlalo);
 
     }
 
@@ -208,10 +199,7 @@ public class gameLogic implements Serializable {
      * Az aktuális játékosnak ad pontot a tevékenysége alapján
      * @param f-től kapja meg az aktuális játékost
      */
-    public void pontOsztas(Felhasznalo f) 
-    {
-        System.out.println("Pont hozzáadva. gameLogic->Felhasznalo");
-    }
+    public void pontOsztas(Felhasznalo f) {}
     /**
      * Inicializálja a játékteret, és véletlenszerűen sorrended
      * rak a felhsznaálók között
@@ -252,19 +240,13 @@ public class gameLogic implements Serializable {
         rovaraszok.add(r2);
 
         gombaszok = gombaszok2;
-            
-        System.out.println("Játék inicializálva. Játékosok, tektonok, rovarok, gombák létrehozva.");
-        
     }
     
     /**
      * A végén kihírdeti a helyezéseket 
      * @param f a felhasznalok listáját kapja meg
      */
-    public void jatekOsszegzes(List<Felhasznalo> f) 
-    {
-        System.out.println("gameLogic->gameLogic");
-    }
+    public void jatekOsszegzes(List<Felhasznalo> f) {}
 
     public void addRovarasz(Rovarasz r)
     {

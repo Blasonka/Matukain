@@ -27,6 +27,7 @@ import java.util.Scanner;
  *
  * @author todortoth
  * @version 1.0 - Manuális mód
+ * @version 1.1 - Teszt mód
  * @date 2025-04-22
  */
 public class Menu {

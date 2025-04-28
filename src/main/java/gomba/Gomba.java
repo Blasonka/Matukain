@@ -77,11 +77,7 @@ public class Gomba {
      * @param gombatest a gombatest, amelyhez a fonal tartozik
      */
     public void fonalNovesztes(Tekton tekton1, Tekton tekton2, Gombatest gombatest, int fonalid) {
-        if (gombatestek.isEmpty()) {
-            System.out.println("Nincs gombatest, nem lehet fonalat növeszteni");
-        } else if (fonalOsszekoti(tekton1, tekton2)) {
-            System.out.println("Már van fonal a két tekton között");
-        } else {
+        if (!gombatestek.isEmpty() && !fonalOsszekoti(tekton1, tekton2)) {
             if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
                 Random rand = new Random();
                 boolean validId = false;
@@ -99,8 +95,6 @@ public class Gomba {
                 Gombafonal gombafonal = new Gombafonal(fonalid, tekton1, tekton2, gombatest);
                 parancsFeldolgozo.print("Fonal (" + fonalid + ") Sima elhelyezve Tekton (" + tekton1.getID() + ") Tekton (" + tekton1.getID() + ") Gomba (" + getID() + ") által\n");
                 addFonal(gombafonal);
-            } else {
-                System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");
             }
         }
     }
@@ -113,15 +107,9 @@ public class Gomba {
      * @param gombafonal a gombafonal, amelyet hozzáadunk
      */
     public void fonalNovesztes(Tekton tekton1, Tekton tekton2, Gombatest gombatest, Gombafonal gombafonal) {
-        if (gombatestek.isEmpty()) {
-            System.out.println("Nincs gombatest, nem lehet fonalat növeszteni");
-        } else if (fonalOsszekoti(tekton1, tekton2)) {
-            System.out.println("Már van fonal a két tekton között");
-        } else {
+        if (!gombatestek.isEmpty() && !fonalOsszekoti(tekton1, tekton2)) {
             if (tekton1.szomszedosTekton(tekton2) || tekton2.szomszedosTekton(tekton1)) {
                 addFonal(gombafonal);
-            } else {
-                System.out.println("A két tekton nem szomszédos, nem lehet fonalat növeszteni");
             }
         }
     }

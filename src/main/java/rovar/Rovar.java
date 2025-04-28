@@ -28,11 +28,11 @@ import static tesztelo.Menu.parancsFeldolgozo;
  *
  * @see felhasznalo.Rovarasz
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
+ * @note Prototípus állapotban van.
  *
  * @author JGeri
- * @version 1.0
- * @date 2025-03-22
+ * @version 2.0
+ * @date 2025-04-25
  */
 public class Rovar {
     /**

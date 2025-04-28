@@ -53,7 +53,6 @@ public class Gombasz extends Felhasznalo {
      * @return a keresett gomba / null, ha nincs találat
      */
     public Gomba melyikGomba(Gombafonal fonal) {
-        System.out.println(">Gombasz->melyikGomba()");
         for (Gomba g : gombak) {
             /*
             if (g.vannekiilyenfonala(fonal)) {
@@ -61,31 +60,7 @@ public class Gombasz extends Felhasznalo {
             }*/
         } return null;
     }
-    /**
-     * Gombafonal növesztése két tekton között
-     * @param t1 egyik tekton
-     * @param t2 másik tekton
-     * @note Ha ugyanarra a tektonra akarja elhelyezni, akkor t2 lehet null, vagy t1=t2
-     */
-    /*
-    public void fonalNovesztes(Tekton t1, Tekton t2) {
-        System.out.println(">Gombasz->FonalNovesztes()");
-        System.out.println(">A fonalnövesztést az (1). számú gomba fogja végezni");
-        gombak.get(0).fonalNovesztes(t1, t2);
-    }
-    */
 
-    /**
-     * Spóra lövése egy kiválasztott tektonra
-     * @param t1 a tekton amire a spóra kerül
-     */
-    /*
-    public void sporaLoves(Tekton t1) {
-        System.out.println(">Gombasz->sporaLoves()");
-        System.out.println(">A spóralövést az (1). számú gomba gombateste fogja végezni");
-        gombak.get(0).getGombatest().sporaLoves(t1);
-    }
-*/
     /**
      * Gombák listájának lekérdezése
      * @return gombák listája

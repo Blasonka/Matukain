@@ -26,6 +26,9 @@ import rovar.Rovar;
  * @version 1.0
  * @version 1.1 - comment Update
  * @date 2025-03-22
+ * @author Bence338
+ * @version 2.0 - Prototípus
+ * @date 2025-04-22
  */
 public abstract class Spora implements hatasKifejtes {
     /**
