@@ -1,1 +1,1 @@
-java -jar szkeleton.jar
+java -jar prototipus.jar

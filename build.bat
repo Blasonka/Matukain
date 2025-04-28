@@ -21,7 +21,7 @@ echo Manifest-Version: 1.0 > MANIFEST.MF
 echo Main-Class: tesztelo.Menu >> MANIFEST.MF
 
 rem .jar fájl készítése
-jar cmf MANIFEST.MF szkeleton.jar -C bin .
+jar cmf MANIFEST.MF prototipus.jar -C bin .
 
 rem Fájl törlés
 del sources.txt
