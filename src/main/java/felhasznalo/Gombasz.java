@@ -24,12 +24,13 @@ import static tesztelo.Menu.parancsFeldolgozo;
  * @see felhasznalo.Felhasznalo
  * @see gomba.Gomba
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
- *
  * @author todortoth
  * @version 1.0
  * @version 1.1 - comment Update
  * @date 2025-03-22
+ * @author JGeri
+ * @version 2.0 - Prototípus
+ * @date 2025-04-23
  */
 public class Gombasz extends Felhasznalo {
     /**

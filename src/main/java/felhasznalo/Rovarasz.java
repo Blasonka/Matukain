@@ -25,12 +25,14 @@ import java.util.List;
  * @see felhasznalo.Felhasznalo
  * @see rovar.Rovar
  *
- * @note Szkeleton állapotban van, a metódusok nincsenek teljesen implementálva.
  *
  * @author todortoth
  * @version 1.0
  * @version 1.1 - comment Update
  * @date 2025-03-22
+ * @author JGeri
+ * @version 2.0 - Prototípus
+ * @date 2025-04-25
  */
 public class Rovarasz extends Felhasznalo {
     /**
