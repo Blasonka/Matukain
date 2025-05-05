@@ -15,10 +15,16 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     //TileManager tiles;
 
+    RovarEntity rovarEntity = new RovarEntity(this, mouseHandler);
+
     public GamePanel(){
         setPreferredSize(new Dimension(screenWidth, screenHeight));
-        setBackground(Color.black);
+        setMinimumSize(new Dimension(screenWidth, screenHeight));
+        setMaximumSize(new Dimension(screenWidth, screenHeight));
+        setBackground(Color.blue);
         setDoubleBuffered(true);
+        startGameThread();
+        addMouseListener(mouseHandler);
     }
 
     public void startGameThread(){
@@ -32,20 +38,21 @@ public class GamePanel extends JPanel implements Runnable{
             update();
             repaint();
             try {
-                Thread.sleep(1000 / 24); // 24 FPS
+                Thread.sleep(1000 / 60); // 24 FPS
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
     public void update(){
-
+        rovarEntity.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.white);
-        g2.fillRect(100, 100, tileSize, tileSize);
+
+        rovarEntity.draw(g2);
+
         g2.dispose();
     }
 
