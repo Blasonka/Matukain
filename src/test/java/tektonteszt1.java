@@ -1,6 +1,7 @@
-import gomba.*;
+import backend.gomba.Gomba;
+import backend.gomba.Gombatest;
+import backend.tekton.MaxEgyFonalTekton;
 import org.junit.*;
-import tekton.*;
 
 import static org.junit.Assert.*;
 
