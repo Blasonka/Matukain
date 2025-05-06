@@ -2,8 +2,12 @@ package frontend.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.List;
 
-public class GamePanel extends JPanel implements Runnable{
+
+public class GamePanel extends JPanel implements Runnable, KeyListener {
     int originalTileSize = 16;
     int scale = 3;
     int tileSize = originalTileSize * scale; // 48x48
@@ -26,11 +30,14 @@ public class GamePanel extends JPanel implements Runnable{
         setDoubleBuffered(true);
         startGameThread();
         addMouseListener(mouseHandler);
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
+
     }
 
     @Override
@@ -59,4 +66,22 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_S) { // Check if the "S" key is pressed
+            if (!tileM.islands.isEmpty()) {
+                tileM.islandOszto(tileM.islands.get(0)); // Call islandOszto on the first island
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // No action needed
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // No action needed
+    }
 }

@@ -22,8 +22,9 @@ public class TektonComponent {
         int y = 0;
 
         for (Tile tile : tiles) {
-            g.drawImage(tile.image, (x + xOffset) * tileSize, (y + yOffset) * tileSize, tileSize, tileSize, null);
-
+            if (tile != null && tile.image != null) { // Null check for tile and its image
+                g.drawImage(tile.image, (x + xOffset) * tileSize, (y + yOffset) * tileSize, tileSize, tileSize, null);
+            }
             x++;
             if (x >= gridSize) { // Move to the next row when reaching the end of the current row
                 x = 0;
@@ -43,4 +44,20 @@ public class TektonComponent {
     public int getGridSize() {
         return gridSize;
     }
+
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(Tile[] tiles) {
+        this.tiles = tiles;
+    }
+
+    public void setGridSize(int gridSize) {
+        this.gridSize = gridSize;
+    }
+    public int getTileSize() {
+        return tileSize;
+    }
+
 }
