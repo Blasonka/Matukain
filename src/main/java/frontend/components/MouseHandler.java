@@ -29,8 +29,8 @@ public class MouseHandler implements MouseListener {
 
             if (mouseX >= islandStartX && mouseX < islandEndX &&
                     mouseY >= islandStartY && mouseY < islandEndY) {
-                coordinate.x = (islandStartX + islandEndX) * gamePanel.tileSize / 2;
-                coordinate.y = (islandStartY + islandEndY) * gamePanel.tileSize / 2;
+                coordinate.x = ((islandStartX + islandEndX) * gamePanel.tileSize / 2)-24;
+                coordinate.y = ((islandStartY + islandEndY) * gamePanel.tileSize / 2)-24;
                 foundIsland = true;
                 System.out.println("Island found! ID: " + islandId + ", Center set to: " + coordinate.x + ", " + coordinate.y);
                 break;
