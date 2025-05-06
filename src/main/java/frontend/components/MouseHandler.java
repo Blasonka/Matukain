@@ -13,17 +13,19 @@ public class MouseHandler implements MouseListener {
         this.tileManager = gamePanel.tileM; // Reference to TileManager
     }
 
+    @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
         int mouseX = e.getX() / gamePanel.tileSize;
         int mouseY = e.getY() / gamePanel.tileSize;
 
         boolean foundIsland = false;
+        int islandId = 0; // To track the index of the island
 
         for (TektonComponent island : tileManager.islands) {
             int islandStartX = island.getXOffset();
             int islandStartY = island.getYOffset();
-            int islandEndX = islandStartX + island.getGridSize()-1;
-            int islandEndY = islandStartY + island.getGridSize()-1;
+            int islandEndX = islandStartX + island.getGridSize() - 1;
+            int islandEndY = islandStartY + island.getGridSize() - 1;
 
             if (mouseX >= islandStartX && mouseX < islandEndX &&
                     mouseY >= islandStartY && mouseY < islandEndY) {
@@ -31,15 +33,15 @@ public class MouseHandler implements MouseListener {
                 coordinate.x = (islandStartX + islandEndX) * gamePanel.tileSize / 2;
                 coordinate.y = (islandStartY + islandEndY) * gamePanel.tileSize / 2;
                 foundIsland = true;
+                System.out.println("Island found! ID: " + islandId + ", Center set to: " + coordinate.x + ", " + coordinate.y);
                 break;
             }
+            islandId++; // Increment the index for the next island
         }
 
         if (!foundIsland) {
             // Do not change the coordinate if no island is found
             System.out.println("No island found at clicked position.");
-        } else {
-            System.out.println("Island found! Center set to: " + coordinate.x + ", " + coordinate.y);
         }
 
         clicked = true;
