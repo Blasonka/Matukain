@@ -21,8 +21,10 @@ public class RovarEntity extends Entity implements Runnable {
         getPlayerImage();
     }
     public void setDefaultValues() {
-        x = 0;
-        y = 0;
+        x = 7*48;
+        y = 5*48;
+        mouseHandler.coordinate.x=x;
+        mouseHandler.coordinate.y=y;
         speed = 3;
     }
     public void startAnimThread(){
