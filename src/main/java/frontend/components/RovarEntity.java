@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 public class RovarEntity extends Entity implements Runnable {
     GamePanel gp;
@@ -21,8 +22,10 @@ public class RovarEntity extends Entity implements Runnable {
         getPlayerImage();
     }
     public void setDefaultValues() {
-        x = 7*48;
-        y = 5*48;
+        Random random = new Random();
+        int r = random.nextInt(0, gp.tileM.islands.size());
+        x = (gp.tileM.islands.get(r).getXOffset() * gp.tileSize + (gp.tileM.islands.get(r).getGridSize() * gp.tileSize) / 2)-24;
+        y = (gp.tileM.islands.get(r).getYOffset() * gp.tileSize + (gp.tileM.islands.get(r).getGridSize() * gp.tileSize) / 2)-24;
         mouseHandler.coordinate.x=x;
         mouseHandler.coordinate.y=y;
         speed = 3;

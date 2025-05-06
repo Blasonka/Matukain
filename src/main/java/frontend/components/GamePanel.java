@@ -11,9 +11,10 @@ public class GamePanel extends JPanel implements Runnable{
     int maxScreenRow = 15; // 720 / 48
     int screenWidth = tileSize * maxScreenCol; // 768
     int screenHeight = tileSize * maxScreenRow; // 576
+    TileManager tileM = new TileManager(this);
+
     MouseHandler mouseHandler = new MouseHandler(this);
     Thread gameThread;
-    TileManager tileM = new TileManager(this);
 
     RovarEntity rovarEntity = new RovarEntity(this, mouseHandler);
 
