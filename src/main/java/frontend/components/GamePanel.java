@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         addMouseListener(mouseHandler);
         addKeyListener(this);
         setFocusable(true);
+        requestFocusInWindow(); // Ensure the panel has focus
     }
 
     public void startGameThread(){
@@ -68,9 +69,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_S) { // Check if the "S" key is pressed
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            System.out.println("S key pressed");
             if (!tileM.islands.isEmpty()) {
-                tileM.islandOszto(tileM.islands.get(0)); // Call islandOszto on the first island
+                tileM.islandOszto(tileM.islands.get(0));
+            } else {
+                System.out.println("No islands available");
             }
         }
     }

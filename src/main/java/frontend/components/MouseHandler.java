@@ -15,34 +15,26 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
-        int mouseX = e.getX() / gamePanel.tileSize;
-        int mouseY = e.getY() / gamePanel.tileSize;
+        int mouseX = e.getX();
+        int mouseY = e.getY();
 
-        boolean foundIsland = false;
-        int islandId = 0;
+        for (TektonComponent island : gamePanel.tileM.islands) {
+            int islandX = island.getXOffset() * island.getTileSize();
+            int islandY = island.getYOffset() * island.getTileSize();
+            int islandWidth = island.getGridWidth() * island.getTileSize();
+            int islandHeight = island.getGridHeight() * island.getTileSize();
 
-        for (TektonComponent island : tileManager.islands) {
-            int islandStartX = island.getXOffset();
-            int islandStartY = island.getYOffset();
-            int islandEndX = islandStartX + island.getGridSize();
-            int islandEndY = islandStartY + island.getGridSize();
+            // Check if the click is within the island's bounds
+            if (mouseX >= islandX && mouseX < islandX + islandWidth &&
+                    mouseY >= islandY && mouseY < islandY + islandHeight) {
+                coordinate.x = (islandX + islandWidth / 2)-24;
+                coordinate.y = (islandY + islandHeight / 2)-24;
 
-            if (mouseX >= islandStartX && mouseX < islandEndX &&
-                    mouseY >= islandStartY && mouseY < islandEndY) {
-                coordinate.x = ((islandStartX + islandEndX) * gamePanel.tileSize / 2)-24;
-                coordinate.y = ((islandStartY + islandEndY) * gamePanel.tileSize / 2)-24;
-                foundIsland = true;
-                System.out.println("Island found! ID: " + islandId + ", Center set to: " + coordinate.x + ", " + coordinate.y);
+                // Handle the click on this island
+                System.out.println("Island clicked: " + gamePanel.tileM.islands.indexOf(island));
                 break;
             }
-            islandId++;
         }
-
-        if (!foundIsland) {
-            System.out.println("No island found at clicked position.");
-        }
-
-        clicked = true;
     }
 
     public void returnFalse() {

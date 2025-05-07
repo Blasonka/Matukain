@@ -1,11 +1,11 @@
-package frontend;
+package frontend.windows;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow {
     JFrame frame = new JFrame("Fungorium");
-    boolean vanemeg = false;
+    public boolean vanemeg = false;
 
     public MainWindow() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

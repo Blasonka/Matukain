@@ -1,12 +1,14 @@
 package frontend.components;
 
+import frontend.components.Tile;
+
 import java.awt.*;
 
 public class TektonComponent {
     private Tile[] tiles;
     private int xOffset;
     private int yOffset;
-    private int gridSize;
+    private int gridSize; // Represents the number of columns
     private int tileSize;
 
     public TektonComponent(Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
@@ -56,8 +58,17 @@ public class TektonComponent {
     public void setGridSize(int gridSize) {
         this.gridSize = gridSize;
     }
+
     public int getTileSize() {
         return tileSize;
     }
 
+    // New methods to calculate actual width and height
+    public int getGridWidth() {
+        return gridSize; // Number of columns
+    }
+
+    public int getGridHeight() {
+        return tiles.length / gridSize; // Number of rows
+    }
 }

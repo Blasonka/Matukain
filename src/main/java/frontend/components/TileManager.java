@@ -87,62 +87,47 @@ public class TileManager {
         int xOffset = island.getXOffset();
         int yOffset = island.getYOffset();
 
+        // Define the dimensions for the split
+        int originalWidth = (gridSize * 3) / 5; // 3 columns for the original island
+        int newWidth = gridSize - originalWidth; // 2 columns for the new island
+        int height = gridSize; // Keep the height the same
+
         // Split the tiles into two parts
-        int halfGridSize = gridSize / 2;
-        int newTileCount = halfGridSize * gridSize;
-        int remainingTileCount = gridSize * gridSize - newTileCount;
+        Tile[] originalTilesPart = new Tile[originalWidth * height];
+        Tile[] newTilesPart = new Tile[newWidth * height];
 
-        Tile[] newTiles = new Tile[newTileCount];
-        Tile[] remainingTiles = new Tile[remainingTileCount];
-        for (int i = 0; i < remainingTiles.length; i++) {
-            if (remainingTiles[i] == null) {
-                remainingTiles[i] = new Tile(); // Initialize with a default Tile
-            }
-        }
-        for (int i = 0; i < newTiles.length; i++) {
-            if (newTiles[i] == null) {
-                newTiles[i] = new Tile(); // Initialize with a default Tile
-            }
-        }
-
-        // Copy tiles for the new island
-        int newTileIndex = 0, remainingTileIndex = 0;
-        for (int y = 0; y < gridSize; y++) {
+        for (int y = 0; y < height; y++) {
             for (int x = 0; x < gridSize; x++) {
                 int index = y * gridSize + x;
-                if (x < halfGridSize) {
-                    if (remainingTileIndex < remainingTiles.length) {
-                        remainingTiles[remainingTileIndex++] = originalTiles[index];
-                    }
+                if (x < originalWidth) {
+                    originalTilesPart[y * originalWidth + x] = originalTiles[index];
                 } else {
-                    if (newTileIndex < newTiles.length) {
-                        newTiles[newTileIndex++] = originalTiles[index];
-                    }
+                    newTilesPart[y * newWidth + (x - originalWidth)] = originalTiles[index];
                 }
             }
         }
 
         // Update the original island with the remaining tiles
-        island.setTiles(remainingTiles);
-        island.setGridSize(halfGridSize);
+        island.setTiles(originalTilesPart);
+        island.setGridSize(originalWidth);
 
         // Find a valid position for the new island
-        int newIslandXOffset = xOffset + halfGridSize; // Initial xOffset for the new island
-        int newIslandYOffset = yOffset; // Initial yOffset for the new island
-        while (isOverlapping(newIslandXOffset, newIslandYOffset, halfGridSize)) {
+        int newIslandXOffset = xOffset + originalWidth; // Place it to the right of the original island
+        int newIslandYOffset = yOffset; // Keep the same vertical position
+        while (isOverlapping(newIslandXOffset, newIslandYOffset, newWidth)) {
             newIslandXOffset++;
-            if (newIslandXOffset + halfGridSize >= gp.maxScreenCol) { // Wrap to the next row if out of bounds
+            if (newIslandXOffset + newWidth >= gp.maxScreenCol) { // Wrap to the next row if out of bounds
                 newIslandXOffset = 0;
                 newIslandYOffset++;
             }
-            if (newIslandYOffset + halfGridSize >= gp.maxScreenRow) { // Stop if no valid position is found
+            if (newIslandYOffset + height >= gp.maxScreenRow) { // Stop if no valid position is found
                 System.out.println("No valid position found for the new island.");
                 return;
             }
         }
 
         // Create a new island for the broken part
-        TektonComponent newIsland = new TektonComponent(newTiles, newIslandXOffset, newIslandYOffset, halfGridSize, tileSize);
+        TektonComponent newIsland = new TektonComponent(newTilesPart, newIslandXOffset, newIslandYOffset, newWidth, tileSize);
 
         // Add the new island to the islands list
         islands.add(newIsland);
