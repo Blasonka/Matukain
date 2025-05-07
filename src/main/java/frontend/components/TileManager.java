@@ -117,85 +117,139 @@ public class TileManager {
         int cols = gp.maxScreenCol;
         int tileSize = gp.tileSize;
 
+        // Create a grid marking blocked tiles (islands)
         boolean[][] grid = new boolean[rows][cols];
         for (TektonComponent island : islands) {
             int startX = island.getXOffset();
             int startY = island.getYOffset();
-            int endX = startX + island.getGridSize();
-            int endY = startY + island.getGridSize();
+            int endX = startX + island.getGridWidth();
+            int endY = startY + island.getGridHeight();
             for (int x = startX; x < endX; x++) {
                 for (int y = startY; y < endY; y++) {
-                    grid[y][x] = true;
+                    if (x >= 0 && x < cols && y >= 0 && y < rows) {
+                        grid[y][x] = true;
+                    }
                 }
             }
         }
 
-        int[] startEdge = findClosestEdge(grid, island1.getXOffset(), island1.getYOffset(), island2.getXOffset(), island2.getYOffset());
-        int[] endEdge = findClosestEdge(grid, island2.getXOffset(), island2.getYOffset(), island1.getXOffset(), island1.getYOffset());
+        // Find the closest walkable points near each island's edge
+        int[] startPoint = findIslandEdgePoint(grid, island1, island2);
+        int[] endPoint = findIslandEdgePoint(grid, island2, island1);
 
-        if (startEdge == null || endEdge == null) {
-            System.out.println("Could not determine valid edge points.");
+        if (startPoint == null || endPoint == null) {
+            System.out.println("Could not find valid edge points for path.");
             return;
         }
 
-        startEdge[0] = Math.max(0, Math.min(grid[0].length - 1, startEdge[0] - 1));
-        startEdge[1] = Math.max(0, Math.min(grid.length - 1, startEdge[1] - 1));
-        endEdge[0] = Math.max(0, Math.min(grid[0].length - 1, endEdge[0] + 1));
-        endEdge[1] = Math.max(0, Math.min(grid.length - 1, endEdge[1] + 1));
+        // Find the path between these points
+        List<int[]> path = findPath(grid, startPoint[0], startPoint[1], endPoint[0], endPoint[1]);
 
-        // Ensure start and end points are walkable
-        if (grid[startEdge[1]][startEdge[0]]) {
-            startEdge = findNearestWalkablePoint(grid, startEdge[0], startEdge[1]);
-            if (startEdge == null) {
-                System.out.println("No valid start point found.");
-                return;
-            }
-        }
-        if (grid[endEdge[1]][endEdge[0]]) {
-            endEdge = findNearestWalkablePoint(grid, endEdge[0], endEdge[1]);
-            if (endEdge == null) {
-                System.out.println("No valid end point found.");
-                return;
-            }
-        }
-
-        List<int[]> path = findPath(grid, startEdge[0], startEdge[1], endEdge[0], endEdge[1]);
-
-
+        // Draw the path
         Graphics2D g2 = (Graphics2D) g;
-        Stroke originalStroke = g2.getStroke(); // Save the original stroke
-        g2.setStroke(new BasicStroke(10)); // Set the stroke width to 10px
-        g2.setColor(new Color(144, 238, 144)); // Set the color to blue
+        Stroke originalStroke = g2.getStroke();
+        g2.setStroke(new BasicStroke(10));
+        g2.setColor(new Color(144, 238, 144));
 
         if (path.isEmpty()) {
-            System.out.println("No path found.");
+            System.out.println("No path found between points.");
+            g2.setStroke(originalStroke);
             return;
         }
 
-        int x1 = startEdge[0] * tileSize + tileSize / 2;
-        int y1 = startEdge[1] * tileSize + tileSize / 2;
-        int x2 = path.get(0)[0] * tileSize + tileSize / 2;
-        int y2 = path.get(0)[1] * tileSize + tileSize / 2;
-        g.drawLine(x1, y1, x2, y2);
+        // Draw from the island center to the first path point
+        int island1CenterX = (island1.getXOffset() + island1.getGridWidth() / 2) * tileSize + tileSize / 2;
+        int island1CenterY = (island1.getYOffset() + island1.getGridHeight() / 2) * tileSize + tileSize / 2;
+        int firstPathX = path.get(0)[0] * tileSize + tileSize / 2;
+        int firstPathY = path.get(0)[1] * tileSize + tileSize / 2;
+        g2.drawLine(island1CenterX, island1CenterY, firstPathX, firstPathY);
 
-        for (int i = 0; i < path.size() - 1; i++) {
-            int[] current = path.get(i);
-            int[] next = path.get(i + 1);
-
-            x1 = current[0] * tileSize + tileSize / 2;
-            y1 = current[1] * tileSize + tileSize / 2;
-            x2 = next[0] * tileSize + tileSize / 2;
-            y2 = next[1] * tileSize + tileSize / 2;
-            g.drawLine(x1, y1, x2, y2);
+        // Draw the main path
+        int prevX = firstPathX;
+        int prevY = firstPathY;
+        for (int i = 1; i < path.size(); i++) {
+            int currX = path.get(i)[0] * tileSize + tileSize / 2;
+            int currY = path.get(i)[1] * tileSize + tileSize / 2;
+            g2.drawLine(prevX, prevY, currX, currY);
+            prevX = currX;
+            prevY = currY;
         }
 
-        int[] lastPoint = path.get(path.size() - 1);
-        x1 = lastPoint[0] * tileSize + tileSize / 2;
-        y1 = lastPoint[1] * tileSize + tileSize / 2;
-        x2 = endEdge[0] * tileSize + tileSize / 2;
-        y2 = endEdge[1] * tileSize + tileSize / 2;
-        g.drawLine(x1, y1, x2, y2);
+        // Draw from last path point to the second island center
+        int island2CenterX = (island2.getXOffset() + island2.getGridWidth() / 2) * tileSize + tileSize / 2;
+        int island2CenterY = (island2.getYOffset() + island2.getGridHeight() / 2) * tileSize + tileSize / 2;
+        g2.drawLine(prevX, prevY, island2CenterX, island2CenterY);
+
+        g2.setStroke(originalStroke);
     }
+
+    private int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
+        int islandLeft = island.getXOffset();
+        int islandRight = island.getXOffset() + island.getGridWidth();
+        int islandTop = island.getYOffset();
+        int islandBottom = island.getYOffset() + island.getGridHeight();
+
+        int targetX = targetIsland.getXOffset() + targetIsland.getGridWidth() / 2;
+        int targetY = targetIsland.getYOffset() + targetIsland.getGridHeight() / 2;
+
+        // Try to find a point just outside the island in the direction of the target
+        int[] bestPoint = null;
+        double minDistance = Double.MAX_VALUE;
+
+        // Check all four sides of the island
+        for (int x = islandLeft; x < islandRight; x++) {
+            // Top side
+            int y = islandTop - 1;
+            if (y >= 0 && !grid[y][x]) {
+                double distance = Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestPoint = new int[]{x, y};
+                }
+            }
+            // Bottom side
+            y = islandBottom;
+            if (y < grid.length && !grid[y][x]) {
+                double distance = Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestPoint = new int[]{x, y};
+                }
+            }
+        }
+
+        for (int y = islandTop; y < islandBottom; y++) {
+            // Left side
+            int x = islandLeft - 1;
+            if (x >= 0 && !grid[y][x]) {
+                double distance = Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestPoint = new int[]{x, y};
+                }
+            }
+            // Right side
+            x = islandRight;
+            if (x < grid[0].length && !grid[y][x]) {
+                double distance = Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestPoint = new int[]{x, y};
+                }
+            }
+        }
+
+        return bestPoint;
+    }
+
+    // Adjusts a point to the nearest walkable position if it's blocked
+    private int[] adjustToWalkable(boolean[][] grid, int[] point) {
+        if (!grid[point[1]][point[0]]) {
+            return point; // Already walkable
+        }
+        return findNearestWalkablePoint(grid, point[0], point[1]);
+    }
+
     private int[] findClosestEdge(boolean[][] grid, int centerX, int centerY, int targetX, int targetY) {
         int rows = grid.length;
         int cols = grid[0].length;
@@ -394,3 +448,4 @@ public class TileManager {
         gp.repaint();
     }
 }
+
