@@ -1,9 +1,11 @@
 package frontend;
 
+import frontend.components.MenuPanel;
 import frontend.windows.GameWindow;
 import frontend.windows.MainWindow;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class Main {
     public static Clip musicPlayer() {
@@ -41,17 +43,6 @@ public class Main {
 
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow();
-
-        while (!mainWindow.vanemeg) {
-            try {
-                Thread.sleep(100); // Check every 100ms
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        GameWindow gameWindow = new GameWindow();
-
 
     }
 }

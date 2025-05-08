@@ -1,11 +1,12 @@
 package frontend.windows;
 
+import frontend.components.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow {
     JFrame frame = new JFrame("Fungorium");
-    public boolean vanemeg = false;
 
     public MainWindow() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -13,30 +14,24 @@ public class MainWindow {
         frame.setResizable(false);
         frame.setSize(1280, 720);
 
-        // Create a JLayeredPane with GridBagLayout
         JLayeredPane layeredPane = new JLayeredPane();
 
-        // Background image
         ImageIcon background = new ImageIcon(MainWindow.class.getResource("/resources/background.png"));
         JLabel backgroundLabel = new JLabel(background);
         backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 
-        // Create a JPanel for the title and button
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setOpaque(false); // Make the panel transparent
+        panel.setOpaque(false);
 
-        // Title label
         JLabel title = new JLabel("Fungorium", SwingConstants.CENTER);
         title.setFont(title.getFont().deriveFont(48f));
         title.setForeground(Color.WHITE);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT); // Center alignment in the panel
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
 
-        // Add spacing between title and button
         panel.add(Box.createVerticalStrut(10));
 
-        // Start button
         JButton startButton = new JButton("Start");
         startButton.setFont(startButton.getFont().deriveFont(24f));
         startButton.setFont(startButton.getFont().deriveFont(Font.ITALIC));
@@ -46,28 +41,34 @@ public class MainWindow {
         startButton.setFocusPainted(false);
         startButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center alignment in the panel
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         startButton.addActionListener(e -> {
-            vanemeg = true;
+            JFrame menuFrame = new JFrame("Fungorium");
+            menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            menuFrame.setUndecorated(true);
+            menuFrame.setResizable(false);
+            menuFrame.setSize(1280, 720);
+
+            MenuPanel menuPanel = new MenuPanel(menuFrame);
+            menuFrame.setContentPane(menuPanel);
+            menuFrame.setLocationRelativeTo(null);
+            menuFrame.setVisible(true);
+
             frame.dispose();
         });
         panel.add(startButton);
 
-        // Set bounds for the panel to ensure it is centered
-        int panelWidth = 400; // Example width for the panel
-        int panelHeight = 300; // Example height for the panel
+        int panelWidth = 400;
+        int panelHeight = 300;
         int panelX = ((frame.getWidth() - panelWidth) / 2);
         int panelY = ((frame.getHeight() - panelHeight) / 2)+150;
         panel.setBounds(panelX, panelY, panelWidth, panelHeight);
 
-        // Add background to the lowest layer
-        layeredPane.add(backgroundLabel, Integer.valueOf(0)); // Background layer
-        layeredPane.add(panel, Integer.valueOf(1)); // Panel layer
+        layeredPane.add(backgroundLabel, Integer.valueOf(0));
+        layeredPane.add(panel, Integer.valueOf(1));
 
-        // Remove GridBagLayout since JLayeredPane does not handle it well
         layeredPane.setLayout(null);
 
-        // Add the layered pane to the frame
         frame.setContentPane(layeredPane);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
