@@ -69,12 +69,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            System.out.println("S key pressed");
-            if (!tileM.islands.isEmpty()) {
-                tileM.islandOszto(tileM.islands.get(0));
+        int keyCode = e.getKeyCode();
+        if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9) {
+            int index = keyCode - KeyEvent.VK_0; // Map key 0-9 to index 0-9
+            if (index < tileM.islands.size() && tileM.islands.get(index).getBreakCount()<=2 ) {
+                System.out.println("Key " + index + " pressed");
+                tileM.islandOszto(tileM.islands.get(index));
             } else {
-                System.out.println("No islands available");
+                System.out.println("No island available at index " + index);
             }
         }
     }

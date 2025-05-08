@@ -12,6 +12,7 @@ public class RovarEntity extends Entity implements Runnable {
     Coordinate defaultCoordinate;
     BufferedImage playerImage;
     Thread animThread;
+    int currentIsland = 0;
     //Rovar rovar;
 
     public RovarEntity(GamePanel gp, MouseHandler mouseHandler) {
@@ -22,13 +23,13 @@ public class RovarEntity extends Entity implements Runnable {
         getPlayerImage();
     }
     public void setDefaultValues() {
-        Random random = new Random();
-        int r = random.nextInt(0, gp.tileM.islands.size());
-        x = (gp.tileM.islands.get(r).getXOffset() * gp.tileSize + (gp.tileM.islands.get(r).getGridSize() * gp.tileSize) / 2)-24;
-        y = (gp.tileM.islands.get(r).getYOffset() * gp.tileSize + (gp.tileM.islands.get(r).getGridSize() * gp.tileSize) / 2)-24;
+        /*Random random = new Random();
+        int r = random.nextInt(0, gp.tileM.islands.size());>*/
+        x = (gp.tileM.islands.get(0).getXOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
+        y = (gp.tileM.islands.get(0).getYOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
         mouseHandler.coordinate.x=x;
         mouseHandler.coordinate.y=y;
-        speed = 3;
+        speed = 15;
     }
     public void startAnimThread(){
         animThread = new Thread(this);
@@ -38,21 +39,21 @@ public class RovarEntity extends Entity implements Runnable {
     @Override
     public void run() {
         while (animThread != null) {
-            if (x<mouseHandler.coordinate.getX()) {
-                x +=1;
-            } else if (x>mouseHandler.coordinate.getX()) {
-                x -= 1;
+            if (x < mouseHandler.coordinate.getX()) {
+                x += Math.min(speed, mouseHandler.coordinate.getX() - x);
+            } else if (x > mouseHandler.coordinate.getX()) {
+                x -= Math.min(speed, x - mouseHandler.coordinate.getX());
             }
-            if (y<mouseHandler.coordinate.getY()) {
-                y +=1;
-            } else if (y>mouseHandler.coordinate.getY()) {
-                y -= 1;
+            if (y < mouseHandler.coordinate.getY()) {
+                y += Math.min(speed, mouseHandler.coordinate.getY() - y);
+            } else if (y > mouseHandler.coordinate.getY()) {
+                y -= Math.min(speed, y - mouseHandler.coordinate.getY());
             }
-            if (x==mouseHandler.coordinate.getX() && y==mouseHandler.coordinate.getY()) {
+            if (x == mouseHandler.coordinate.getX() && y == mouseHandler.coordinate.getY()) {
                 animThread = null;
             }
             try {
-                Thread.sleep(1000 / 60); // 24 FPS
+                Thread.sleep(1000/60); // 24 FPS
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -60,8 +61,16 @@ public class RovarEntity extends Entity implements Runnable {
     }
 
     public void update() {
-        if (mouseHandler.coordinate.getX()!=x || mouseHandler.coordinate.getY()!=y) {
-            startAnimThread();
+        if (mouseHandler.coordinate.getX() != x || mouseHandler.coordinate.getY() != y) {
+            if (currentIsland != mouseHandler.selectedIsland) {
+                if (currentIsland != mouseHandler.selectedIsland &&
+                        gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
+
+                    System.out.println("Island changed: " + currentIsland + " -> " + mouseHandler.selectedIsland);
+                    currentIsland = mouseHandler.selectedIsland;
+                    startAnimThread();
+                }
+            }
         }
     }
 
@@ -79,5 +88,6 @@ public class RovarEntity extends Entity implements Runnable {
         }
 
     }
+
 
 }

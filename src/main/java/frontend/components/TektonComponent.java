@@ -3,13 +3,19 @@ package frontend.components;
 import frontend.components.Tile;
 
 import java.awt.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class TektonComponent {
     private Tile[] tiles;
     private int xOffset;
     private int yOffset;
-    private int gridSize; // Represents the number of columns
+    private int gridSize;
     private int tileSize;
+    private int breakCount = 0; // Tracks how many times the island has been broken
+    public List<Integer> szomszedok = new ArrayList<>();
 
     public TektonComponent(Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
         this.tiles = tiles;
@@ -17,6 +23,14 @@ public class TektonComponent {
         this.yOffset = yOffset;
         this.gridSize = gridSize;
         this.tileSize = tileSize;
+    }
+
+    public int getBreakCount() {
+        return breakCount;
+    }
+
+    public void incrementBreakCount() {
+        this.breakCount++;
     }
 
     public void draw(Graphics g) {
@@ -71,4 +85,5 @@ public class TektonComponent {
     public int getGridHeight() {
         return tiles.length / gridSize; // Number of rows
     }
+
 }

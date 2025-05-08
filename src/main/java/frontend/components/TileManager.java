@@ -18,6 +18,7 @@ public class TileManager {
         createIslands(5); // Example: Create 5 islands
     }
 
+
     private void createIslands(int numberOfIslands) {
         Random random = new Random();
         for (int i = 0; i < numberOfIslands; i++) {
@@ -71,48 +72,14 @@ public class TileManager {
 
     public void draw(Graphics g) {
         // Draw the path between the islands
-        drawPathAvoidingIslands(g, islands.get(0), islands.get(1)); // Example: Draw path between first two islands
+        drawPathAvoidingIslands(g, islands.get(0), islands.get(1));
+        drawPathAvoidingIslands(g, islands.get(0), islands.get(3));
         for (TektonComponent island : islands) {
             island.draw(g);
         }
     }
 
-    private int[] findNearestWalkablePoint(boolean[][] grid, int x, int y) {
-        int rows = grid.length;
-        int cols = grid[0].length;
-
-        // Check if the current point is already walkable
-        if (!grid[y][x]) {
-            return new int[]{x, y};
-        }
-
-        // Search for the nearest walkable point
-        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-        Queue<int[]> queue = new LinkedList<>();
-        boolean[][] visited = new boolean[rows][cols];
-        queue.add(new int[]{x, y});
-        visited[y][x] = true;
-
-        while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            for (int[] dir : directions) {
-                int newX = current[0] + dir[0];
-                int newY = current[1] + dir[1];
-
-                if (newX >= 0 && newX < cols && newY >= 0 && newY < rows && !visited[newY][newX]) {
-                    if (!grid[newY][newX]) {
-                        return new int[]{newX, newY};
-                    }
-                    queue.add(new int[]{newX, newY});
-                    visited[newY][newX] = true;
-                }
-            }
-        }
-
-        return null; // No walkable point found
-    }
-
-    private void drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2) {
+    private List<int[]> drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2) {
         int rows = gp.maxScreenRow;
         int cols = gp.maxScreenCol;
         int tileSize = gp.tileSize;
@@ -139,7 +106,7 @@ public class TileManager {
 
         if (startPoint == null || endPoint == null) {
             System.out.println("Could not find valid edge points for path.");
-            return;
+            return new ArrayList<>();
         }
 
         // Find the path between these points
@@ -154,7 +121,7 @@ public class TileManager {
         if (path.isEmpty()) {
             System.out.println("No path found between points.");
             g2.setStroke(originalStroke);
-            return;
+            return new ArrayList<>();
         }
 
         // Draw from the island center to the first path point
@@ -178,9 +145,15 @@ public class TileManager {
         // Draw from last path point to the second island center
         int island2CenterX = (island2.getXOffset() + island2.getGridWidth() / 2) * tileSize + tileSize / 2;
         int island2CenterY = (island2.getYOffset() + island2.getGridHeight() / 2) * tileSize + tileSize / 2;
+
+        island1.szomszedok.add(islands.indexOf(island2));
+        island2.szomszedok.add(islands.indexOf(island1));
+
         g2.drawLine(prevX, prevY, island2CenterX, island2CenterY);
 
         g2.setStroke(originalStroke);
+        return path; // Return the path
+
     }
 
     private int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
@@ -240,58 +213,6 @@ public class TileManager {
         }
 
         return bestPoint;
-    }
-
-    // Adjusts a point to the nearest walkable position if it's blocked
-    private int[] adjustToWalkable(boolean[][] grid, int[] point) {
-        if (!grid[point[1]][point[0]]) {
-            return point; // Already walkable
-        }
-        return findNearestWalkablePoint(grid, point[0], point[1]);
-    }
-
-    private int[] findClosestEdge(boolean[][] grid, int centerX, int centerY, int targetX, int targetY) {
-        int rows = grid.length;
-        int cols = grid[0].length;
-        int[] closestEdge = null;
-        double minDistance = Double.MAX_VALUE;
-
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
-                if (!grid[y][x] && isEdge(grid, x, y)) {
-                    double distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestEdge = new int[]{x, y};
-                    }
-                }
-            }
-        }
-
-        if (closestEdge != null && grid[closestEdge[1]][closestEdge[0]]) {
-            System.out.println("Closest edge is blocked.");
-            return null;
-        }
-
-        return closestEdge;
-    }
-
-    private boolean isEdge(boolean[][] grid, int x, int y) {
-        int rows = grid.length;
-        int cols = grid[0].length;
-
-        // Check if the point is walkable and has at least one neighbor that is an obstacle
-        if (!grid[y][x]) {
-            int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-            for (int[] dir : directions) {
-                int neighborX = x + dir[0];
-                int neighborY = y + dir[1];
-                if (neighborX >= 0 && neighborX < cols && neighborY >= 0 && neighborY < rows && grid[neighborY][neighborX]) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
@@ -390,8 +311,13 @@ public class TileManager {
         }
     }
 
-
     public void islandOszto(TektonComponent island) {
+        // Check if the island has already been broken 3 times
+        if (island.getBreakCount() >= 2) {
+            System.out.println("This island cannot be broken further.");
+            return;
+        }
+
         // Get the original island's properties
         Tile[] originalTiles = island.getTiles();
         int gridSize = island.getGridSize();
@@ -422,6 +348,7 @@ public class TileManager {
         // Update the original island with the remaining tiles
         island.setTiles(originalTilesPart);
         island.setGridSize(originalWidth);
+        island.incrementBreakCount(); // Increment the break count for the original island
 
         // Find a valid position for the new island
         int newIslandXOffset = xOffset + originalWidth; // Place it to the right of the original island
@@ -448,4 +375,9 @@ public class TileManager {
         gp.repaint();
     }
 }
+
+
+
+
+
 

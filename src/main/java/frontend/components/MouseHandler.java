@@ -7,6 +7,7 @@ public class MouseHandler implements MouseListener {
     private TileManager tileManager;
     Coordinate coordinate = new Coordinate(0, 0);
     boolean clicked = false;
+    public int selectedIsland = 0;
 
     public MouseHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -31,6 +32,7 @@ public class MouseHandler implements MouseListener {
                 coordinate.y = (islandY + islandHeight / 2)-24;
 
                 // Handle the click on this island
+                selectedIsland = gamePanel.tileM.islands.indexOf(island);
                 System.out.println("Island clicked: " + gamePanel.tileM.islands.indexOf(island));
                 break;
             }

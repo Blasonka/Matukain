@@ -43,6 +43,8 @@ public class MainWindow {
 
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         startButton.addActionListener(e -> {
+            GameWindow gameWindow = new GameWindow();
+            /*
             JFrame menuFrame = new JFrame("Fungorium");
             menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             menuFrame.setUndecorated(true);
@@ -53,7 +55,7 @@ public class MainWindow {
             menuFrame.setContentPane(menuPanel);
             menuFrame.setLocationRelativeTo(null);
             menuFrame.setVisible(true);
-
+            */
             frame.dispose();
         });
         panel.add(startButton);
