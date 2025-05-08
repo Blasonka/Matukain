@@ -129,7 +129,9 @@ public class TileManager {
         int island1CenterY = (island1.getYOffset() + island1.getGridHeight() / 2) * tileSize + tileSize / 2;
         int firstPathX = path.get(0)[0] * tileSize + tileSize / 2;
         int firstPathY = path.get(0)[1] * tileSize + tileSize / 2;
-        g2.drawLine(island1CenterX, island1CenterY, firstPathX, firstPathY);
+        if(!pathFinding) {
+            g2.drawLine(island1CenterX, island1CenterY, firstPathX, firstPathY);
+        }
 
         // Draw the main path
         int prevX = firstPathX;
@@ -137,7 +139,9 @@ public class TileManager {
         for (int i = 1; i < path.size(); i++) {
             int currX = path.get(i)[0] * tileSize + tileSize / 2;
             int currY = path.get(i)[1] * tileSize + tileSize / 2;
-            g2.drawLine(prevX, prevY, currX, currY);
+            if (!pathFinding){
+                g2.drawLine(prevX, prevY, currX, currY);
+            }
             prevX = currX;
             prevY = currY;
         }
