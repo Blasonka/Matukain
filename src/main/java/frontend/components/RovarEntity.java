@@ -4,7 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
+import java.util.*;
 
 public class RovarEntity extends Entity implements Runnable {
     GamePanel gp;
@@ -13,6 +15,8 @@ public class RovarEntity extends Entity implements Runnable {
     BufferedImage playerImage;
     Thread animThread;
     int currentIsland = 0;
+    private List<int[]> currentPath;
+    private int currentPathIndex = 0;
     //Rovar rovar;
 
     public RovarEntity(GamePanel gp, MouseHandler mouseHandler) {
@@ -22,23 +26,75 @@ public class RovarEntity extends Entity implements Runnable {
         defaultCoordinate = mouseHandler.coordinate;
         getPlayerImage();
     }
+
     public void setDefaultValues() {
-        /*Random random = new Random();
-        int r = random.nextInt(0, gp.tileM.islands.size());>*/
         x = (gp.tileM.islands.get(0).getXOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
         y = (gp.tileM.islands.get(0).getYOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
-        mouseHandler.coordinate.x=x;
-        mouseHandler.coordinate.y=y;
-        speed = 15;
+        mouseHandler.coordinate.x = x;
+        mouseHandler.coordinate.y = y;
+        speed = 5; // Reduced speed for smoother path following
     }
+
     public void startAnimThread(){
-        animThread = new Thread(this);
-        animThread.start();
+        if (animThread == null || !animThread.isAlive()) {
+            animThread = new Thread(this);
+            animThread.start();
+        }
     }
 
     @Override
     public void run() {
         while (animThread != null) {
+            if (currentPath != null && !currentPath.isEmpty()) {
+                // Follow the path
+                followPath();
+            } else {
+                // Move directly to target if no path is set
+                moveDirectlyToTarget();
+            }
+
+            try {
+                Thread.sleep(1000/60); // 24 FPS
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void followPath() {
+        if (currentPathIndex < currentPath.size()) {
+            int[] targetPoint = currentPath.get(currentPathIndex);
+            int targetX = targetPoint[0] * gp.tileSize + gp.tileSize / 2 - 24;
+            int targetY = targetPoint[1] * gp.tileSize + gp.tileSize / 2 - 24;
+
+            // Move towards the current path point
+            if (x < targetX) {
+                x += Math.min(speed, targetX - x);
+            } else if (x > targetX) {
+                x -= Math.min(speed, x - targetX);
+            }
+
+            if (y < targetY) {
+                y += Math.min(speed, targetY - y);
+            } else if (y > targetY) {
+                y -= Math.min(speed, y - targetY);
+            }
+
+            // Check if we've reached the current path point
+            if (Math.abs(x - targetX) < speed && Math.abs(y - targetY) < speed) {
+                currentPathIndex++;
+            }
+        } else {
+            // Path completed
+            currentPath = null;
+            currentPathIndex = 0;
+        }
+    }
+
+    private void moveDirectlyToTarget() {
+        // Check if the current island and selected island are neighbors
+        if (currentIsland == mouseHandler.selectedIsland ||
+                gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
             if (x < mouseHandler.coordinate.getX()) {
                 x += Math.min(speed, mouseHandler.coordinate.getX() - x);
             } else if (x > mouseHandler.coordinate.getX()) {
@@ -49,14 +105,6 @@ public class RovarEntity extends Entity implements Runnable {
             } else if (y > mouseHandler.coordinate.getY()) {
                 y -= Math.min(speed, y - mouseHandler.coordinate.getY());
             }
-            if (x == mouseHandler.coordinate.getX() && y == mouseHandler.coordinate.getY()) {
-                animThread = null;
-            }
-            try {
-                Thread.sleep(1000/60); // 24 FPS
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -65,6 +113,16 @@ public class RovarEntity extends Entity implements Runnable {
             if (currentIsland != mouseHandler.selectedIsland) {
                 if (currentIsland != mouseHandler.selectedIsland &&
                         gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
+
+                    // Get the path between current island and target island
+                    TektonComponent currentIslandObj = gp.tileM.islands.get(currentIsland);
+                    TektonComponent targetIslandObj = gp.tileM.islands.get(mouseHandler.selectedIsland);
+
+                    // Get the path between these islands
+                    currentPath = gp.tileM.drawPathAvoidingIslands(gp.getGraphics(), currentIslandObj, targetIslandObj, true);
+                    currentPathIndex = 0;
+
+                    gp.tileM.draw(gp.getGraphics());
 
                     System.out.println("Island changed: " + currentIsland + " -> " + mouseHandler.selectedIsland);
                     currentIsland = mouseHandler.selectedIsland;
@@ -75,8 +133,6 @@ public class RovarEntity extends Entity implements Runnable {
     }
 
     public void draw(Graphics2D g) {
-        //g.setColor(Color.red);
-        //g.fillRect(x, y, gp.tileSize, gp.tileSize);
         g.drawImage(playerImage, x, y, gp.tileSize, gp.tileSize, null);
     }
 
@@ -86,8 +142,5 @@ public class RovarEntity extends Entity implements Runnable {
         } catch (IOException e) {
             System.out.println("Error loading image: " + e.getMessage());
         }
-
     }
-
-
 }

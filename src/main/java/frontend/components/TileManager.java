@@ -72,14 +72,14 @@ public class TileManager {
 
     public void draw(Graphics g) {
         // Draw the path between the islands
-        drawPathAvoidingIslands(g, islands.get(0), islands.get(1));
-        drawPathAvoidingIslands(g, islands.get(0), islands.get(3));
+        drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
+        drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
         for (TektonComponent island : islands) {
             island.draw(g);
         }
     }
 
-    private List<int[]> drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2) {
+    public List<int[]> drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2, boolean pathFinding) {
         int rows = gp.maxScreenRow;
         int cols = gp.maxScreenCol;
         int tileSize = gp.tileSize;
@@ -146,10 +146,12 @@ public class TileManager {
         int island2CenterX = (island2.getXOffset() + island2.getGridWidth() / 2) * tileSize + tileSize / 2;
         int island2CenterY = (island2.getYOffset() + island2.getGridHeight() / 2) * tileSize + tileSize / 2;
 
-        island1.szomszedok.add(islands.indexOf(island2));
-        island2.szomszedok.add(islands.indexOf(island1));
 
-        g2.drawLine(prevX, prevY, island2CenterX, island2CenterY);
+        if (!pathFinding) {
+            island1.szomszedok.add(islands.indexOf(island2));
+            island2.szomszedok.add(islands.indexOf(island1));
+            g2.drawLine(prevX, prevY, island2CenterX, island2CenterY);
+        }
 
         g2.setStroke(originalStroke);
         return path; // Return the path
