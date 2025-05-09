@@ -2,6 +2,7 @@ package frontend.windows;
 
 import frontend.Main;
 import frontend.components.GamePanel;
+import frontend.components.Statbar;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -55,6 +56,8 @@ public class GameWindow {
 
 
         layeredPane.add(muteButton, Integer.valueOf(1)); // Top layer
+
+
 
         // Add the layered pane to the frame
         frame2.setContentPane(layeredPane);
