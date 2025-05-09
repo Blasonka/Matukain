@@ -1,0 +1,18 @@
+@startuml
+actor User
+participant Main
+participant GamePanel
+
+User -> Main : alkalmazás elindítása
+activate Main
+Main -> GamePanel : startGameThread()
+activate GamePanel
+GamePanel -> GamePanel : run()
+loop amíg a játék fut
+GamePanel -> GamePanel : update()
+GamePanel -> GamePanel : paintComponent(g)
+end
+GamePanel --> Main :
+deactivate GamePanel
+deactivate Main
+@enduml

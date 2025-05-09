@@ -1,0 +1,9 @@
+@startuml
+participant "GamePanel" as GamePanel
+participant "TileManager" as TileManager
+participant "Tile" as Tile
+
+GamePanel -> TileManager: draw()
+TileManager -> Tile: draw()
+TileManager -> Tile: update()
+@enduml

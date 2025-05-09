@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "MouseHandler" as MouseHandler
+participant "GamePanel" as GamePanel
+participant "RovarEntity" as Entity
+
+User -> MouseHandler: MouseClicked(MouseEvent e)
+activate MouseHandler
+MouseHandler -> GamePanel: update()
+activate GamePanel
+GamePanel -> Entity: update()
+activate Entity
+Entity -> Entity:  getPlayerImage(BufferedImage b)
+Entity --> GamePanel: draw(Graphics g)
+deactivate Entity
+GamePanel --> MouseHandler:
+deactivate GamePanel
+deactivate MouseHandler
+@enduml

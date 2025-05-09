@@ -1,0 +1,29 @@
+@startuml
+
+actor User
+
+participant "Main" as Main
+participant "GamePanel" as GamePanel
+participant "MouseHandler" as MouseHandler
+participant "GombaEntity" as GombaEntity
+participant "Tile" as Tile
+participant "TileManager" as TileManager
+
+User -> Main: startGameThread()
+Main -> GamePanel: startGameThread()
+activate GamePanel
+GamePanel -> TileManager: draw()
+activate TileManager
+TileManager --> Tile: update()
+deactivate TileManager
+User -> MouseHandler: MouseClicked(MouseEvent e)
+activate MouseHandler
+MouseHandler -> GamePanel: koordinataX, koordinataY
+deactivate MouseHandler
+GamePanel -> GombaEntity: update()
+activate GombaEntity
+GombaEntity --> GamePanel: draw(Graphics g)
+deactivate GombaEntity
+deactivate GamePanel
+
+@enduml
