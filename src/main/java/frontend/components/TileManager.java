@@ -71,9 +71,9 @@ public class TileManager {
     }
 
     public void draw(Graphics g) {
-        // Draw the path between the islands
         drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
         drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
+        // Draw the path between the islands
         for (TektonComponent island : islands) {
             island.draw(g);
         }

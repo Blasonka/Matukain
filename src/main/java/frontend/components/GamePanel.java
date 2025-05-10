@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     Thread gameThread;
 
     RovarEntity rovarEntity = new RovarEntity(this, mouseHandler);
+    GombatestEntity gombatestEntity = new GombatestEntity(this, mouseHandler);
 
     public GamePanel(){
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
     public void update(){
         rovarEntity.update();
+        gombatestEntity.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -63,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         tileM.draw(g2);
 
         rovarEntity.draw(g2);
+        gombatestEntity.draw(g2);
 
         g2.dispose();
     }
@@ -78,6 +81,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             } else {
                 System.out.println("No island available at index " + index);
             }
+        }
+        if (keyCode == KeyEvent.VK_ENTER) {
+            System.out.println("Gombatest fejlodott");
+            gombatestEntity.state = 1;
         }
     }
 
