@@ -226,4 +226,12 @@ public abstract class Tekton {
      * @param gomba, a gomba, amelyre a hatás kifejtésre kerül
      */
     public abstract void hatasKifejtes(Gomba gomba);
+
+    public void setKoordinataX(int x) {
+        this.koordinataX =x;
+    }
+
+    public void setKoordinataY(int y) {
+        this.koordinataY = y;
+    }
 }

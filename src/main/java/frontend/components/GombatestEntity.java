@@ -4,29 +4,18 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
 
-public class GombatestEntity extends Entity{
+public class GombatestEntity extends Entity {
     GamePanel gp;
     MouseHandler mouseHandler;
     BufferedImage playerImage;
-    int currentIsland = 1;
-    int state = 0; //0=kis gomba, 1=kifejett gomba
+    int state = 0; // 0 = kis gomba, 1 = kifejlett gomba
 
     public GombatestEntity(GamePanel gp, MouseHandler mouseHandler) {
         this.gp = gp;
         this.mouseHandler = mouseHandler;
-        setDefaultValues(currentIsland);
         getPlayerImage();
     }
-
-    public void setDefaultValues(int islandIndex) {
-        x = (gp.tileM.islands.get(islandIndex).getXOffset() * gp.tileSize + (gp.tileM.islands.get(islandIndex).getGridSize() * gp.tileSize) / 2)-24;
-        y = (gp.tileM.islands.get(islandIndex).getYOffset() * gp.tileSize + (gp.tileM.islands.get(islandIndex).getGridSize() * gp.tileSize) / 2)-24-48;
-    }
-
-
-
 
     public void update() {
         draw(gp.getGraphics());

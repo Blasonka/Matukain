@@ -1,5 +1,6 @@
 package frontend.components;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,22 +57,68 @@ public class TektonComponent {
             int tileIndex = relativeY * gridSize + relativeX;
             if (tileIndex >= 0 && tileIndex < tiles.length) {
                 Tile clickedTile = tiles[tileIndex];
-                if (tmpSpora) clickedTile.incrementSporeCount();
-                else clickedTile.decrementSporeCount();
+                if (tmpSpora) {
+                    clickedTile.incrementSporeCount();
+                } else {
+                    clickedTile.decrementSporeCount();
+                }
 
                 try {
                     String imagePath = switch (clickedTile.getSporeCount()) {
-                        case 1 -> "/resources/textures/tekton_1spore.png";
-                        case 2 -> "/resources/textures/tekton_2spores.png";
-                        case 3 -> "/resources/textures/tekton_3spores.png";
-                        default -> new Random().nextInt(2) == 0 ? "/resources/textures/tekton1.png" : "/resources/textures/tekton2.png";
+                        case 1 -> "/textures/tekton_1spore.png";
+                        case 2 -> "/textures/tekton_2spores.png";
+                        case 3 -> "/textures/tekton_3spores.png";
+                        default -> new Random().nextInt(2) == 0 ? "/textures/tekton1.png" : "/textures/tekton2.png";
                     };
-                    clickedTile.image = javax.imageio.ImageIO.read(getClass().getResourceAsStream(imagePath));
+                    System.out.println("Loading image: " + imagePath);
+                    java.io.InputStream inputStream = getClass().getResourceAsStream(imagePath);
+                    if (inputStream == null) {
+                        System.err.println("Failed to load image: " + imagePath + " - Resource not found");
+                        clickedTile.image = null;
+                    } else {
+                        clickedTile.image = ImageIO.read(inputStream);
+                        if (clickedTile.image == null) {
+                            System.err.println("ImageIO.read returned null for: " + imagePath);
+                        }
+                    }
                 } catch (java.io.IOException e) {
+                    System.err.println("Error loading image for spore count " + clickedTile.getSporeCount() + ": " + e.getMessage());
                     e.printStackTrace();
+                    clickedTile.image = null;
                 }
             }
+        } else {
+            System.out.println("Click outside tile bounds: relativeX=" + relativeX + ", relativeY=" + relativeY);
         }
+    }
+
+    public Entity placeInitialEntity(int playerIndex, GamePanel gamePanel) {
+        int centerX = (xOffset + gridSize / 2) * tileSize - 24; // Center of the island, adjusted for entity size
+        int centerY = (yOffset + (tiles.length / gridSize) / 2) * tileSize - 24;
+
+        Entity entity = null;
+        if (playerIndex < 2) {
+
+            GombatestEntity gombaEntity = new GombatestEntity(gamePanel, gamePanel.mouseHandler);
+            gombaEntity.x = centerX;
+            gombaEntity.y = centerY - 48;
+            gombaEntity.state = 0;
+
+            gamePanel.gombatestEntities.add(gombaEntity);
+            entity = gombaEntity;
+            System.out.println("Placed mushroom at (" + centerX + ", " + centerY + ") for player " + playerIndex);
+        } else {
+            RovarEntity rovarEntity = new RovarEntity(gamePanel, gamePanel.mouseHandler);
+            rovarEntity.x = centerX;
+            rovarEntity.y = centerY;
+            rovarEntity.currentIsland = gamePanel.tileM.islands.indexOf(this);
+
+            gamePanel.rovarEntities.add(rovarEntity);
+            entity = rovarEntity;
+            System.out.println("Placed bug at (" + centerX + ", " + centerY + ") for player " + playerIndex);
+        }
+
+        return entity;
     }
 
     public int getXOffset() {

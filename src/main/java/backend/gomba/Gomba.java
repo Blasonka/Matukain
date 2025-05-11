@@ -181,4 +181,8 @@ public class Gomba {
     public int getID() {
         return id;
     }
+
+    public void setTekton(Tekton tekton) {
+
+    }
 }

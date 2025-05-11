@@ -1,5 +1,6 @@
 package frontend;
 
+import backend.jateklogika.gameLogic;
 import frontend.components.MenuPanel;
 import frontend.windows.GameWindow;
 import frontend.windows.MainWindow;
@@ -15,7 +16,7 @@ public class Main {
         try {
             // Load the audio file
             AudioInputStream originalStream = AudioSystem.getAudioInputStream(
-                    Main.class.getResourceAsStream("/resources/fungorium.wav"));
+                    Main.class.getResourceAsStream("/fungorium.wav"));
 
             // Define target format (16-bit signed is widely supported)
             AudioFormat targetFormat = new AudioFormat(
@@ -60,46 +61,46 @@ public class Main {
     }
 
     public static void fontLoader(){
-            // Font betöltése
-            Font customFont = loadCustomFont("src/main/resources/fonts/Minecraft.ttf", 12f);
+        // Font betöltése
+        Font customFont = loadCustomFont("src/main/resources/fonts/Minecraft.ttf", 12f);
 
-            // UIManager beállítások az összes Swing komponenshez
-            UIManager.put("Button.font", customFont);
-            UIManager.put("ToggleButton.font", customFont);
-            UIManager.put("RadioButton.font", customFont);
-            UIManager.put("CheckBox.font", customFont);
-            UIManager.put("ColorChooser.font", customFont);
-            UIManager.put("ComboBox.font", customFont);
-            UIManager.put("Label.font", customFont);
-            UIManager.put("List.font", customFont);
-            UIManager.put("MenuBar.font", customFont);
-            UIManager.put("Menu.font", customFont);
-            UIManager.put("MenuItem.font", customFont);
-            UIManager.put("RadioButtonMenuItem.font", customFont);
-            UIManager.put("CheckBoxMenuItem.font", customFont);
-            UIManager.put("PopupMenu.font", customFont);
-            UIManager.put("OptionPane.font", customFont);
-            UIManager.put("Panel.font", customFont);
-            UIManager.put("ProgressBar.font", customFont);
-            UIManager.put("ScrollPane.font", customFont);
-            UIManager.put("Viewport.font", customFont);
-            UIManager.put("TabbedPane.font", customFont);
-            UIManager.put("Table.font", customFont);
-            UIManager.put("TableHeader.font", customFont);
-            UIManager.put("TextField.font", customFont);
-            UIManager.put("PasswordField.font", customFont);
-            UIManager.put("TextArea.font", customFont);
-            UIManager.put("TextPane.font", customFont);
-            UIManager.put("EditorPane.font", customFont);
-            UIManager.put("TitledBorder.font", customFont);
-            UIManager.put("ToolBar.font", customFont);
-            UIManager.put("ToolTip.font", customFont);
-            UIManager.put("Tree.font", customFont);
+        // UIManager beállítások az összes Swing komponenshez
+        UIManager.put("Button.font", customFont);
+        UIManager.put("ToggleButton.font", customFont);
+        UIManager.put("RadioButton.font", customFont);
+        UIManager.put("CheckBox.font", customFont);
+        UIManager.put("ColorChooser.font", customFont);
+        UIManager.put("ComboBox.font", customFont);
+        UIManager.put("Label.font", customFont);
+        UIManager.put("List.font", customFont);
+        UIManager.put("MenuBar.font", customFont);
+        UIManager.put("Menu.font", customFont);
+        UIManager.put("MenuItem.font", customFont);
+        UIManager.put("RadioButtonMenuItem.font", customFont);
+        UIManager.put("CheckBoxMenuItem.font", customFont);
+        UIManager.put("PopupMenu.font", customFont);
+        UIManager.put("OptionPane.font", customFont);
+        UIManager.put("Panel.font", customFont);
+        UIManager.put("ProgressBar.font", customFont);
+        UIManager.put("ScrollPane.font", customFont);
+        UIManager.put("Viewport.font", customFont);
+        UIManager.put("TabbedPane.font", customFont);
+        UIManager.put("Table.font", customFont);
+        UIManager.put("TableHeader.font", customFont);
+        UIManager.put("TextField.font", customFont);
+        UIManager.put("PasswordField.font", customFont);
+        UIManager.put("TextArea.font", customFont);
+        UIManager.put("TextPane.font", customFont);
+        UIManager.put("EditorPane.font", customFont);
+        UIManager.put("TitledBorder.font", customFont);
+        UIManager.put("ToolBar.font", customFont);
+        UIManager.put("ToolTip.font", customFont);
+        UIManager.put("Tree.font", customFont);
     }
 
     public static void main(String[] args) {
         fontLoader();
-        MainWindow mainWindow = new MainWindow();
-
+        gameLogic logic = new gameLogic();
+        MainWindow mainWindow = new MainWindow(logic);
     }
 }

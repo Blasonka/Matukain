@@ -11,7 +11,7 @@ public class MouseHandler implements MouseListener {
 
     public MouseHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.tileManager = gamePanel.tileM; // Reference to TileManager
+        this.tileManager = gamePanel.tileM;
     }
 
     @Override
@@ -25,31 +25,26 @@ public class MouseHandler implements MouseListener {
             int islandWidth = island.getGridWidth() * island.getTileSize();
             int islandHeight = island.getGridHeight() * island.getTileSize();
 
-            // Check if the click is within the island's bounds
-            if (mouseX >= islandX && mouseX < islandX + islandWidth &&
-                    mouseY >= islandY && mouseY < islandY + islandHeight) {
-                coordinate.x = (islandX + islandWidth / 2)-24;
-                coordinate.y = (islandY + islandHeight / 2)-24;
-
-                // Handle the click on this island
-                selectedIsland = gamePanel.tileM.islands.indexOf(island);
-                System.out.println("Island clicked: " + gamePanel.tileM.islands.indexOf(island));
-                break;
-            }
-        }
-        for (TektonComponent island : gamePanel.tileM.islands) {
-            int islandX = island.getXOffset() * island.getTileSize();
-            int islandY = island.getYOffset() * island.getTileSize();
-            int islandWidth = island.getGridWidth() * island.getTileSize();
-            int islandHeight = island.getGridHeight() * island.getTileSize();
 
             if (mouseX >= islandX && mouseX < islandX + islandWidth &&
                     mouseY >= islandY && mouseY < islandY + islandHeight) {
-                coordinate.x = (islandX + islandWidth / 2)-24;
-                coordinate.y = (islandY + islandHeight / 2)-24;
-                selectedIsland = gamePanel.tileM.islands.indexOf(island);
+                coordinate.x = (islandX + islandWidth / 2) - 24;
+                coordinate.y = (islandY + islandHeight / 2) - 24;
 
-                island.handleTileClick(mouseX, mouseY);
+
+                selectedIsland = gamePanel.tileM.islands.indexOf(island);
+                System.out.println("Island clicked: " + selectedIsland);
+
+
+                if (gamePanel.currentPlayerIndex < 4) {
+
+                    island.placeInitialEntity(gamePanel.currentPlayerIndex, gamePanel);
+                    clicked = true;
+                } else {
+
+                    island.handleTileClick(mouseX, mouseY);
+                }
+
                 gamePanel.repaint();
                 break;
             }
@@ -62,12 +57,12 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mousePressed(java.awt.event.MouseEvent e) {
-        //mouseClicked(e);
+        ;
     }
 
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
-        //mouseClicked(e);
+
     }
 
     @Override

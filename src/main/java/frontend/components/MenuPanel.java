@@ -2,15 +2,20 @@ package frontend.components;
 
 import javax.swing.*;
 import java.awt.*;
-import frontend.windows.*;
+import backend.jateklogika.gameLogic;
+import backend.felhasznalo.Gombasz;
+import backend.felhasznalo.Rovarasz;
+import frontend.windows.GameWindow;
 
 public class MenuPanel extends JPanel {
     private JTextField[] nameFields;
     private JButton startButton;
     private JFrame frame;
+    private gameLogic logic;
 
-    public MenuPanel(JFrame frame) {
+    public MenuPanel(JFrame frame, gameLogic logic) {
         this.frame = frame;
+        this.logic = logic;
         setLayout(new GridBagLayout());
         setPreferredSize(new Dimension(1280, 720));
         setBackground(new Color(0, 0, 1, 0)); // Transparent background
@@ -55,8 +60,11 @@ public class MenuPanel extends JPanel {
                 add(startButton, gbc);
 
                 startButton.addActionListener(e -> {
+                    String[] names = getNames();
+                    logic.createUsers(names);
+                    logic.jatekKezdes(); // Initialize the game after creating users
                     frame.dispose();
-                    new GameWindow();
+                    new GameWindow(logic); // Start the game window
                 });
             }
         }
@@ -66,6 +74,9 @@ public class MenuPanel extends JPanel {
         String[] names = new String[4];
         for (int i = 0; i < 4; i++) {
             names[i] = nameFields[i].getText().trim();
+            if (names[i].isEmpty()) {
+                names[i] = "Player" + (i + 1);
+            }
         }
         return names;
     }

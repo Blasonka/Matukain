@@ -1,14 +1,17 @@
 package frontend.windows;
 
 import frontend.components.MenuPanel;
+import backend.jateklogika.gameLogic;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow {
     JFrame frame = new JFrame("Fungorium");
+    private gameLogic logic;
 
-    public MainWindow() {
+    public MainWindow(gameLogic logic) {
+        this.logic = logic;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setUndecorated(true);
         frame.setResizable(false);
@@ -16,7 +19,7 @@ public class MainWindow {
 
         JLayeredPane layeredPane = new JLayeredPane();
 
-        ImageIcon background = new ImageIcon(MainWindow.class.getResource("/resources/background.png"));
+        ImageIcon background = new ImageIcon(MainWindow.class.getResource("/background.png"));
         JLabel backgroundLabel = new JLabel(background);
         backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 
@@ -43,19 +46,18 @@ public class MainWindow {
 
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         startButton.addActionListener(e -> {
-            GameWindow gameWindow = new GameWindow();
-            /*
             JFrame menuFrame = new JFrame("Fungorium");
             menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             menuFrame.setUndecorated(true);
             menuFrame.setResizable(false);
             menuFrame.setSize(1280, 720);
 
-            MenuPanel menuPanel = new MenuPanel(menuFrame);
+            // Pass the gameLogic instance to MenuPanel
+            MenuPanel menuPanel = new MenuPanel(menuFrame, logic);
             menuFrame.setContentPane(menuPanel);
             menuFrame.setLocationRelativeTo(null);
             menuFrame.setVisible(true);
-            */
+
             frame.dispose();
         });
         panel.add(startButton);
@@ -63,7 +65,7 @@ public class MainWindow {
         int panelWidth = 400;
         int panelHeight = 300;
         int panelX = ((frame.getWidth() - panelWidth) / 2);
-        int panelY = ((frame.getHeight() - panelHeight) / 2)+150;
+        int panelY = ((frame.getHeight() - panelHeight) / 2) + 150;
         panel.setBounds(panelX, panelY, panelWidth, panelHeight);
 
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
@@ -74,5 +76,9 @@ public class MainWindow {
         frame.setContentPane(layeredPane);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public void dispose() {
+        frame.dispose();
     }
 }

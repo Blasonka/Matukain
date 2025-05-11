@@ -2,39 +2,51 @@ package frontend.components;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.*;
+import backend.jateklogika.gameLogic;
 
 public class TileManager {
     GamePanel gp;
+    gameLogic logic;
     public List<TektonComponent> islands;
 
-    public TileManager(GamePanel gp) {
+    public TileManager(GamePanel gp, gameLogic logic) {
         this.gp = gp;
+        this.logic = logic;
         this.islands = new ArrayList<>();
-        createIslands(5); // Example: Create 5 islands
+        createIslands(5); // Create 5 islands as before
+        syncTektonCoordinates(); // Sync coordinates with gameLogic
     }
-
 
     private void createIslands(int numberOfIslands) {
         Random random = new Random();
         for (int i = 0; i < numberOfIslands; i++) {
-            Tile[] tiles = new Tile[25]; // Each island has 25 tiles
+            Tile[] tiles = new Tile[25];
             initializeTiles(tiles);
 
-            int gridSize = (int) Math.sqrt(tiles.length); // Square layout
+            int gridSize = (int) Math.sqrt(tiles.length);
             int xOffset, yOffset;
 
-            // Find a valid position that does not overlap
             do {
-                xOffset = random.nextInt(gp.maxScreenCol - gridSize - 1); // Leave 1-tile margin
-                yOffset = random.nextInt(gp.maxScreenRow - gridSize - 1); // Leave 1-tile margin
+                xOffset = random.nextInt(gp.maxScreenCol - gridSize - 1);
+                yOffset = random.nextInt(gp.maxScreenRow - gridSize - 1);
             } while (isOverlapping(xOffset, yOffset, gridSize));
 
             islands.add(new TektonComponent(tiles, xOffset, yOffset, gridSize, gp.tileSize));
+        }
+    }
+
+    private void syncTektonCoordinates() {
+        for (int i = 0; i < islands.size(); i++) {
+            TektonComponent island = islands.get(i);
+            int xOffset = island.getXOffset() + island.getGridSize() / 2;
+            int yOffset = island.getYOffset() + island.getGridSize() / 2;
+            logic.updateTektonCoordinates(i, xOffset, yOffset);
         }
     }
 
@@ -47,10 +59,10 @@ public class TileManager {
 
             if (xOffset < islandRight && newRight > island.getXOffset() &&
                     yOffset < islandBottom && newBottom > island.getYOffset()) {
-                return true; // Overlap detected
+                return true;
             }
         }
-        return false; // No overlap
+        return false;
     }
 
     private void initializeTiles(Tile[] tiles) {
@@ -60,9 +72,9 @@ public class TileManager {
                 tiles[i] = new Tile();
                 int randomNumber = random.nextInt(2);
                 if (randomNumber == 0) {
-                    tiles[i].image = ImageIO.read(getClass().getResourceAsStream("/resources/textures/tekton1.png"));
+                    tiles[i].image = ImageIO.read(getClass().getResourceAsStream("/textures/tekton1.png"));
                 } else {
-                    tiles[i].image = ImageIO.read(getClass().getResourceAsStream("/resources/textures/tekton2.png"));
+                    tiles[i].image = ImageIO.read(getClass().getResourceAsStream("/textures/tekton2.png"));
                 }
             }
         } catch (IOException e) {
@@ -73,12 +85,10 @@ public class TileManager {
     public void draw(Graphics g) {
         drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
         drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
-        // Draw the path between the islands
         for (TektonComponent island : islands) {
             island.draw(g);
         }
     }
-
     public List<int[]> drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2, boolean pathFinding) {
         int rows = gp.maxScreenRow;
         int cols = gp.maxScreenCol;
@@ -381,9 +391,3 @@ public class TileManager {
         gp.repaint();
     }
 }
-
-
-
-
-
-
