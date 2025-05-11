@@ -1,12 +1,9 @@
 package frontend.components;
 
-import frontend.components.Tile;
-
 import java.awt.*;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Random;
 
 public class TektonComponent {
     private Tile[] tiles;
@@ -16,6 +13,8 @@ public class TektonComponent {
     private int tileSize;
     private int breakCount = 0; // Tracks how many times the island has been broken
     public List<Integer> szomszedok = new ArrayList<>();
+
+    public boolean tmpSpora = true;
 
     public TektonComponent(Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
         this.tiles = tiles;
@@ -45,6 +44,32 @@ public class TektonComponent {
             if (x >= gridSize) { // Move to the next row when reaching the end of the current row
                 x = 0;
                 y++;
+            }
+        }
+    }
+
+    public void handleTileClick(int mouseX, int mouseY) {
+        int relativeX = (mouseX / tileSize) - xOffset;
+        int relativeY = (mouseY / tileSize) - yOffset;
+
+        if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize) {
+            int tileIndex = relativeY * gridSize + relativeX;
+            if (tileIndex >= 0 && tileIndex < tiles.length) {
+                Tile clickedTile = tiles[tileIndex];
+                if (tmpSpora) clickedTile.incrementSporeCount();
+                else clickedTile.decrementSporeCount();
+
+                try {
+                    String imagePath = switch (clickedTile.getSporeCount()) {
+                        case 1 -> "/resources/textures/tekton_1spore.png";
+                        case 2 -> "/resources/textures/tekton_2spores.png";
+                        case 3 -> "/resources/textures/tekton_3spores.png";
+                        default -> new Random().nextInt(2) == 0 ? "/resources/textures/tekton1.png" : "/resources/textures/tekton2.png";
+                    };
+                    clickedTile.image = javax.imageio.ImageIO.read(getClass().getResourceAsStream(imagePath));
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

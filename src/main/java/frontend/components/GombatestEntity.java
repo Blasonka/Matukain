@@ -40,9 +40,9 @@ public class GombatestEntity extends Entity{
     public void getPlayerImage() {
         try {
             if (state == 0) {
-                playerImage = ImageIO.read(getClass().getResourceAsStream("/resources/mushroom1.png"));
+                playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom1.png"));
             } else if (state == 1) {
-                playerImage = ImageIO.read(getClass().getResourceAsStream("/resources/mushroom2.png"));
+                playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom2.png"));
             }
         } catch (IOException e) {
             System.out.println("Error loading image: " + e.getMessage());

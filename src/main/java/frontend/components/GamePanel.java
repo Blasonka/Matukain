@@ -85,6 +85,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         if (keyCode == KeyEvent.VK_ENTER) {
             System.out.println("Gombatest fejlodott");
             gombatestEntity.state = 1;
+        } if (keyCode == KeyEvent.VK_SPACE) {
+            System.out.println("Spóra mód váltva");
+            for (TektonComponent island : tileM.islands) {
+                island.tmpSpora = !island.tmpSpora;
+            }
         }
     }
 

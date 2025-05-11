@@ -37,6 +37,23 @@ public class MouseHandler implements MouseListener {
                 break;
             }
         }
+        for (TektonComponent island : gamePanel.tileM.islands) {
+            int islandX = island.getXOffset() * island.getTileSize();
+            int islandY = island.getYOffset() * island.getTileSize();
+            int islandWidth = island.getGridWidth() * island.getTileSize();
+            int islandHeight = island.getGridHeight() * island.getTileSize();
+
+            if (mouseX >= islandX && mouseX < islandX + islandWidth &&
+                    mouseY >= islandY && mouseY < islandY + islandHeight) {
+                coordinate.x = (islandX + islandWidth / 2)-24;
+                coordinate.y = (islandY + islandHeight / 2)-24;
+                selectedIsland = gamePanel.tileM.islands.indexOf(island);
+
+                island.handleTileClick(mouseX, mouseY);
+                gamePanel.repaint();
+                break;
+            }
+        }
     }
 
     public void returnFalse() {
@@ -45,12 +62,12 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mousePressed(java.awt.event.MouseEvent e) {
-        mouseClicked(e);
+        //mouseClicked(e);
     }
 
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
-        mouseClicked(e);
+        //mouseClicked(e);
     }
 
     @Override
