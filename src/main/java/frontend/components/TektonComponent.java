@@ -2,6 +2,7 @@ package frontend.components;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,8 +15,8 @@ public class TektonComponent {
     private int tileSize;
     private int breakCount = 0; // Tracks how many times the island has been broken
     public List<Integer> szomszedok = new ArrayList<>();
+    private int sporeCount = 0; // Tracks the spore count for the entire island
 
-    public boolean tmpSpora = true;
 
     public TektonComponent(Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
         this.tiles = tiles;
@@ -53,48 +54,34 @@ public class TektonComponent {
         int relativeX = (mouseX / tileSize) - xOffset;
         int relativeY = (mouseY / tileSize) - yOffset;
 
-        if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize) {
-            int tileIndex = relativeY * gridSize + relativeX;
-            if (tileIndex >= 0 && tileIndex < tiles.length) {
-                Tile clickedTile = tiles[tileIndex];
-                if (tmpSpora) {
-                    clickedTile.incrementSporeCount();
-                } else {
-                    clickedTile.decrementSporeCount();
-                }
+        if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize && sporeCount<=2) {
+            sporeCount++;
 
-                try {
-                    String imagePath = switch (clickedTile.getSporeCount()) {
-                        case 1 -> "/textures/tekton_1spore.png";
-                        case 2 -> "/textures/tekton_2spores.png";
-                        case 3 -> "/textures/tekton_3spores.png";
-                        default -> new Random().nextInt(2) == 0 ? "/textures/tekton1.png" : "/textures/tekton2.png";
-                    };
-                    System.out.println("Loading image: " + imagePath);
-                    java.io.InputStream inputStream = getClass().getResourceAsStream(imagePath);
-                    if (inputStream == null) {
-                        System.err.println("Failed to load image: " + imagePath + " - Resource not found");
-                        clickedTile.image = null;
-                    } else {
-                        clickedTile.image = ImageIO.read(inputStream);
-                        if (clickedTile.image == null) {
-                            System.err.println("ImageIO.read returned null for: " + imagePath);
-                        }
+            String imagePath = switch (sporeCount) {
+                case 1 -> "/textures/tekton_1spore.png";
+                case 2 -> "/textures/tekton_2spores.png";
+                case 3 -> "/textures/tekton_3spores.png";
+                default -> new Random().nextInt(2) == 0 ? "/textures/tekton1.png" : "/textures/tekton2.png";
+            };
+
+            try (java.io.InputStream inputStream = getClass().getResourceAsStream(imagePath)) {
+                if (inputStream != null) {
+                    BufferedImage islandImage = ImageIO.read(inputStream);
+                    for (Tile tile : tiles) {
+                        tile.image = islandImage;
                     }
-                } catch (java.io.IOException e) {
-                    System.err.println("Error loading image for spore count " + clickedTile.getSporeCount() + ": " + e.getMessage());
-                    e.printStackTrace();
-                    clickedTile.image = null;
+                } else {
+                    System.err.println("Failed to load image: " + imagePath);
                 }
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
             }
-        } else {
-            System.out.println("Click outside tile bounds: relativeX=" + relativeX + ", relativeY=" + relativeY);
         }
     }
 
     public Entity placeInitialEntity(int playerIndex, GamePanel gamePanel) {
-        int centerX = (xOffset + gridSize / 2) * tileSize - 24; // Center of the island, adjusted for entity size
-        int centerY = (yOffset + (tiles.length / gridSize) / 2) * tileSize - 24;
+        int centerX = (xOffset + gridSize / 2) * tileSize; // Center of the island, adjusted for entity size
+        int centerY = (yOffset + (tiles.length / gridSize) / 2) * tileSize;
 
         Entity entity = null;
         if (playerIndex < 2) {

@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         if (keyCode == KeyEvent.VK_SPACE) {
             System.out.println("Spóra mód váltva");
             for (TektonComponent island : tileM.islands) {
-                island.tmpSpora = !island.tmpSpora;
+                //island.tmpSpora = !island.tmpSpora;
             }
         }
     }
