@@ -1,0 +1,14 @@
+Gombász (0) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Véletlenszerű események kikapcsolva
+Tektontörés valószínűsége: 0%
+Fonal elrágás utáni megmaradásának ideje: 1 kör
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
+Tekton (0) szamlalo értéke megváltozott: 2 -> 1
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 1 -> 2
+Tekton (0) szamlalo értéke megváltozott: 1 -> 0
+Tekton(0) hatására Fonal (0) eltűnt
+Gomba (0) fonalak értéke megváltozott: Fonal (0) ->

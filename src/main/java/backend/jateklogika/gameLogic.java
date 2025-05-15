@@ -137,6 +137,11 @@ public class gameLogic implements Serializable {
         System.out.println("Users created with names: " + names[0] + ", " + names[1] + ", " + names[2] + ", " + names[3]);
     }
 
+    /**
+     * Lerakja a megfelelő tektonra a megfelő entitást
+     * @param tektonIndex A tekton indexe
+     * @param playerIndex A jelenlegi játékos indexe (0 - 3)
+     */
     public void placeInitialEntity(int tektonIndex, int playerIndex) {
         if (tektonIndex < 0 || tektonIndex >= map.size()) {
             System.out.println("Invalid tekton index: " + tektonIndex);
@@ -190,8 +195,9 @@ public class gameLogic implements Serializable {
 
 
     /**
-     * meghívja a tores()-t
+     * meghívja a Tekton tores() metódusát, egy tekton kettétörését valósítja meg
      * @param t a tektonok listája
+     * @note A tores() metódus a Tekton osztályban van implementálva
      */
     public void tektonTores(List<Tekton> t) {
         Random rand = new Random();
@@ -217,6 +223,9 @@ public class gameLogic implements Serializable {
         }
     }
 
+    /**
+     * Csökkenti a fonalak élettartamát, és eltávolítja azokat, amelyek elpusztultak
+     */
     public void csokkentFonalakElete() {
         Iterator<Gombafonal> iterator = fonalak.iterator();
         while (iterator.hasNext()) {
@@ -229,6 +238,10 @@ public class gameLogic implements Serializable {
         }
     }
 
+    /**
+     * Gombászok körének végrehajtása
+     * @note A gombászok körében a gombák növesztése és spórák lövése történhet
+     */
     public void gombaszKor() {
         System.out.println("--- Gombászok köre ---");
         for (Gombasz g : gombaszok) {
@@ -263,6 +276,10 @@ public class gameLogic implements Serializable {
         // Implement as needed
     }
 
+    /**
+     * Kör végrehajtása
+     * @note A kör végrehajtásához szükséges metódusok meghívása
+     */
     public void kor() {
         System.out.println("Kör kezdete: #" + korSzamlalo);
 
@@ -318,18 +335,35 @@ public class gameLogic implements Serializable {
         System.out.println("gameLogic->gameLogic");
     }
 
+    /**
+     * Hozzáad egy rovarászt a rovarászok listájához
+     * @param r
+     */
     public void addRovarasz(Rovarasz r) {
         rovaraszok.add(r);
     }
 
+    /**
+     * Hozzáad egy gombászt a gombászok listájához
+     * @param g
+     */
     public void addGombasz(Gombasz g) {
         gombaszok.add(g);
     }
 
+    /**
+     * Hozzáad egy tekton objektumot a tektonok listájához
+     * @param t
+     */
     public void addTekton(Tekton t) {
         map.add(t);
     }
 
+    /**
+     * Visszaadja az adott ID-jú tekton objektumot
+     * @param id
+     * @return a tekton objektum, ha megtalálható, egyébként null
+     */
     public Tekton getTekton(int id) {
         for (Tekton t : map) {
             if (t.getID() == id) {
@@ -339,6 +373,11 @@ public class gameLogic implements Serializable {
         return null;
     }
 
+    /**
+     * Visszaadja az adott ID-jú gombászt
+     * @param id
+     * @return a Gombász objektum, ha megtalálható, egyébként null
+     */
     public Gombasz getGombasz(int id) {
         for (Gombasz gombasz : gombaszok) {
             if (gombasz.getID() == id) {
@@ -348,6 +387,11 @@ public class gameLogic implements Serializable {
         return null;
     }
 
+    /**
+     * Visszaadja az adott ID-jú rovarászt
+     * @param id
+     * @return a Rovarász objektum, ha megtalálható, egyébként null
+     */
     public Rovarasz getRovarasz(int id) {
         for (Rovarasz rovarasz : rovaraszok) {
             if (rovarasz.getID() == id) {
@@ -357,6 +401,10 @@ public class gameLogic implements Serializable {
         return null;
     }
 
+    /**
+     * egy kör szimulálása
+     * @note A kör szimulálásához szükséges metódusok meghívása
+     */
     public void simulateRound() {
         parancsFeldolgozo.print("Kör szimulálása...\n");
         int regi = korSzamlalo;

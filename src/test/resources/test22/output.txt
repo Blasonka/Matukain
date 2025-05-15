@@ -1,0 +1,18 @@
+Véletlenszerű események kikapcsolva
+Tektontörés valószínűsége: 0%
+Fonal elrágás utáni megmaradásának ideje: 1 kör
+Gombász (1) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Gomba (0) fonalak értéke megváltozott: Fonal (0) -> Fonal (0), Fonal (1)
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
+Tekton (1) szamlalo értéke megváltozott: 2 -> 1
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 1 -> 2
+Tekton (1) szamlalo értéke megváltozott: 1 -> 0
+Tekton(1) hatására Fonal (0) eltűnt
+Tekton(1) hatására Fonal (1) eltűnt
+Gomba (0) fonalak értéke megváltozott: Fonal (0), Fonal (1) -> Fonal (1)
+Gomba (0) fonalak értéke megváltozott: Fonal (1) ->
+Spóra (0) Vágásgátló NEM elhelyezve Tekton (2) Gombatest (0) által

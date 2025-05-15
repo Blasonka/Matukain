@@ -1,0 +1,10 @@
+Gombász (0) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gombász (0) gombak értéke megváltozott: Gomba (0) -> Gomba (0), Gomba (1)
+Gomba (1) gombatestek értéke megváltozott: -> Gombatest (1)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Gomba (1) fonalak értéke megváltozott: -> Fonal (1)
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
+Fonal (1) NEM sikerült elhelyezni
+Gomba (1) fonalak értéke megváltozott: Fonal (1) ->

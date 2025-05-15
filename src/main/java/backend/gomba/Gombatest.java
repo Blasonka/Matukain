@@ -83,6 +83,9 @@ public class Gombatest {
         parancsFeldolgozo.print("Gombatest sikeresen létrejött\n");
     }
 
+    /**
+     * Gombatest konstruktora
+     */
     public Gombatest(int id, Tekton t, boolean fejlett) {
         this.id = id;
         this.tekton = t;

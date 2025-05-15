@@ -1,0 +1,6 @@
+Véletlenszerű események kikapcsolva
+Tektontörés valószínűsége: 100%
+Fonal elrágás utáni megmaradásának ideje: 1 kör
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
+Tekton (0) eltört: Tekton (0) + Tekton (1)

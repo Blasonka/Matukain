@@ -1,0 +1,14 @@
+Rovarász (0) rovarok értéke megváltozott: -> Rovar (0)
+Gombász (1) gombak értéke megváltozott: -> Gomba (0)
+Gomba (0) gombatestek értéke megváltozott: -> Gombatest (0)
+Gomba (0) fonalak értéke megváltozott: -> Fonal (0)
+Tekton (1) sporak értéke megváltozott: -> Spóra (0)
+Rovar (0) tekton értéke megváltozott: Tekton (0) -> Tekton (1)
+Rovar (0) elfogyasztotta Spóra (0)
+Rovar (0) elfogyasztottsporak értéke megváltozott: -> Spóra (0)
+Spóra (0) hatására Rovar (0) osztódott: Rovar (0) + Rovar (1)
+Kör szimulálása...
+Játéklogika kor értéke megváltozott: 0 -> 1
+Spóra (0) hatására Rovar (0) osztódott: Rovar (0) + Rovar (1)
+Rovar (0) elfogyasztottsporak értéke megváltozott: Spóra (0) ->
+Tekton (2) eltört: Tekton (2) + Tekton (3)

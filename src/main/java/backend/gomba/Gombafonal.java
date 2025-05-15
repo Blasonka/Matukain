@@ -135,19 +135,35 @@ public class Gombafonal {
         elragva = true;
     }
 
-
+    /**
+     * Beállítja a pusztulás számlálót az adott értékre.
+     * @brief A pusztulás számláló beállítása.
+     */
     public void setPusztulasSzamlalo(int ertek) {
         this.pusztulasSzamlalo = ertek;
     }
 
+    /**
+     * Csökkenti a pusztulás számlálót 1-el.
+     * @brief A pusztulás számláló csökkentése.
+     * @return true, ha a pusztulás számláló 0-ra csökkent, false egyébként
+     */
     public boolean csokkentPusztulasSzamlalo() {
         this.pusztulasSzamlalo--;
         return this.pusztulasSzamlalo <= 0;
     }
 
+    /**
+     * Visszaadja a gombafonal egyik végpontját
+     * @return a gombafonal egyik végpontja
+     */
     public Tekton getHatar() {
         return hatar1;
     }
+    /**
+     * Visszaadja a gombafonal másik végpontját
+     * @return a gombafonal másik végpontja
+     */
     public Tekton getMasikHatar() {
         return hatar2;
     }
