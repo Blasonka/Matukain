@@ -7,12 +7,50 @@ import backend.felhasznalo.Gombasz;
 import backend.felhasznalo.Rovarasz;
 import frontend.windows.GameWindow;
 
+/**
+ * MenuPanel osztály
+ *
+ * @class MenuPanel
+ *
+ * @brief A játék főmenüjét reprezentáló osztály
+ *
+ * @details
+ * A MenuPanel osztály a játék főmenüjét valósítja meg, ahol a felhasználók
+ * megadhatják a nevüket és elindíthatják a játékot.
+ *
+ * @note A főmenü grafikus felületét valósítja meg.
+ *
+ * @author Csordás
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class MenuPanel extends JPanel {
+    /**
+     * @var JTextField[] nameFields
+     * @brief A felhasználók neveit tároló szövegmezők tömbje
+     */
     private JTextField[] nameFields;
+    /**
+     * @var JButton startButton
+     * @brief A játék indításáért felelős gomb
+     */
     private JButton startButton;
+    /**
+     * @var JFrame frame
+     * @brief A főmenü kerete
+     */
     private JFrame frame;
+    /**
+     * @var gameLogic logic
+     * @brief A játék logikáját kezelő objektum
+     */
     private gameLogic logic;
 
+    /**
+     * MenuPanel osztály konstruktora
+     * @param frame A főmenü kerete
+     * @param logic A játék logikáját kezelő objektum
+     */
     public MenuPanel(JFrame frame, gameLogic logic) {
         this.frame = frame;
         this.logic = logic;
@@ -70,6 +108,10 @@ public class MenuPanel extends JPanel {
         }
     }
 
+    /**
+     * Visszaadja a felhasználók neveit
+     * @return A felhasználók neveit tartalmazó tömb
+     */
     public String[] getNames() {
         String[] names = new String[4];
         for (int i = 0; i < 4; i++) {
