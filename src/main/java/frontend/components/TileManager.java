@@ -10,11 +10,43 @@ import java.util.Random;
 import java.util.*;
 import backend.jateklogika.gameLogic;
 
+/**
+ * TileManager osztály
+ *
+ * @class TileManager
+ *
+ * @brief A csempekezelő osztály, amely a szigetek létrehozásáért és kezeléséért felelős
+ *
+ * @details
+ * Osztály a szigetek létrehozására és kezelésére, beleértve a csempekezelést és az útvonaltervezést.
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class TileManager {
+    /**
+     * @var GamePanel gp
+     * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
+     */
     GamePanel gp;
+    /**
+     * @var gameLogic logic
+     * @brief A játék logikáját kezelő objektum
+     */
     gameLogic logic;
+    /**
+     * @var List<TektonComponent> islands
+     * @brief A tekton-szigetek listája
+     */
     public List<TektonComponent> islands;
 
+    /**
+     * @brief TileManager osztály konstruktora
+     * @param gp a GamePanel objektum
+     * @param logic a játék logikáját kezelő objektum
+     */
     public TileManager(GamePanel gp, gameLogic logic) {
         this.gp = gp;
         this.logic = logic;
@@ -23,6 +55,10 @@ public class TileManager {
         syncTektonCoordinates(); // Sync coordinates with gameLogic
     }
 
+    /**
+     * Szigetek létrehozása
+     * @param numberOfIslands a létrehozandó szigetek száma
+     */
     private void createIslands(int numberOfIslands) {
         Random random = new Random();
         for (int i = 0; i < numberOfIslands; i++) {
@@ -41,6 +77,9 @@ public class TileManager {
         }
     }
 
+    /**
+     * Szinkronizálja a szigetek koordinátáit a játék logikájával
+     */
     private void syncTektonCoordinates() {
         for (int i = 0; i < islands.size(); i++) {
             TektonComponent island = islands.get(i);
@@ -50,6 +89,13 @@ public class TileManager {
         }
     }
 
+    /**
+     * Ellenőrzi, hogy az új sziget elhelyezése átfedésben van-e a meglévő szigetekkel
+     * @param xOffset az új sziget X koordinátája
+     * @param yOffset az új sziget Y koordinátája
+     * @param gridSize a sziget mérete
+     * @return true, ha átfedés van, false, ha nincs
+     */
     private boolean isOverlapping(int xOffset, int yOffset, int gridSize) {
         for (TektonComponent island : islands) {
             int islandRight = island.getXOffset() + island.getGridSize() + 1;
@@ -65,6 +111,10 @@ public class TileManager {
         return false;
     }
 
+    /**
+     * Inicializálja a csempéket véletlenszerű képekkel
+     * @param tiles a csempe tömb
+     */
     private void initializeTiles(Tile[] tiles) {
         Random random = new Random();
         try {
@@ -82,6 +132,10 @@ public class TileManager {
         }
     }
 
+    /**
+     * Kirajzolja a szigeteket és az utakat
+     * @param g a grafikus objektum
+     */
     public void draw(Graphics g) {
         drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
         drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
@@ -89,6 +143,15 @@ public class TileManager {
             island.draw(g);
         }
     }
+
+    /**
+     * Kirajzolja az utat a szigetek között, kihagyva a szigeteket
+     * @param g a grafikus objektum
+     * @param island1 az első sziget
+     * @param island2 a második sziget
+     * @param pathFinding ha igaz, akkor csak az útvonalat keresi, nem rajzolja ki
+     * @return az útvonal koordinátái
+     */
     public List<int[]> drawPathAvoidingIslands(Graphics g, TektonComponent island1, TektonComponent island2, boolean pathFinding) {
         int rows = gp.maxScreenRow;
         int cols = gp.maxScreenCol;
@@ -172,6 +235,13 @@ public class TileManager {
 
     }
 
+    /**
+     * Keres egy sziget szélén lévő pontot, amely a cél sziget irányába mutat
+     * @param grid a rács, amely jelzi a blokkolt területeket
+     * @param island az aktuális sziget
+     * @param targetIsland a cél sziget
+     * @return a legjobb pont koordinátái
+     */
     private int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
         int islandLeft = island.getXOffset();
         int islandRight = island.getXOffset() + island.getGridWidth();
@@ -231,6 +301,15 @@ public class TileManager {
         return bestPoint;
     }
 
+    /**
+     * Keres egy utat a megadott kezdő és végpont között
+     * @param grid a rács, amely jelzi a blokkolt területeket
+     * @param startX a kezdőpont X koordinátája
+     * @param startY a kezdőpont Y koordinátája
+     * @param endX a végpont X koordinátája
+     * @param endY a végpont Y koordinátája
+     * @return az útvonal koordinátái
+     */
     private List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
         int rows = grid.length;
         int cols = grid[0].length;
@@ -298,11 +377,23 @@ public class TileManager {
     }
 
     // Heuristic function (Manhattan distance)
+    /**
+     * @param x1 X koordináta 1
+     * @param y1 Y koordináta 1
+     * @param x2 X koordináta 2
+     * @param y2 Y koordináta 2
+     * @return a Manhattan távolság
+     */
     private int heuristic(int x1, int y1, int x2, int y2) {
         return Math.abs(x1 - x2) + Math.abs(y1 - y2);
     }
 
     // Reconstruct the path from the goal to the start
+    /**
+     * Útvonal rekonstruálása a célponttól a kezdőpontig
+     * @param node a célpont csomópont
+     * @return az útvonal koordinátái
+     */
     private List<int[]> reconstructPath(Node node) {
         List<int[]> path = new ArrayList<>();
         while (node != null) {
@@ -314,6 +405,9 @@ public class TileManager {
     }
 
     // Node class for A* algorithm
+    /**
+     * Csomópont osztály az A* algoritmushoz
+     */
     private static class Node {
         int x, y, g, f;
         Node parent;
@@ -327,6 +421,10 @@ public class TileManager {
         }
     }
 
+    /**
+     * Ellenőrzi, hogy a sziget már elérte-e a maximális törési számot
+     * @param island a sziget
+     */
     public void islandOszto(TektonComponent island) {
         // Check if the island has already been broken 3 times
         if (island.getBreakCount() >= 2) {

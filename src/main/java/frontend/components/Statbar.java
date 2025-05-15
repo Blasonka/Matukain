@@ -3,11 +3,42 @@ package frontend.components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Statbar osztály
+ *
+ * @class Statbar
+ *
+ * @brief A játék statisztikáit megjelenítő osztály
+ *
+ * @details
+ * Osztály a játék statisztikáinak megjelenítésére
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class Statbar extends JPanel {
+    /**
+     * @var JLabel roundLabel
+     * @brief A kör számát megjelenítő JLabel
+     */
     private JLabel roundLabel;
+    /**
+     * @var JLabel playerRoundLabel
+     * @brief A játékos körét megjelenítő JLabel
+     */
     private JLabel playerRoundLabel;
+    /**
+     * @var JLabel actionPointsLabel
+     * @brief Az akciópontokat megjelenítő JLabel
+     */
     private JLabel actionPointsLabel;
 
+    /**
+     * Statbar osztály konstruktora
+     * @brief Inicializálja a statisztikákat megjelenítő panelt
+     */
     public Statbar() {
         setLayout(new GridLayout(1, 3)); // Layout with 1 row and 3 columns
         setPreferredSize(new Dimension(1280, 50)); // Set the preferred size of the panel
@@ -35,16 +66,28 @@ public class Statbar extends JPanel {
     }
 
     // Method to update the round number
+    /**
+     * @param round A kör számát tároló változó
+     * @brief Frissíti a kör számát
+     */
     public void updateRound(int round) {
         roundLabel.setText("Round: " + round);
     }
 
     // Method to update the player's round
+    /**
+     * @param playerRound A játékos körét tároló változó
+     * @brief Frissíti a játékos körét
+     */
     public void updatePlayerRound(int playerRound) {
         playerRoundLabel.setText("Player Round: " + playerRound);
     }
 
     // Method to update the action points
+    /**
+     * @param actionPoints Az akciópontokat tároló változó
+     * @brief Frissíti az akciópontokat
+     */
     public void updateActionPoints(int actionPoints) {
         actionPointsLabel.setText("Action Points: " + actionPoints);
     }
