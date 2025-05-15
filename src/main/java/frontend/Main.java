@@ -11,7 +11,22 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @class Main
+ * @brief A játék fő belépési pontja.
+ *
+ * @details
+ * Ez az osztály felelős a játék inicializálásáért és a fő ablak megjelenítéséért.
+ *
+ * @note A játék grafikus részének belépési pontja.
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class Main {
+    /**
+     * Lejátsza a háttérzenét végtelenített lejátszással.
+     */
     public static Clip musicPlayer() {
         try {
             // Load the audio file
@@ -44,6 +59,13 @@ public class Main {
         }
     }
 
+    /**
+     * @brief Betölti a megadott fontot a fájlból.
+     *
+     * @param path A font fájl elérési útja.
+     * @param size A betűméret.
+     * @return A betöltött Font objektum.
+     */
     public static Font loadCustomFont(String path, float size) {
         try {
             // Font betöltése a fájlból
@@ -60,6 +82,13 @@ public class Main {
         }
     }
 
+    /**
+     * @brief Betölti a fontokat és beállítja az UIManager-t.
+     *
+     * @details
+     * Ez a metódus betölti a megadott fontot és beállítja az UIManager-t,
+     * hogy az összes Swing komponens ezt a fontot használja.
+     */
     public static void fontLoader(){
         // Font betöltése
         Font customFont = loadCustomFont("src/main/resources/fonts/Minecraft.ttf", 12f);
@@ -98,6 +127,14 @@ public class Main {
         UIManager.put("Tree.font", customFont);
     }
 
+    /**
+     * @brief A játék indítási pontja.
+     *
+     * @details
+     * Ez a metódus inicializálja a játékot és megjeleníti a fő ablakot.
+     *
+     * @param args Parancssori argumentumok.
+     */
     public static void main(String[] args) {
         fontLoader();
         gameLogic logic = new gameLogic();

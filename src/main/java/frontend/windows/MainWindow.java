@@ -6,10 +6,38 @@ import backend.jateklogika.gameLogic;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * MainWindow osztály
+ *
+ * @class MainWindow
+ *
+ * @brief A fő ablakot reprezentáló osztály
+ *
+ * @details
+ * Az ablak, amely a játék főmenüjét megjeleníti.
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class MainWindow {
+    /**
+     * @var JFrame frame
+     * @brief A fő ablakot reprezentáló JFrame objektum
+     */
     JFrame frame = new JFrame("Fungorium");
+    /**
+     * @var gameLogic logic
+     * @brief A játék logikáját kezelő objektum
+     */
     private gameLogic logic;
 
+    /**
+     * MainWindow osztály konstruktora
+     *
+     * @param logic A játék logikáját kezelő objektum
+     */
     public MainWindow(gameLogic logic) {
         this.logic = logic;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +106,9 @@ public class MainWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * @brief A fő ablak bezárása
+     */
     public void dispose() {
         frame.dispose();
     }

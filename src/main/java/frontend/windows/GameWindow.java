@@ -8,12 +8,48 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * GameWindow osztály
+ *
+ * @class GameWindow
+ *
+ * @brief A játék ablakát reprezentáló osztály
+ *
+ * @details
+ * Az ablak, amely a játékot megjeleníti és kezeli a zene lejátszását.
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class GameWindow {
+    /**
+     * @var Clip musicClip
+     * @brief A zene lejátszásáért felelős Clip objektum
+     */
     public static Clip musicClip;
+    /**
+     * @var boolean isMuted
+     * @brief A zene némításának állapotát tároló változó
+     */
     private boolean isMuted = false;
+    /**
+     * @var GamePanel gamePanel
+     * @brief A játék grafikus megjelenítéséért felelős GamePanel objektum
+     */
     private GamePanel gamePanel;
+    /**
+     * @var JFrame frame
+     * @brief A játék ablakát reprezentáló JFrame objektum
+     */
     private JFrame frame;
 
+    /**
+     * GameWindow osztály konstruktora
+     *
+     * @param logic A játék logikáját kezelő objektum
+     */
     public GameWindow(gameLogic logic) {
         frame = new JFrame("Fungorium");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,6 +94,11 @@ public class GameWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * Visszaadja a játékpanel objektumot.
+     *
+     * @return A példány, amely a jelenlegi játékpanelt képviseli
+     */
     public GamePanel getGamePanel() {
         return gamePanel;
     }
