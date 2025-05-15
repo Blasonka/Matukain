@@ -10,7 +10,7 @@ public class OsztoSpora extends Spora implements hatasKifejtes {
     
     public OsztoSpora() {
         super(0, "oszto");
-        System.out.println("\t>LassitoSpora->LassitoSpora()");
+        System.out.println("\t>OsztoSpora->OsztoSpora()");
     }
 
     public void hatasKifejtes(Rovar rovar){
