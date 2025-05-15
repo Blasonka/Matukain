@@ -8,22 +8,98 @@ import java.util.ArrayList;
 import java.util.List;
 import backend.jateklogika.gameLogic;
 
+/**
+ * @class GamePanel
+ * @brief A játék fő megjelenítő panelje, amely kezeli a kirajzolást, eseményeket és frissítéseket.
+ *
+ * @details
+ * A GamePanel felelős a játék grafikus megjelenítéséért, a billentyűzet- és egéresemények kezeléséért,
+ * az entitások frissítéséért és animációjáért.
+ *
+ * @note A játék fő komponense, amely JPanel-ből származik.
+ *
+ * @author Jónás
+ * @author Csordás
+ * @author Tóth
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+    /**
+     * @var int originalTileSize
+     * @brief Az eredeti csempe mérete (16x16)
+     */
     int originalTileSize = 16;
+    /**
+     * @var int scale
+     * @brief A csempe méretének skálázása (3x)
+     */
     int scale = 3;
+    /**
+     * @var int tileSize
+     * @brief A csempe mérete a skálázás után (48x48)
+     */
     int tileSize = originalTileSize * scale; // 48x48
+    /**
+     * @var int maxScreenCol
+     * @brief A maximális oszlopok száma a képernyőn (26)
+     */
     int maxScreenCol = 26; // 1248 / 48
+    /**
+     * @var int maxScreenRow
+     * @brief A maximális sorok száma a képernyőn (15)
+     */
     int maxScreenRow = 15; // 720 / 48
+    /**
+     * @var int screenWidth
+     * @brief A képernyő szélessége (1248)
+     */
     int screenWidth = tileSize * maxScreenCol; // 1248
+    /**
+     * @var int screenHeight
+     * @brief A képernyő magassága (720)
+     */
     int screenHeight = tileSize * maxScreenRow; // 720
+    /**
+     * @var TileManager tileM
+     * @brief A csempekezelő objektum
+     */
     TileManager tileM;
+    /**
+     * @var MouseHandler mouseHandler
+     * @brief Az egérkezelő objektum
+     */
     MouseHandler mouseHandler;
+    /**
+     * @var Thread gameThread
+     * @brief A játék szál
+     */
     Thread gameThread;
+    /**
+     * @var gameLogic logic
+     * @brief A játék logikáját kezelő objektum
+     */
     gameLogic logic;
+    /**
+     * @var List<GombatestEntity> gombatestEntities
+     * @brief A gombatest entitások listája
+     */
     List<GombatestEntity> gombatestEntities = new ArrayList<>();
+    /**
+     * @var List<RovarEntity> rovarEntities
+     * @brief A rovar entitások listája
+     */
     List<RovarEntity> rovarEntities = new ArrayList<>();
+    /**
+     * @var int currentPlayerIndex
+     * @brief Az aktuális játékos indexe
+     */
     int currentPlayerIndex = 0;
 
+    /**
+     * @brief A GamePanel konstruktora
+     * @param logic A játék logikáját kezelő objektum
+     */
     public GamePanel(gameLogic logic) {
         this.logic = logic;
         tileM = new TileManager(this, logic);
@@ -46,11 +122,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         startGameThread();
     }
 
+    /**
+     * @brief A játék szálának indítása
+     */
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * @brief A játék fő ciklusa. 60 FPS frissítési ciklussal fut.
+     */
     @Override
     public void run() {
         while (gameThread != null) {
@@ -63,7 +145,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             }
         }
     }
-
+    /**
+     * Frissíti a játék logikáját.
+     * @details Kezeli az entitások kezdeti elhelyezését és animációját.
+     */
     public void update() {
         if (currentPlayerIndex < 4 && mouseHandler.clicked) {
             int selectedIsland = mouseHandler.selectedIsland;
@@ -96,6 +181,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
+    /**
+     * @brief Kirajzolja a játék elemeit.
+     * @param g A Graphics objektum, amire rajzolni kell
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -112,6 +201,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         g2.dispose();
     }
 
+    /**
+     * Kezeli a lenyomott billentyűket.
+     * @param e A billentyűesemény
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -139,9 +232,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
+    /**
+     * Kezeli a billentyűfelengedést.
+     * @param e A billentyűesemény
+     */
     @Override
     public void keyReleased(KeyEvent e) {}
 
+    /**
+     * Legépelt karakter kezelése.
+     * @param e A billentyűesemény
+     */
     @Override
     public void keyTyped(KeyEvent e) {}
 }
