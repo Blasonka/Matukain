@@ -20,7 +20,6 @@ import frontend.windows.GameWindow;
  *
  * @note A főmenü grafikus felületét valósítja meg.
  *
- * @author Csordás
  * @version 1.0
  * @date 2025-05-10
  */

@@ -17,9 +17,6 @@ import java.io.IOException;
  *
  * @note Grafikus részhez készült
  *
- * @author Jónás
- * @author Csordás
- * @author Tóth
  * @version 1.0
  * @date 2025-05-10
  */

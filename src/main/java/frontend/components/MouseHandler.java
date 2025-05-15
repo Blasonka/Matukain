@@ -15,9 +15,6 @@ import java.awt.event.MouseListener;
  *
  * @note Az egér események kezelésére készült.
  *
- * @author Jónás
- * @author Csordás
- * @author Tóth
  * @version 1.0
  * @date 2025-05-10
  */

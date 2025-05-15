@@ -6,15 +6,64 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * RovarEntity osztály
+ *
+ * @class RovarEntity
+ *
+ * @brief A rovar entitásokat reprezentáló osztály
+ *
+ * @details
+ * Osztály a rovarok tárolására
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-10
+ */
 public class RovarEntity extends Entity implements Runnable {
+    /**
+     * @var GamePanel gp
+     * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
+     */
     GamePanel gp;
+    /**
+     * @var MouseHandler mouseHandler
+     * @brief A MouseHandler objektum, amely az egér események kezeléséért felelős
+     */
     MouseHandler mouseHandler;
+    /**
+     * @var BufferedImage playerImage
+     * @brief A rovar grafikus megjelenését tároló BufferedImage objektum
+     */
     BufferedImage playerImage;
+    /**
+     * @var Thread animThread
+     * @brief A rovar animációs szálát tároló Thread objektum
+     */
     Thread animThread;
+    /**
+     * @var int currentIsland
+     * @brief Az aktuális sziget indexét tároló változó
+     */
     int currentIsland = 0;
+    /**
+     * @var List<int[]> currentPath
+     * @brief Az aktuális útvonalat tároló lista
+     */
     private List<int[]> currentPath;
+    /**
+     * @var int currentPathIndex
+     * @brief Az aktuális útvonal indexét tároló változó
+     */
     private int currentPathIndex = 0;
 
+    /**
+     * RovarEntity osztály konstruktora
+     * @param gp
+     * @param mouseHandler
+     * @brief Inicializálja a RovarEntity objektumot
+     */
     public RovarEntity(GamePanel gp, MouseHandler mouseHandler) {
         this.gp = gp;
         this.mouseHandler = mouseHandler;
@@ -22,6 +71,9 @@ public class RovarEntity extends Entity implements Runnable {
         speed = 5;
     }
 
+    /**
+     * @brief elindítja az animációs szálat
+     */
     public void startAnimThread() {
         if (animThread == null || !animThread.isAlive()) {
             animThread = new Thread(this);
@@ -29,6 +81,13 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
+    /**
+     * A rovar entitás mozgását vezérlő szál.
+     *
+     * @details
+     * Ha van előre kiszámolt útvonal, akkor azt követi.
+     * Ha nincs, akkor közvetlenül mozog a kijelölt célpontra.
+     */
     @Override
     public void run() {
         while (animThread != null) {
@@ -46,6 +105,9 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
+    /**
+     * A rovar mozgását végzi az előre kiszámolt útvonal mentén.
+     */
     private void followPath() {
         if (currentPathIndex < currentPath.size()) {
             int[] targetPoint = currentPath.get(currentPathIndex);
@@ -73,6 +135,13 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
+    /**
+     * A rovar közvetlen mozgatása a célpontra, ha nincs útvonal.
+     *
+     * @details
+     * Csak akkor történik meg, ha a jelenlegi sziget megegyezik a cél szigettel,
+     * vagy azok szomszédosak.
+     */
     private void moveDirectlyToTarget() {
         if (currentIsland == mouseHandler.selectedIsland ||
                 gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
@@ -89,6 +158,12 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
+    /**
+     * Frissíti a rovar entitás állapotát.
+     *
+     * @details
+     * Ellenőrzi, hogy a rovar mozgása szükséges-e, és ha igen, akkor végrehajtja azt.
+     */
     public void update() {
         if (mouseHandler.clicked && (mouseHandler.coordinate.getX() != x || mouseHandler.coordinate.getY() != y)) {
             if (currentIsland != mouseHandler.selectedIsland) {
@@ -108,10 +183,21 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
+    /**
+     * Kirajzolja a rovar entitást a megadott Graphics2D objektumra.
+     *
+     * @param g a Graphics2D objektum, amire rajzolni kell
+     */
     public void draw(Graphics2D g) {
         g.drawImage(playerImage, x, y, gp.tileSize, gp.tileSize, null);
     }
 
+    /**
+     * Betölti a rovar entitás grafikus megjelenését.
+     *
+     * @details
+     * A kép betöltése a rovar entitás aktuális állapotához tartozik.
+     */
     public void getPlayerImage() {
         try {
             playerImage = ImageIO.read(getClass().getResourceAsStream("/rovar.png"));

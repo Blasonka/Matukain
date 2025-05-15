@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
  *
  * @note Grafikus részhez készült
  *
- * @author Jónás
  * @version 1.0
  * @date 2025-05-10
  */
