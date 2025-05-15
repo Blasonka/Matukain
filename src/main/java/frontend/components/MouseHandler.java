@@ -85,7 +85,6 @@ public class MouseHandler implements MouseListener {
                     island.placeInitialEntity(gamePanel.currentPlayerIndex, gamePanel);
                     clicked = true;
                 } else {
-
                     island.handleTileClick(mouseX, mouseY);
                 }
 

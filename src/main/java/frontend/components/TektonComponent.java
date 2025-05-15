@@ -140,7 +140,7 @@ public class TektonComponent {
             sporeCount++;
 
             String imagePath = switch (sporeCount) {
-                case 1 -> "/textures/tekton_1spore.png";
+                case 1 -> "/textures/tekton_1spores.png";
                 case 2 -> "/textures/tekton_2spores.png";
                 case 3 -> "/textures/tekton_3spores.png";
                 default -> new Random().nextInt(2) == 0 ? "/textures/tekton1.png" : "/textures/tekton2.png";
@@ -149,8 +149,25 @@ public class TektonComponent {
             try (java.io.InputStream inputStream = getClass().getResourceAsStream(imagePath)) {
                 if (inputStream != null) {
                     BufferedImage islandImage = ImageIO.read(inputStream);
-                    for (Tile tile : tiles) {
-                        tile.image = islandImage;
+                    Tile keresett = null;
+                    try (java.io.InputStream inputStream2 = getClass().getResourceAsStream("/textures/tekton_" + (sporeCount - 1) + "spores.png")) {
+                        if (inputStream2 != null) {
+                            System.out.println("/textures/tekton_" + (sporeCount - 1) + "spores.png");
+                            BufferedImage islandImage2 = ImageIO.read(inputStream2);
+                            for (Tile tile : tiles) {
+                                if (compareImages(tile.image, islandImage2)) {
+                                    System.out.println("Found tile: " + tile);
+                                    keresett = tile;
+                                }
+                            }
+                        }
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (keresett != null) {
+                        keresett.image = islandImage;
+                    } else {
+                        tiles[new Random().nextInt(tiles.length)].image = islandImage;
                     }
                 } else {
                     System.err.println("Failed to load image: " + imagePath);
@@ -160,6 +177,30 @@ public class TektonComponent {
             }
         }
     }
+
+    /**
+     * Metódus képek összehasonlítására a spórák lerakásához
+     * Képméretet és pixelenként RGB kódot hasonlít össze
+     *
+     * @param img1 Egyik kép
+     * @param img2 Másik kép
+     * @return Igaz, ha a két kép megegyezik és hamis, ha eltérés van közöttük
+     */
+    public static boolean compareImages(BufferedImage img1, BufferedImage img2) {
+        if (img1.getWidth() != img2.getWidth() || img1.getHeight() != img2.getHeight()) {
+            return false;
+        }
+
+        for (int x = 0; x < img1.getWidth(); x++) {
+            for (int y = 0; y < img1.getHeight(); y++) {
+                if (img1.getRGB(x, y) != img2.getRGB(x, y)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Elhelyezi az első entitást a szigeten.
