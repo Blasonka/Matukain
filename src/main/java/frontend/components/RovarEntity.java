@@ -154,7 +154,7 @@ public class RovarEntity extends Entity implements Runnable {
                 y += Math.min(speed, mouseHandler.coordinate.getY() - y);
             } else if (y > mouseHandler.coordinate.getY()) {
                 y -= Math.min(speed, y - mouseHandler.coordinate.getY());
-            }
+            } currentIsland = mouseHandler.selectedIsland;
         }
     }
 

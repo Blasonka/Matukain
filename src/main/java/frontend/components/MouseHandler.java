@@ -1,5 +1,7 @@
 package frontend.components;
 
+import backend.rovar.Rovar;
+
 import java.awt.event.MouseListener;
 
 /**
@@ -81,13 +83,18 @@ public class MouseHandler implements MouseListener {
 
 
                 if (gamePanel.currentPlayerIndex < 4) {
-
                     island.placeInitialEntity(gamePanel.currentPlayerIndex, gamePanel);
                     clicked = true;
                 } else {
-                    island.handleTileClick(mouseX, mouseY);
+                    boolean rovarIsland = false;
+                    for (RovarEntity rovar : gamePanel.rovarEntities) {
+                        if (rovar.currentIsland == selectedIsland) {
+                            rovarIsland = true;
+                            break;
+                        }
+                    }
+                    island.handleTileClick(mouseX, mouseY, rovarIsland);
                 }
-
                 gamePanel.repaint();
                 break;
             }

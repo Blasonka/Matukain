@@ -24,6 +24,11 @@ import java.util.Random;
  */
 public class TektonComponent {
     /**
+     * @var GamePanel gp
+     * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
+     */
+    GamePanel gp;
+    /**
      * @var Tile[] tiles
      * @brief A szigetet alkotó csempék tömbje
      */
@@ -73,7 +78,8 @@ public class TektonComponent {
      * @param gridSize A sziget mérete
      * @param tileSize A csempe mérete
      */
-    public TektonComponent(Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
+    public TektonComponent(GamePanel panel, Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
+        this.gp = panel;
         this.tiles = tiles;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
@@ -132,12 +138,17 @@ public class TektonComponent {
      * Ellenőrzi, hogy a kattintás a sziget területén belül történt-e, és ha igen,
      * akkor növeli a spóra számot és frissíti a csempe képet.
      */
-    public void handleTileClick(int mouseX, int mouseY) {
+    public void handleTileClick(int mouseX, int mouseY, boolean rovarIsland) {
         int relativeX = (mouseX / tileSize) - xOffset;
         int relativeY = (mouseY / tileSize) - yOffset;
 
-        if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize && sporeCount<=2) {
-            sporeCount++;
+        if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize) {
+            boolean add = true;
+            if (rovarIsland && sporeCount >= 0) {
+                sporeCount--;
+                add = false;
+            }
+            else if (sporeCount <= 2) sporeCount++;
 
             String imagePath = switch (sporeCount) {
                 case 1 -> "/textures/tekton_1spores.png";
@@ -150,13 +161,19 @@ public class TektonComponent {
                 if (inputStream != null) {
                     BufferedImage islandImage = ImageIO.read(inputStream);
                     Tile keresett = null;
-                    try (java.io.InputStream inputStream2 = getClass().getResourceAsStream("/textures/tekton_" + (sporeCount - 1) + "spores.png")) {
+                    try (java.io.InputStream inputStream2 = getClass().getResourceAsStream("/textures/tekton_" + (add ? (sporeCount - 1) : (sporeCount + 1)) + "spores.png");
+                    java.io.InputStream inputStream3 = getClass().getResourceAsStream("/textures/tekton_" + sporeCount + "spores.png")) {
                         if (inputStream2 != null) {
-                            System.out.println("/textures/tekton_" + (sporeCount - 1) + "spores.png");
                             BufferedImage islandImage2 = ImageIO.read(inputStream2);
                             for (Tile tile : tiles) {
                                 if (compareImages(tile.image, islandImage2)) {
-                                    System.out.println("Found tile: " + tile);
+                                    keresett = tile;
+                                }
+                            }
+                        } if (inputStream3 != null) {
+                            BufferedImage islandImage3 = ImageIO.read(inputStream3);
+                            for (Tile tile : tiles) {
+                                if (compareImages(tile.image, islandImage3)) {
                                     keresett = tile;
                                 }
                             }
@@ -200,7 +217,6 @@ public class TektonComponent {
         }
         return true;
     }
-
 
     /**
      * Elhelyezi az első entitást a szigeten.

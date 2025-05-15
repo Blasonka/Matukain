@@ -73,7 +73,7 @@ public class TileManager {
                 yOffset = random.nextInt(gp.maxScreenRow - gridSize - 1);
             } while (isOverlapping(xOffset, yOffset, gridSize));
 
-            islands.add(new TektonComponent(tiles, xOffset, yOffset, gridSize, gp.tileSize));
+            islands.add(new TektonComponent(gp, tiles, xOffset, yOffset, gridSize, gp.tileSize));
         }
     }
 
@@ -480,7 +480,7 @@ public class TileManager {
         }
 
         // Create a new island for the broken part
-        TektonComponent newIsland = new TektonComponent(newTilesPart, newIslandXOffset, newIslandYOffset, newWidth, tileSize);
+        TektonComponent newIsland = new TektonComponent(gp, newTilesPart, newIslandXOffset, newIslandYOffset, newWidth, tileSize);
 
         // Add the new island to the islands list
         islands.add(newIsland);
