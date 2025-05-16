@@ -71,31 +71,16 @@ public class MouseHandler implements MouseListener {
             int islandWidth = island.getGridWidth() * island.getTileSize();
             int islandHeight = island.getGridHeight() * island.getTileSize();
 
-
             if (mouseX >= islandX && mouseX < islandX + islandWidth &&
                     mouseY >= islandY && mouseY < islandY + islandHeight) {
                 coordinate.x = (islandX + islandWidth / 2) - 24;
                 coordinate.y = (islandY + islandHeight / 2) - 24;
 
-
                 selectedIsland = gamePanel.tileM.islands.indexOf(island);
                 System.out.println("Island clicked: " + selectedIsland);
 
-
-                if (gamePanel.currentPlayerIndex < 4) {
-                    island.placeInitialEntity(gamePanel.currentPlayerIndex, gamePanel);
-                    clicked = true;
-                } else {
-                    boolean rovarIsland = false;
-                    for (RovarEntity rovar : gamePanel.rovarEntities) {
-                        if (rovar.currentIsland == selectedIsland) {
-                            rovarIsland = true;
-                            break;
-                        }
-                    }
-                    island.handleTileClick(mouseX, mouseY, rovarIsland);
-                }
-                gamePanel.repaint();
+                // Továbbítjuk a controllernak a kattintást
+                gamePanel.controller.handleClick(selectedIsland, mouseX, mouseY);
                 break;
             }
         }

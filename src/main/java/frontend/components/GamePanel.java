@@ -93,6 +93,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     int currentPlayerIndex = 0;
 
+    GameController controller;
+
+    Statbar statbar;
     /**
      * @brief A GamePanel konstruktora
      * @param logic A játék logikáját kezelő objektum
@@ -101,22 +104,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         this.logic = logic;
         tileM = new TileManager(this, logic);
         mouseHandler = new MouseHandler(this);
+        controller = new GameController(logic, this);
+        statbar = new Statbar(); // Statbar inicializálása
+
+        setLayout(new BorderLayout()); // BorderLayout használata
+        add(statbar, BorderLayout.NORTH); // Statbar a tetejére
+        add(new JPanel(), BorderLayout.CENTER);
         setPreferredSize(new Dimension(screenWidth, screenHeight));
-        setMinimumSize(new Dimension(screenWidth, screenHeight));
-        setMaximumSize(new Dimension(screenWidth, screenHeight));
         setBackground(Color.blue);
         setDoubleBuffered(true);
-        addMouseListener(mouseHandler);
         addKeyListener(this);
         setFocusable(true);
-        requestFocusInWindow();
-
-
-        if (currentPlayerIndex < 4) {
-            logic.promptForInitialPlacement(currentPlayerIndex);
-        }
-
-        startGameThread();
     }
 
     /**
@@ -147,35 +145,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      * @details Kezeli az entitások kezdeti elhelyezését és animációját.
      */
     public void update() {
-        if (currentPlayerIndex < 4 && mouseHandler.clicked) {
-            int selectedIsland = mouseHandler.selectedIsland;
-
-            TektonComponent island = tileM.islands.get(selectedIsland);
-            island.placeInitialEntity(currentPlayerIndex, this);
-
-
-            currentPlayerIndex++;
-            mouseHandler.returnFalse();
-
-
-            if (currentPlayerIndex < 4) {
-                logic.promptForInitialPlacement(currentPlayerIndex);
-            } else {
-                System.out.println("All initial entities placed. Game can proceed.");
-
-                for (RovarEntity rovar : rovarEntities) {
-                    rovar.startAnimThread();
-                }
-            }
-        }
-
-
-        for (RovarEntity rovar : rovarEntities) {
-            rovar.update();
-        }
-        for (GombatestEntity gomba : gombatestEntities) {
-            gomba.update();
-        }
+        controller.update();
     }
 
     /**
@@ -242,4 +212,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     @Override
     public void keyTyped(KeyEvent e) {}
+
+    public Statbar getStatbar() {
+        return  statbar;
+    }
 }
