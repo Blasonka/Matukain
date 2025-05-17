@@ -10,6 +10,9 @@ for /r src\main\java %%i in (*.java) do (
 rem A Java fájlok lefordítása
 javac -d bin -sourcepath src\main\java @sources.txt
 
+rem Másold át a resources tartalmát a bin könyvtárba
+xcopy /E /Y src\main\resources\* bin\
+
 rem A .class fájlok listájának összegyűjtése a bin könyvtárból
 del sources.txt 2>nul
 for /r bin %%i in (*.class) do (
@@ -18,10 +21,10 @@ for /r bin %%i in (*.class) do (
 
 rem MANIFEST.MF fájl létrehozása
 echo Manifest-Version: 1.0 > MANIFEST.MF
-echo Main-Class: tesztelo.Tesztelo >> MANIFEST.MF
+echo Main-Class: frontend.Main >> MANIFEST.MF
 
 rem .jar fájl készítése
-jar cmf MANIFEST.MF szkeleton.jar -C bin .
+jar cmf MANIFEST.MF grafikus.jar -C bin .
 
 rem Fájl törlés
 del sources.txt
