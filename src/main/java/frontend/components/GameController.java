@@ -32,8 +32,8 @@ public class GameController {
                 }
                 // Statbar inicializálása
                 Statbar statbar = gamePanel.getStatbar();
-                statbar.updateRound(1);
-                statbar.updatePlayerRound(1);
+                statbar.updateRound(logic.getKorszamlalo());
+                statbar.updatePlayerRound(currentPlayerIndex);
                 statbar.updateActionPoints(5);
 
                 // Gombász és Rovarász panelek láthatóvá tétele

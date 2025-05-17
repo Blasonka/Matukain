@@ -98,6 +98,21 @@ public class MenuPanel extends JPanel {
 
                 startButton.addActionListener(e -> {
                     String[] names = getNames();
+
+                    // Duplikált név ellenőrzés
+                    java.util.Set<String> nameSet = new java.util.HashSet<>();
+                    boolean hasDuplicate = false;
+                    for (String name : names) {
+                        if (!nameSet.add(name)) {
+                            hasDuplicate = true;
+                            break;
+                        }
+                    }
+                    if (hasDuplicate) {
+                        JOptionPane.showMessageDialog(this, "Ket jatekosnak nem lehet ugyanaz a neve!", "Hiba", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
                     logic.createUsers(names);
                     logic.jatekKezdes(); // Initialize the game after creating users
                     frame.dispose();
@@ -122,3 +137,4 @@ public class MenuPanel extends JPanel {
         return names;
     }
 }
+
