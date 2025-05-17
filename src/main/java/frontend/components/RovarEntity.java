@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
+import static frontend.components.GamePanel.state;
+
 /**
  * RovarEntity osztály
  *
@@ -152,6 +154,7 @@ public class RovarEntity extends Entity implements Runnable {
      * vagy azok szomszédosak.
      */
     private void moveDirectlyToTarget() {
+        if (state != GameState.MOZGATAS) return;
         if (currentIsland == mouseHandler.selectedIsland ||
                 gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
             if (x < mouseHandler.coordinate.getX()) {
@@ -174,6 +177,7 @@ public class RovarEntity extends Entity implements Runnable {
      * Ellenőrzi, hogy a rovar mozgása szükséges-e, és ha igen, akkor végrehajtja azt.
      */
     public void update() {
+        if (state != GameState.MOZGATAS) return;
         if (mouseHandler.clicked && (mouseHandler.coordinate.getX() != x || mouseHandler.coordinate.getY() != y)) {
             if (currentIsland != mouseHandler.selectedIsland) {
                 if (gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
@@ -213,5 +217,13 @@ public class RovarEntity extends Entity implements Runnable {
         } catch (IOException e) {
             System.out.println("Error loading image: " + e.getMessage());
         }
+    }
+
+    /**
+     * A rovar által végzett műveletek meghívásához
+     * @return entitás backend-oldali megfelelője
+     */
+    public Rovar getRovar() {
+        return rovar;
     }
 }

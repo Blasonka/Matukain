@@ -7,7 +7,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+enum GameState {SPORANOVESZTES, GOMBANOVESZTES, FONALNOVESZTES, MOZGATAS, SPORAEVES, FONALELVAGAS}
+
 public class GamePanel extends JPanel implements Runnable {
+    static GameState state;
+
     int originalTileSize = 16;
     int scale = 3;
     int tileSize = originalTileSize * scale; // 48x48

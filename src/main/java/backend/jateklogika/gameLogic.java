@@ -344,20 +344,17 @@ public class gameLogic implements Serializable {
      * Inicializálja a játékot
      */
     public void jatekKezdes() {
-        // This method will be called after createUsers to initialize the game state
-        List<Gombasz> gombaszok2 = new ArrayList<>(); // Use existing gombaszok
-        List<Rovarasz> rovaraszok = new ArrayList<>(); // Use existing rovaraszok
         Random rand = new Random();
-        Tekton[] tektonok = new Tekton[3];
+        Tekton[] tektonok = new Tekton[5];
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             int randomIndex = rand.nextInt(5);
             switch (randomIndex) {
-                case 0 -> tektonok[i] = new FelszivodosTekton(1, 2, 2);
-                case 1 -> tektonok[i] = new GombatestNelkuliTekton(2, 3, 3);
-                case 2 -> tektonok[i] = new MaxEgyFonalTekton(3, 4, 4);
-                case 3 -> tektonok[i] = new TobbFonalTekton(4, 5, 5);
-                case 4 -> tektonok[i] = new FonalMegtartoTekton(5, 6, 6);
+                case 0 -> tektonok[i] = new FelszivodosTekton(i, 2, 2);
+                case 1 -> tektonok[i] = new GombatestNelkuliTekton(i, 3, 3);
+                case 2 -> tektonok[i] = new MaxEgyFonalTekton(i, 4, 4);
+                case 3 -> tektonok[i] = new TobbFonalTekton(i, 5, 5);
+                case 4 -> tektonok[i] = new FonalMegtartoTekton(i, 6, 6);
             }
             map.add(tektonok[i]);
         }

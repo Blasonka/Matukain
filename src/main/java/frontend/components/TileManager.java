@@ -52,6 +52,7 @@ public class TileManager {
         this.logic = logic;
         this.islands = new ArrayList<>();
         createIslands(5); // Create 5 islands as before
+        syncTektonCoordinates();
     }
 
     /**
@@ -71,8 +72,7 @@ public class TileManager {
                 xOffset = random.nextInt(gp.maxScreenCol - gridSize - 1);
                 yOffset = random.nextInt(gp.maxScreenRow - gridSize - 1);
             } while (isOverlapping(xOffset, yOffset, gridSize));
-            syncTektonCoordinates();
-            islands.add(new TektonComponent(logic.getTektonBasedOnCords(xOffset + gridSize / 2, yOffset + gridSize / 2), gp, tiles, xOffset, yOffset, gridSize, gp.tileSize));
+            islands.add(new TektonComponent(logic.getTekton(i), gp, tiles, xOffset, yOffset, gridSize, gp.tileSize));
         }
     }
 

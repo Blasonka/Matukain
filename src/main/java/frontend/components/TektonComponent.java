@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static frontend.components.GamePanel.state;
+
 /**
  * TektonComponent osztály
  *
@@ -77,7 +79,7 @@ public class TektonComponent {
      * @var int sporeCount
      * @brief A sziget spóráinak számát tároló változó
      */
-    private int sporeCount = 0; // Tracks the spore count for the entire island
+    private int sporeCount = 0;
 
     /**
      * TektonComponent osztály konstruktora
@@ -150,17 +152,20 @@ public class TektonComponent {
      * Ellenőrzi, hogy a kattintás a sziget területén belül történt-e, és ha igen,
      * akkor növeli a spóra számot és frissíti a csempe képet.
      */
-    public void handleTileClick(int mouseX, int mouseY, boolean rovarIsland) {
+    public void handleTileClick(int mouseX, int mouseY, RovarEntity rovarIsland) {
         int relativeX = (mouseX / tileSize) - xOffset;
         int relativeY = (mouseY / tileSize) - yOffset;
 
         if (relativeX >= 0 && relativeX < gridSize && relativeY >= 0 && relativeY < tiles.length / gridSize) {
             boolean add = true;
-            if (rovarIsland && sporeCount >= 0) {
+            if (rovarIsland != null && sporeCount >= 0 && state == GameState.SPORAEVES) {
+                //rovarIsland.getRovar().elfogyaszt(tekton.getSporak().get(0));
                 sporeCount--;
                 add = false;
             }
-            else if (sporeCount <= 2) sporeCount++;
+            else if (sporeCount <= 2 && state == GameState.SPORANOVESZTES) {
+                sporeCount++;
+            }
 
             String imagePath = switch (sporeCount) {
                 case 1 -> "/textures/tekton_1spores.png";

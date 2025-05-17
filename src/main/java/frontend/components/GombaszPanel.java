@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static frontend.components.GamePanel.state;
+
 /**
  * GombaszPanel osztály
  * @class GombaszPanel
@@ -39,21 +41,21 @@ public class GombaszPanel extends JPanel {
         sporanovesztesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Spóranövesztés gomb megnyomva!");
+                state = GameState.SPORANOVESZTES;
             }
         });
 
         gombanovesztesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Gombanövesztés gomb megnyomva!");
+                state = GameState.GOMBANOVESZTES;
             }
         });
 
         fonalnovesztesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Fonalnövesztés gomb megnyomva!");
+                state = GameState.FONALNOVESZTES;
             }
         });
 

@@ -42,7 +42,13 @@ public class GameController {
             }
         } else {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
-            island.handleTileClick(mouseX, mouseY, true);
+            RovarEntity rovarIsland = null;
+            for (RovarEntity rovar : gamePanel.rovarEntities) {
+                if (rovar.currentIsland == selectedIsland) {
+                    rovarIsland = rovar;
+                    break;
+                }
+            } island.handleTileClick(mouseX, mouseY, rovarIsland);
         }
         gamePanel.repaint();
     }
