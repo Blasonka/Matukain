@@ -5,8 +5,6 @@ import backend.rovar.Rovar;
 import backend.spora.Spora;
 import backend.tekton.Tekton;
 
-import static backend.tesztelo.Menu.parancsFeldolgozo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,12 +58,9 @@ public class Rovarasz extends Felhasznalo {
      * Hozzáad egy rovar objektumot a rovarok listájához
      * @param r - a hozzáadni kívánt rovar
      */
-    public void addRovar(Rovar r){
-        parancsFeldolgozo.print("Rovarász (" + ID + ") rovarok paraméterének értéke megváltozott: ");
-        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "" : ", "));
-        parancsFeldolgozo.print(" -> ");
+    public Rovar addRovar(Rovar r){
         rovarok.add(r);
-        for (int i = 0; i < rovarok.size(); i++) parancsFeldolgozo.print("Rovar (" + rovarok.get(i).getID() + ")" + (i == rovarok.size() - 1 ? "\n" : ", "));
+        return r;
     }
 
     /**

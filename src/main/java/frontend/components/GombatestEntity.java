@@ -1,5 +1,7 @@
 package frontend.components;
 
+import backend.gomba.Gomba;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,6 +23,11 @@ import java.io.IOException;
  * @date 2025-05-10
  */
 public class GombatestEntity extends Entity {
+    /**
+     * @var Gomba gomba
+     * @brief Az entitáshoz tartozó frontend oldali párja
+     */
+    Gomba gomba;
     /**
      * @var GamePanel gp
      * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
@@ -44,10 +51,12 @@ public class GombatestEntity extends Entity {
 
     /**
      * GombatestEntity osztály konstruktora
-     * @param gp
-     * @param mouseHandler
+     * @param g Gomba
+     * @param gp GamePanel
+     * @param mouseHandler Egér
      */
-    public GombatestEntity(GamePanel gp, MouseHandler mouseHandler) {
+    public GombatestEntity(Gomba g, GamePanel gp, MouseHandler mouseHandler) {
+        this.gomba = g;
         this.gp = gp;
         this.mouseHandler = mouseHandler;
         getPlayerImage();

@@ -34,14 +34,12 @@ public class VagasGatloSpora extends Spora implements hatasKifejtes {
      */
     public VagasGatloSpora(int sz) {
         super(sz, "vagas");
-        System.out.println("\t>VagasGatloSpora->VagasGatloSpora()");
     }
     /**
      * Spóra törlése
      */
     @Override
     public void torles() {
-        System.out.println("\t\t>VagasGatloSpora->torles()");
     }
 
     /**

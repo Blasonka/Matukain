@@ -52,7 +52,6 @@ public class TileManager {
         this.logic = logic;
         this.islands = new ArrayList<>();
         createIslands(5); // Create 5 islands as before
-        syncTektonCoordinates(); // Sync coordinates with gameLogic
     }
 
     /**
@@ -72,8 +71,8 @@ public class TileManager {
                 xOffset = random.nextInt(gp.maxScreenCol - gridSize - 1);
                 yOffset = random.nextInt(gp.maxScreenRow - gridSize - 1);
             } while (isOverlapping(xOffset, yOffset, gridSize));
-
-            islands.add(new TektonComponent(gp, tiles, xOffset, yOffset, gridSize, gp.tileSize));
+            syncTektonCoordinates();
+            islands.add(new TektonComponent(logic.getTektonBasedOnCords(xOffset + gridSize / 2, yOffset + gridSize / 2), gp, tiles, xOffset, yOffset, gridSize, gp.tileSize));
         }
     }
 
@@ -480,7 +479,8 @@ public class TileManager {
         }
 
         // Create a new island for the broken part
-        TektonComponent newIsland = new TektonComponent(gp, newTilesPart, newIslandXOffset, newIslandYOffset, newWidth, tileSize);
+        TektonComponent newIsland = new TektonComponent(logic.createNewTekton(), gp, newTilesPart, newIslandXOffset, newIslandYOffset, newWidth, tileSize);
+        syncTektonCoordinates();
 
         // Add the new island to the islands list
         islands.add(newIsland);

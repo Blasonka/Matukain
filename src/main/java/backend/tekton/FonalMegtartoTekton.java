@@ -32,7 +32,6 @@ public class FonalMegtartoTekton extends Tekton {
      */
     public FonalMegtartoTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("Létrejött egy FonalMegtartoTekton");
     }
 
     /**

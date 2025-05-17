@@ -2,6 +2,8 @@ package frontend.components;
 
 import backend.jateklogika.gameLogic;
 
+import javax.swing.*;
+
 public class GameController {
     private gameLogic logic;
     private GamePanel gamePanel;
@@ -11,7 +13,7 @@ public class GameController {
         this.logic = logic;
         this.gamePanel = gamePanel;
         gamePanel.addMouseListener(gamePanel.mouseHandler);
-        logic.promptForInitialPlacement(currentPlayerIndex);
+        JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
     }
 
     public void handleClick(int selectedIsland, int mouseX, int mouseY) {
@@ -22,9 +24,9 @@ public class GameController {
             gamePanel.mouseHandler.returnFalse();
 
             if (currentPlayerIndex < 4) {
-                logic.promptForInitialPlacement(currentPlayerIndex);
+                JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
             } else {
-                System.out.println("Kezdőthet a játék!");
+                JOptionPane.showMessageDialog(gamePanel, "Kezdothet a jatek!");
                 for (RovarEntity rovar : gamePanel.rovarEntities) {
                     rovar.startAnimThread();
                 }

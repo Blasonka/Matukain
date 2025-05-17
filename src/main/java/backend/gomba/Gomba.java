@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static backend.tesztelo.Menu.parancsFeldolgozo;
 
 /**
  * Gomba osztály
@@ -55,7 +54,6 @@ public class Gomba {
         this.id = id;
         this.gombafonalak = new ArrayList<Gombafonal>();
         this.gombatestek = new ArrayList<Gombatest>();
-        parancsFeldolgozo.print("Gomba sikeresen létrejött\n");
     }
 
     /**

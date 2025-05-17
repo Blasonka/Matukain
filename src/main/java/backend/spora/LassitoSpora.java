@@ -5,8 +5,6 @@ import backend.interfaces.hatasKifejtes;
 import backend.tekton.Tekton;
 import backend.rovar.Rovar;
 
-import static backend.tesztelo.Menu.parancsFeldolgozo;
-
 /**
  * LassítóSpóra osztály
  *
@@ -36,7 +34,6 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
      */
     public LassitoSpora(int sz) {
         super(sz, "lassito" );
-        System.out.println("\t>LassitoSpora->LassitoSpora()");
     }
 
     /**
@@ -44,7 +41,6 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
      */
     @Override
     public void torles() {
-        System.out.println("\t\t>LassitoSpora->torles()");
     }
 
     /**
@@ -55,7 +51,6 @@ public class LassitoSpora extends Spora implements hatasKifejtes {
         int regi = r.getSebesseg();
         if (!(r.getSebesseg() <= 0)) {
             r.setSebesseg(r.getSebesseg() - 1);
-            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+r.getSebesseg());
         }
     }
 }

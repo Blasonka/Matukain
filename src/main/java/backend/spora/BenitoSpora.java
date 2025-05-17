@@ -5,9 +5,6 @@ import backend.interfaces.hatasKifejtes;
 import backend.tekton.Tekton;
 import backend.rovar.Rovar;
 
-
-import static backend.tesztelo.Menu.parancsFeldolgozo;
-
 /**
  * BénítóSpóra osztály
  *
@@ -37,14 +34,12 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
      */
     public BenitoSpora(int sz) {
         super(sz,"benito");
-        System.out.println("\t>BenitoSpora->BenitoSpora()");
     }
 
     /**
      * Spóra törlése
      */
     public void torles() {
-        System.out.println("\t\t>BenitoSpora->torles()");
     }
     /**
      * Spóra hatásának kifejtése
@@ -54,6 +49,5 @@ public class BenitoSpora extends Spora implements hatasKifejtes {
     public void hatasKifejtes(Rovar rovar) {
         int regi= rovar.getSebesseg();
         rovar.setSebesseg(0);
-        parancsFeldolgozo.print("A rovar sebessege megvaltozott: "+regi+" -> "+rovar.getSebesseg());
     }
 }

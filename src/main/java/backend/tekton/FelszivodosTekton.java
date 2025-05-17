@@ -3,8 +3,6 @@ package backend.tekton;
 import backend.gomba.Gomba;
 import backend.gomba.Gombafonal;
 
-import static backend.tesztelo.Menu.parancsFeldolgozo;
-
 /**
  * FelszivodosTekton osztály
  *
@@ -37,7 +35,6 @@ public class FelszivodosTekton extends Tekton{
     public FelszivodosTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
         szamlalo = 0;
-        System.out.println("Létrejött egy FelszivodosTekton");
     }
 
     @Override
@@ -60,12 +57,10 @@ public class FelszivodosTekton extends Tekton{
     @Override
     public void hatasKifejtes(Gomba gomba){
         szamlalo--;
-        parancsFeldolgozo.print("Tekton (" + this.getID() + ") szamlalo értéke megváltozott: " + szamlalo+1 + " -> " + szamlalo);
         if (szamlalo==0){
             for (Gombafonal fonal : gomba.getGombafonalak()) {
                 if (fonal.getHatar1() == this || fonal.getHatar2() == this) {
                     gomba.removeFonal(fonal);
-                    parancsFeldolgozo.print("Tekton(" + this.getID() +") hatására Fonal (" + fonal.getId() + ") eltűnt");
                 }
             }
         }

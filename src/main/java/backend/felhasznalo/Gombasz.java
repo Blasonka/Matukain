@@ -42,7 +42,6 @@ public class Gombasz extends Felhasznalo {
     public Gombasz(int id, String name) {
         super(id, name, 6);
         gombak = new ArrayList<>();
-        System.out.println(">Gombasz->Gombasz()");
     }
     /**
      * Megállapítja melyik gombához tartozik a kilőtt gombafonal
@@ -91,7 +90,8 @@ public class Gombasz extends Felhasznalo {
         return gombak;
     }
 
-    public void addGomba(Gomba gomba) {
+    public Gomba addGomba(Gomba gomba) {
         gombak.add(gomba);
+        return gomba;
     }
 }

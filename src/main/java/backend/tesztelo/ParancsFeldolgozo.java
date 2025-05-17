@@ -124,12 +124,12 @@ public class ParancsFeldolgozo {
                 case "/consume":
                     consume(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
                     break;
-                case "/list":
-                    list();
-                    break;
-                case "/lista":
-                    lista();
-                    break;
+//                case "/list":
+//                    list();
+//                    break;
+//                case "/lista":
+//                    lista();
+//                    break;
                 case "/trigger_tores":
                     trigger_tores(Integer.parseInt(command[1]));
                     break;
@@ -550,21 +550,21 @@ public class ParancsFeldolgozo {
             keresett.megesziRovart(keresettRovar);
         }
     }
-
-    /**
-     * Játék aktuális állapotát kilistázó metódust hívja meg
-     */
-    private void list() {
-        jatekLogika.list();
-    }
-
-    /**
-     * Felhasználókat és hozzájuk tartozó pontszámokat listázza ki
-     */
-    private void lista() {
-        jatekLogika.lista();
-    }
-
+//
+//    /**
+//     * Játék aktuális állapotát kilistázó metódust hívja meg
+//     */
+//    private void list() {
+//        jatekLogika.list();
+//    }
+//
+//    /**
+//     * Felhasználókat és hozzájuk tartozó pontszámokat listázza ki
+//     */
+//    private void lista() {
+//        jatekLogika.lista();
+//    }
+//
     /**
      * Egyetlen egy tekton kettétörését megindító metódus
      * @param tektonID a törendő tekton

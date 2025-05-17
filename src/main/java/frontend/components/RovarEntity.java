@@ -1,5 +1,7 @@
 package frontend.components;
 
+import backend.rovar.Rovar;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,6 +24,11 @@ import java.util.List;
  * @date 2025-05-10
  */
 public class RovarEntity extends Entity implements Runnable {
+    /**
+     * @var Rovar rovar
+     * @brief A backend-en található rovar, aminek ez a megfelelője
+     */
+    Rovar rovar;
     /**
      * @var GamePanel gp
      * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
@@ -60,11 +67,13 @@ public class RovarEntity extends Entity implements Runnable {
 
     /**
      * RovarEntity osztály konstruktora
-     * @param gp
-     * @param mouseHandler
+     * @param r Rovar
+     * @param gp GamePanel
+     * @param mouseHandler Egér
      * @brief Inicializálja a RovarEntity objektumot
      */
-    public RovarEntity(GamePanel gp, MouseHandler mouseHandler) {
+    public RovarEntity(Rovar r, GamePanel gp, MouseHandler mouseHandler) {
+        this.rovar = r;
         this.gp = gp;
         this.mouseHandler = mouseHandler;
         getPlayerImage();

@@ -47,12 +47,12 @@ public class MenuPanel extends JPanel {
 
     /**
      * MenuPanel osztály konstruktora
-     * @param frame A főmenü kerete
-     * @param logic A játék logikáját kezelő objektum
+     * @param f A főmenü kerete
+     * @param l A játék logikáját kezelő objektum
      */
-    public MenuPanel(JFrame frame, gameLogic logic) {
-        this.frame = frame;
-        this.logic = logic;
+    public MenuPanel(JFrame f, gameLogic l) {
+        this.frame = f;
+        this.logic = l;
         setLayout(new GridBagLayout());
         setPreferredSize(new Dimension(1280, 720));
         setBackground(new Color(0, 0, 1, 0)); // Transparent background
@@ -63,8 +63,8 @@ public class MenuPanel extends JPanel {
 
         nameFields = new JTextField[5];
         String[] labels = {
-                "Adja meg a gombász nevét", "Adja meg a gombász nevét",
-                "Adja meg a rovarász nevét", "Adja meg a rovarász nevét",
+                "Adja meg a gombasz nevet", "Adja meg a gombasz nevet",
+                "Adja meg a rovarasz nevet", "Adja meg a rovarasz nevet",
                 null
         };
 

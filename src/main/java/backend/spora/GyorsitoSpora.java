@@ -5,8 +5,6 @@ import backend.interfaces.hatasKifejtes;
 import backend.tekton.Tekton;
 import backend.rovar.Rovar;
 
-import static backend.tesztelo.Menu.parancsFeldolgozo;
-
 /**
  * GyorsítóSpóra osztály
  *
@@ -36,14 +34,12 @@ import static backend.tesztelo.Menu.parancsFeldolgozo;
      */
     public GyorsitoSpora(int sz) {
         super(sz, "gyorsito");
-        System.out.println("\t>GyorsitoSpora->GyorsitoSpora()");
     }
 
     /**
      * Spóra törlése
      */
     public void torles() {
-        System.out.println("\t\t>GyorsitoSpora->torles()");
     }
 
     /**
@@ -55,7 +51,6 @@ import static backend.tesztelo.Menu.parancsFeldolgozo;
         int regi = rovar.getSebesseg();
         if (rovar.getSebesseg() < 3) {
             rovar.setSebesseg(rovar.getSebesseg() + 1);
-            parancsFeldolgozo.print("A sebesseg megvaltozott: "+regi+" -> "+rovar.getSebesseg());
         }
     }
 }

@@ -27,7 +27,6 @@ public class MaxEgyFonalTekton extends Tekton{
      */
     public MaxEgyFonalTekton(int id, int koordinataX, int koordinataY){
         super(id, koordinataX, koordinataY);
-        System.out.println("Létrejött egy MaxEgyFonalTekton");
     }
 
     /**

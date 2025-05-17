@@ -1,5 +1,10 @@
 package frontend.components;
 
+import backend.gomba.Gomba;
+import backend.gomba.Gombatest;
+import backend.rovar.Rovar;
+import backend.tekton.Tekton;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,6 +28,11 @@ import java.util.Random;
  * @date 2025-05-10
  */
 public class TektonComponent {
+    /**
+     * @var Tekton tekton
+     * @brief A Tekton, ami a backend-en kapcsolódik hozzá
+     */
+    Tekton tekton;
     /**
      * @var GamePanel gp
      * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
@@ -72,13 +82,15 @@ public class TektonComponent {
     /**
      * TektonComponent osztály konstruktora
      *
+     * @param t A tekton, kapcoslódik hozzá
      * @param tiles A szigetet alkotó csempék tömbje
      * @param xOffset A sziget X koordinátájának eltolása
      * @param yOffset A sziget Y koordinátájának eltolása
      * @param gridSize A sziget mérete
      * @param tileSize A csempe mérete
      */
-    public TektonComponent(GamePanel panel, Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
+    public TektonComponent(Tekton t, GamePanel panel, Tile[] tiles, int xOffset, int yOffset, int gridSize, int tileSize) {
+        this.tekton = t;
         this.gp = panel;
         this.tiles = tiles;
         this.xOffset = xOffset;
@@ -232,8 +244,10 @@ public class TektonComponent {
 
         Entity entity = null;
         if (playerIndex < 2) {
+            Gomba ujGomba = gp.logic.getGombasz(playerIndex).addGomba(new Gomba(gp.logic.getGombaID() + 1));
+            ujGomba.addGombatest(new Gombatest(gp.logic.getGombatestID(), tekton));
 
-            GombatestEntity gombaEntity = new GombatestEntity(gamePanel, gamePanel.mouseHandler);
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler);
             gombaEntity.x = centerX;
             gombaEntity.y = centerY - 48;
             gombaEntity.state = 0;
@@ -242,7 +256,9 @@ public class TektonComponent {
             entity = gombaEntity;
             System.out.println("Placed mushroom at (" + centerX + ", " + centerY + ") for player " + playerIndex);
         } else {
-            RovarEntity rovarEntity = new RovarEntity(gamePanel, gamePanel.mouseHandler);
+            Rovar ujrovar = gp.logic.getRovarasz(playerIndex).addRovar(new Rovar(tekton, gp.logic.getRovarID()));
+
+            RovarEntity rovarEntity = new RovarEntity(ujrovar, gamePanel, gamePanel.mouseHandler);
             rovarEntity.x = centerX;
             rovarEntity.y = centerY;
             rovarEntity.currentIsland = gamePanel.tileM.islands.indexOf(this);

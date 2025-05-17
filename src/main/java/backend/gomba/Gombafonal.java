@@ -74,7 +74,6 @@ public class Gombafonal {
         this.test = test;
         this.hatar1 = hatar1;
         this.hatar2 = hatar2;
-        System.out.println("Gombafonal létrejött");
     }
 
     /**

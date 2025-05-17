@@ -64,7 +64,6 @@ public class GamePanel extends JPanel implements Runnable {
         actionPanelContainer = new JPanel();
         actionPanelContainer.setLayout(new BoxLayout(actionPanelContainer, BoxLayout.Y_AXIS));
         actionPanelContainer.add(gombaszPanel);
-        actionPanelContainer.add(Box.createRigidArea(new Dimension(0, 10))); // Távolság a panelek között
         actionPanelContainer.add(rovaraszPanel);
         add(actionPanelContainer, BorderLayout.EAST);
 
