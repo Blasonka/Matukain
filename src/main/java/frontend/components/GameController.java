@@ -14,18 +14,6 @@ public class GameController {
         logic.promptForInitialPlacement(currentPlayerIndex);
     }
 
-    // Getter és setter metódusok, ha szükséges
-    public int getCurrentPlayerIndex() {
-        return currentPlayerIndex;
-    }
-
-    public void setCurrentPlayerIndex(int index) {
-        this.currentPlayerIndex = index;
-    }
-
-
-
-    // Eseménykezelő metódusok
     public void handleClick(int selectedIsland, int mouseX, int mouseY) {
         if (currentPlayerIndex < 4) {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
@@ -40,11 +28,15 @@ public class GameController {
                 for (RovarEntity rovar : gamePanel.rovarEntities) {
                     rovar.startAnimThread();
                 }
-                // Statbar inicializálása a játék kezdetén
+                // Statbar inicializálása
                 Statbar statbar = gamePanel.getStatbar();
-                statbar.updateRound(1); // Első kör
-                statbar.updatePlayerRound(1); // Első játékos kör
-                statbar.updateActionPoints(10); // Kezdeti akciópontok (pl. 10)
+                statbar.updateRound(1);
+                statbar.updatePlayerRound(1);
+                statbar.updateActionPoints(5);
+
+                // Gombász és Rovarász panelek láthatóvá tétele
+                gamePanel.getGombaszPanel().setVisible(true);
+                gamePanel.getRovaraszPanel().setVisible(true);
             }
         } else {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
@@ -53,10 +45,9 @@ public class GameController {
         gamePanel.repaint();
     }
 
-
     public void update() {
         if (gamePanel.mouseHandler.clicked) {
-            handleClick(gamePanel.mouseHandler.selectedIsland, 0, 0); // mouseX, mouseY itt redundáns lehet, ha csak az island kell
+            handleClick(gamePanel.mouseHandler.selectedIsland, 0, 0);
         }
         for (RovarEntity rovar : gamePanel.rovarEntities) {
             rovar.update();
