@@ -32,7 +32,7 @@ public class GameController {
                 }
                 // Statbar inicializálása
                 Statbar statbar = gamePanel.getStatbar();
-                statbar.updateRound(logic.getKorszamlalo());
+                statbar.updateRound(logic.getKorszamlalo()+1);
                 statbar.updatePlayerRound(currentPlayerIndex);
                 statbar.updateActionPoints(5);
 

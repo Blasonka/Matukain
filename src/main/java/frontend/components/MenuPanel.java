@@ -63,8 +63,8 @@ public class MenuPanel extends JPanel {
 
         nameFields = new JTextField[5];
         String[] labels = {
-                "Adja meg a gombasz nevet", "Adja meg a gombasz nevet",
-                "Adja meg a rovarasz nevet", "Adja meg a rovarasz nevet",
+                "Adja meg az elso gombasz nevet", "Adja meg a masodik gombasz nevet",
+                "Adja meg az elso rovarasz nevet", "Adja meg a masodik rovarasz nevet",
                 null
         };
 
@@ -72,7 +72,7 @@ public class MenuPanel extends JPanel {
             if (i < 4) {
                 if (labels[i] != null) {
                     JLabel label = new JLabel(labels[i]);
-                    label.setForeground(Color.WHITE);
+                    label.setForeground(Color.BLACK);
                     label.setFont(label.getFont().deriveFont(18f));
                     gbc.gridx = 0;
                     gbc.gridy = i * 2;
