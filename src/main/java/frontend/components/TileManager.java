@@ -132,12 +132,13 @@ public class TileManager {
     }
 
     /**
-     * Kirajzolja a szigeteket és az utakat
+     * Kirajzolja a szigeteket
      * @param g a grafikus objektum
      */
     public void draw(Graphics g) {
-        drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
-        drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
+        // Az alapértelmezett fonalak rajzolását eltávolítjuk
+        // drawPathAvoidingIslands(g, islands.get(0), islands.get(1), false);
+        // drawPathAvoidingIslands(g, islands.get(0), islands.get(3), false);
         for (TektonComponent island : islands) {
             island.draw(g);
         }
@@ -201,7 +202,7 @@ public class TileManager {
         int island1CenterY = (island1.getYOffset() + island1.getGridHeight() / 2) * tileSize + tileSize / 2;
         int firstPathX = path.get(0)[0] * tileSize + tileSize / 2;
         int firstPathY = path.get(0)[1] * tileSize + tileSize / 2;
-        if(!pathFinding) {
+        if (!pathFinding) {
             g2.drawLine(island1CenterX, island1CenterY, firstPathX, firstPathY);
         }
 
@@ -211,7 +212,7 @@ public class TileManager {
         for (int i = 1; i < path.size(); i++) {
             int currX = path.get(i)[0] * tileSize + tileSize / 2;
             int currY = path.get(i)[1] * tileSize + tileSize / 2;
-            if (!pathFinding){
+            if (!pathFinding) {
                 g2.drawLine(prevX, prevY, currX, currY);
             }
             prevX = currX;
@@ -221,8 +222,6 @@ public class TileManager {
         // Draw from last path point to the second island center
         int island2CenterX = (island2.getXOffset() + island2.getGridWidth() / 2) * tileSize + tileSize / 2;
         int island2CenterY = (island2.getYOffset() + island2.getGridHeight() / 2) * tileSize + tileSize / 2;
-
-
         if (!pathFinding) {
             island1.szomszedok.add(islands.indexOf(island2));
             island2.szomszedok.add(islands.indexOf(island1));
@@ -231,7 +230,6 @@ public class TileManager {
 
         g2.setStroke(originalStroke);
         return path; // Return the path
-
     }
 
     /**
@@ -241,7 +239,7 @@ public class TileManager {
      * @param targetIsland a cél sziget
      * @return a legjobb pont koordinátái
      */
-    private int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
+    protected int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
         int islandLeft = island.getXOffset();
         int islandRight = island.getXOffset() + island.getGridWidth();
         int islandTop = island.getYOffset();
@@ -309,7 +307,7 @@ public class TileManager {
      * @param endY a végpont Y koordinátája
      * @return az útvonal koordinátái
      */
-    private List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
+    protected List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
         int rows = grid.length;
         int cols = grid[0].length;
 

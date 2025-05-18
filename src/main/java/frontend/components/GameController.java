@@ -3,6 +3,7 @@ package frontend.components;
 import backend.jateklogika.gameLogic;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameController {
     private gameLogic logic;
@@ -39,6 +40,16 @@ public class GameController {
                 // Gombász és Rovarász panelek láthatóvá tétele
                 gamePanel.getGombaszPanel().setVisible(true);
                 gamePanel.getRovaraszPanel().setVisible(true);
+            }
+        } else if (gamePanel.state == GameState.FONALNOVESZTES) {
+            TektonComponent selectedIslandObj = gamePanel.tileM.islands.get(selectedIsland);
+            if (gamePanel.getFirstSelectedIsland() == null) {
+                gamePanel.setFirstSelectedIsland(selectedIslandObj);
+                JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy második szigetet!");
+            } else if (gamePanel.getSecondSelectedIsland() == null && selectedIslandObj != gamePanel.getFirstSelectedIsland()) {
+                gamePanel.setSecondSelectedIsland(selectedIslandObj);
+                // A fonal logikáját a handleFonalnoveszt-be helyezzük
+                handleFonalnoveszt(); // Frissítve, hogy itt is meghívjuk a logikát
             }
         } else {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
@@ -97,12 +108,25 @@ public class GameController {
 
     public void handleFonalnoveszt() {
         if (gamePanel.state == GameState.FONALNOVESZTES) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Fonalnövesztés mód aktiválva! Jelölj ki két szigetet!");
+            if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
+                JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
+            } else if (gamePanel.getFirstSelectedIsland() == gamePanel.getSecondSelectedIsland()) {
+                JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
+                if (g != null) {
+                    Graphics2D  g2= (Graphics2D) g;
+                    gamePanel.drawThreads(g2, gamePanel.getFirstSelectedIsland(), gamePanel.getSecondSelectedIsland());
+                    g2.dispose();
+                }
+                // Hozzáadjuk a fonalat (a két sziget indexeit tároljuk)
+                int island1Index = gamePanel.tileM.islands.indexOf(gamePanel.getFirstSelectedIsland());
+                int island2Index = gamePanel.tileM.islands.indexOf(gamePanel.getSecondSelectedIsland());
+                gamePanel.addThread(island1Index, island2Index);
+                gamePanel.state = GameState.DEFAULT; // Visszaállítjuk az alapértelmezett állapotot
+                gamePanel.repaint(); // Frissítjük a felületet a fonal rajzolásához
+                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
+                gamePanel.clearSelectedIslands(); // Töröljük a kijelöléseket a következő körre
             }
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
