@@ -177,9 +177,9 @@ public class GameController {
 
     // Gomb eseménykezelők a GameState alapján
     public void handleSporanoveszt() {
-        if (gamePanel.state == null || gamePanel.state == GameState.DEFAULT) {
+        if (gamePanel.state == GameState.SPORANOVESZTES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.state = GameState.SPORANOVESZTES;
+
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
             } else {
@@ -191,9 +191,9 @@ public class GameController {
     }
 
     public void handleGombanoveszt() {
-        if (gamePanel.state == null || gamePanel.state == GameState.DEFAULT) {
+        if (gamePanel.state == GameState.GOMBANOVESZTES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.state = GameState.GOMBANOVESZTES;
+
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Gombanövesztés mód aktiválva!");
             } else {
@@ -250,9 +250,9 @@ public class GameController {
     }
 
     public void handleSporaeves() {
-        if (gamePanel.state == null || gamePanel.state == GameState.DEFAULT) {
+        if (gamePanel.state == GameState.SPORAEVES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.state = GameState.SPORAEVES;
+
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
             } else {
