@@ -1,5 +1,6 @@
 package frontend.components;
 
+import backend.gomba.Gombatest;
 import backend.interfaces.Jatekos;
 import backend.jateklogika.gameLogic;
 import backend.tekton.Tekton;
@@ -473,7 +474,6 @@ public class GameController {
     }
 
     public void handleFonalnoveszt() {
-        // Ellenőrzés: csak akkor lehessen fonalat növeszteni, ha a két kiválasztott tekton közül legalább az egyiken van már a játékosnak gombatestje vagy fonala
         if (gamePanel.getFirstSelectedIsland() == null) {
             gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
             JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy masodik szigetet!");
@@ -488,6 +488,7 @@ public class GameController {
             TektonComponent[] islands = new TektonComponent[] { firstIsland, secondIsland };
             boolean found = false;
             backend.felhasznalo.Gombasz gombasz = (backend.felhasznalo.Gombasz) logic.getPlayerByIndex(currentPlayerIndex);
+            backend.gomba.Gombatest kapcsolodoGombatest = null;
             for (TektonComponent island : islands) {
                 int tektonId = island.tekton.getID();
                 // Gombatestek vizsgálata
@@ -495,6 +496,7 @@ public class GameController {
                     for (backend.gomba.Gombatest gt : g.getGombatest()) {
                         if (gt.getTekton().getID() == tektonId) {
                             found = true;
+                            kapcsolodoGombatest = gt;
                             break;
                         }
                     }
@@ -503,6 +505,7 @@ public class GameController {
                     for (backend.gomba.Gombafonal gf : g.getGombafonalak()) {
                         if (gf.getHatar1().getID() == tektonId || gf.getHatar2().getID() == tektonId) {
                             found = true;
+                            kapcsolodoGombatest = gf.getTest();
                             break;
                         }
                     }
@@ -516,17 +519,27 @@ public class GameController {
                 gamePanel.state = GameState.DEFAULT;
                 return;
             }
-            // Ha minden OK, fonal növesztése
-            gamePanel.setSecondSelectedIsland(secondIsland);
+            // Fonal létrehozása
+            int island1Index = gamePanel.tileM.islands.indexOf(firstIsland);
+            int island2Index = gamePanel.tileM.islands.indexOf(secondIsland);
+            backend.tekton.Tekton t1 = firstIsland.tekton;
+            backend.tekton.Tekton t2 = secondIsland.tekton;
+            backend.gomba.Gombafonal ujFonal = new backend.gomba.Gombafonal(0, t1, t2, kapcsolodoGombatest);
+            // Megkeressük, melyik gombához tartozik a kapcsolodoGombatest, és oda adjuk hozzá a fonalat
+            for (backend.gomba.Gomba g : gombasz.getGombak()) {
+                if (g.getGombatest().contains(kapcsolodoGombatest)) {
+                    g.addFonal(ujFonal);
+                    break;
+                }
+            }
+            // Frontend listába is hozzáadjuk
+            gamePanel.addThread(island1Index, island2Index);
             Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
             if (g != null) {
                 Graphics2D g2 = (Graphics2D) g;
                 gamePanel.drawThreads(g2, firstIsland, secondIsland);
                 g2.dispose();
             }
-            int island1Index = gamePanel.tileM.islands.indexOf(firstIsland);
-            int island2Index = gamePanel.tileM.islands.indexOf(secondIsland);
-            gamePanel.addThread(island1Index, island2Index);
             decreaseActionPointsForCurrentPlayer();
             gamePanel.state = GameState.DEFAULT;
             gamePanel.repaint();
