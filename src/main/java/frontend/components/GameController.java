@@ -14,6 +14,9 @@ public class GameController {
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
     private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
     private boolean initialPlacementPhase = true;
+    private int currentRound = 1;
+    private final int maxRounds = 10;
+    private boolean gameOver = false;
 
     public GameController(gameLogic logic, GamePanel gamePanel) {
         this.logic = logic;
@@ -182,12 +185,54 @@ public class GameController {
         }
     }
 
+    public void endPlayerTurn() {
+        if (gameOver) return;
+        currentPlayerIndex++;
+        if (currentPlayerIndex >= 4) {
+            currentPlayerIndex = 0;
+            currentRound++;
+            logic.setKorszamlalo(currentRound - 1); // backend round update
+            if (currentRound > maxRounds) {
+                gameOver = true;
+                JOptionPane.showMessageDialog(gamePanel, "A játék véget ért!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+        logic.resetPlayerActionPoints(currentPlayerIndex); // backend: reset AP for new player
+        Statbar statbar = gamePanel.getStatbar();
+        statbar.updateRound(currentRound);
+        statbar.updatePlayerRound(logic.getPlayerNameByIndex(currentPlayerIndex));
+        statbar.updateCurrentPlayerActionPoints(logic.getPlayerActionPointsByIndex(currentPlayerIndex));
+        gamePanel.updateActionPanelsForCurrentPlayer(currentPlayerIndex);
+    }
+
+    // Call this after every action that spends action points
+    public void checkAndAdvanceTurn() {
+        int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+        if (ap <= 0) {
+            JOptionPane.showMessageDialog(gamePanel, "Elfogytak az akciópontjaid! Következő játékos jön.");
+            endPlayerTurn();
+        } else {
+            gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap);
+        }
+    }
+
+    // Helper to decrease action points by 2 after every action
+    public void decreaseActionPointsForCurrentPlayer() {
+        int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+        logic.setPlayerActionPointsByIndex(currentPlayerIndex, ap - 2);
+        gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
+    }
+
     // Gomb eseménykezelők a GameState alapján
     public void handleSporanoveszt() {
+        if (gameOver) return;
         if (gamePanel.state == GameState.SPORANOVESZTES) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+            int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+            if (ap >= 2) {
+                decreaseActionPointsForCurrentPlayer();
                 JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
@@ -197,6 +242,7 @@ public class GameController {
     }
 
     public void handleGombanoveszt() {
+        if (gameOver) return;
          if (gamePanel.state == GameState.GOMBANOVESZTES) {
              JOptionPane.showMessageDialog(gamePanel, "Válassz ki egy szigetet");
             int selectedIsland = gamePanel.mouseHandler.selectedIsland;
@@ -289,15 +335,18 @@ public class GameController {
             gombaEntity.state = 0;
 
             gamePanel.gombatestEntities.add(gombaEntity);
+            decreaseActionPointsForCurrentPlayer();
             JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen növesztve a szigeten!");
             gamePanel.state = GameState.DEFAULT;
             gamePanel.repaint();
+            checkAndAdvanceTurn();
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
     public void handleFonalnoveszt() {
+        if (gameOver) return;
         if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
                 JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
@@ -313,10 +362,12 @@ public class GameController {
                 int island1Index = gamePanel.tileM.islands.indexOf(gamePanel.getFirstSelectedIsland());
                 int island2Index = gamePanel.tileM.islands.indexOf(gamePanel.getSecondSelectedIsland());
                 gamePanel.addThread(island1Index, island2Index);
+                decreaseActionPointsForCurrentPlayer();
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
                 JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
                 gamePanel.clearSelectedIslands();
+                checkAndAdvanceTurn();
             }
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
@@ -324,14 +375,18 @@ public class GameController {
     }
 
     public void handleMozgatas() {
+        if (gameOver) return;
         if (gamePanel.state == GameState.MOZGATAS) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+            int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+            if (ap >= 2) {
+                decreaseActionPointsForCurrentPlayer();
+                gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
                 selectingIsland = false;
                 selectedRovar = null;
                 JOptionPane.showMessageDialog(gamePanel, "Mozgatás mód aktiválva! Jelölj ki egy rovart!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
@@ -341,10 +396,14 @@ public class GameController {
     }
 
     public void handleSporaeves() {
+        if (gameOver) return;
         if (gamePanel.state == GameState.SPORAEVES) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+            int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+            if (ap >= 2) {
+                decreaseActionPointsForCurrentPlayer();
+                gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
@@ -354,12 +413,16 @@ public class GameController {
     }
 
     public void handleFonalelvagas() {
+        if (gameOver) return;
         if (gamePanel.state == GameState.FONALELVAGAS) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+            int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
+            if (ap >= 2) {
+                decreaseActionPointsForCurrentPlayer();
+                gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
                 JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva! Jelölj ki egy rovart!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }

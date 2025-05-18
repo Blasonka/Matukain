@@ -447,10 +447,19 @@ public class gameLogic implements Serializable {
     public String getPlayerNameByIndex(int index) {
         if (index < 2) {
             System.out.println("Gombász index: " + index);
-            return gombaszok.get(index).getNev();
+            if (index >= 0 && index < gombaszok.size()) {
+                return gombaszok.get(index).getNev();
+            } else {
+                return "N/A";
+            }
         } else {
-            System.out.println("Rovarász index: " + index);
-            return rovaraszok.get(index - 3).getNev();
+            int rovaraszIndex = index - 2;
+            System.out.println("Rovarász index: " + rovaraszIndex);
+            if (rovaraszIndex >= 0 && rovaraszIndex < rovaraszok.size()) {
+                return rovaraszok.get(rovaraszIndex).getNev();
+            } else {
+                return "N/A";
+            }
         }
     }
 
@@ -460,10 +469,57 @@ public class gameLogic implements Serializable {
      * @return a játékos hátralévő akciópontjai
      */
     public int getPlayerActionPointsByIndex(int index) {
+        if (index < 0 || index > 3) {
+            return 0; // or throw exception if you prefer
+        }
         if (index < 2) {
-            return gombaszok.get(index).getHatralevoAkciopont();
+            if (index >= 0 && index < gombaszok.size()) {
+                return gombaszok.get(index).getHatralevoAkciopont();
+            } else {
+                return 0;
+            }
         } else {
-            return rovaraszok.get(index - 3).getHatralevoAkciopont();
+            int rovaraszIndex = index - 2;
+            if (rovaraszIndex >= 0 && rovaraszIndex < rovaraszok.size()) {
+                return rovaraszok.get(rovaraszIndex).getHatralevoAkciopont();
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    /**
+     * Resets the player's action points to the default value (6) by index.
+     * @param playerIndex the index of the player (0-3)
+     */
+    public void resetPlayerActionPoints(int playerIndex) {
+        if (playerIndex < 2) {
+            if (playerIndex >= 0 && playerIndex < gombaszok.size()) {
+                gombaszok.get(playerIndex).setHatralevoAkciopont(6);
+            }
+        } else {
+            int idx = playerIndex - 2;
+            if (idx >= 0 && idx < rovaraszok.size()) {
+                rovaraszok.get(idx).setHatralevoAkciopont(6);
+            }
+        }
+    }
+
+    /**
+     * Sets the player's action points by index.
+     * @param playerIndex the index of the player (0-3)
+     * @param points the number of action points to set
+     */
+    public void setPlayerActionPointsByIndex(int playerIndex, int points) {
+        if (playerIndex < 2) {
+            if (playerIndex >= 0 && playerIndex < gombaszok.size()) {
+                gombaszok.get(playerIndex).setHatralevoAkciopont(points);
+            }
+        } else {
+            int idx = playerIndex - 2;
+            if (idx >= 0 && idx < rovaraszok.size()) {
+                rovaraszok.get(idx).setHatralevoAkciopont(points);
+            }
         }
     }
 
@@ -485,4 +541,3 @@ public class gameLogic implements Serializable {
         csokkentFonalakElete();
     }
 }
-
