@@ -266,7 +266,7 @@ public class TektonComponent {
             RovarEntity rovarEntity = new RovarEntity(ujrovar, gamePanel, gamePanel.mouseHandler);
             rovarEntity.x = centerX;
             rovarEntity.y = centerY;
-            rovarEntity.currentIsland = gamePanel.tileM.islands.indexOf(this);
+            rovarEntity.setCurrentIsland(gamePanel.tileM.islands.indexOf(this)); // Visszaállítva int indexre
 
             gamePanel.rovarEntities.add(rovarEntity);
             entity = rovarEntity;

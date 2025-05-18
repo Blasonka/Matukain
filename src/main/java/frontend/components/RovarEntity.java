@@ -22,58 +22,19 @@ import static frontend.components.GamePanel.state;
  *
  * @note Grafikus részhez készült
  *
- * @version 1.0
- * @date 2025-05-10
+ * @version 1.1
+ * @date 2025-05-18
  */
 public class RovarEntity extends Entity implements Runnable {
-    /**
-     * @var Rovar rovar
-     * @brief A backend-en található rovar, aminek ez a megfelelője
-     */
     Rovar rovar;
-    /**
-     * @var GamePanel gp
-     * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
-     */
     GamePanel gp;
-    /**
-     * @var MouseHandler mouseHandler
-     * @brief A MouseHandler objektum, amely az egér események kezeléséért felelős
-     */
     MouseHandler mouseHandler;
-    /**
-     * @var BufferedImage playerImage
-     * @brief A rovar grafikus megjelenését tároló BufferedImage objektum
-     */
     BufferedImage playerImage;
-    /**
-     * @var Thread animThread
-     * @brief A rovar animációs szálát tároló Thread objektum
-     */
     Thread animThread;
-    /**
-     * @var int currentIsland
-     * @brief Az aktuális sziget indexét tároló változó
-     */
-    int currentIsland = 0;
-    /**
-     * @var List<int[]> currentPath
-     * @brief Az aktuális útvonalat tároló lista
-     */
+    int currentIsland = 0; // Visszaállítva int-re
     private List<int[]> currentPath;
-    /**
-     * @var int currentPathIndex
-     * @brief Az aktuális útvonal indexét tároló változó
-     */
     private int currentPathIndex = 0;
 
-    /**
-     * RovarEntity osztály konstruktora
-     * @param r Rovar
-     * @param gp GamePanel
-     * @param mouseHandler Egér
-     * @brief Inicializálja a RovarEntity objektumot
-     */
     public RovarEntity(Rovar r, GamePanel gp, MouseHandler mouseHandler) {
         this.rovar = r;
         this.gp = gp;
@@ -82,9 +43,6 @@ public class RovarEntity extends Entity implements Runnable {
         speed = 5;
     }
 
-    /**
-     * @brief elindítja az animációs szálat
-     */
     public void startAnimThread() {
         if (animThread == null || !animThread.isAlive()) {
             animThread = new Thread(this);
@@ -92,13 +50,6 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
-    /**
-     * A rovar entitás mozgását vezérlő szál.
-     *
-     * @details
-     * Ha van előre kiszámolt útvonal, akkor azt követi.
-     * Ha nincs, akkor közvetlenül mozog a kijelölt célpontra.
-     */
     @Override
     public void run() {
         while (animThread != null) {
@@ -116,9 +67,6 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
-    /**
-     * A rovar mozgását végzi az előre kiszámolt útvonal mentén.
-     */
     private void followPath() {
         if (currentPathIndex < currentPath.size()) {
             int[] targetPoint = currentPath.get(currentPathIndex);
@@ -146,13 +94,6 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
-    /**
-     * A rovar közvetlen mozgatása a célpontra, ha nincs útvonal.
-     *
-     * @details
-     * Csak akkor történik meg, ha a jelenlegi sziget megegyezik a cél szigettel,
-     * vagy azok szomszédosak.
-     */
     private void moveDirectlyToTarget() {
         if (state != GameState.MOZGATAS) return;
         if (currentIsland == mouseHandler.selectedIsland ||
@@ -166,16 +107,11 @@ public class RovarEntity extends Entity implements Runnable {
                 y += Math.min(speed, mouseHandler.coordinate.getY() - y);
             } else if (y > mouseHandler.coordinate.getY()) {
                 y -= Math.min(speed, y - mouseHandler.coordinate.getY());
-            } currentIsland = mouseHandler.selectedIsland;
+            }
+            currentIsland = mouseHandler.selectedIsland;
         }
     }
 
-    /**
-     * Frissíti a rovar entitás állapotát.
-     *
-     * @details
-     * Ellenőrzi, hogy a rovar mozgása szükséges-e, és ha igen, akkor végrehajtja azt.
-     */
     public void update() {
         if (state != GameState.MOZGATAS) return;
         if (mouseHandler.clicked && (mouseHandler.coordinate.getX() != x || mouseHandler.coordinate.getY() != y)) {
@@ -196,21 +132,10 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
-    /**
-     * Kirajzolja a rovar entitást a megadott Graphics2D objektumra.
-     *
-     * @param g a Graphics2D objektum, amire rajzolni kell
-     */
     public void draw(Graphics2D g) {
         g.drawImage(playerImage, x, y, gp.tileSize, gp.tileSize, null);
     }
 
-    /**
-     * Betölti a rovar entitás grafikus megjelenését.
-     *
-     * @details
-     * A kép betöltése a rovar entitás aktuális állapotához tartozik.
-     */
     public void getPlayerImage() {
         try {
             playerImage = ImageIO.read(getClass().getResourceAsStream("/rovar.png"));
@@ -219,11 +144,16 @@ public class RovarEntity extends Entity implements Runnable {
         }
     }
 
-    /**
-     * A rovar által végzett műveletek meghívásához
-     * @return entitás backend-oldali megfelelője
-     */
     public Rovar getRovar() {
         return rovar;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setCurrentIsland(int islandIndex) {
+        this.currentIsland = islandIndex;
     }
 }
