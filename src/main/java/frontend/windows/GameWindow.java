@@ -72,12 +72,7 @@ public class GameWindow {
         muteButton.setContentAreaFilled(false);
         muteButton.setFocusPainted(false);
         muteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        // Set muteButton position to bottom left
-        int muteButtonWidth = 50;
-        int muteButtonHeight = 50;
-        int muteButtonX = 20; // 20px from left
-        int muteButtonY = frame.getHeight() - muteButtonHeight - 20; // 20px from bottom
-        muteButton.setBounds(muteButtonX, muteButtonY, muteButtonWidth, muteButtonHeight);
+        muteButton.setBounds(frame.getWidth() - 70, 10, 50, 50);
 
         muteButton.addActionListener(e -> {
             if (musicClip != null) {
@@ -85,11 +80,7 @@ public class GameWindow {
                     musicClip.stop();
                     muteButton.setIcon(new ImageIcon(GameWindow.class.getResource("/icons/mute.png")));
                 } else {
-                    // If the clip has reached the end, reset to the beginning
-                    if (musicClip.getFramePosition() == musicClip.getFrameLength()) {
-                        musicClip.setFramePosition(0);
-                    }
-                    musicClip.loop(Clip.LOOP_CONTINUOUSLY); // Ensure looping
+                    musicClip.start();
                     muteButton.setIcon(new ImageIcon(GameWindow.class.getResource("/icons/sound.png")));
                 }
             }
@@ -112,4 +103,3 @@ public class GameWindow {
         return gamePanel;
     }
 }
-

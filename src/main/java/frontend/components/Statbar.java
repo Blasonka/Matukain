@@ -3,8 +3,6 @@ package frontend.components;
 import javax.swing.*;
 import java.awt.*;
 
-import static frontend.Main.loadCustomFont;
-
 /**
  * Statbar osztály
  *
@@ -54,7 +52,7 @@ public class Statbar extends JPanel {
         actionPointsLabel = new JLabel("Action Points: 0", SwingConstants.CENTER);
 
         // Set font and color for labels
-        Font labelFont = loadCustomFont("src/main/resources/fonts/Minecraft.ttf", 18f);
+        Font labelFont = new Font("SansSerif", Font.BOLD, 18);
         roundLabel.setFont(labelFont);
         playerRoundLabel.setFont(labelFont);
         actionPointsLabel.setFont(labelFont);
