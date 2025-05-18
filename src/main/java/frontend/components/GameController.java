@@ -16,10 +16,6 @@ public class GameController {
     private boolean selectingRovar = false; // Nyomon követi, hogy rovart vagy fonalat kell kijelölni
     private boolean selectingIsland = false; // Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
-
-    private boolean selectingGomba = false;
-    private GombatestEntity selectedGomba = null;
-
     private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
     private boolean initialPlacementPhase = true;
     private int currentRound = 1;
@@ -302,7 +298,7 @@ public class GameController {
             backend.gomba.Gomba ujGomba = gamePanel.logic.getGombasz(0).addGomba(new backend.gomba.Gomba(gamePanel.logic.getGombaID() + 1));
             ujGomba.addGombatest(new backend.gomba.Gombatest(gamePanel.logic.getGombatestID(), island.tekton));
 
-            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, 0, gamePanel.tileM.islands.indexOf(island));
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, 0);
             gombaEntity.x = centerX;
             gombaEntity.y = centerY - 48;
             gombaEntity.state = 0;
@@ -315,81 +311,32 @@ public class GameController {
             gamePanel.state = GameState.DEFAULT;
             gamePanel.repaint();
             checkAndAdvanceTurn();
-        } else if (GamePanel.state == GameState.SPORANOVESZTES) {
-            if (selectingGomba) {
-                GombatestEntity gomba = null;
-                for (GombatestEntity g : gamePanel.gombatestEntities) {
-                    if (g.island == selectedIsland && g.getOwnerIndex() == currentPlayerIndex) {
-                        gomba = g;
-                        break;
-                    }
-                } if (gomba != null) {
-                    selectedGomba = gomba;
-                    selectingGomba = false;
-                    selectingIsland = true;
-                    JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy szigetet a sporaszorashoz!");
-                } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs sajat gombad!");
-                }
-            } else if (selectingIsland && selectedGomba != null) {
-                TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
-                RovarEntity rovarIsland = null;
-                for (RovarEntity rovar : gamePanel.rovarEntities) {
-                    if (rovar.currentIsland == selectedIsland && rovar.getOwnerIndex() + 2 == currentPlayerIndex) {
-                        rovarIsland = rovar;
-                        break;
-                    }
-                }
-                boolean foreignMushroomPresent = false;
-                for (GombatestEntity gomba : gamePanel.gombatestEntities) {
-                    int gombaIslandIndex = gamePanel.tileM.islands.indexOf(island);
-                    int gombaX = gomba.x / gamePanel.tileSize - island.getXOffset();
-                    int gombaY = gomba.y / gamePanel.tileSize - island.getYOffset();
-                    if (gombaX >= 0 && gombaX < island.getGridWidth() &&
-                            gombaY >= 0 && gombaY < island.getGridHeight() &&
-                            gomba.getOwnerIndex() != currentPlayerIndex) {
-                        foreignMushroomPresent = true;
-                        break;
-                    }
-                }
-                if (foreignMushroomPresent) {
-                    JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádat tudod kiválasztani ezen a szigeten!");
-                    selectingGomba = false;
-                    selectingIsland = false;
-                    selectedGomba = null;
-                    gamePanel.state = GameState.DEFAULT;
-                    return;
-                }
-                selectingGomba = false;
-                selectingIsland = false;
-                selectedGomba = null;
-                island.handleTileClick(mouseX, mouseY, rovarIsland);
-                decreaseActionPointsForCurrentPlayer();
-                gamePanel.state = GameState.DEFAULT;
-                JOptionPane.showMessageDialog(gamePanel, "Spora sikeresen elhelyezve!");
-                checkAndAdvanceTurn();
-            }
-        } else if (GamePanel.state == GameState.SPORAEVES) {
-            if (selectingIsland) {
-                TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
-                RovarEntity rovarIsland = null;
-                for (RovarEntity rovar : gamePanel.rovarEntities) {
-                    if (rovar.currentIsland == selectedIsland && rovar.getOwnerIndex() + 2 == currentPlayerIndex) {
-                        rovarIsland = rovar;
-                        break;
-                    }
-                } if (rovarIsland == null) {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a tektonon nincs rovarod!");
-                    selectingIsland = false;
-                    GamePanel.state = GameState.DEFAULT;
-                } else {
-                    selectingIsland = false;
-                    island.handleTileClick(mouseX, mouseY, rovarIsland);
-                    decreaseActionPointsForCurrentPlayer();
-                    JOptionPane.showMessageDialog(gamePanel, "Spora sikeresen elfogyasztva!");
-                    checkAndAdvanceTurn();
+        } else {
+            TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
+            RovarEntity rovarIsland = null;
+            for (RovarEntity rovar : gamePanel.rovarEntities) {
+                if (rovar.currentIsland == selectedIsland && rovar.getOwnerIndex() + 2 == currentPlayerIndex) {
+                    rovarIsland = rovar;
+                    break;
                 }
             }
+            boolean foreignMushroomPresent = false;
+            for (GombatestEntity gomba : gamePanel.gombatestEntities) {
+                int gombaIslandIndex = gamePanel.tileM.islands.indexOf(island);
+                int gombaX = gomba.x / gamePanel.tileSize - island.getXOffset();
+                int gombaY = gomba.y / gamePanel.tileSize - island.getYOffset();
+                if (gombaX >= 0 && gombaX < island.getGridWidth() &&
+                        gombaY >= 0 && gombaY < island.getGridHeight() &&
+                        gomba.getOwnerIndex() != currentPlayerIndex) {
+                    foreignMushroomPresent = true;
+                    break;
+                }
+            }
+            if (foreignMushroomPresent) {
+                JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádat tudod kiválasztani ezen a szigeten!");
+                return;
+            }
+            island.handleTileClick(mouseX, mouseY, rovarIsland);
         }
 
         gamePanel.repaint();
@@ -452,8 +399,8 @@ public class GameController {
         if (gamePanel.state == GameState.SPORANOVESZTES) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                JOptionPane.showMessageDialog(gamePanel, "Valassz ki egy gombat a sporanoveszteshez!");
-                selectingGomba = true;
+                JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
@@ -532,8 +479,9 @@ public class GameController {
         if (gamePanel.state == GameState.SPORAEVES) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                JOptionPane.showMessageDialog(gamePanel, "Valassz ki egy szigetet!");
-                selectingIsland = true;
+                gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
+                JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
+                checkAndAdvanceTurn();
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
