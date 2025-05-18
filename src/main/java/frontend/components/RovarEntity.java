@@ -34,6 +34,8 @@ public class RovarEntity extends Entity implements Runnable {
     int currentIsland = 0; // Visszaállítva int-re
     private List<int[]> currentPath;
     private int currentPathIndex = 0;
+    private int finalTargetX = -1;
+    private int finalTargetY = -1;
     /**
      * A rovar tulajdonos rovarász indexe (0 = első, 1 = második)
      */
@@ -129,14 +131,35 @@ public class RovarEntity extends Entity implements Runnable {
 
             if (x == targetX && y == targetY) {
                 currentPathIndex++;
-                if (currentPathIndex == currentPath.size()) {
-                    x = targetX;
-                    y = targetY;
-                    currentPath = null;
-                    currentPathIndex = 0;
-                    animThread = null;
-                }
             }
+        } else if (finalTargetX != -1 && finalTargetY != -1 && (x != finalTargetX || y != finalTargetY)) {
+            // Move towards the final target (island center) after path
+            if (x < finalTargetX) {
+                x += Math.min(speed, finalTargetX - x);
+                moved = true;
+            } else if (x > finalTargetX) {
+                x -= Math.min(speed, x - finalTargetX);
+                moved = true;
+            }
+            if (y < finalTargetY) {
+                y += Math.min(speed, finalTargetY - y);
+                moved = true;
+            } else if (y > finalTargetY) {
+                y -= Math.min(speed, y - finalTargetY);
+                moved = true;
+            }
+            if (x == finalTargetX && y == finalTargetY) {
+                // Arrived at the center, stop animation
+                currentPath = null;
+                currentPathIndex = 0;
+                finalTargetX = -1;
+                finalTargetY = -1;
+                animThread = null;
+            }
+        } else if (currentPath != null && currentPath.isEmpty()) {
+            // Defensive: if path is empty but not null, clear it
+            currentPath = null;
+            currentPathIndex = 0;
         }
         if (moved) {
             gp.repaint(); // Minden mozgás után frissítjük a képernyőt
@@ -233,7 +256,20 @@ public class RovarEntity extends Entity implements Runnable {
     public void setPath(List<int[]> path) {
         this.currentPath = path;
         this.currentPathIndex = 0;
-        // Ne állítsuk át az x, y pozíciót, mert az ugrást okozhat
-        // A rovar animációja a jelenlegi pozícióból induljon
+        // Set final target to the center of the destination island
+        if (gp != null && gp.mouseHandler != null) {
+            int islandIdx = gp.mouseHandler.selectedIsland;
+            if (islandIdx >= 0 && islandIdx < gp.tileM.islands.size()) {
+                TektonComponent targetIsland = gp.tileM.islands.get(islandIdx);
+                this.finalTargetX = (targetIsland.getXOffset() + targetIsland.getGridWidth() / 2) * gp.tileSize + gp.tileSize / 2 - 24;
+                this.finalTargetY = (targetIsland.getYOffset() + targetIsland.getGridHeight() / 2) * gp.tileSize + gp.tileSize / 2 - 24;
+            } else {
+                this.finalTargetX = -1;
+                this.finalTargetY = -1;
+            }
+        } else {
+            this.finalTargetX = -1;
+            this.finalTargetY = -1;
+        }
     }
 }
