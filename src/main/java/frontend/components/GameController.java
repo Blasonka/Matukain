@@ -54,6 +54,39 @@ public class GameController {
                 if (secondIsland == gamePanel.getFirstSelectedIsland()) {
                     JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
                 } else {
+                    // --- Block fonalnövesztés if there is a foreign mushroom on either island ---
+                    TektonComponent firstIsland = gamePanel.getFirstSelectedIsland();
+                    boolean foreignMushroomPresent = false;
+                    for (GombatestEntity gomba : gamePanel.gombatestEntities) {
+                        int gombaIslandIndex = gamePanel.tileM.islands.indexOf(firstIsland);
+                        int gombaX = gomba.x / gamePanel.tileSize - firstIsland.getXOffset();
+                        int gombaY = gomba.y / gamePanel.tileSize - firstIsland.getYOffset();
+                        if (gombaX >= 0 && gombaX < firstIsland.getGridWidth() &&
+                                gombaY >= 0 && gombaY < firstIsland.getGridHeight() &&
+                                gomba.getOwnerIndex() != currentPlayerIndex) {
+                            foreignMushroomPresent = true;
+                            break;
+                        }
+                    }
+                    for (GombatestEntity gomba : gamePanel.gombatestEntities) {
+                        int gombaIslandIndex = gamePanel.tileM.islands.indexOf(secondIsland);
+                        int gombaX = gomba.x / gamePanel.tileSize - secondIsland.getXOffset();
+                        int gombaY = gomba.y / gamePanel.tileSize - secondIsland.getYOffset();
+                        if (gombaX >= 0 && gombaX < secondIsland.getGridWidth() &&
+                                gombaY >= 0 && gombaY < secondIsland.getGridHeight() &&
+                                gomba.getOwnerIndex() != currentPlayerIndex) {
+                            foreignMushroomPresent = true;
+                            break;
+                        }
+                    }
+                    if (foreignMushroomPresent) {
+                        JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádról indíthatsz fonalat!");
+                        gamePanel.clearSelectedIslands();
+                        gamePanel.state = GameState.DEFAULT;
+                        return;
+                    }
+                    // --- End block ---
+
                     gamePanel.setSecondSelectedIsland(secondIsland);
                     handleFonalnoveszt();
                 }
@@ -177,6 +210,23 @@ public class GameController {
                     rovarIsland = rovar;
                     break;
                 }
+            }
+            // Block interaction if there is a mushroom on this island not owned by the current player
+            boolean foreignMushroomPresent = false;
+            for (GombatestEntity gomba : gamePanel.gombatestEntities) {
+                int gombaIslandIndex = gamePanel.tileM.islands.indexOf(island);
+                int gombaX = gomba.x / gamePanel.tileSize - island.getXOffset();
+                int gombaY = gomba.y / gamePanel.tileSize - island.getYOffset();
+                if (gombaX >= 0 && gombaX < island.getGridWidth() &&
+                        gombaY >= 0 && gombaY < island.getGridHeight() &&
+                        gomba.getOwnerIndex() != currentPlayerIndex) {
+                    foreignMushroomPresent = true;
+                    break;
+                }
+            }
+            if (foreignMushroomPresent) {
+                JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádat tudod kiválasztani ezen a szigeten!");
+                return;
             }
             island.handleTileClick(mouseX, mouseY, rovarIsland);
         }
