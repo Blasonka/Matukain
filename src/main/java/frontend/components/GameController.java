@@ -12,6 +12,7 @@ public class GameController {
     private boolean selectingRovar = false; // Nyomon követi, hogy rovart vagy fonalat kell kijelölni
     private boolean selectingIsland = false; // Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
+    private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
 
     public GameController(gameLogic logic, GamePanel gamePanel) {
         this.logic = logic;
@@ -149,6 +150,8 @@ public class GameController {
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
             }
+        } else if (gamePanel.state == GameState.GOMBANOVESZTES) {
+            handleGombanoveszt();
         } else {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
             RovarEntity rovarIsland = null;
@@ -179,7 +182,6 @@ public class GameController {
     public void handleSporanoveszt() {
         if (gamePanel.state == GameState.SPORANOVESZTES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
             } else {
@@ -191,21 +193,107 @@ public class GameController {
     }
 
     public void handleGombanoveszt() {
-        if (gamePanel.state == GameState.GOMBANOVESZTES) {
-            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+         if (gamePanel.state == GameState.GOMBANOVESZTES) {
+             JOptionPane.showMessageDialog(gamePanel, "Válassz ki egy szigetet");
+            int selectedIsland = gamePanel.mouseHandler.selectedIsland;
+            TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
 
-                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Gombanövesztés mód aktiválva!");
-            } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            // Ellenőrizzük, hogy van-e már gomba a szigeten
+            boolean hasMushroom = false;
+            for (GombatestEntity gomba : gamePanel.gombatestEntities) {
+                int gombaIslandIndex = gamePanel.tileM.islands.indexOf(island);
+                int gombaX = gomba.x / gamePanel.tileSize - island.getXOffset();
+                int gombaY = gomba.y / gamePanel.tileSize - island.getYOffset();
+                if (gombaX >= 0 && gombaX < island.getGridWidth() &&
+                        gombaY >= 0 && gombaY < island.getGridHeight() &&
+                        gombaIslandIndex == selectedIsland) {
+                    hasMushroom = true;
+                    break;
+                }
             }
+
+            if (hasMushroom) {
+                JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten már van gomba!");
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+
+            // Ellenőrizzük, hogy van-e 3 spóra a szigeten
+            int sporeCount = 0;
+            try {
+                java.lang.reflect.Field sporeCountField = TektonComponent.class.getDeclaredField("sporeCount");
+                sporeCountField.setAccessible(true);
+                sporeCount = (int) sporeCountField.get(island);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a spórák ellenőrzése közben!");
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+
+            if (sporeCount < 3) {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég spóra a szigeten! Legalább 3 spóra szükséges.");
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+
+            // Spórák eltávolítása
+            try {
+                java.lang.reflect.Field sporeCountField = TektonComponent.class.getDeclaredField("sporeCount");
+                sporeCountField.setAccessible(true);
+                sporeCountField.set(island, 0);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a spórák eltávolítása közben!");
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+
+            // Sziget csempéinek visszaállítása alapállapotra (0 spóra)
+            try {
+                java.io.InputStream inputStream = getClass().getResourceAsStream("/textures/tekton1.png");
+                if (inputStream == null) {
+                    inputStream = getClass().getResourceAsStream("/textures/tekton2.png");
+                }
+                if (inputStream != null) {
+                    java.awt.image.BufferedImage islandImage = javax.imageio.ImageIO.read(inputStream);
+                    for (Tile tile : island.getTiles()) {
+                        if (tile != null) {
+                            tile.image = islandImage;
+                        }
+                    }
+                } else {
+                    System.err.println("Failed to load default tekton image for resetting spores!");
+                }
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a sziget visszaállítása közben!");
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+
+            // GombatestEntity létrehozása és elhelyezése
+            int centerX = (island.getXOffset() + island.getGridWidth() / 2) * gamePanel.tileSize;
+            int centerY = (island.getYOffset() + island.getGridHeight() / 2) * gamePanel.tileSize;
+
+            backend.gomba.Gomba ujGomba = gamePanel.logic.getGombasz(0).addGomba(new backend.gomba.Gomba(gamePanel.logic.getGombaID() + 1));
+            ujGomba.addGombatest(new backend.gomba.Gombatest(gamePanel.logic.getGombatestID(), island.tekton));
+
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, 0);
+            gombaEntity.x = centerX;
+            gombaEntity.y = centerY - 48; // Az eredeti elhelyezés szerint -48 a gombák Y pozíciója
+            gombaEntity.state = 0;
+
+            gamePanel.gombatestEntities.add(gombaEntity);
+            JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen növesztve a szigeten!");
+            gamePanel.state = GameState.DEFAULT;
+            gamePanel.repaint();
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
     public void handleFonalnoveszt() {
-
         if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
                 JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
@@ -234,7 +322,6 @@ public class GameController {
     public void handleMozgatas() {
         if (gamePanel.state == GameState.MOZGATAS) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 gamePanel.clearSelections();
                 selectingRovar = true;
@@ -252,7 +339,6 @@ public class GameController {
     public void handleSporaeves() {
         if (gamePanel.state == GameState.SPORAEVES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
             } else {
@@ -266,7 +352,6 @@ public class GameController {
     public void handleFonalelvagas() {
         if (gamePanel.state == GameState.FONALELVAGAS) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 gamePanel.clearSelections();
                 selectingRovar = true;
