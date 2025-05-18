@@ -41,7 +41,7 @@ public class GameController {
             if (currentPlayerIndex < 4) {
                 JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Kezdodhet a jatek!");
+                JOptionPane.showMessageDialog(gamePanel, "Kezdődhet a játék!");
                 initialPlacementPhase = false;
                 currentPlayerIndex = 0;
                 logic.setPlayerActionPointsByIndex(currentPlayerIndex, 6);
@@ -54,11 +54,11 @@ public class GameController {
         } else if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null) {
                 gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
-                JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy masodik szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy második szigetet!");
             } else if (gamePanel.getSecondSelectedIsland() == null) {
                 TektonComponent secondIsland = gamePanel.tileM.islands.get(selectedIsland);
                 if (secondIsland == gamePanel.getFirstSelectedIsland()) {
-                    JOptionPane.showMessageDialog(gamePanel, "Kerlek, valassz ket kulonbozo szigetet!");
+                    JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
                 } else {
                     TektonComponent firstIsland = gamePanel.getFirstSelectedIsland();
                     boolean foreignMushroomPresent = false;
@@ -85,7 +85,7 @@ public class GameController {
                         }
                     }
                     if (foreignMushroomPresent) {
-                        JOptionPane.showMessageDialog(gamePanel, "Csak a sajat gombadrol indithatsz fonalat!");
+                        JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádról indíthatsz fonalat!");
                         gamePanel.clearSelectedIslands();
                         gamePanel.state = GameState.DEFAULT;
                         return;
@@ -106,9 +106,9 @@ public class GameController {
                 if (rovar != null) {
                     gamePanel.setSelectedRovar(rovar);
                     selectingRovar = false;
-                    JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy fonalat az elvagashoz!");
+                    JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy fonalat az elvágáshoz!");
                 } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs sajat rovarod!");
+                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs saját rovarod!");
                 }
             } else if (gamePanel.getSelectedRovar() != null) {
                 int rovarIslandIndex = selectedIsland;
@@ -126,16 +126,16 @@ public class GameController {
                     int threadIsland2 = gamePanel.getSelectedThread()[1];
                     if (threadIsland1 == rovarIslandIndex2 || threadIsland2 == rovarIslandIndex2) {
                         gamePanel.removeThread(threadIsland1, threadIsland2);
-                        JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen elvagva!");
+                        JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen elvágva!");
                         decreaseActionPointsForCurrentPlayer();
                     } else {
-                        JOptionPane.showMessageDialog(gamePanel, "A rovar szigete nem egyezik a fonal egyik vegevel!");
+                        JOptionPane.showMessageDialog(gamePanel, "A rovar szigete nem egyezik a fonal egyik végével!");
                     }
                     gamePanel.clearSelections();
                     gamePanel.state = GameState.DEFAULT;
                     gamePanel.repaint();
                 } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Nincs kijelolheto fonal a kozelben!");
+                    JOptionPane.showMessageDialog(gamePanel, "Nincs kijelölhető fonal a közelben!");
                 }
             }
         } else if (gamePanel.state == GameState.MOZGATAS) {
@@ -151,15 +151,15 @@ public class GameController {
                     selectedRovar = rovar;
                     selectingRovar = false;
                     selectingIsland = true;
-                    JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy szigetet a mozgatashoz!");
+                    JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy szigetet a mozgatáshoz!");
                 } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs sajat rovarod!");
+                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs saját rovarod!");
                 }
             } else if (selectingIsland && selectedRovar != null) {
                 int currentIslandIndex = selectedRovar.currentIsland;
                 int targetIslandIndex = selectedIsland;
                 if (currentIslandIndex == targetIslandIndex) {
-                    JOptionPane.showMessageDialog(gamePanel, "A rovar és a kijelolt sziget ugyanaz!");
+                    JOptionPane.showMessageDialog(gamePanel, "A rovar és a kijelölt sziget ugyanaz!");
                 } else {
                     boolean hasThread = false;
                     for (int[] thread : gamePanel.threads) {
@@ -179,14 +179,14 @@ public class GameController {
                         if (path != null && !path.isEmpty()) {
                             selectedRovar.setPath(path);
                             selectedRovar.setCurrentIsland(targetIslandIndex);
-                            JOptionPane.showMessageDialog(gamePanel, "Rovar mozgas elinditva!");
+                            JOptionPane.showMessageDialog(gamePanel, "Rovar mozgás elindítva!");
                             selectedRovar.startAnimThread();
                             decreaseActionPointsForCurrentPlayer();
                         } else {
-                            JOptionPane.showMessageDialog(gamePanel, "Nem talalhato utvonal a szigetek kozott!");
+                            JOptionPane.showMessageDialog(gamePanel, "Nem található útvonal a szigetek között!");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(gamePanel, "Nincs fonal a rovar szigete és a kijelolt sziget kozott!");
+                        JOptionPane.showMessageDialog(gamePanel, "Nincs fonal a rovar szigete és a kijelölt sziget között!");
                     }
                 }
                 selectedRovar = null;
@@ -199,7 +199,7 @@ public class GameController {
             // Csak a gombász játékosok végezhetnek gombanövesztést
             int gombaszIndex = currentPlayerIndex;
             if (gombaszIndex > 1) {
-                JOptionPane.showMessageDialog(gamePanel, "Csak gombasz jatekos hajthat vegre gombanovesztest!");
+                JOptionPane.showMessageDialog(gamePanel, "Csak gombász játékos hajthat végre gombanövesztést!");
                 gamePanel.state = GameState.DEFAULT;
                 return;
             }
@@ -223,7 +223,7 @@ public class GameController {
             }
 
             if (hasMushroom) {
-                JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten mar van gomba!");
+                JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten már van gomba!");
                 selectedIslandForGombanoveszt = null;
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
@@ -238,7 +238,7 @@ public class GameController {
                 sporeCount = (int) sporeCountField.get(island);
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(gamePanel, "Hiba tortent a sporak ellenorzese kozben!");
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a spórák ellenőrzése közben!");
                 selectedIslandForGombanoveszt = null;
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
@@ -246,7 +246,7 @@ public class GameController {
             }
 
             if (sporeCount < 3) {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg spora a szigeten! Legalább 3 spora szukseges.");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég spóra a szigeten! Legalább 3 spóra szükséges.");
                 selectedIslandForGombanoveszt = null;
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
@@ -260,7 +260,7 @@ public class GameController {
                 sporeCountField.set(island, 0);
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(gamePanel, "Hiba tortent a sporak eltavolitasa kozben!");
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a spórák eltávolítása közben!");
                 selectedIslandForGombanoveszt = null;
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
@@ -286,7 +286,7 @@ public class GameController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(gamePanel, "Hiba tortent a sziget visszaallitasa kozben!");
+                JOptionPane.showMessageDialog(gamePanel, "Hiba történt a sziget visszaállítása közben!");
                 selectedIslandForGombanoveszt = null;
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
@@ -308,7 +308,7 @@ public class GameController {
 
             gamePanel.gombatestEntities.add(gombaEntity);
             decreaseActionPointsForCurrentPlayer();
-            JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen novesztve a szigeten!");
+            JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen növesztve a szigeten!");
             selectedIslandForGombanoveszt = null;
             gamePanel.state = GameState.DEFAULT;
             gamePanel.repaint();
@@ -335,7 +335,7 @@ public class GameController {
                 }
             }
             if (foreignMushroomPresent) {
-                JOptionPane.showMessageDialog(gamePanel, "Csak a sajat gombadat tudod kivalasztani ezen a szigeten!");
+                JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádat tudod kiválasztani ezen a szigeten!");
                 return;
             }
             island.handleTileClick(mouseX, mouseY, rovarIsland);
@@ -377,7 +377,7 @@ public class GameController {
             // --- vége ---
             if (currentRound > maxRounds) {
                 gameOver = true;
-                showGameResults();
+                JOptionPane.showMessageDialog(gamePanel, "A játék véget ért!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
         }
@@ -393,7 +393,7 @@ public class GameController {
     public void checkAndAdvanceTurn() {
         int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
         if (ap <= 0) {
-            JOptionPane.showMessageDialog(gamePanel, "Elfogytak az akciopontjaid! Kovetkezo jatekos jon.");
+            JOptionPane.showMessageDialog(gamePanel, "Elfogytak az akciópontjaid! Következő játékos jön.");
             endPlayerTurn();
         } else {
             gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap);
@@ -413,13 +413,13 @@ public class GameController {
         if (gamePanel.state == GameState.SPORANOVESZTES) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                JOptionPane.showMessageDialog(gamePanel, "Sporanovesztes mod aktivalva!");
+                JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
                 checkAndAdvanceTurn();
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
@@ -429,13 +429,13 @@ public class GameController {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
                 // Csak üzenetet jelenítünk meg, a szigetkijelölés a handleClick-ben történik
-                JOptionPane.showMessageDialog(gamePanel, "Valassz ki egy szigetet a gombanoveszteshez!");
+                JOptionPane.showMessageDialog(gamePanel, "Válassz ki egy szigetet a gombanövesztéshez!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
                 gamePanel.state = GameState.DEFAULT;
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
@@ -443,9 +443,9 @@ public class GameController {
         if (gameOver) return;
         if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
-                JOptionPane.showMessageDialog(gamePanel, "Kerlek, jelolj ki ket szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
             } else if (gamePanel.getFirstSelectedIsland() == gamePanel.getSecondSelectedIsland()) {
-                JOptionPane.showMessageDialog(gamePanel, "Kerlek, valassz ket kulonbozo szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
             } else {
                 Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
                 if (g != null) {
@@ -459,12 +459,12 @@ public class GameController {
                 decreaseActionPointsForCurrentPlayer();
                 gamePanel.state = GameState.DEFAULT;
                 gamePanel.repaint();
-                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen letrehozva!");
+                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
                 gamePanel.clearSelectedIslands();
                 checkAndAdvanceTurn();
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
@@ -478,13 +478,13 @@ public class GameController {
                 selectingRovar = true;
                 selectingIsland = false;
                 selectedRovar = null;
-                JOptionPane.showMessageDialog(gamePanel, "Mozgatas mod aktivalva! Jelolj ki egy rovart!");
+                JOptionPane.showMessageDialog(gamePanel, "Mozgatás mód aktiválva! Jelölj ki egy rovart!");
                 checkAndAdvanceTurn();
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
@@ -494,13 +494,13 @@ public class GameController {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
-                JOptionPane.showMessageDialog(gamePanel, "Sporaeves mod aktivalva!");
+                JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
                 checkAndAdvanceTurn();
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 
@@ -512,45 +512,13 @@ public class GameController {
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
-                JOptionPane.showMessageDialog(gamePanel, "Fonalelvagas mod aktivalva! Jelolj ki egy rovart!");
+                JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva! Jelölj ki egy rovart!");
                 checkAndAdvanceTurn();
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
-    }
-
-    public void showGameResults() {
-        // Eredmények összegyűjtése
-        java.util.List<backend.felhasznalo.Felhasznalo> players = new java.util.ArrayList<>();
-        players.addAll(logic.getGombaszok());
-        players.addAll(logic.getRovaraszok());
-        StringBuilder sb = new StringBuilder();
-        int maxPoints = Integer.MIN_VALUE;
-        java.util.List<backend.felhasznalo.Felhasznalo> winners = new java.util.ArrayList<>();
-        sb.append("Jatek vege!\nPontszamok:\n");
-        for (backend.felhasznalo.Felhasznalo p : players) {
-            sb.append(p.getNev()).append(": ").append(p.getPontokSzama()).append(" pont\n");
-            if (p.getPontokSzama() > maxPoints) {
-                maxPoints = p.getPontokSzama();
-                winners.clear();
-                winners.add(p);
-            } else if (p.getPontokSzama() == maxPoints) {
-                winners.add(p);
-            }
-        }
-        if (winners.size() == 1) {
-            sb.append("\nGyoztes: ").append(winners.get(0).getNev()).append("!");
-        } else {
-            sb.append("\nDontetlen a kovetkezo jatekosok kozott: ");
-            for (int i = 0; i < winners.size(); i++) {
-                sb.append(winners.get(i).getNev());
-                if (i < winners.size() - 1) sb.append(", ");
-            }
-            sb.append("!");
-        }
-        JOptionPane.showMessageDialog(gamePanel, sb.toString(), "Jatek vege", JOptionPane.INFORMATION_MESSAGE);
     }
 }
