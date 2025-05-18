@@ -36,13 +36,11 @@ public class GameController {
                 //     rovar.startAnimThread();
                 // }
 
+                gamePanel.updateActionPanelsForCurrentPlayer(currentPlayerIndex);
                 Statbar statbar = gamePanel.getStatbar();
                 statbar.updateRound(logic.getKorszamlalo() + 1);
-                statbar.updatePlayerRound(currentPlayerIndex);
-                statbar.updateActionPoints(5);
-
-                gamePanel.getGombaszPanel().setVisible(true);
-                gamePanel.getRovaraszPanel().setVisible(true);
+                statbar.updatePlayerRound(logic.getPlayerNameByIndex(currentPlayerIndex));
+                statbar.updateCurrentPlayerActionPoints(logic.getPlayerActionPointsByIndex(currentPlayerIndex));
             }
         } else if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null) {
@@ -371,4 +369,3 @@ public class GameController {
         }
     }
 }
-

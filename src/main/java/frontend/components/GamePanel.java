@@ -218,6 +218,19 @@ public class GamePanel extends JPanel implements Runnable {
         threads.add(new int[]{island1Index, island2Index});
     }
 
+    /**
+     * Frissíti az akciópanelek láthatóságát az aktuális játékos alapján
+     */
+    public void updateActionPanelsForCurrentPlayer(int currentPlayerIndex) {
+        if (currentPlayerIndex < 2) {
+            gombaszPanel.setVisible(true);
+            rovaraszPanel.setVisible(false);
+        } else {
+            gombaszPanel.setVisible(false);
+            rovaraszPanel.setVisible(true);
+        }
+    }
+
     @Override
     public void run() {
         while (gameThread != null) {
