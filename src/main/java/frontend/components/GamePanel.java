@@ -66,6 +66,8 @@ public class GamePanel extends JPanel implements Runnable {
                 super.paintComponent(g);
                 setBackground(Color.BLUE);
                 Graphics2D g2 = (Graphics2D) g;
+                // Fonalak rajzolása a threads listából
+                drawAllThreads(g2);
                 tileM.draw(g2);
                 for (GombatestEntity gomba : gombatestEntities) {
                     gomba.draw(g2);
@@ -73,8 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
                 for (RovarEntity rovar : rovarEntities) {
                     rovar.draw(g2);
                 }
-                // Fonalak rajzolása a threads listából
-                drawAllThreads(g2);
+
             }
         };
         gameArea.setPreferredSize(new Dimension(screenWidth - 150, screenHeight - 50)); // 150px a paneleknek
