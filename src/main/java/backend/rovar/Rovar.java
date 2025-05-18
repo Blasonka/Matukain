@@ -72,15 +72,32 @@ public class Rovar {
     private int ID;
 
     /**
+     * Rovar tulajdonosának indexe.
+     * @var int ownerIndex
+     * @brief A rovar tulajdonosának indexe.
+     */
+    private int ownerIndex;
+
+    /**
      * Default constructor
      * @brief Inicializálja a kezdő tektont, valamint alapértelmezett értéket ad a telitettsegnek és az elfogyasztottSporaknak.
      * @param tekton a kezdő tekton.
      */
-    public Rovar(Tekton tekton, int ID) {
+    public Rovar(Tekton tekton, int ID, int ownerIndex) {
         this.tekton = tekton;
         this.telitettseg = 3;
         this.elfogyasztottSporak = new ArrayList<>();
         this.ID = ID;
+        this.ownerIndex = ownerIndex;
+    }
+
+    /**
+     * Default constructor for compatibility
+     * @brief Inicializálja a kezdő tektont, valamint alapértelmezett értéket ad a telitettsegnek és az elfogyasztottSporaknak.
+     * @param tekton a kezdő tekton.
+     */
+    public Rovar(Tekton tekton, int ID) {
+        this(tekton, ID, 0);
     }
 
     /**
@@ -238,5 +255,13 @@ public class Rovar {
      */
     public boolean isVaghate() {
         return vaghate;
+    }
+
+    /**
+     * Visszaadja a rovar tulajdonosának indexét
+     * @return a rovar tulajdonosának indexe
+     */
+    public int getOwnerIndex() {
+        return ownerIndex;
     }
 }

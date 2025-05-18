@@ -272,4 +272,16 @@ public class RovarEntity extends Entity implements Runnable {
             this.finalTargetY = -1;
         }
     }
+
+    public int getOwnerIndex() {
+        return ownerIndex;
+    }
+
+    /**
+     * Ellenőrzi, hogy a megadott játékos index a tulajdonos-e.
+     */
+    public boolean isOwner(int playerIndex) {
+        // Rovar ownerIndex: 0/1, playerIndex: 2/3
+        return (playerIndex - 2) == ownerIndex;
+    }
 }

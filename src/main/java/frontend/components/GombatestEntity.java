@@ -108,6 +108,15 @@ public class GombatestEntity extends Entity {
             System.out.println("Error loading image: " + e.getMessage());
         }
     }
+
+    public int getOwnerIndex() {
+        return ownerIndex;
+    }
+
+    /**
+     * Ellenőrzi, hogy a megadott játékos index a tulajdonos-e.
+     */
+    public boolean isOwner(int playerIndex) {
+        return playerIndex == ownerIndex;
+    }
 }
-
-

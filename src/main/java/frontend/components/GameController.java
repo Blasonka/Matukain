@@ -62,7 +62,7 @@ public class GameController {
             if (selectingRovar) {
                 RovarEntity rovar = null;
                 for (RovarEntity r : gamePanel.rovarEntities) {
-                    if (r.currentIsland == selectedIsland) {
+                    if (r.currentIsland == selectedIsland && r.getOwnerIndex() + 2 == currentPlayerIndex) {
                         rovar = r;
                         break;
                     }
@@ -72,7 +72,7 @@ public class GameController {
                     selectingRovar = false; // Most már fonalat kell kijelölni
                     JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy fonalat az elvágáshoz!");
                 } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs rovar!");
+                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs saját rovarod!");
                 }
             } else if (gamePanel.getSelectedRovar() != null) {
                 int rovarIslandIndex = selectedIsland;
@@ -106,7 +106,7 @@ public class GameController {
             if (selectingRovar) {
                 RovarEntity rovar = null;
                 for (RovarEntity r : gamePanel.rovarEntities) {
-                    if (r.currentIsland == selectedIsland) {
+                    if (r.currentIsland == selectedIsland && r.getOwnerIndex() + 2 == currentPlayerIndex) {
                         rovar = r;
                         break;
                     }
@@ -117,7 +117,7 @@ public class GameController {
                     selectingIsland = true;
                     JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy szigetet a mozgatáshoz!");
                 } else {
-                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs rovar!");
+                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs saját rovarod!");
                 }
             } else if (selectingIsland && selectedRovar != null) {
                 int currentIslandIndex = selectedRovar.currentIsland;
@@ -161,12 +161,19 @@ public class GameController {
                 gamePanel.repaint();
             }
         } else if (gamePanel.state == GameState.GOMBANOVESZTES) {
+            // Only allow gomba owner to interact
+            int gombaszIndex = currentPlayerIndex;
+            if (gombaszIndex > 1) {
+                JOptionPane.showMessageDialog(gamePanel, "Csak gombász játékos hajthat végre gombanövesztést!");
+                return;
+            }
             handleGombanoveszt();
         } else {
+            // Only allow gomba/gombatest interaction for owner
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
             RovarEntity rovarIsland = null;
             for (RovarEntity rovar : gamePanel.rovarEntities) {
-                if (rovar.currentIsland == selectedIsland) {
+                if (rovar.currentIsland == selectedIsland && rovar.getOwnerIndex() + 2 == currentPlayerIndex) {
                     rovarIsland = rovar;
                     break;
                 }
