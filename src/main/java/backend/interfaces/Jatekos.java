@@ -60,4 +60,8 @@ public interface Jatekos {
      * @param nev beállítandó név
      */
     void setNev(String nev);
+
+    default void addPontokSzama(int i){
+        this.setPontokSzama(this.getPontokSzama() + i);
+    }
 }

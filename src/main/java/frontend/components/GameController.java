@@ -1,5 +1,6 @@
 package frontend.components;
 
+import backend.interfaces.Jatekos;
 import backend.jateklogika.gameLogic;
 import backend.tekton.Tekton;
 
@@ -408,7 +409,7 @@ public class GameController {
             // --- vége ---
             if (currentRound > maxRounds) {
                 gameOver = true;
-                JOptionPane.showMessageDialog(gamePanel, "A jatek veget ert!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                showGameResults();
                 return;
             }
         }
@@ -436,6 +437,7 @@ public class GameController {
         int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
         logic.setPlayerActionPointsByIndex(currentPlayerIndex, ap - 2);
         gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
+        logic.getPlayerByIndex(currentPlayerIndex).addPontokSzama(2);
     }
 
     // Gomb eseménykezelők a GameState alapján
@@ -474,7 +476,7 @@ public class GameController {
         // Ellenőrzés: csak akkor lehessen fonalat növeszteni, ha a két kiválasztott tekton közül legalább az egyiken van már a játékosnak gombatestje vagy fonala
         if (gamePanel.getFirstSelectedIsland() == null) {
             gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
-            JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy masodik szigetet!");
+            JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy masodik szigetet!");
         } else if (gamePanel.getSecondSelectedIsland() == null) {
             TektonComponent secondIsland = gamePanel.tileM.islands.get(selectedIsland);
             if (secondIsland == gamePanel.getFirstSelectedIsland()) {
@@ -540,6 +542,7 @@ public class GameController {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
+                logic.getPlayerByIndex(currentPlayerIndex).addPontokSzama(2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
                 selectingIsland = false;
@@ -575,6 +578,7 @@ public class GameController {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
+                logic.getPlayerByIndex(currentPlayerIndex).addPontokSzama(2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
                 JOptionPane.showMessageDialog(gamePanel, "Fonalelvagas mod aktivalva! Jelolj ki egy rovart!");
@@ -585,5 +589,37 @@ public class GameController {
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
+    }
+
+    public void showGameResults() {
+        // Eredmények összegyűjtése
+        java.util.List<backend.felhasznalo.Felhasznalo> players = new java.util.ArrayList<>();
+        players.addAll(logic.getGombaszok());
+        players.addAll(logic.getRovaraszok());
+        StringBuilder sb = new StringBuilder();
+        int maxPoints = Integer.MIN_VALUE;
+        java.util.List<backend.felhasznalo.Felhasznalo> winners = new java.util.ArrayList<>();
+        sb.append("Jatek vege!\nPontszamok:\n");
+        for (backend.felhasznalo.Felhasznalo p : players) {
+            sb.append(p.getNev()).append(": ").append(p.getPontokSzama()).append(" pont\n");
+            if (p.getPontokSzama() > maxPoints) {
+                maxPoints = p.getPontokSzama();
+                winners.clear();
+                winners.add(p);
+            } else if (p.getPontokSzama() == maxPoints) {
+                winners.add(p);
+            }
+        }
+        if (winners.size() == 1) {
+            sb.append("\nGyoztes: ").append(winners.get(0).getNev()).append("!");
+        } else {
+            sb.append("\nDontetlen a kovetkezo jatekosok kozott: ");
+            for (int i = 0; i < winners.size(); i++) {
+                sb.append(winners.get(i).getNev());
+                if (i < winners.size() - 1) sb.append(", ");
+            }
+            sb.append("!");
+        }
+        JOptionPane.showMessageDialog(gamePanel, sb.toString(), "Jatek vege", JOptionPane.INFORMATION_MESSAGE);
     }
 }

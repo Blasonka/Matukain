@@ -11,6 +11,7 @@ import backend.felhasznalo.Gombasz;
 import backend.felhasznalo.Rovarasz;
 import backend.gomba.Gomba;
 import backend.gomba.Gombatest;
+import backend.interfaces.Jatekos;
 import backend.rovar.Rovar;
 import backend.spora.Spora;
 import backend.tekton.FelszivodosTekton;
@@ -541,7 +542,7 @@ public class gameLogic implements Serializable {
         csokkentFonalakElete();
     }
 
-    public Object getPlayerByIndex(int currentPlayerIndex) {
+    public Jatekos getPlayerByIndex(int currentPlayerIndex) {
         if (currentPlayerIndex < 2) {
             return gombaszok.get(currentPlayerIndex);
         } else {
