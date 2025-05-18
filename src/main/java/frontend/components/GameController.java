@@ -32,9 +32,9 @@ public class GameController {
                 JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Kezdothet a jatek!");
-                for (RovarEntity rovar : gamePanel.rovarEntities) {
-                    rovar.startAnimThread();
-                }
+                // for (RovarEntity rovar : gamePanel.rovarEntities) {
+                //     rovar.startAnimThread();
+                // }
 
                 Statbar statbar = gamePanel.getStatbar();
                 statbar.updateRound(logic.getKorszamlalo() + 1);
@@ -134,12 +134,19 @@ public class GameController {
                         }
                     }
                     if (hasThread) {
+                        TektonComponent currentIslandObj = gamePanel.tileM.islands.get(currentIslandIndex);
                         TektonComponent targetIslandObj = gamePanel.tileM.islands.get(targetIslandIndex);
-                        int targetCenterX = (targetIslandObj.getXOffset() + targetIslandObj.getGridWidth() / 2) * gamePanel.tileSize + gamePanel.tileSize / 2;
-                        int targetCenterY = (targetIslandObj.getYOffset() + targetIslandObj.getGridHeight() / 2) * gamePanel.tileSize + gamePanel.tileSize / 2;
-                        selectedRovar.setPosition(targetCenterX, targetCenterY);
-                        selectedRovar.setCurrentIsland(targetIslandIndex);
-                        JOptionPane.showMessageDialog(gamePanel, "Rovar sikeresen mozgatva!");
+                        // Calculate path using TileManager
+                        java.util.List<int[]> path = gamePanel.tileM.drawPathAvoidingIslands(
+                                gamePanel.getGraphics(), currentIslandObj, targetIslandObj, true);
+                        if (path != null && !path.isEmpty()) {
+                            selectedRovar.setPath(path); // Use path-following instead of direct position set
+                            selectedRovar.setCurrentIsland(targetIslandIndex);
+                            JOptionPane.showMessageDialog(gamePanel, "Rovar mozgás elindítva!");
+                            selectedRovar.startAnimThread(); // Ensure animation thread is started
+                        } else {
+                            JOptionPane.showMessageDialog(gamePanel, "Nem található útvonal a szigetek között!");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(gamePanel, "Nincs fonal a rovar szigete és a kijelölt sziget között!");
                     }
@@ -364,3 +371,4 @@ public class GameController {
         }
     }
 }
+

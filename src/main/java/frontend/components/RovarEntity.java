@@ -78,8 +78,10 @@ public class RovarEntity extends Entity implements Runnable {
         while (animThread != null) {
             if (currentPath != null && !currentPath.isEmpty()) {
                 followPath();
+                System.out.println("Following path");
             } else {
                 moveDirectlyToTarget();
+                System.out.println("Moving directly to target");
             }
 
             try {
@@ -117,6 +119,7 @@ public class RovarEntity extends Entity implements Runnable {
         } else {
             currentPath = null;
             currentPathIndex = 0;
+            animThread = null; // Stop the animation thread when animation is finished
         }
     }
 
@@ -142,6 +145,10 @@ public class RovarEntity extends Entity implements Runnable {
                 y -= Math.min(speed, y - mouseHandler.coordinate.getY());
             }
             currentIsland = mouseHandler.selectedIsland;
+            // Stop the animation thread if the target is reached
+            if (Math.abs(x - mouseHandler.coordinate.getX()) < speed && Math.abs(y - mouseHandler.coordinate.getY()) < speed) {
+                animThread = null;
+            }
         }
     }
 
@@ -213,5 +220,17 @@ public class RovarEntity extends Entity implements Runnable {
 
     public void setCurrentIsland(int islandIndex) {
         this.currentIsland = islandIndex;
+    }
+
+    // Setter for path to allow external movement control
+    public void setPath(List<int[]> path) {
+        this.currentPath = path;
+        this.currentPathIndex = 0;
+        // Set the entity's position to the start of the path for correct animation
+        if (path != null && !path.isEmpty()) {
+            int[] start = path.get(0);
+            this.x = start[0] * gp.tileSize + gp.tileSize / 2 - 24;
+            this.y = start[1] * gp.tileSize + gp.tileSize / 2 - 24;
+        }
     }
 }
