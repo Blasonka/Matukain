@@ -35,6 +35,8 @@ public class Statbar extends JPanel {
      */
     private JLabel actionPointsLabel;
 
+    int akciopont;
+
     /**
      * Statbar osztály konstruktora
      * @brief Inicializálja a statisztikákat megjelenítő panelt
@@ -63,6 +65,7 @@ public class Statbar extends JPanel {
         add(roundLabel);
         add(playerRoundLabel);
         add(actionPointsLabel);
+        akciopont =5;
     }
 
     // Method to update the round number
@@ -90,5 +93,9 @@ public class Statbar extends JPanel {
      */
     public void updateActionPoints(int actionPoints) {
         actionPointsLabel.setText("Action Points: " + actionPoints);
+    }
+
+    public int getActionPoints() {
+        return  akciopont;
     }
 }

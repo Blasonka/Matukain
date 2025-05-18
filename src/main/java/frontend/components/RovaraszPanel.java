@@ -20,6 +20,7 @@ public class RovaraszPanel extends JPanel {
     private JButton mozgatasButton;
     private JButton sporaevesButton;
     private JButton fonalelvagasButton;
+    private GameController controller;
 
     public RovaraszPanel() {
         setLayout(new GridLayout(3, 1, 10, 10)); // 3 sor, 1 oszlop, 10px távolság
@@ -65,5 +66,8 @@ public class RovaraszPanel extends JPanel {
         add(fonalelvagasButton);
 
         setVisible(false); // Kezdetben láthatatlan
+    }
+    public void setController(GameController controller) {
+        this.controller = controller;
     }
 }

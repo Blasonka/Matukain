@@ -20,6 +20,7 @@ public class GombaszPanel extends JPanel {
     private JButton sporanovesztesButton;
     private JButton gombanovesztesButton;
     private JButton fonalnovesztesButton;
+    private GameController controller;
 
     public GombaszPanel() {
         setLayout(new GridLayout(3, 1, 10, 10)); // 3 sor, 1 oszlop, 10px távolság
@@ -37,11 +38,12 @@ public class GombaszPanel extends JPanel {
         gombanovesztesButton.setFont(buttonFont);
         fonalnovesztesButton.setFont(buttonFont);
 
-        // Eseménykezelők hozzáadása (egyelőre csak konzolra íratunk)
+        // Eseménykezelők hozzáadása a GameController metódusaihoz
         sporanovesztesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.SPORANOVESZTES;
+                controller.handleSporanoveszt();
             }
         });
 
@@ -49,6 +51,7 @@ public class GombaszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.GOMBANOVESZTES;
+                controller.handleGombanoveszt();
             }
         });
 
@@ -56,6 +59,7 @@ public class GombaszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.FONALNOVESZTES;
+                controller.handleFonalnoveszt();
             }
         });
 
@@ -65,5 +69,10 @@ public class GombaszPanel extends JPanel {
         add(fonalnovesztesButton);
 
         setVisible(false); // Kezdetben láthatatlan
+    }
+
+    // Setter a GameController-hoz, hogy az eseményeket kezelhesse
+    public void setController(GameController controller) {
+        this.controller = controller;
     }
 }

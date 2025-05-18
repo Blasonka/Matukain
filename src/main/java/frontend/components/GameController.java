@@ -32,7 +32,7 @@ public class GameController {
                 }
                 // Statbar inicializálása
                 Statbar statbar = gamePanel.getStatbar();
-                statbar.updateRound(logic.getKorszamlalo()+1);
+                statbar.updateRound(logic.getKorszamlalo() + 1);
                 statbar.updatePlayerRound(currentPlayerIndex);
                 statbar.updateActionPoints(5);
 
@@ -48,20 +48,106 @@ public class GameController {
                     rovarIsland = rovar;
                     break;
                 }
-            } island.handleTileClick(mouseX, mouseY, rovarIsland);
+            }
+            island.handleTileClick(mouseX, mouseY, rovarIsland);
         }
         gamePanel.repaint();
     }
 
     public void update() {
         if (gamePanel.mouseHandler.clicked) {
-            handleClick(gamePanel.mouseHandler.selectedIsland, 0, 0);
+            handleClick(gamePanel.mouseHandler.selectedIsland, gamePanel.mouseHandler.coordinate.getX(), gamePanel.mouseHandler.coordinate.getY());
         }
         for (RovarEntity rovar : gamePanel.rovarEntities) {
             rovar.update();
         }
         for (GombatestEntity gomba : gamePanel.gombatestEntities) {
             gomba.update();
+        }
+    }
+
+    // Gomb eseménykezelők a GameState alapján
+    public void handleSporanoveszt() {
+        if (gamePanel.state == GameState.SPORANOVESZTES) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+        }
+    }
+
+    public void handleGombanoveszt() {
+        if (gamePanel.state == GameState.GOMBANOVESZTES) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+                gamePanel.state = GameState.GOMBANOVESZTES;
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Gombanövesztés mód aktiválva!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+        }
+    }
+
+    public void handleFonalnoveszt() {
+        if (gamePanel.state == GameState.FONALNOVESZTES) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Fonalnövesztés mód aktiválva! Jelölj ki két szigetet!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+        }
+    }
+
+    public void handleMozgatas() {
+        if (gamePanel.state == GameState.MOZGATAS) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Mozgatás mód aktiválva!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+        }
+    }
+
+    public void handleSporaeves() {
+        if (gamePanel.state == GameState.SPORAEVES) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+        }
+    }
+
+    public void handleFonalelvagas() {
+        if (gamePanel.state == null || gamePanel.state == GameState.FONALELVAGAS) {
+            if (gamePanel.getStatbar().getActionPoints() >= 1) {
+
+                gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
+                JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva!");
+            } else {
+                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
         }
     }
 }

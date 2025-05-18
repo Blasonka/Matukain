@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Statbar statbar;
     private GombaszPanel gombaszPanel;
     private RovaraszPanel rovaraszPanel;
-    private JPanel actionPanelContainer; // Konténer a gombász és rovarász panelek számára
+    private JPanel actionPanelContainer;
     private JPanel gameArea;
 
     public GamePanel(gameLogic logic) {
@@ -41,6 +41,10 @@ public class GamePanel extends JPanel implements Runnable {
         statbar = new Statbar();
         gombaszPanel = new GombaszPanel();
         rovaraszPanel = new RovaraszPanel();
+
+        // Beállítjuk a controllert a panelek számára
+        gombaszPanel.setController(controller);
+        rovaraszPanel.setController(controller);
 
         setLayout(new BorderLayout());
         add(statbar, BorderLayout.NORTH);
@@ -107,6 +111,4 @@ public class GamePanel extends JPanel implements Runnable {
     public RovaraszPanel getRovaraszPanel() {
         return rovaraszPanel;
     }
-
-
 }
