@@ -13,6 +13,7 @@ public class GameController {
     private boolean selectingIsland = false; // Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
     private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
+    private boolean initialPlacementPhase = true;
 
     public GameController(gameLogic logic, GamePanel gamePanel) {
         this.logic = logic;
@@ -22,7 +23,7 @@ public class GameController {
     }
 
     public void handleClick(int selectedIsland, int mouseX, int mouseY) {
-        if (currentPlayerIndex < 4) {
+        if (initialPlacementPhase) {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
             island.placeInitialEntity(currentPlayerIndex, gamePanel);
             currentPlayerIndex++;
@@ -32,10 +33,8 @@ public class GameController {
                 JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Kezdothet a jatek!");
-                // for (RovarEntity rovar : gamePanel.rovarEntities) {
-                //     rovar.startAnimThread();
-                // }
-
+                initialPlacementPhase = false;
+                currentPlayerIndex = 0; // gombasz starts the round
                 gamePanel.updateActionPanelsForCurrentPlayer(currentPlayerIndex);
                 Statbar statbar = gamePanel.getStatbar();
                 statbar.updateRound(logic.getKorszamlalo() + 1);
