@@ -50,15 +50,21 @@ public class GombatestEntity extends Entity {
     int state = 0; // 0 = kis gomba, 1 = kifejlett gomba
 
     /**
+     * A gombatest tulajdonos gombász indexe (0 = első, 1 = második)
+     */
+    private int ownerIndex = 0;
+
+    /**
      * GombatestEntity osztály konstruktora
      * @param g Gomba
      * @param gp GamePanel
      * @param mouseHandler Egér
      */
-    public GombatestEntity(Gomba g, GamePanel gp, MouseHandler mouseHandler) {
+    public GombatestEntity(Gomba g, GamePanel gp, MouseHandler mouseHandler, int ownerIndex) {
         this.gomba = g;
         this.gp = gp;
         this.mouseHandler = mouseHandler;
+        this.ownerIndex = ownerIndex;
         getPlayerImage();
     }
 
@@ -84,13 +90,24 @@ public class GombatestEntity extends Entity {
      */
     public void getPlayerImage() {
         try {
-            if (state == 0) {
-                playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom1.png"));
-            } else if (state == 1) {
-                playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom2.png"));
+            if (ownerIndex == 1) {
+                if (state == 0) {
+                    playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom1b.png"));
+                } else if (state == 1) {
+                    playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom2b.png"));
+                }
+            } else {
+                    // Első játékos: az állapot alapján
+                if (state == 0) {
+                    playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom1.png"));
+                } else if (state == 1) {
+                    playerImage = ImageIO.read(getClass().getResourceAsStream("/mushroom2.png"));
+                }
             }
         } catch (IOException e) {
             System.out.println("Error loading image: " + e.getMessage());
         }
     }
 }
+
+
