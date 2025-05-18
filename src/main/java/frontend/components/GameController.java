@@ -1,6 +1,7 @@
 package frontend.components;
 
 import backend.jateklogika.gameLogic;
+import backend.tekton.Tekton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class GameController {
     private gameLogic logic;
@@ -361,6 +363,18 @@ public class GameController {
             currentPlayerIndex = 0;
             currentRound++;
             logic.setKorszamlalo(currentRound - 1); // backend round update
+            // --- 20% eséllyel tekton törés frontend oldalon ---
+            java.util.Random rnd = new java.util.Random();
+            if (rnd.nextDouble() < 0.5) {
+                List<TektonComponent> islands = gamePanel.tileM.islands;
+                if (!islands.isEmpty()) {
+                    int idx = rnd.nextInt(islands.size());
+                    TektonComponent torendo = islands.get(idx);
+                    gamePanel.tileM.islandOszto(torendo);
+                    //JOptionPane.showMessageDialog(gamePanel, "Egy tekton széttört! (ID: " + torendo.tekton.getID() + ")", "Tekton törés", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            // --- vége ---
             if (currentRound > maxRounds) {
                 gameOver = true;
                 showGameResults();

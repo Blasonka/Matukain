@@ -48,7 +48,7 @@ public class gameLogic implements Serializable {
     private List<Gombasz> gombaszok = new ArrayList<>();
     private List<Rovarasz> rovaraszok = new ArrayList<>();
     public boolean veletlenEsemenyekEngedelyezve = true;
-    public double toresEsely = 0.0; // Initialized to 0
+    public double toresEsely = 80.0; // Initialized to 0
     private List<Gombafonal> fonalak = new ArrayList<>();
     public int fonalelet = 0; // Initialized to 0
     private List<Rovar> rovarok = new ArrayList<>();
