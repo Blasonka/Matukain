@@ -38,6 +38,7 @@ public class GameController {
                 JOptionPane.showMessageDialog(gamePanel, "Kezdothet a jatek!");
                 initialPlacementPhase = false;
                 currentPlayerIndex = 0; // gombasz starts the round
+                logic.setPlayerActionPointsByIndex(currentPlayerIndex, 6); // Set first player's AP to 6
                 gamePanel.updateActionPanelsForCurrentPlayer(currentPlayerIndex);
                 Statbar statbar = gamePanel.getStatbar();
                 statbar.updateRound(logic.getKorszamlalo() + 1);
@@ -90,6 +91,7 @@ public class GameController {
                     if (threadIsland1 == rovarIslandIndex2 || threadIsland2 == rovarIslandIndex2) {
                         gamePanel.removeThread(threadIsland1, threadIsland2);
                         JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen elvágva!");
+                        decreaseActionPointsForCurrentPlayer();
                     } else {
                         JOptionPane.showMessageDialog(gamePanel, "A rovar szigete nem egyezik a fonal egyik végével!");
                     }
@@ -144,6 +146,7 @@ public class GameController {
                             selectedRovar.setCurrentIsland(targetIslandIndex);
                             JOptionPane.showMessageDialog(gamePanel, "Rovar mozgás elindítva!");
                             selectedRovar.startAnimThread(); // Ensure animation thread is started
+                            decreaseActionPointsForCurrentPlayer();
                         } else {
                             JOptionPane.showMessageDialog(gamePanel, "Nem található útvonal a szigetek között!");
                         }
@@ -230,7 +233,6 @@ public class GameController {
         if (gamePanel.state == GameState.SPORANOVESZTES) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                decreaseActionPointsForCurrentPlayer();
                 JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
                 checkAndAdvanceTurn();
             } else {
@@ -379,7 +381,6 @@ public class GameController {
         if (gamePanel.state == GameState.MOZGATAS) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                decreaseActionPointsForCurrentPlayer();
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 gamePanel.clearSelections();
                 selectingRovar = true;
@@ -400,7 +401,6 @@ public class GameController {
         if (gamePanel.state == GameState.SPORAEVES) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                decreaseActionPointsForCurrentPlayer();
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
                 checkAndAdvanceTurn();
@@ -417,7 +417,6 @@ public class GameController {
         if (gamePanel.state == GameState.FONALELVAGAS) {
             int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
             if (ap >= 2) {
-                decreaseActionPointsForCurrentPlayer();
                 gamePanel.getStatbar().updateCurrentPlayerActionPoints(ap - 2);
                 gamePanel.clearSelections();
                 selectingRovar = true;

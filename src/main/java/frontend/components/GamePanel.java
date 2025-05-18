@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
         mouseHandler = new MouseHandler(this);
         controller = new GameController(logic, this);
         statbar = new Statbar();
+        statbar.setController(controller);
         gombaszPanel = new GombaszPanel(gombasz);
         rovaraszPanel = new RovaraszPanel();
 

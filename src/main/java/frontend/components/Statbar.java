@@ -37,6 +37,9 @@ public class Statbar extends JPanel {
      */
     private JLabel actionPointsLabel;
 
+    private JButton passRoundButton;
+    private GameController controller;
+
     int akciopont;
 
     /**
@@ -44,7 +47,7 @@ public class Statbar extends JPanel {
      * @brief Inicializálja a statisztikákat megjelenítő panelt
      */
     public Statbar() {
-        setLayout(new GridLayout(1, 3)); // Layout with 1 row and 3 columns
+        setLayout(new GridLayout(1, 4)); // Layout with 1 row and 4 columns
         setPreferredSize(new Dimension(1280, 50)); // Set the preferred size of the panel
         setBackground(new Color(50, 50, 50)); // Background color
 
@@ -67,7 +70,16 @@ public class Statbar extends JPanel {
         add(roundLabel);
         add(playerRoundLabel);
         add(actionPointsLabel);
-        akciopont =5;
+        passRoundButton = new JButton("Pass Round");
+        passRoundButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        passRoundButton.setBackground(new Color(80, 80, 200));
+        passRoundButton.setForeground(Color.WHITE);
+        passRoundButton.setFocusPainted(false);
+        passRoundButton.addActionListener(e -> {
+            if (controller != null) controller.endPlayerTurn();
+        });
+        add(passRoundButton);
+        akciopont = 5;
     }
 
     // Method to update the round number
@@ -109,4 +121,9 @@ public class Statbar extends JPanel {
     public int getActionPoints() {
         return  akciopont;
     }
+
+    public void setController(GameController controller) {
+        this.controller = controller;
+    }
 }
+
