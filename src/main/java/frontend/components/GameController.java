@@ -363,7 +363,7 @@ public class GameController {
             logic.setKorszamlalo(currentRound - 1); // backend round update
             if (currentRound > maxRounds) {
                 gameOver = true;
-                JOptionPane.showMessageDialog(gamePanel, "A jatek veget ert!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                showGameResults();
                 return;
             }
         }
@@ -506,5 +506,37 @@ public class GameController {
         } else {
             JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
+    }
+
+    public void showGameResults() {
+        // Eredmények összegyűjtése
+        java.util.List<backend.felhasznalo.Felhasznalo> players = new java.util.ArrayList<>();
+        players.addAll(logic.getGombaszok());
+        players.addAll(logic.getRovaraszok());
+        StringBuilder sb = new StringBuilder();
+        int maxPoints = Integer.MIN_VALUE;
+        java.util.List<backend.felhasznalo.Felhasznalo> winners = new java.util.ArrayList<>();
+        sb.append("Jatek vege!\nPontszamok:\n");
+        for (backend.felhasznalo.Felhasznalo p : players) {
+            sb.append(p.getNev()).append(": ").append(p.getPontokSzama()).append(" pont\n");
+            if (p.getPontokSzama() > maxPoints) {
+                maxPoints = p.getPontokSzama();
+                winners.clear();
+                winners.add(p);
+            } else if (p.getPontokSzama() == maxPoints) {
+                winners.add(p);
+            }
+        }
+        if (winners.size() == 1) {
+            sb.append("\nGyoztes: ").append(winners.get(0).getNev()).append("!");
+        } else {
+            sb.append("\nDontetlen a kovetkezo jatekosok kozott: ");
+            for (int i = 0; i < winners.size(); i++) {
+                sb.append(winners.get(i).getNev());
+                if (i < winners.size() - 1) sb.append(", ");
+            }
+            sb.append("!");
+        }
+        JOptionPane.showMessageDialog(gamePanel, sb.toString(), "Jatek vege", JOptionPane.INFORMATION_MESSAGE);
     }
 }
