@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import backend.felhasznalo.Gombasz;
+
 import static frontend.components.GamePanel.state;
 
 /**
@@ -21,8 +23,10 @@ public class GombaszPanel extends JPanel {
     private JButton gombanovesztesButton;
     private JButton fonalnovesztesButton;
     private GameController controller;
+    private Gombasz gombasz;
 
-    public GombaszPanel() {
+    public GombaszPanel(Gombasz gombasz) {
+        this.gombasz = gombasz;
         setLayout(new GridLayout(3, 1, 10, 10)); // 3 sor, 1 oszlop, 10px távolság
         setPreferredSize(new Dimension(150, 150));
         setBackground(new Color(100, 150, 100)); // Zöldes háttér
@@ -76,3 +80,4 @@ public class GombaszPanel extends JPanel {
         this.controller = controller;
     }
 }
+

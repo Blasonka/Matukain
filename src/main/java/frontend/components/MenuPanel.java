@@ -116,7 +116,7 @@ public class MenuPanel extends JPanel {
                     logic.createUsers(names);
                     logic.jatekKezdes(); // Initialize the game after creating users
                     frame.dispose();
-                    new GameWindow(logic); // Start the game window
+                    new GameWindow(logic, logic.getGombaszok().get(0)); // Start the game window for the first player
                 });
             }
         }

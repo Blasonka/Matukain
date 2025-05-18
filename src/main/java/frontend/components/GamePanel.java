@@ -1,6 +1,7 @@
 package frontend.components;
 
 import backend.jateklogika.gameLogic;
+import backend.felhasznalo.Gombasz;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     private RovaraszPanel rovaraszPanel;
     private JPanel actionPanelContainer;
     JPanel gameArea;
+    private Gombasz gombasz;
 
     // Tárolja a kijelölt szigeteket a fonalnövesztéshez
     private TektonComponent firstSelectedIsland = null;
@@ -43,13 +45,14 @@ public class GamePanel extends JPanel implements Runnable {
     private RovarEntity selectedRovar = null;
     private int[] selectedThread = null;
 
-    public GamePanel(gameLogic logic) {
+    public GamePanel(gameLogic logic, Gombasz gombasz) {
         this.logic = logic;
+        this.gombasz = gombasz;
         tileM = new TileManager(this, logic);
         mouseHandler = new MouseHandler(this);
         controller = new GameController(logic, this);
         statbar = new Statbar();
-        gombaszPanel = new GombaszPanel();
+        gombaszPanel = new GombaszPanel(gombasz);
         rovaraszPanel = new RovaraszPanel();
 
         // Beállítjuk a controllert a panelek számára
