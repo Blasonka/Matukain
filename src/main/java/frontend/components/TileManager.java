@@ -202,7 +202,7 @@ public class TileManager {
         int island1CenterY = (island1.getYOffset() + island1.getGridHeight() / 2) * tileSize + tileSize / 2;
         int firstPathX = path.get(0)[0] * tileSize + tileSize / 2;
         int firstPathY = path.get(0)[1] * tileSize + tileSize / 2;
-        if (!pathFinding) {
+        if(!pathFinding) {
             g2.drawLine(island1CenterX, island1CenterY, firstPathX, firstPathY);
         }
 
@@ -212,7 +212,7 @@ public class TileManager {
         for (int i = 1; i < path.size(); i++) {
             int currX = path.get(i)[0] * tileSize + tileSize / 2;
             int currY = path.get(i)[1] * tileSize + tileSize / 2;
-            if (!pathFinding) {
+            if (!pathFinding){
                 g2.drawLine(prevX, prevY, currX, currY);
             }
             prevX = currX;
@@ -222,6 +222,8 @@ public class TileManager {
         // Draw from last path point to the second island center
         int island2CenterX = (island2.getXOffset() + island2.getGridWidth() / 2) * tileSize + tileSize / 2;
         int island2CenterY = (island2.getYOffset() + island2.getGridHeight() / 2) * tileSize + tileSize / 2;
+
+
         if (!pathFinding) {
             island1.szomszedok.add(islands.indexOf(island2));
             island2.szomszedok.add(islands.indexOf(island1));
@@ -230,6 +232,7 @@ public class TileManager {
 
         g2.setStroke(originalStroke);
         return path; // Return the path
+
     }
 
     /**
@@ -487,3 +490,4 @@ public class TileManager {
         gp.repaint();
     }
 }
+

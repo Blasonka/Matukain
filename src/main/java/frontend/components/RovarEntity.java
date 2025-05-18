@@ -53,8 +53,17 @@ public class RovarEntity extends Entity implements Runnable {
         this.mouseHandler = mouseHandler;
         this.ownerIndex = ownerIndex;
         getPlayerImage();
-        speed = 5;
+        setDefaultValues();
     }
+
+    public void setDefaultValues() {
+        x = (gp.tileM.islands.get(0).getXOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
+        y = (gp.tileM.islands.get(0).getYOffset() * gp.tileSize + (gp.tileM.islands.get(0).getGridSize() * gp.tileSize) / 2)-24;
+        mouseHandler.coordinate.x = x;
+        mouseHandler.coordinate.y = y;
+        speed = 5; // Reduced speed for smoother path following
+    }
+
 
     /**
      * @brief elindítja az animációs szálat
@@ -85,7 +94,7 @@ public class RovarEntity extends Entity implements Runnable {
             }
 
             try {
-                Thread.sleep(1000 / 60);
+                Thread.sleep(1000/60);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -96,6 +105,7 @@ public class RovarEntity extends Entity implements Runnable {
      * A rovar mozgását végzi az előre kiszámolt útvonal mentén.
      */
     private void followPath() {
+        boolean moved = false;
         if (currentPathIndex < currentPath.size()) {
             int[] targetPoint = currentPath.get(currentPathIndex);
             int targetX = targetPoint[0] * gp.tileSize + gp.tileSize / 2 - 24;
@@ -103,23 +113,33 @@ public class RovarEntity extends Entity implements Runnable {
 
             if (x < targetX) {
                 x += Math.min(speed, targetX - x);
+                moved = true;
             } else if (x > targetX) {
                 x -= Math.min(speed, x - targetX);
+                moved = true;
             }
 
             if (y < targetY) {
                 y += Math.min(speed, targetY - y);
+                moved = true;
             } else if (y > targetY) {
                 y -= Math.min(speed, y - targetY);
+                moved = true;
             }
 
-            if (Math.abs(x - targetX) < speed && Math.abs(y - targetY) < speed) {
+            if (x == targetX && y == targetY) {
                 currentPathIndex++;
+                if (currentPathIndex == currentPath.size()) {
+                    x = targetX;
+                    y = targetY;
+                    currentPath = null;
+                    currentPathIndex = 0;
+                    animThread = null;
+                }
             }
-        } else {
-            currentPath = null;
-            currentPathIndex = 0;
-            animThread = null; // Stop the animation thread when animation is finished
+        }
+        if (moved) {
+            gp.repaint(); // Minden mozgás után frissítjük a képernyőt
         }
     }
 
@@ -155,27 +175,14 @@ public class RovarEntity extends Entity implements Runnable {
     /**
      * Frissíti a rovar entitás állapotát.
      *
-     * @details
-     * Ellenőrzi, hogy a rovar mozgása szükséges-e, és ha igen, akkor végrehajtja azt.
+     * Csak akkor lépteti a rovart, ha van aktuális útvonal (currentPath).
+     * A path-ot a GameController állítja be, az update csak léptet.
      */
     public void update() {
-        if (state != GameState.MOZGATAS) return;
-        if (mouseHandler.clicked && (mouseHandler.coordinate.getX() != x || mouseHandler.coordinate.getY() != y)) {
-            if (currentIsland != mouseHandler.selectedIsland) {
-                if (gp.tileM.islands.get(currentIsland).szomszedok.contains(mouseHandler.selectedIsland)) {
-                    TektonComponent currentIslandObj = gp.tileM.islands.get(currentIsland);
-                    TektonComponent targetIslandObj = gp.tileM.islands.get(mouseHandler.selectedIsland);
-
-                    currentPath = gp.tileM.drawPathAvoidingIslands(gp.getGraphics(), currentIslandObj, targetIslandObj, true);
-                    currentPathIndex = 0;
-
-                    gp.tileM.draw(gp.getGraphics());
-
-                    System.out.println("Island changed: " + currentIsland + " -> " + mouseHandler.selectedIsland);
-                    currentIsland = mouseHandler.selectedIsland;
-                }
-            }
+        if (currentPath != null && !currentPath.isEmpty()) {
+            followPath();
         }
+        // Egyébként nem csinál semmit, a mozgás indítását a GameController végzi
     }
 
     /**
@@ -226,11 +233,7 @@ public class RovarEntity extends Entity implements Runnable {
     public void setPath(List<int[]> path) {
         this.currentPath = path;
         this.currentPathIndex = 0;
-        // Set the entity's position to the start of the path for correct animation
-        if (path != null && !path.isEmpty()) {
-            int[] start = path.get(0);
-            this.x = start[0] * gp.tileSize + gp.tileSize / 2 - 24;
-            this.y = start[1] * gp.tileSize + gp.tileSize / 2 - 24;
-        }
+        // Ne állítsuk át az x, y pozíciót, mert az ugrást okozhat
+        // A rovar animációja a jelenlegi pozícióból induljon
     }
 }
