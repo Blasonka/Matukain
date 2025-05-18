@@ -45,7 +45,7 @@ public class GameController {
             TektonComponent selectedIslandObj = gamePanel.tileM.islands.get(selectedIsland);
             if (gamePanel.getFirstSelectedIsland() == null) {
                 gamePanel.setFirstSelectedIsland(selectedIslandObj);
-                JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy második szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Jelolj ki egy masodik szigetet!");
             } else if (gamePanel.getSecondSelectedIsland() == null && selectedIslandObj != gamePanel.getFirstSelectedIsland()) {
                 gamePanel.setSecondSelectedIsland(selectedIslandObj);
                 // A fonal logikáját a handleFonalnoveszt-be helyezzük
@@ -83,12 +83,12 @@ public class GameController {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
 
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
+                JOptionPane.showMessageDialog(gamePanel, "Sporanovesztes mod aktivalva!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 
@@ -97,21 +97,21 @@ public class GameController {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
                 gamePanel.state = GameState.GOMBANOVESZTES;
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Gombanövesztés mód aktiválva!");
+                JOptionPane.showMessageDialog(gamePanel, "Gombanovesztes mod aktivalva!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 
     public void handleFonalnoveszt() {
         if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
-                JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kerlek, jelolj ki ket szigetet!");
             } else if (gamePanel.getFirstSelectedIsland() == gamePanel.getSecondSelectedIsland()) {
-                JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kerlek, valassz ket kulonbozo szigetet!");
             } else {
                 Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
                 if (g != null) {
@@ -125,11 +125,11 @@ public class GameController {
                 gamePanel.addThread(island1Index, island2Index);
                 gamePanel.state = GameState.DEFAULT; // Visszaállítjuk az alapértelmezett állapotot
                 gamePanel.repaint(); // Frissítjük a felületet a fonal rajzolásához
-                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
+                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen letrehozva!");
                 gamePanel.clearSelectedIslands(); // Töröljük a kijelöléseket a következő körre
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 
@@ -138,12 +138,12 @@ public class GameController {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
 
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Mozgatás mód aktiválva!");
+                JOptionPane.showMessageDialog(gamePanel, "Mozgatas mod aktivalva!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 
@@ -152,12 +152,12 @@ public class GameController {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
 
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
+                JOptionPane.showMessageDialog(gamePanel, "Sporaeves mod aktivalva!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 
@@ -166,12 +166,12 @@ public class GameController {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
 
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva!");
+                JOptionPane.showMessageDialog(gamePanel, "Fonalelvagas mod aktivalva!");
             } else {
-                JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
+                JOptionPane.showMessageDialog(gamePanel, "Nincs eleg akciopontod!");
             }
         } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelo allapotban vagy!");
         }
     }
 }
