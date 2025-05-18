@@ -22,49 +22,17 @@ import static frontend.components.GamePanel.state;
  *
  * @note Grafikus részhez készült
  *
- * @version 1.0
- * @date 2025-05-10
+ * @version 1.1
+ * @date 2025-05-18
  */
 public class RovarEntity extends Entity implements Runnable {
-    /**
-     * @var Rovar rovar
-     * @brief A backend-en található rovar, aminek ez a megfelelője
-     */
     Rovar rovar;
-    /**
-     * @var GamePanel gp
-     * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős
-     */
     GamePanel gp;
-    /**
-     * @var MouseHandler mouseHandler
-     * @brief A MouseHandler objektum, amely az egér események kezeléséért felelős
-     */
     MouseHandler mouseHandler;
-    /**
-     * @var BufferedImage playerImage
-     * @brief A rovar grafikus megjelenését tároló BufferedImage objektum
-     */
     BufferedImage playerImage;
-    /**
-     * @var Thread animThread
-     * @brief A rovar animációs szálát tároló Thread objektum
-     */
     Thread animThread;
-    /**
-     * @var int currentIsland
-     * @brief Az aktuális sziget indexét tároló változó
-     */
-    int currentIsland = 0;
-    /**
-     * @var List<int[]> currentPath
-     * @brief Az aktuális útvonalat tároló lista
-     */
+    int currentIsland = 0; // Visszaállítva int-re
     private List<int[]> currentPath;
-    /**
-     * @var int currentPathIndex
-     * @brief Az aktuális útvonal indexét tároló változó
-     */
     private int currentPathIndex = 0;
     /**
      * A rovar tulajdonos rovarász indexe (0 = első, 1 = második)
@@ -172,7 +140,8 @@ public class RovarEntity extends Entity implements Runnable {
                 y += Math.min(speed, mouseHandler.coordinate.getY() - y);
             } else if (y > mouseHandler.coordinate.getY()) {
                 y -= Math.min(speed, y - mouseHandler.coordinate.getY());
-            } currentIsland = mouseHandler.selectedIsland;
+            }
+            currentIsland = mouseHandler.selectedIsland;
         }
     }
 
@@ -235,5 +204,14 @@ public class RovarEntity extends Entity implements Runnable {
      */
     public Rovar getRovar() {
         return rovar;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setCurrentIsland(int islandIndex) {
+        this.currentIsland = islandIndex;
     }
 }
