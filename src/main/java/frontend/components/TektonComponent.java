@@ -252,7 +252,8 @@ public class TektonComponent {
             Gomba ujGomba = gp.logic.getGombasz(playerIndex).addGomba(new Gomba(gp.logic.getGombaID() + 1));
             ujGomba.addGombatest(new Gombatest(gp.logic.getGombatestID(), tekton));
 
-            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler);
+            int gombaszIndex = playerIndex; // 0: első gombasz, 1: második gombasz
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, gombaszIndex);
             gombaEntity.x = centerX;
             gombaEntity.y = centerY - 48;
             gombaEntity.state = 0;
@@ -263,7 +264,8 @@ public class TektonComponent {
         } else {
             Rovar ujrovar = gp.logic.getRovarasz(playerIndex).addRovar(new Rovar(tekton, gp.logic.getRovarID()));
 
-            RovarEntity rovarEntity = new RovarEntity(ujrovar, gamePanel, gamePanel.mouseHandler);
+            int rovaraszIndex = playerIndex - 2; // 0: első rovarász, 1: második rovarász
+            RovarEntity rovarEntity = new RovarEntity(ujrovar, gamePanel, gamePanel.mouseHandler, rovaraszIndex);
             rovarEntity.x = centerX;
             rovarEntity.y = centerY;
             rovarEntity.currentIsland = gamePanel.tileM.islands.indexOf(this);
@@ -359,3 +361,5 @@ public class TektonComponent {
     }
 
 }
+
+

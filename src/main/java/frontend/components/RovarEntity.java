@@ -66,18 +66,24 @@ public class RovarEntity extends Entity implements Runnable {
      * @brief Az aktuális útvonal indexét tároló változó
      */
     private int currentPathIndex = 0;
+    /**
+     * A rovar tulajdonos rovarász indexe (0 = első, 1 = második)
+     */
+    private int ownerIndex = 0;
 
     /**
      * RovarEntity osztály konstruktora
      * @param r Rovar
      * @param gp GamePanel
      * @param mouseHandler Egér
+     * @param ownerIndex A rovar gazda rovarász indexe (0 = első, 1 = második)
      * @brief Inicializálja a RovarEntity objektumot
      */
-    public RovarEntity(Rovar r, GamePanel gp, MouseHandler mouseHandler) {
+    public RovarEntity(Rovar r, GamePanel gp, MouseHandler mouseHandler, int ownerIndex) {
         this.rovar = r;
         this.gp = gp;
         this.mouseHandler = mouseHandler;
+        this.ownerIndex = ownerIndex;
         getPlayerImage();
         speed = 5;
     }
@@ -213,7 +219,11 @@ public class RovarEntity extends Entity implements Runnable {
      */
     public void getPlayerImage() {
         try {
-            playerImage = ImageIO.read(getClass().getResourceAsStream("/rovar.png"));
+            if (ownerIndex == 1) {
+                playerImage = ImageIO.read(getClass().getResourceAsStream("/rovar2.png"));
+            } else {
+                playerImage = ImageIO.read(getClass().getResourceAsStream("/rovar.png"));
+            }
         } catch (IOException e) {
             System.out.println("Error loading image: " + e.getMessage());
         }
