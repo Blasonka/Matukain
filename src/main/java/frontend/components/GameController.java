@@ -9,6 +9,7 @@ public class GameController {
     private gameLogic logic;
     private GamePanel gamePanel;
     private int currentPlayerIndex = 0;
+    private boolean selectingRovar = false; // Nyomon követi, hogy rovart vagy fonalat kell kijelölni
 
     public GameController(gameLogic logic, GamePanel gamePanel) {
         this.logic = logic;
@@ -51,6 +52,52 @@ public class GameController {
                 // A fonal logikáját a handleFonalnoveszt-be helyezzük
                 handleFonalnoveszt(); // Frissítve, hogy itt is meghívjuk a logikát
             }
+        } else if (gamePanel.state == GameState.FONALELVAGAS) {
+            if (selectingRovar) {
+                // Keresünk rovart a kijelölt szigeten
+                RovarEntity rovar = null;
+                for (RovarEntity r : gamePanel.rovarEntities) {
+                    if (r.currentIsland == selectedIsland) {
+                        rovar = r;
+                        break;
+                    }
+                }
+                if (rovar != null) {
+                    gamePanel.setSelectedRovar(rovar);
+                    selectingRovar = false; // Most már fonalat kell kijelölni
+                    JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy fonalat az elvágáshoz!");
+                } else {
+                    JOptionPane.showMessageDialog(gamePanel, "Ezen a szigeten nincs rovar!");
+                }
+            } else if (gamePanel.getSelectedRovar() != null) {
+                // Keresünk fonalat a kijelölt sziget közelében
+                int rovarIslandIndex = gamePanel.tileM.islands.indexOf(gamePanel.tileM.islands.get(selectedIsland));
+                for (int[] thread : gamePanel.threads) {
+                    int island1Index = thread[0];
+                    int island2Index = thread[1];
+                    if ((island1Index == rovarIslandIndex || island2Index == rovarIslandIndex) && gamePanel.getSelectedThread() == null) {
+                        gamePanel.setSelectedThread(thread);
+                        break;
+                    }
+                }
+                if (gamePanel.getSelectedThread() != null) {
+                    // Ellenőrizzük, hogy a fonal egyik vége megegyezik-e a rovar szigetével
+                    int rovarIslandIndex2 = gamePanel.tileM.islands.indexOf(gamePanel.tileM.islands.get(gamePanel.getSelectedRovar().currentIsland));
+                    int threadIsland1 = gamePanel.getSelectedThread()[0];
+                    int threadIsland2 = gamePanel.getSelectedThread()[1];
+                    if (threadIsland1 == rovarIslandIndex2 || threadIsland2 == rovarIslandIndex2) {
+                        gamePanel.removeThread(threadIsland1, threadIsland2);
+                        JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen elvágva!");
+                    } else {
+                        JOptionPane.showMessageDialog(gamePanel, "A rovar szigete nem egyezik a fonal egyik végével!");
+                    }
+                    gamePanel.clearSelections();
+                    gamePanel.state = GameState.DEFAULT; // Visszaállítjuk az alapértelmezett állapotot
+                    gamePanel.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(gamePanel, "Nincs kijelölhető fonal a közelben!");
+                }
+            }
         } else {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
             RovarEntity rovarIsland = null;
@@ -81,7 +128,6 @@ public class GameController {
     public void handleSporanoveszt() {
         if (gamePanel.state == GameState.SPORANOVESZTES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Spóranövesztés mód aktiválva!");
             } else {
@@ -115,7 +161,7 @@ public class GameController {
             } else {
                 Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
                 if (g != null) {
-                    Graphics2D  g2= (Graphics2D) g;
+                    Graphics2D g2 = (Graphics2D) g;
                     gamePanel.drawThreads(g2, gamePanel.getFirstSelectedIsland(), gamePanel.getSecondSelectedIsland());
                     g2.dispose();
                 }
@@ -136,7 +182,6 @@ public class GameController {
     public void handleMozgatas() {
         if (gamePanel.state == GameState.MOZGATAS) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Mozgatás mód aktiválva!");
             } else {
@@ -150,7 +195,6 @@ public class GameController {
     public void handleSporaeves() {
         if (gamePanel.state == GameState.SPORAEVES) {
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
                 JOptionPane.showMessageDialog(gamePanel, "Sporaevés mód aktiválva!");
             } else {
@@ -162,11 +206,14 @@ public class GameController {
     }
 
     public void handleFonalelvagas() {
-        if (gamePanel.state == null || gamePanel.state == GameState.FONALELVAGAS) {
+        if (gamePanel.state == GameState.FONALELVAGAS) {
+            System.out.println("1");
             if (gamePanel.getStatbar().getActionPoints() >= 1) {
-
+                System.out.println("2");
                 gamePanel.getStatbar().updateActionPoints(gamePanel.getStatbar().getActionPoints() - 1);
-                JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva!");
+                gamePanel.clearSelections(); // Töröljük az előző kijelöléseket
+                selectingRovar = true; // Először rovart kell kijelölni
+                JOptionPane.showMessageDialog(gamePanel, "Fonalelvágás mód aktiválva! Jelölj ki egy rovart!");
             } else {
                 JOptionPane.showMessageDialog(gamePanel, "Nincs elég akciópontod!");
             }

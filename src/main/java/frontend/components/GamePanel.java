@@ -37,7 +37,11 @@ public class GamePanel extends JPanel implements Runnable {
     private TektonComponent firstSelectedIsland = null;
     private TektonComponent secondSelectedIsland = null;
     // Tárolja a fonalakat (párokat a szigetek indexeivel)
-    private List<int[]> threads = new ArrayList<>();
+    List<int[]> threads = new ArrayList<>();
+
+    // Tárolja a kijelölt rovart és fonalat a fonalelvágáshoz
+    private RovarEntity selectedRovar = null;
+    private int[] selectedThread = null;
 
     public GamePanel(gameLogic logic) {
         this.logic = logic;
@@ -157,7 +161,14 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    // Getter és setter metódusok a kijelölt szigetekhez
+
+    public void removeThread(int island1Index, int island2Index) {
+        threads.removeIf(thread -> (thread[0] == island1Index && thread[1] == island2Index) ||
+                (thread[0] == island2Index && thread[1] == island1Index));
+        repaint();
+    }
+
+
     public TektonComponent getFirstSelectedIsland() {
         return firstSelectedIsland;
     }
@@ -177,6 +188,29 @@ public class GamePanel extends JPanel implements Runnable {
     public void clearSelectedIslands() {
         this.firstSelectedIsland = null;
         this.secondSelectedIsland = null;
+    }
+
+    // Getter és setter a kijelölt rovarhoz
+    public RovarEntity getSelectedRovar() {
+        return selectedRovar;
+    }
+
+    public void setSelectedRovar(RovarEntity rovar) {
+        this.selectedRovar = rovar;
+    }
+
+    // Getter és setter a kijelölt fonalhoz
+    public int[] getSelectedThread() {
+        return selectedThread;
+    }
+
+    public void setSelectedThread(int[] thread) {
+        this.selectedThread = thread;
+    }
+
+    public void clearSelections() {
+        this.selectedRovar = null;
+        this.selectedThread = null;
     }
 
     public void addThread(int island1Index, int island2Index) {

@@ -43,6 +43,7 @@ public class RovaraszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.MOZGATAS;
+                controller.handleMozgatas();
             }
         });
 
@@ -50,6 +51,7 @@ public class RovaraszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.SPORAEVES;
+                controller.handleSporaeves();
             }
         });
 
@@ -57,6 +59,7 @@ public class RovaraszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.FONALELVAGAS;
+                controller.handleFonalelvagas();
             }
         });
 
