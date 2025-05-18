@@ -440,6 +440,34 @@ public class gameLogic implements Serializable {
     }
 
     /**
+     * Visszaadja a játékos nevét az index alapján
+     * @param index a játékos indexe (0-3)
+     * @return a játékos neve
+     */
+    public String getPlayerNameByIndex(int index) {
+        if (index < 2) {
+            System.out.println("Gombász index: " + index);
+            return gombaszok.get(index).getNev();
+        } else {
+            System.out.println("Rovarász index: " + index);
+            return rovaraszok.get(index - 3).getNev();
+        }
+    }
+
+    /**
+     * Visszaadja a játékos hátralévő akciópontjait az index alapján
+     * @param index a játékos indexe (0-3)
+     * @return a játékos hátralévő akciópontjai
+     */
+    public int getPlayerActionPointsByIndex(int index) {
+        if (index < 2) {
+            return gombaszok.get(index).getHatralevoAkciopont();
+        } else {
+            return rovaraszok.get(index - 3).getHatralevoAkciopont();
+        }
+    }
+
+    /**
      * egy kör szimulálása
      * @note A kör szimulálásához szükséges metódusok meghívása
      */
@@ -457,3 +485,4 @@ public class gameLogic implements Serializable {
         csokkentFonalakElete();
     }
 }
+

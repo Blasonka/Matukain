@@ -38,8 +38,8 @@ public class GameController {
 
                 Statbar statbar = gamePanel.getStatbar();
                 statbar.updateRound(logic.getKorszamlalo() + 1);
-                statbar.updatePlayerRound(currentPlayerIndex);
-                statbar.updateActionPoints(5);
+                statbar.updatePlayerRound(logic.getPlayerNameByIndex(currentPlayerIndex));
+                statbar.updateCurrentPlayerActionPoints(logic.getPlayerActionPointsByIndex(currentPlayerIndex));
 
                 gamePanel.getGombaszPanel().setVisible(true);
                 gamePanel.getRovaraszPanel().setVisible(true);
@@ -371,4 +371,3 @@ public class GameController {
         }
     }
 }
-

@@ -79,11 +79,11 @@ public class Statbar extends JPanel {
 
     // Method to update the player's round
     /**
-     * @param playerRound A játékos körét tároló változó
-     * @brief Frissíti a játékos körét
+     * @param playerName A játékos nevét tároló változó
+     * @brief Frissíti a játékos nevét
      */
-    public void updatePlayerRound(int playerRound) {
-        playerRoundLabel.setText("Player Round: " + playerRound);
+    public void updatePlayerRound(String playerName) {
+        playerRoundLabel.setText("Current Player: " + playerName);
     }
 
     // Method to update the action points
@@ -93,6 +93,15 @@ public class Statbar extends JPanel {
      */
     public void updateActionPoints(int actionPoints) {
         actionPointsLabel.setText("Action Points: " + actionPoints);
+    }
+
+    // Method to update the current player's action points
+    /**
+     * @param actionPoints Az aktuális játékos akciópontjai
+     * @brief Frissíti a jelenlegi játékos akciópontjait
+     */
+    public void updateCurrentPlayerActionPoints(int actionPoints) {
+        actionPointsLabel.setText("Current Player Action Points: " + actionPoints);
     }
 
     public int getActionPoints() {
