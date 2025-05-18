@@ -63,7 +63,7 @@ public class GombaszPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state = GameState.FONALNOVESZTES;
-                controller.handleFonalnoveszt();
+                //controller.handleFonalnoveszt();
             }
         });
 

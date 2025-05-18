@@ -17,6 +17,7 @@ public class GameController {
     private int currentPlayerIndex = 0;
     private boolean selectingRovar = false; // Nyomon követi, hogy rovart vagy fonalat kell kijelölni
     private boolean selectingIsland = false; // Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz
+    int selectedIsland; // Kijelölt sziget
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
     private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
     private boolean initialPlacementPhase = true;
@@ -32,6 +33,7 @@ public class GameController {
     }
 
     public void handleClick(int selectedIsland, int mouseX, int mouseY) {
+        this.selectedIsland = selectedIsland;
         if (initialPlacementPhase) {
             TektonComponent island = gamePanel.tileM.islands.get(selectedIsland);
             island.placeInitialEntity(currentPlayerIndex, gamePanel);
@@ -52,48 +54,7 @@ public class GameController {
                 statbar.updateCurrentPlayerActionPoints(logic.getPlayerActionPointsByIndex(currentPlayerIndex));
             }
         } else if (gamePanel.state == GameState.FONALNOVESZTES) {
-            if (gamePanel.getFirstSelectedIsland() == null) {
-                gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
-                JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy második szigetet!");
-            } else if (gamePanel.getSecondSelectedIsland() == null) {
-                TektonComponent secondIsland = gamePanel.tileM.islands.get(selectedIsland);
-                if (secondIsland == gamePanel.getFirstSelectedIsland()) {
-                    JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
-                } else {
-                    TektonComponent firstIsland = gamePanel.getFirstSelectedIsland();
-                    boolean foreignMushroomPresent = false;
-                    for (GombatestEntity gomba : gamePanel.gombatestEntities) {
-                        int gombaIslandIndex = gamePanel.tileM.islands.indexOf(firstIsland);
-                        int gombaX = gomba.x / gamePanel.tileSize - firstIsland.getXOffset();
-                        int gombaY = gomba.y / gamePanel.tileSize - firstIsland.getYOffset();
-                        if (gombaX >= 0 && gombaX < firstIsland.getGridWidth() &&
-                                gombaY >= 0 && gombaY < firstIsland.getGridHeight() &&
-                                gomba.getOwnerIndex() != currentPlayerIndex) {
-                            foreignMushroomPresent = true;
-                            break;
-                        }
-                    }
-                    for (GombatestEntity gomba : gamePanel.gombatestEntities) {
-                        int gombaIslandIndex = gamePanel.tileM.islands.indexOf(secondIsland);
-                        int gombaX = gomba.x / gamePanel.tileSize - secondIsland.getXOffset();
-                        int gombaY = gomba.y / gamePanel.tileSize - secondIsland.getYOffset();
-                        if (gombaX >= 0 && gombaX < secondIsland.getGridWidth() &&
-                                gombaY >= 0 && gombaY < secondIsland.getGridHeight() &&
-                                gomba.getOwnerIndex() != currentPlayerIndex) {
-                            foreignMushroomPresent = true;
-                            break;
-                        }
-                    }
-                    if (foreignMushroomPresent) {
-                        JOptionPane.showMessageDialog(gamePanel, "Csak a saját gombádról indíthatsz fonalat!");
-                        gamePanel.clearSelectedIslands();
-                        gamePanel.state = GameState.DEFAULT;
-                        return;
-                    }
-                    gamePanel.setSecondSelectedIsland(secondIsland);
-                    handleFonalnoveszt();
-                }
-            }
+            handleFonalnoveszt();
         } else if (gamePanel.state == GameState.FONALELVAGAS) {
             if (selectingRovar) {
                 RovarEntity rovar = null;
@@ -440,61 +401,66 @@ public class GameController {
     }
 
     public void handleFonalnoveszt() {
-        if (gameOver) return;
-        if (gamePanel.state == GameState.FONALNOVESZTES) {
-            if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
-                JOptionPane.showMessageDialog(gamePanel, "Kerlek, jelolj ki ket szigetet!");
-            } else if (gamePanel.getFirstSelectedIsland() == gamePanel.getSecondSelectedIsland()) {
-                JOptionPane.showMessageDialog(gamePanel, "Kerlek, valassz ket kulonbozo szigetet!");
-            } else {
-                // --- ÚJ: feltétel ellenőrzése ---
-                int island1ID = gamePanel.getFirstSelectedIsland().tekton.getID();
-                int island2ID = gamePanel.getSecondSelectedIsland().tekton.getID();
-                boolean found = false;
-                backend.felhasznalo.Gombasz gombasz = (backend.felhasznalo.Gombasz) logic.getPlayerByIndex(currentPlayerIndex);
+        // Ellenőrzés: csak akkor lehessen fonalat növeszteni, ha a két kiválasztott tekton közül legalább az egyiken van már a játékosnak gombatestje vagy fonala
+        if (gamePanel.getFirstSelectedIsland() == null) {
+            gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
+            JOptionPane.showMessageDialog(gamePanel, "Jelölj ki egy második szigetet!");
+        } else if (gamePanel.getSecondSelectedIsland() == null) {
+            TektonComponent secondIsland = gamePanel.tileM.islands.get(selectedIsland);
+            if (secondIsland == gamePanel.getFirstSelectedIsland()) {
+                JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
+                return;
+            }
+            // Ellenőrzés: legalább az egyik tektonon van-e saját gombatest vagy fonal
+            TektonComponent firstIsland = gamePanel.getFirstSelectedIsland();
+            TektonComponent[] islands = new TektonComponent[] { firstIsland, secondIsland };
+            boolean found = false;
+            backend.felhasznalo.Gombasz gombasz = (backend.felhasznalo.Gombasz) logic.getPlayerByIndex(currentPlayerIndex);
+            for (TektonComponent island : islands) {
+                int tektonId = island.tekton.getID();
+                // Gombatestek vizsgálata
                 for (backend.gomba.Gomba g : gombasz.getGombak()) {
-                    // Gombatestek vizsgálata
                     for (backend.gomba.Gombatest gt : g.getGombatest()) {
-                        int tid = gt.getTekton().getID();
-                        if (tid == island1ID || tid == island2ID) {
+                        if (gt.getTekton().getID() == tektonId) {
                             found = true;
                             break;
                         }
                     }
+                    if (found) break;
                     // Gombafonalak vizsgálata
                     for (backend.gomba.Gombafonal gf : g.getGombafonalak()) {
-                        int t1 = gf.getHatar1().getID();
-                        int t2 = gf.getHatar2().getID();
-                        if (t1 == island1ID || t1 == island2ID || t2 == island1ID || t2 == island2ID) {
+                        if (gf.getHatar1().getID() == tektonId || gf.getHatar2().getID() == tektonId) {
                             found = true;
                             break;
                         }
                     }
                     if (found) break;
                 }
-                if (!found) {
-                    JOptionPane.showMessageDialog(gamePanel, "Csak akkor növeszthetsz fonalat, ha legalább az egyik kiválasztott tektonon van már gombatestje VAGY fonala a gombászodnak!");
-                    return;
-                }
-                // --- EDDIG ÚJ ---
-                Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
-                if (g != null) {
-                    Graphics2D g2 = (Graphics2D) g;
-                    gamePanel.drawThreads(g2, gamePanel.getFirstSelectedIsland(), gamePanel.getSecondSelectedIsland());
-                    g2.dispose();
-                }
-                int island1Index = gamePanel.tileM.islands.indexOf(gamePanel.getFirstSelectedIsland());
-                int island2Index = gamePanel.tileM.islands.indexOf(gamePanel.getSecondSelectedIsland());
-                gamePanel.addThread(island1Index, island2Index);
-                decreaseActionPointsForCurrentPlayer();
-                gamePanel.state = GameState.DEFAULT;
-                gamePanel.repaint();
-                JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
-                gamePanel.clearSelectedIslands();
-                checkAndAdvanceTurn();
+                if (found) break;
             }
-        } else {
-            JOptionPane.showMessageDialog(gamePanel, "Nem megfelelő állapotban vagy!");
+            if (!found) {
+                JOptionPane.showMessageDialog(gamePanel, "Csak akkor növeszthetsz fonalat, ha a két kiválasztott tekton közül legalább az egyiken van már gombatested vagy fonalad!");
+                gamePanel.clearSelectedIslands();
+                gamePanel.state = GameState.DEFAULT;
+                return;
+            }
+            // Ha minden OK, fonal növesztése
+            gamePanel.setSecondSelectedIsland(secondIsland);
+            Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
+            if (g != null) {
+                Graphics2D g2 = (Graphics2D) g;
+                gamePanel.drawThreads(g2, firstIsland, secondIsland);
+                g2.dispose();
+            }
+            int island1Index = gamePanel.tileM.islands.indexOf(firstIsland);
+            int island2Index = gamePanel.tileM.islands.indexOf(secondIsland);
+            gamePanel.addThread(island1Index, island2Index);
+            decreaseActionPointsForCurrentPlayer();
+            gamePanel.state = GameState.DEFAULT;
+            gamePanel.repaint();
+            JOptionPane.showMessageDialog(gamePanel, "Fonal sikeresen létrehozva!");
+            gamePanel.clearSelectedIslands();
+            checkAndAdvanceTurn();
         }
     }
 
