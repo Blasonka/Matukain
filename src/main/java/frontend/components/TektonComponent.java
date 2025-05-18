@@ -253,7 +253,7 @@ public class TektonComponent {
             ujGomba.addGombatest(new Gombatest(gp.logic.getGombatestID(), tekton));
 
             int gombaszIndex = playerIndex; // 0: első gombasz, 1: második gombasz
-            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, gombaszIndex);
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, gombaszIndex, gamePanel.tileM.islands.indexOf(this));
             gombaEntity.x = centerX;
             gombaEntity.y = centerY - 48;
             gombaEntity.state = 0;

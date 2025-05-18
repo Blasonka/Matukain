@@ -55,16 +55,23 @@ public class GombatestEntity extends Entity {
     private int ownerIndex = 0;
 
     /**
+     * @var int island
+     * A sziget indexe, amelyen a gomba megtalálható
+     */
+    public int island;
+
+    /**
      * GombatestEntity osztály konstruktora
      * @param g Gomba
      * @param gp GamePanel
      * @param mouseHandler Egér
      */
-    public GombatestEntity(Gomba g, GamePanel gp, MouseHandler mouseHandler, int ownerIndex) {
+    public GombatestEntity(Gomba g, GamePanel gp, MouseHandler mouseHandler, int ownerIndex, int sziget) {
         this.gomba = g;
         this.gp = gp;
         this.mouseHandler = mouseHandler;
         this.ownerIndex = ownerIndex;
+        this.island = sziget;
         getPlayerImage();
     }
 
