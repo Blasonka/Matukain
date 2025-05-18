@@ -540,4 +540,12 @@ public class gameLogic implements Serializable {
         }
         csokkentFonalakElete();
     }
+
+    public Object getPlayerByIndex(int currentPlayerIndex) {
+        if (currentPlayerIndex < 2) {
+            return gombaszok.get(currentPlayerIndex);
+        } else {
+            return rovaraszok.get(currentPlayerIndex - 3);
+        }
+    }
 }

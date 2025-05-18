@@ -300,7 +300,7 @@ public class GameController {
             backend.gomba.Gomba ujGomba = gamePanel.logic.getGombasz(0).addGomba(new backend.gomba.Gomba(gamePanel.logic.getGombaID() + 1));
             ujGomba.addGombatest(new backend.gomba.Gombatest(gamePanel.logic.getGombatestID(), island.tekton));
 
-            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, 0);
+            GombatestEntity gombaEntity = new GombatestEntity(ujGomba, gamePanel, gamePanel.mouseHandler, 0, gamePanel.tileM.islands.indexOf(island));
             gombaEntity.x = centerX;
             gombaEntity.y = centerY - 48;
             gombaEntity.state = 0;
@@ -308,7 +308,7 @@ public class GameController {
 
             gamePanel.gombatestEntities.add(gombaEntity);
             decreaseActionPointsForCurrentPlayer();
-            JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen növesztve a szigeten!");
+            JOptionPane.showMessageDialog(gamePanel, "Gomba sikeresen novesztve a szigeten!");
             selectedIslandForGombanoveszt = null;
             gamePanel.state = GameState.DEFAULT;
             gamePanel.repaint();
@@ -443,10 +443,40 @@ public class GameController {
         if (gameOver) return;
         if (gamePanel.state == GameState.FONALNOVESZTES) {
             if (gamePanel.getFirstSelectedIsland() == null || gamePanel.getSecondSelectedIsland() == null) {
-                JOptionPane.showMessageDialog(gamePanel, "Kérlek, jelölj ki két szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kerlek, jelolj ki ket szigetet!");
             } else if (gamePanel.getFirstSelectedIsland() == gamePanel.getSecondSelectedIsland()) {
-                JOptionPane.showMessageDialog(gamePanel, "Kérlek, válassz két különböző szigetet!");
+                JOptionPane.showMessageDialog(gamePanel, "Kerlek, valassz ket kulonbozo szigetet!");
             } else {
+                // --- ÚJ: feltétel ellenőrzése ---
+                int island1ID = gamePanel.getFirstSelectedIsland().tekton.getID();
+                int island2ID = gamePanel.getSecondSelectedIsland().tekton.getID();
+                boolean found = false;
+                backend.felhasznalo.Gombasz gombasz = (backend.felhasznalo.Gombasz) logic.getPlayerByIndex(currentPlayerIndex);
+                for (backend.gomba.Gomba g : gombasz.getGombak()) {
+                    // Gombatestek vizsgálata
+                    for (backend.gomba.Gombatest gt : g.getGombatest()) {
+                        int tid = gt.getTekton().getID();
+                        if (tid == island1ID || tid == island2ID) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    // Gombafonalak vizsgálata
+                    for (backend.gomba.Gombafonal gf : g.getGombafonalak()) {
+                        int t1 = gf.getHatar1().getID();
+                        int t2 = gf.getHatar2().getID();
+                        if (t1 == island1ID || t1 == island2ID || t2 == island1ID || t2 == island2ID) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) break;
+                }
+                if (!found) {
+                    JOptionPane.showMessageDialog(gamePanel, "Csak akkor növeszthetsz fonalat, ha legalább az egyik kiválasztott tektonon van már gombatestje VAGY fonala a gombászodnak!");
+                    return;
+                }
+                // --- EDDIG ÚJ ---
                 Graphics2D g = (Graphics2D) gamePanel.gameArea.getGraphics();
                 if (g != null) {
                     Graphics2D g2 = (Graphics2D) g;
