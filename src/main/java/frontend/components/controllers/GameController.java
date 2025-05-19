@@ -18,26 +18,112 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * GameController osztály
+ *
+ * @class GameController
+ *
+ * @brief A játék logikáját kezelő osztály
+ *
+ * @details
+ * Az osztály kezeli a játékosok interakcióit, köröket, játékmenet-állapotokat és
+ * az akciók végrehajtását a grafikus felületen.
+ *
+ * @note Grafikus részhez készült
+ *
+ * @version 1.0
+ * @date 2025-05-16
+ */
 public class GameController {
+    /**
+     * @var gameLogic logic
+     * @brief A játék logikáját kezelő objektum
+     */
     private gameLogic logic;
+    /**
+     * @var GamePanel gamePanel
+     * @brief A játék grafikus megjelenítéséért felelős GamePanel objektum
+     */
     private GamePanel gamePanel;
+    /**
+     * @var int currentPlayerIndex
+     * @brief Az aktuális játékos indexe
+     */
     private int currentPlayerIndex = 0;
+    /**
+     * @var int selectingRovar
+     * @brief Nyomon követi, hogy rovart vagy fonalat kell kijelölni.
+     */
     private boolean selectingRovar = false; // Nyomon követi, hogy rovart vagy fonalat kell kijelölni
+    /**
+     * @var int selectedIsland
+     * @brief Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz.
+     */
     private boolean selectingIsland = false; // Nyomon követi, hogy szigetet kell kijelölni a mozgatáshoz
+    /**
+     * @var int selectedIsland
+     * @brief A kiválasztott sziget indexe
+     */
     int selectedIsland; // Kijelölt sziget
+    /**
+     * @var RovarEntity selectedRovar
+     * @brief A kiválasztott rovar indexe
+     */
     private RovarEntity selectedRovar = null; // Kijelölt rovar a mozgatáshoz
 
+    /**
+     * @var boolean selectingGomba
+     * @brief Nyomon követi, hogy gombát kell-e kijelölni.
+     */
     private boolean selectingGomba = false;
+    /**
+     * @var GombatestEntity selectedGomba
+     * @brief A kiválasztott gomba indexe
+     */
     private GombatestEntity selectedGomba = null;
 
+    /**
+     * @var int selectedIslandForGombanoveszt
+     * @brief Szigetkijelölés tárolása gombanövesztéshez
+     */
     private Integer selectedIslandForGombanoveszt = null; // Szigetkijelölés tárolása gombanövesztéshez
+    /**
+     * @var boolean initialPlacementPhase
+     * @brief Nyomon követi, hogy az első elhelyezési fázisban vagyunk-e.
+     */
     private boolean initialPlacementPhase = true;
+    /**
+     * @var int currentRound
+     * @brief Az aktuális kör száma
+     */
     private int currentRound = 1;
+    /**
+     * @var int maxRounds
+     * @brief A maximális körök száma
+     */
     private final int maxRounds = 10;
+    /**
+     * @var boolean gameOver
+     * @brief Nyomon követi, hogy a játék véget ért-e.
+     */
     private boolean gameOver = false;
+    /**
+     * @var int mouseX
+     * @brief Az egér X koordinátája
+     */
     private int mouseX;
+    /**
+     * @var int mouseY
+     * @brief Az egér Y koordinátája
+     */
     private int mouseY;
 
+    /**
+     * GameController osztály konstruktora
+     *
+     * @param logic A játék logikáját kezelő objektum
+     * @param gamePanel A játék grafikus megjelenítéséért felelős GamePanel objektum
+     */
     public GameController(gameLogic logic, GamePanel gamePanel) {
         this.logic = logic;
         this.gamePanel = gamePanel;
@@ -45,6 +131,13 @@ public class GameController {
         JOptionPane.showMessageDialog(gamePanel, logic.promptForInitialPlacement(currentPlayerIndex));
     }
 
+    /**
+     * Játékosok körének végrehajtása
+     *
+     * @param selectedIsland A kiválasztott sziget indexe
+     * @param mouseX Az egér X koordinátája
+     * @param mouseY Az egér Y koordinátája
+     */
     public void handleClick(int selectedIsland, int mouseX, int mouseY) {
         this.selectedIsland = selectedIsland;
         this.mouseX = mouseX;
@@ -340,6 +433,12 @@ public class GameController {
         gamePanel.repaint();
     }
 
+    /**
+     * Játék frissítése
+     *
+     * @details
+     * Frissíti a játék állapotát, beleértve a játékosok akciópontjait és a játékosok körét.
+     */
     public void update() {
         if (gamePanel.mouseHandler.clicked) {
             handleClick(gamePanel.mouseHandler.selectedIsland, gamePanel.mouseHandler.coordinate.getX(), gamePanel.mouseHandler.coordinate.getY());
@@ -352,6 +451,13 @@ public class GameController {
         }
     }
 
+    /**
+     * Játék egy körének befejezése
+     *
+     * @details
+     * Befejezi az aktuális játékos körét, frissíti a következő játékos körét,
+     * és ellenőrzi, hogy a játék véget ért-e.
+     */
     public void endPlayerTurn() {
         if (gameOver) return;
         currentPlayerIndex++;
@@ -385,6 +491,14 @@ public class GameController {
         gamePanel.updateActionPanelsForCurrentPlayer(currentPlayerIndex);
     }
 
+    /**
+     * Ellenőrzi az aktuális játékos akciópontjait, és ha elfogytak, automatikusan átadja a kört a következő játékosnak.
+     *
+     * @details
+     * Ezt a metódust minden olyan akció után meg kell hívni, amely akciópontot fogyaszt.
+     * Ha az akciópontok száma nulla vagy kevesebb, a kör automatikusan vált a következő játékosra.
+     * Ellenkező esetben frissíti a statbar-on megjelenő akciópontokat.
+     */
     // Call this after every action that spends action points
     public void checkAndAdvanceTurn() {
         int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
@@ -396,6 +510,14 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Csökkenti az aktuális játékos akciópontjait 2-vel, és frissíti a státuszsávot.
+     *
+     * @details
+     * Ez a metódus minden akció végrehajtása után hívandó.
+     * Levon 2 akciópontot az aktuális játékostól, frissíti a statbar-on megjelenített értéket,
+     * és növeli a játékos pontszámát 2-vel.
+     */
     // Helper to decrease action points by 2 after every action
     public void decreaseActionPointsForCurrentPlayer() {
         int ap = logic.getPlayerActionPointsByIndex(currentPlayerIndex);
@@ -404,6 +526,18 @@ public class GameController {
         logic.getPlayerByIndex(currentPlayerIndex).addPontokSzama(2);
     }
 
+    /**
+     * @brief Kezeli a spóraszórás műveletet a gombász játékos számára.
+     *
+     * @details
+     * Ez a metódus több lépésben hajtja végre a spóraszórást:
+     *
+     * 1. lépés: A játékos kiválaszt egy saját gombatestet.
+     * 2. lépés: Ezután kiválaszt egy szomszédos tekton szigetet, amelyre a spórát szórni kívánja.
+     *
+     * A metódus ellenőrzi, hogy van-e elegendő akciópont (legalább 2), hogy a kiválasztott tekton valóban szomszédos-e,
+     * majd végrehajtja a háttérlogikában a spóra hozzáadását. A művelet végén 2 akciópont kerül levonásra.
+     */
     // Gomb eseménykezelők a GameState alapján
     public void handleSporanoveszt() {
         if (gameOver) return;
@@ -489,6 +623,14 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Kezeli a gombanövesztés műveletet a gombász játékos számára.
+     *
+     * @details
+     * Ez a metódus kezeli a gombanövesztést, beleértve a sziget kiválasztását és a gombatest elhelyezését.
+     * Ellenőrzi, hogy van-e elegendő akciópont (legalább 2), és hogy a kiválasztott sziget megfelelő-e.
+     * Ha minden feltétel teljesül, létrehozza a gombatestet és frissíti a játék állapotát.
+     */
     public void handleGombanoveszt() {
         if (gameOver) return;
         if (gamePanel.state == GameState.GOMBANOVESZTES) {
@@ -505,6 +647,12 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Kezeli a fonalnövesztés műveletet a gombász játékos számára.
+     *
+     * @details
+     * Ez a metódus kezeli a fonalnövesztést, beleértve a szigetek kiválasztását és a fonal létrehozását.
+     */
     public void handleFonalnoveszt() {
         if (gamePanel.getFirstSelectedIsland() == null) {
             gamePanel.setFirstSelectedIsland(gamePanel.tileM.islands.get(selectedIsland));
@@ -581,6 +729,12 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Kezeli a mozgás műveletet a rovarász játékos számára.
+     *
+     * @details
+     * Ez a metódus kezeli a rovarok mozgatását, beleértve a kiválasztást és a cél sziget kiválasztását.
+     */
     public void handleMozgatas() {
         if (gameOver) return;
         if (gamePanel.state == GameState.MOZGATAS) {
@@ -602,6 +756,17 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Kezeli a spóraevés műveletet a játékos számára.
+     *
+     * @details
+     * Ez a metódus ellenőrzi, hogy a játékos éppen a SPORAEVES állapotban van-e,
+     * és rendelkezik-e legalább 2 akcióponttal. Ha igen, akkor engedélyezi egy tekton kiválasztását,
+     * amelyen a spóraevés végrehajtható.
+     * Ellenkező esetben figyelmeztető üzenetet jelenít meg.
+     *
+     * @note Ez csak a megfelelő játékmenet-állapotban hajtható végre.
+     */
     public void handleSporaeves() {
         if (gameOver) return;
         if (gamePanel.state == GameState.SPORAEVES) {
@@ -617,6 +782,14 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Kezeli a fonalelvágás műveletet a játékos számára.
+     *
+     * @details
+     * Ez a metódus ellenőrzi, hogy a játékos éppen a FONALELVAGAS állapotban van-e,
+     * és rendelkezik-e legalább 2 akcióponttal. Ha igen, akkor engedélyezi egy rovar kiválasztását,
+     * amelyen a fonalelvágás végrehajtható.
+     */
     public void handleFonalelvagas() {
         if (gameOver) return;
         if (gamePanel.state == GameState.FONALELVAGAS) {
@@ -636,6 +809,12 @@ public class GameController {
         }
     }
 
+    /**
+     * @brief Megjeleníti a játék eredményeit.
+     *
+     * @details
+     * Ez a metódus összegyűjti a játékosok eredményeit, és megjeleníti őket egy üzenetablakban.
+     */
     public void showGameResults() {
         // Eredmények összegyűjtése
         java.util.List<backend.felhasznalo.Felhasznalo> players = new java.util.ArrayList<>();
