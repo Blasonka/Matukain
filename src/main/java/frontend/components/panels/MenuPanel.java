@@ -1,10 +1,8 @@
-package frontend.components;
+package frontend.components.panels;
 
 import javax.swing.*;
 import java.awt.*;
 import backend.jateklogika.gameLogic;
-import backend.felhasznalo.Gombasz;
-import backend.felhasznalo.Rovarasz;
 import frontend.windows.GameWindow;
 
 /**

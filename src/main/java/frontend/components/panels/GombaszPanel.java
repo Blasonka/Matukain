@@ -1,4 +1,4 @@
-package frontend.components;
+package frontend.components.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import backend.felhasznalo.Gombasz;
+import frontend.components.controllers.GameController;
 
-import static frontend.components.GamePanel.state;
+import static frontend.components.panels.GamePanel.state;
+import frontend.GameState;
 
 /**
  * GombaszPanel osztály

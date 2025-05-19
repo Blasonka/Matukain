@@ -1,14 +1,16 @@
-package frontend.components;
+package frontend.components.controllers;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.*;
 import backend.jateklogika.gameLogic;
+import frontend.components.entities.TektonComponent;
+import frontend.components.entities.Tile;
+import frontend.components.panels.GamePanel;
 
 /**
  * TileManager osztály
@@ -242,7 +244,7 @@ public class TileManager {
      * @param targetIsland a cél sziget
      * @return a legjobb pont koordinátái
      */
-    protected int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
+    public int[] findIslandEdgePoint(boolean[][] grid, TektonComponent island, TektonComponent targetIsland) {
         int islandLeft = island.getXOffset();
         int islandRight = island.getXOffset() + island.getGridWidth();
         int islandTop = island.getYOffset();
@@ -310,7 +312,7 @@ public class TileManager {
      * @param endY a végpont Y koordinátája
      * @return az útvonal koordinátái
      */
-    protected List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
+    public List<int[]> findPath(boolean[][] grid, int startX, int startY, int endX, int endY) {
         int rows = grid.length;
         int cols = grid[0].length;
 

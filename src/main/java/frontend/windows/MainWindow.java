@@ -1,6 +1,6 @@
 package frontend.windows;
 
-import frontend.components.MenuPanel;
+import frontend.components.panels.MenuPanel;
 import backend.jateklogika.gameLogic;
 
 import javax.swing.*;

@@ -1,6 +1,8 @@
-package frontend.components;
+package frontend.components.controllers;
 
-import backend.rovar.Rovar;
+import frontend.components.Coordinate;
+import frontend.components.entities.TektonComponent;
+import frontend.components.panels.GamePanel;
 
 import java.awt.event.MouseListener;
 
@@ -35,7 +37,7 @@ public class MouseHandler implements MouseListener {
      * @var Coordinate coordinate
      * @brief A koordinátákat tároló objektum
      */
-    Coordinate coordinate = new Coordinate(0, 0);
+    public Coordinate coordinate = new Coordinate(0, 0);
     /**
      * @var boolean clicked
      * @brief A kattintás állapotát tároló változó

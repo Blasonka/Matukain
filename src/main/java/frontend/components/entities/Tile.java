@@ -1,4 +1,4 @@
-package frontend.components;
+package frontend.components.entities;
 
 import java.awt.image.BufferedImage;
 
