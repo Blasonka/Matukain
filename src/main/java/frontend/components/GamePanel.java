@@ -1,50 +1,45 @@
-package frontend.components.panels;
+package frontend.components;
 
 import backend.jateklogika.gameLogic;
 import backend.felhasznalo.Gombasz;
-import frontend.GameState;
-import frontend.components.controllers.GameController;
-import frontend.components.controllers.MouseHandler;
-import frontend.components.controllers.TileManager;
-import frontend.components.entities.GombatestEntity;
-import frontend.components.entities.RovarEntity;
-import frontend.components.entities.TektonComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+enum GameState {SPORANOVESZTES, GOMBANOVESZTES, FONALNOVESZTES, MOZGATAS, SPORAEVES, FONALELVAGAS, DEFAULT}
+
 public class GamePanel extends JPanel implements Runnable {
-    public static GameState state;
+    static GameState state;
 
     int originalTileSize = 16;
     int scale = 3;
-    public int tileSize = originalTileSize * scale; // 48x48
-    public int maxScreenCol = 26; // 1248 / 48
-    public int maxScreenRow = 15; // 720 / 48
+    int tileSize = originalTileSize * scale; // 48x48
+    int maxScreenCol = 26; // 1248 / 48
+    int maxScreenRow = 15; // 720 / 48
     int screenWidth = tileSize * maxScreenCol; // 1248
     int screenHeight = tileSize * maxScreenRow + 50; // 720 + 50 (Statbar magasság)
-    public TileManager tileM;
-    public MouseHandler mouseHandler;
+    TileManager tileM;
+    MouseHandler mouseHandler;
     Thread gameThread;
-    public gameLogic logic;
-    public List<GombatestEntity> gombatestEntities = new ArrayList<>();
-    public List<RovarEntity> rovarEntities = new ArrayList<>();
+    gameLogic logic;
+    List<GombatestEntity> gombatestEntities = new ArrayList<>();
+    List<RovarEntity> rovarEntities = new ArrayList<>();
     public int currentPlayerIndex = 0;
-    public GameController controller;
+    GameController controller;
     private Statbar statbar;
     private GombaszPanel gombaszPanel;
     private RovaraszPanel rovaraszPanel;
     private JPanel actionPanelContainer;
-    public JPanel gameArea;
+    JPanel gameArea;
     private Gombasz gombasz;
 
     // Tárolja a kijelölt szigeteket a fonalnövesztéshez
     private TektonComponent firstSelectedIsland = null;
     private TektonComponent secondSelectedIsland = null;
     // Tárolja a fonalakat (párokat a szigetek indexeivel)
-    public List<int[]> threads = new ArrayList<>();
+    List<int[]> threads = new ArrayList<>();
 
     // Tárolja a kijelölt rovart és fonalat a fonalelvágáshoz
     private RovarEntity selectedRovar = null;

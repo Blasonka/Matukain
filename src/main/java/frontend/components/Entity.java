@@ -1,4 +1,4 @@
-package frontend.components.entities;
+package frontend.components;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,9 +30,7 @@ public class Entity {
      * @var int speed
      * @brief Sebességet tárolja
      */
-    public int x;
-    public int y;
-    int speed;
+    int x, y, speed;
 
     /**
      * @brief frissíti az entitás állapotát

@@ -1,14 +1,9 @@
-package frontend.components.controllers;
+package frontend.components;
 
 import backend.gomba.Gombatest;
+import backend.interfaces.Jatekos;
 import backend.jateklogika.gameLogic;
-import frontend.components.entities.TektonComponent;
-import frontend.components.entities.Tile;
-import frontend.components.entities.GombatestEntity;
-import frontend.components.entities.RovarEntity;
-import frontend.components.panels.GamePanel;
-import frontend.GameState;
-import frontend.components.panels.Statbar;
+import backend.tekton.Tekton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

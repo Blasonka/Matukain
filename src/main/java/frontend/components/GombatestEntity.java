@@ -1,8 +1,6 @@
-package frontend.components.entities;
+package frontend.components;
 
 import backend.gomba.Gomba;
-import frontend.components.panels.GamePanel;
-import frontend.components.controllers.MouseHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -49,7 +47,7 @@ public class GombatestEntity extends Entity {
      * @var int state
      * @brief A gombatest állapotát tároló változó (0 = kis gomba, 1 = kifejlett gomba)
      */
-    public int state = 0; // 0 = kis gomba, 1 = kifejlett gomba
+    int state = 0; // 0 = kis gomba, 1 = kifejlett gomba
 
     /**
      * A gombatest tulajdonos gombász indexe (0 = első, 1 = második)

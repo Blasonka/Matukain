@@ -1,11 +1,9 @@
-package frontend.components.entities;
+package frontend.components;
 
 import backend.gomba.Gomba;
 import backend.gomba.Gombatest;
 import backend.rovar.Rovar;
 import backend.tekton.Tekton;
-import frontend.components.panels.GamePanel;
-import frontend.GameState;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static frontend.components.panels.GamePanel.state;
+import static frontend.components.GamePanel.state;
 
 /**
  * TektonComponent osztály
@@ -36,7 +34,7 @@ public class TektonComponent {
      * @var Tekton tekton
      * @brief A Tekton, ami a backend-en kapcsolódik hozzá
      */
-    public Tekton tekton;
+    Tekton tekton;
     /**
      * @var GamePanel gp
      * @brief A GamePanel objektum, amely a játék grafikus megjelenítéséért felelős

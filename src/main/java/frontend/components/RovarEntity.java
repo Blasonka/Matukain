@@ -1,9 +1,6 @@
-package frontend.components.entities;
+package frontend.components;
 
 import backend.rovar.Rovar;
-import frontend.components.panels.GamePanel;
-import frontend.GameState;
-import frontend.components.controllers.MouseHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
-import static frontend.components.panels.GamePanel.state;
+import static frontend.components.GamePanel.state;
 
 /**
  * RovarEntity osztály
@@ -34,15 +31,15 @@ public class RovarEntity extends Entity implements Runnable {
     MouseHandler mouseHandler;
     BufferedImage playerImage;
     Thread animThread;
-    public int currentIsland = 0; // Visszaállítva int-re
-    List<int[]> currentPath;
-    int currentPathIndex = 0;
-    int finalTargetX = -1;
-    int finalTargetY = -1;
+    int currentIsland = 0; // Visszaállítva int-re
+    private List<int[]> currentPath;
+    private int currentPathIndex = 0;
+    private int finalTargetX = -1;
+    private int finalTargetY = -1;
     /**
      * A rovar tulajdonos rovarász indexe (0 = első, 1 = második)
      */
-    int ownerIndex = 0;
+    private int ownerIndex = 0;
 
     /**
      * RovarEntity osztály konstruktora

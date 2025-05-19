@@ -20,12 +20,12 @@ public class Coordinate {
      * @var int x
      * @brief X koordinátát tárolja
      */
-    public int x;
+    int x;
     /**
      * @var int y
      * @brief Y koordinátát tárolja
      */
-    public int y;
+    int y;
 
     /**
      * Coordinate osztály konstruktora

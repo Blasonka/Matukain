@@ -1,6 +1,4 @@
-package frontend.components.panels;
-
-import frontend.components.controllers.GameController;
+package frontend.components;
 
 import javax.swing.*;
 import java.awt.*;

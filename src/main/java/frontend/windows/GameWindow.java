@@ -1,8 +1,8 @@
 package frontend.windows;
 
 import frontend.Main;
-import frontend.components.panels.GamePanel;
-import frontend.components.panels.GombaszPanel;
+import frontend.components.GamePanel;
+import frontend.components.GombaszPanel;
 import backend.jateklogika.gameLogic;
 import backend.felhasznalo.Gombasz;
 

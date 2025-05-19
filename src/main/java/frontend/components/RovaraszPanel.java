@@ -1,14 +1,11 @@
-package frontend.components.panels;
-
-import frontend.GameState;
-import frontend.components.controllers.GameController;
+package frontend.components;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static frontend.components.panels.GamePanel.state;
+import static frontend.components.GamePanel.state;
 
 /**
  * RovaraszPanel osztály

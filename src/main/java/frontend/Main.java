@@ -1,6 +1,8 @@
 package frontend;
 
 import backend.jateklogika.gameLogic;
+import frontend.components.MenuPanel;
+import frontend.windows.GameWindow;
 import frontend.windows.MainWindow;
 
 import javax.sound.sampled.*;
