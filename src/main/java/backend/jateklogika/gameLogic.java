@@ -546,7 +546,11 @@ public class gameLogic implements Serializable {
         if (currentPlayerIndex < 2) {
             return gombaszok.get(currentPlayerIndex);
         } else {
-            return rovaraszok.get(currentPlayerIndex - 3);
+            return rovaraszok.get(currentPlayerIndex - 2);
         }
+    }
+
+    public List<Tekton> getAllTektons() {
+        return map;
     }
 }

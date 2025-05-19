@@ -156,19 +156,24 @@ public abstract class Tekton {
      * @param spora spórát hozzáadja a tektonhoz
      */
     public void addSpora(Spora spora){
-        parancsFeldolgozo.print("Tekton (" + this.getID() + ") sporak értéke megváltozott: ");
-        for (int i=0; i<sporak.size()-1; i++){
-            parancsFeldolgozo.print(sporak.get(i).getID() + ", ");
+        // Ellenőrizzük, hogy a parancsFeldolgozo nem null-e, csak akkor írjunk ki, ha van
+        if (parancsFeldolgozo != null) {
+            parancsFeldolgozo.print("Tekton (" + this.getID() + ") sporak értéke megváltozott: ");
+            for (int i=0; i<sporak.size()-1; i++){
+                parancsFeldolgozo.print(sporak.get(i).getID() + ", ");
+            }
+            if (!sporak.isEmpty())
+                parancsFeldolgozo.print(sporak.get(sporak.size()-1).getID() + " ->");
         }
-        parancsFeldolgozo.print(sporak.get(sporak.size()-1).getID() + " ->");
         sporak.add(spora);
-        for (int i=0; i<sporak.size()-1; i++){
-            parancsFeldolgozo.print(" " + sporak.get(i).getID() + ",");
+        if (parancsFeldolgozo != null) {
+            for (int i=0; i<sporak.size()-1; i++){
+                parancsFeldolgozo.print(" " + sporak.get(i).getID() + ",");
+            }
+            if (!sporak.isEmpty())
+                parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()));
         }
-        parancsFeldolgozo.print(" " + sporak.get(sporak.get(sporak.size()-1).getID()));
     }
-
-   
 
     /**
      * Spóra törlése
@@ -197,6 +202,36 @@ public abstract class Tekton {
             return false;
         }
 
+    }
+
+    /**
+     * Két tekton szomszédosságának eldöntése: akkor szomszédosak, ha nincs köztük másik tekton
+     */
+    public boolean szomszedosTekton(Tekton masik, List<Tekton> osszesTekton) {
+        // Két tekton akkor szomszédos, ha nincs köztük másik tekton a vonal mentén
+        // Egyszerűsített: ha a két tekton közötti szakaszra nem esik rá egy harmadik tekton (két végpont kivételével)
+        int x1 = this.koordinataX;
+        int y1 = this.koordinataY;
+        int x2 = masik.koordinataX;
+        int y2 = masik.koordinataY;
+        for (Tekton t : osszesTekton) {
+            if (t == this || t == masik) continue;
+            int tx = t.koordinataX;
+            int ty = t.koordinataY;
+            // Ellenőrizzük, hogy a t pont rajta van-e a két tekton közötti szakaszon
+            // Feltételezzük, hogy egész koordináták, és a pont a szakaszon van, ha kollineáris és a szakasz végpontjai között van
+            int dx1 = x2 - x1;
+            int dy1 = y2 - y1;
+            int dx2 = tx - x1;
+            int dy2 = ty - y1;
+            int cross = dx1 * dy2 - dy1 * dx2;
+            if (cross != 0) continue; // Nem kollineáris
+            // Ellenőrizzük, hogy a t pont a szakasz végpontjai között van-e
+            if (Math.min(x1, x2) < tx && tx < Math.max(x1, x2) && Math.min(y1, y2) < ty && ty < Math.max(y1, y2)) {
+                return false; // Van közte másik tekton
+            }
+        }
+        return true;
     }
 
     /**
